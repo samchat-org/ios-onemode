@@ -1,0 +1,13 @@
+//
+//  samchat_debug.xcconfig
+//  SamChat
+//
+//  Created by HJ on 10/23/16.
+//  Copyright © 2016 SamChat. All rights reserved.
+//
+
+#include "../../Pods/Target Support Files/Pods-SamChat/Pods-SamChat.debug.xcconfig"
+
+XCCONFIG_BUNDLE_ID                  = com.github.gknows.samchat
+XCCONFIG_BUNDLE_NAME                = SamChat Dev
+
