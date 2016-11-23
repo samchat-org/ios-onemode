@@ -1,4 +1,4 @@
-platform :ios, '7.0'
+platform :ios, '8.0'
 
 target 'SamChat' do
     pod 'SDWebImage', '~> 3.7.1'
@@ -9,5 +9,7 @@ target 'SamChat' do
     pod 'Reachability', '~> 3.1.1'
     pod 'CocoaLumberjack', '~> 2.0.0-rc2'
     pod 'SSZipArchive', '~> 1.2'
+    pod 'AFNetworking', '~> 3.0'
+    pod 'AWSS3'
 end
 
