@@ -11,5 +11,6 @@ target 'SamChat' do
     pod 'SSZipArchive', '~> 1.2'
     pod 'AFNetworking', '~> 3.0'
     pod 'AWSS3'
+    pod 'Masonry'
 end
 

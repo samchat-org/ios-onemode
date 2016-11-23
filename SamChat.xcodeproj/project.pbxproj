@@ -196,6 +196,8 @@
 		31A044151DE535C80021E029 /* video_chat_tip_sender.aac in Resources */ = {isa = PBXBuildFile; fileRef = 31A043561DE535C80021E029 /* video_chat_tip_sender.aac */; };
 		31A044161DE535C80021E029 /* video_connect_chat_tip_sender.aac in Resources */ = {isa = PBXBuildFile; fileRef = 31A043571DE535C80021E029 /* video_connect_chat_tip_sender.aac */; };
 		31A0441D1DE53ECD0021E029 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31A0441C1DE53ECD0021E029 /* LaunchScreen.storyboard */; };
+		31A044241DE567C60021E029 /* SAMCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A044231DE567C60021E029 /* SAMCLoginViewController.m */; };
+		31A044281DE57CC90021E029 /* SAMCGradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A044271DE57CC90021E029 /* SAMCGradientButton.m */; };
 		3972DECFA052F7025D9E172D /* libPods-SamChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E082DB4614A7B87AB712BF66 /* libPods-SamChat.a */; };
 		611FE9EE1BB02320005E8E45 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		61530BE71BABAD3B00FE50CC /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 61530BE61BABAD3B00FE50CC /* libsqlite3.0.tbd */; };
@@ -559,6 +561,10 @@
 		31A044191DE53BAD0021E029 /* samchat_release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = samchat_release.xcconfig; sourceTree = "<group>"; };
 		31A0441C1DE53ECD0021E029 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		31A044201DE547FF0021E029 /* samchat_adhoc.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = samchat_adhoc.xcconfig; sourceTree = "<group>"; };
+		31A044221DE567C60021E029 /* SAMCLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCLoginViewController.h; sourceTree = "<group>"; };
+		31A044231DE567C60021E029 /* SAMCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCLoginViewController.m; sourceTree = "<group>"; };
+		31A044261DE57CC90021E029 /* SAMCGradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCGradientButton.h; sourceTree = "<group>"; };
+		31A044271DE57CC90021E029 /* SAMCGradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCGradientButton.m; sourceTree = "<group>"; };
 		332C493725247BFBF7A8FA45 /* Pods-SamChat.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SamChat.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-SamChat/Pods-SamChat.adhoc.xcconfig"; sourceTree = "<group>"; };
 		6121D1C91D9B9F8D005FAD3B /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
 		6121D1CB1D9B9FCC005FAD3B /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
@@ -716,6 +722,8 @@
 				31A041F01DE535C80021E029 /* NTESMarginButton.m */,
 				31A041F11DE535C80021E029 /* NTESPageView.h */,
 				31A041F21DE535C80021E029 /* NTESPageView.m */,
+				31A044261DE57CC90021E029 /* SAMCGradientButton.h */,
+				31A044271DE57CC90021E029 /* SAMCGradientButton.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -992,6 +1000,8 @@
 				31A042681DE535C80021E029 /* NTESRegisterViewController.h */,
 				31A042691DE535C80021E029 /* NTESRegisterViewController.m */,
 				31A0426A1DE535C80021E029 /* NTESRegisterViewController.xib */,
+				31A044221DE567C60021E029 /* SAMCLoginViewController.h */,
+				31A044231DE567C60021E029 /* SAMCLoginViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1559,9 +1569,9 @@
 		AE5882DD1A6F47E10070536A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = NTES;
+				CLASSPREFIX = SAMC;
 				LastUpgradeCheck = 0700;
-				ORGANIZATIONNAME = Netease;
+				ORGANIZATIONNAME = SamChat;
 				TargetAttributes = {
 					AE5882E41A6F47E10070536A = {
 						CreatedOnToolsVersion = 6.1;
@@ -1824,6 +1834,7 @@
 				31A043751DE535C80021E029 /* NTESSearchTeamViewController.m in Sources */,
 				31A043DF1DE535C80021E029 /* NTESTextSettingCell.m in Sources */,
 				31A043F11DE535C80021E029 /* NTESDemoFetchChatroomTask.m in Sources */,
+				31A044241DE567C60021E029 /* SAMCLoginViewController.m in Sources */,
 				31A043C21DE535C80021E029 /* NTESSessionRemoteHistoryViewController.m in Sources */,
 				31A0437D1DE535C80021E029 /* NTESChatroomManager.m in Sources */,
 				31A043C31DE535C80021E029 /* NTESSessionViewController.m in Sources */,
@@ -1841,6 +1852,7 @@
 				31A043E61DE535C80021E029 /* NTESEmailSettingViewController.m in Sources */,
 				31A043BB1DE535C80021E029 /* NTESFileTransSelectViewController.m in Sources */,
 				31A043F31DE535C80021E029 /* NTESDemoService.m in Sources */,
+				31A044281DE57CC90021E029 /* SAMCGradientButton.m in Sources */,
 				31A043B51DE535C80021E029 /* NTESSessionSnapchatContentView.m in Sources */,
 				31A043BF1DE535C80021E029 /* NTESLocationViewController.m in Sources */,
 				31A043EA1DE535C80021E029 /* NTESSignSettingViewController.m in Sources */,

@@ -7,7 +7,7 @@
 //
 
 #import "NTESAppDelegate.h"
-#import "NTESLoginViewController.h"
+#import "SAMCLoginViewController.h"
 #import "NIMSDK.h"
 #import "UIView+Toast.h"
 #import "NTESService.h"
@@ -168,7 +168,7 @@ NSString *NTESNotificationLogout = @"NTESNotificationLogout";
 
 - (void)setupLoginViewController
 {
-    NTESLoginViewController *loginController = [[NTESLoginViewController alloc] init];
+    SAMCLoginViewController *loginController = [[SAMCLoginViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginController];
     self.window.rootViewController = nav;
 }

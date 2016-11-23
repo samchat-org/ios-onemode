@@ -31,6 +31,7 @@ PODS:
   - FMDB/standard (2.5):
     - FMDB/common
   - M80AttributedLabel (1.3.1)
+  - Masonry (1.0.2)
   - Reachability (3.1.1)
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
@@ -45,6 +46,7 @@ DEPENDENCIES:
   - CocoaLumberjack (~> 2.0.0-rc2)
   - FMDB (~> 2.5)
   - M80AttributedLabel (~> 1.3.1)
+  - Masonry
   - Reachability (~> 3.1.1)
   - SDWebImage (~> 3.7.1)
   - SSZipArchive (~> 1.2)
@@ -58,12 +60,13 @@ SPEC CHECKSUMS:
   CocoaLumberjack: f58d8a19629f4d8379ae14bb3534def24161430e
   FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
   M80AttributedLabel: 7bb3456dcdf847b111fac6695e7c40650ab2b6d2
+  Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   Reachability: dd9aa4fb6667b9f787690a74f53cb7634ce99893
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   SSZipArchive: 251093c65f98d6ea282c50bc404bfa631d9fd721
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   Toast: 0773b8fc0e97352ca6054517bec7ebdd4110029d
 
-PODFILE CHECKSUM: f93e861cb5bd253eda84da553582dbf1b8817fcf
+PODFILE CHECKSUM: 8af2c060e126347cd2c0710d5fb7af03c9ca042d
 
 COCOAPODS: 1.1.1

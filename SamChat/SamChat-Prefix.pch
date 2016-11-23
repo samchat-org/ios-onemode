@@ -15,7 +15,9 @@
 #import "NIMSDK.h"
 #import "NIMAVChat.h"
 #import "NTESGlobalMacro.h"
+#import "SAMCGlobalMacro.h"
 #import "NIMKit.h"
+#import "Masonry.h"
 
 #import <CocoaLumberjack/CocoaLumberjack.h>
 
