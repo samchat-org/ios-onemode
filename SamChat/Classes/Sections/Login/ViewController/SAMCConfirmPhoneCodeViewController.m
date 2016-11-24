@@ -161,8 +161,26 @@
 #pragma mark - Action
 - (void)resend:(id)sender
 {
-    // TODO: add resend
-    DDLogInfo(@"touch resend button");
+    [SVProgressHUD showWithStatus:@"Loading" maskType:SVProgressHUDMaskTypeBlack];
+    __weak typeof(self) wself = self;
+    
+    void (^completionBlock)(NSError *) = ^(NSError * _Nullable error){
+        [SVProgressHUD dismiss];
+        if (error) {
+            [wself.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:2.0f position:CSToastPositionCenter];
+            return;
+        }
+        [wself.resendButton startWithCountDownSeconds:60 titleFormat:@"Resend code in %02ld seconds..."];
+    };
+    if (self.isSignupOperation) {
+        [[SAMCAccountManager sharedManager] registerCodeRequestWithCountryCode:self.countryCode
+                                                                     cellPhone:self.phoneNumber
+                                                                    completion:completionBlock];
+    } else {
+        [[SAMCAccountManager sharedManager] findPWDCodeRequestWithCountryCode:self.countryCode
+                                                                    cellPhone:self.phoneNumber
+                                                                   completion:completionBlock];
+    }
 }
 
 - (void)submit:(id)sender
