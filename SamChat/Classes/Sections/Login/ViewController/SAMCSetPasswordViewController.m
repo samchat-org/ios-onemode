@@ -23,6 +23,10 @@
 
 @interface SAMCSetPasswordViewController ()
 
+@property (nonatomic, copy) NSString *countryCode;
+@property (nonatomic, copy) NSString *phoneNumber;
+@property (nonatomic, copy) NSString *verifyCode;
+
 @property (nonatomic, strong) SAMCStepperView *stepperView;
 @property (nonatomic, strong) UILabel *tipLabel;
 @property (nonatomic, strong) UITextField *passwordTextField;
@@ -31,6 +35,17 @@
 @end
 
 @implementation SAMCSetPasswordViewController
+
+- (instancetype)initWithCountryCode:(NSString *)countryCode phone:(NSString *)phone code:(NSString *)code
+{
+    self = [super init];
+    if (self) {
+        _countryCode = countryCode;
+        _phoneNumber = phone;
+        _verifyCode = code;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -123,13 +138,17 @@
 
 - (void)setupLoginViewControllerWithToast:(NSString *)toast
 {
-//    [SAMCPreferenceManager sharedManager].currentUserMode = SAMCUserModeTypeCustom;
-//    SAMCLoginViewController *vc = [[SAMCLoginViewController alloc] init];
-//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-//    nav.navigationBar.translucent = NO;
-//    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-//    window.rootViewController = nav;
-//    [window makeToast:toast duration:2.0 position:CSToastPositionCenter];
+    SAMCPreLoginInfo *info = [[SAMCPreLoginInfo alloc] init];
+    info.countryCode = self.countryCode;
+    info.cellPhone = self.phoneNumber;
+    [SAMCPreferenceManager sharedManager].preLoginInfo = info;
+    SAMCLoginViewController *vc = [[SAMCLoginViewController alloc] init];
+    vc.preLoginInfo = info;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    nav.navigationBar.translucent = NO;
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    window.rootViewController = nav;
+    [window makeToast:toast duration:2.0 position:CSToastPositionCenter];
 }
 
 - (void)showPassword:(UIButton *)sender

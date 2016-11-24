@@ -10,10 +10,6 @@
 
 @interface SAMCSetPasswordViewController : UIViewController
 
-@property (nonatomic, getter=isSignupOperation) BOOL signupOperation;
-
-@property (nonatomic, copy) NSString *countryCode;
-@property (nonatomic, copy) NSString *phoneNumber;
-@property (nonatomic, copy) NSString *verifyCode;
+- (instancetype)initWithCountryCode:(NSString *)countryCode phone:(NSString *)phone code:(NSString *)code;
 
 @end

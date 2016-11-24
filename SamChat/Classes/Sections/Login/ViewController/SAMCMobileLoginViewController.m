@@ -163,6 +163,9 @@
 #pragma mark - textField
 - (void)textFieldEditingChanged:(UITextField *)textField
 {
+    NSString *cellPhone = self.phoneTextField.rightTextField.text;
+    NSString *password = self.passwordTextField.text;
+    self.loginButton.enabled = [cellPhone samc_isValidCellphone] && [password samc_isValidPassword];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField

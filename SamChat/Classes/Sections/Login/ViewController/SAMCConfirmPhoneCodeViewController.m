@@ -184,10 +184,9 @@
                                                                       phone:phoneNumber
                                                                        code:verifyCode];
         } else {
-            vc = [[SAMCSetPasswordViewController alloc] init];
-//        vc.countryCode = self.countryCode;
-//        vc.phoneNumber = self.phoneNumber;
-//        vc.verifyCode = verifyCode;
+            vc = [[SAMCSetPasswordViewController alloc] initWithCountryCode:countryCode
+                                                                      phone:phoneNumber
+                                                                       code:verifyCode];
         }
         [self.navigationController pushViewController:vc animated:YES];
     };
