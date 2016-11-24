@@ -11,6 +11,9 @@
 #import "SAMCPadImageView.h"
 #import "SAMCMobileLoginViewController.h"
 #import "SAMCAccountLoginViewController.h"
+#import "SVProgressHUD.h"
+#import "SAMCAccountManager.h"
+#import "UIView+Toast.h"
 
 @interface SAMCDefaultLoginViewController ()
 
@@ -125,6 +128,21 @@
 
 - (void)login:(id)sender
 {
+    [SVProgressHUD showWithStatus:@"login" maskType:SVProgressHUDMaskTypeBlack];
+    [_passwordTextField resignFirstResponder];
+    
+    NSString *password = [_passwordTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    __weak typeof(self) wself = self;
+    [[SAMCAccountManager sharedManager] loginWithCountryCode:_countryCode cellPhone:_phoneNumber password:password completion:^(NSError * _Nullable error) {
+        [SVProgressHUD dismiss];
+        if (error) {
+            NSString *toast = error.userInfo[NSLocalizedDescriptionKey];
+            [wself.view makeToast:toast duration:2.0f position:CSToastPositionCenter];
+            return;
+        }
+        extern NSString *SAMCLoginNotification;
+        [[NSNotificationCenter defaultCenter] postNotificationName:SAMCLoginNotification object:nil userInfo:nil];
+    }];
 }
 
 - (void)forgotPassword:(id)sender

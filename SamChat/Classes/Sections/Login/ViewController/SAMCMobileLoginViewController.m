@@ -13,6 +13,9 @@
 #import "NSString+SAMC.h"
 #import "SAMCTextField.h"
 #import "SAMCPadImageView.h"
+#import "SVProgressHUD.h"
+#import "SAMCAccountManager.h"
+#import "UIView+Toast.h"
 
 @interface SAMCMobileLoginViewController ()
 
@@ -116,6 +119,25 @@
 
 - (void)login:(id)sender
 {
+    [SVProgressHUD showWithStatus:@"login" maskType:SVProgressHUDMaskTypeBlack];
+    [_phoneTextField.rightTextField resignFirstResponder];
+    [_passwordTextField resignFirstResponder];
+    
+    NSString *countryCode = _phoneTextField.leftButton.titleLabel.text;
+    countryCode = [countryCode stringByReplacingOccurrencesOfString:@"+" withString:@""];
+    NSString *cellPhone = [_phoneTextField.rightTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *password = [_passwordTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    __weak typeof(self) wself = self;
+    [[SAMCAccountManager sharedManager] loginWithCountryCode:countryCode cellPhone:cellPhone password:password completion:^(NSError * _Nullable error) {
+        [SVProgressHUD dismiss];
+        if (error) {
+            NSString *toast = error.userInfo[NSLocalizedDescriptionKey];
+            [wself.view makeToast:toast duration:2.0f position:CSToastPositionCenter];
+            return;
+        }
+        extern NSString *SAMCLoginNotification;
+        [[NSNotificationCenter defaultCenter] postNotificationName:SAMCLoginNotification object:nil userInfo:nil];
+    }];
 }
 
 - (void)forgotPassword:(id)sender

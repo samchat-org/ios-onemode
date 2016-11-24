@@ -8,6 +8,9 @@
 
 #import "SAMCAccountLoginViewController.h"
 #import "SAMCPadImageView.h"
+#import "SVProgressHUD.h"
+#import "SAMCAccountManager.h"
+#import "UIView+Toast.h"
 
 @interface SAMCAccountLoginViewController ()
 
@@ -90,6 +93,23 @@
 
 - (void)login:(id)sender
 {
+    [SVProgressHUD showWithStatus:@"login" maskType:SVProgressHUDMaskTypeBlack];
+    [_accountTextField resignFirstResponder];
+    [_passwordTextField resignFirstResponder];
+    
+    NSString *account = [_accountTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *password = [_passwordTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    __weak typeof(self) wself = self;
+    [[SAMCAccountManager sharedManager] loginWithAccount:account password:password completion:^(NSError * _Nullable error) {
+        [SVProgressHUD dismiss];
+        if (error) {
+            NSString *toast = error.userInfo[NSLocalizedDescriptionKey];
+            [wself.view makeToast:toast duration:2.0f position:CSToastPositionCenter];
+            return;
+        }
+        extern NSString *SAMCLoginNotification;
+        [[NSNotificationCenter defaultCenter] postNotificationName:SAMCLoginNotification object:nil userInfo:nil];
+    }];
 }
 
 - (void)forgotPassword:(id)sender
