@@ -45,6 +45,8 @@ alpha:alphaValue]
 #define SAMC_COLOR_INK_HINT                     SAMCUIColorFromRGBA(0x13243F, 0.5)
 
 #define SAMC_COLOR_BODY_MID                     SAMCUIColorFromRGBA(0x13243F, 0.6)
+#define SAMC_COLOR_NAV_LIGHT                    SAMCUIColorFromRGB(0xF8F9F9)
+#define SAMC_COLOR_NAV_DARK                     SAMCUIColorFromRGB(0x13243F)
 
 #define SAMC_COLOR_RGB_GREEN                    0x67D45F
 #define SAMC_COLOR_RGB_INK                      0x13243F

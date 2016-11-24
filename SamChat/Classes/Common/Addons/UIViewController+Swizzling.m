@@ -19,11 +19,12 @@
 + (void)load{
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-//        swizzling_exchangeMethod([UIViewController class] ,@selector(viewWillAppear:), @selector(swizzling_viewWillAppear:));
+        swizzling_exchangeMethod([UIViewController class] ,@selector(viewWillAppear:), @selector(swizzling_viewWillAppear:));
 //        swizzling_exchangeMethod([UIViewController class] ,@selector(viewDidAppear:), @selector(swizzling_viewDidAppear:));
 //        swizzling_exchangeMethod([UIViewController class] ,@selector(viewWillDisappear:), @selector(swizzling_viewWillDisappear:));
         swizzling_exchangeMethod([UIViewController class] ,@selector(viewDidLoad),    @selector(swizzling_viewDidLoad));
         swizzling_exchangeMethod([UIViewController class], @selector(initWithNibName:bundle:), @selector(swizzling_initWithNibName:bundle:));
+        swizzling_exchangeMethod([UIViewController class], @selector(viewWillLayoutSubviews), @selector(swizzling_viewWillLayoutSubviews));
     });
 }
 
@@ -61,18 +62,18 @@ static char UIFirstResponderViewAddress;
 
 - (void)swizzling_viewWillAppear:(BOOL)animated{
     [self swizzling_viewWillAppear:animated];
-    if (self.parentViewController == self.navigationController)
+    if ((self.parentViewController == self.navigationController) && self.navigationController)
     {
-        if ([self swizzling_isUseClearBar] && self.navigationController)
-        {
-            [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-            [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+        [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+        [self.navigationController.navigationBar setShadowImage:nil];
+        
+        UIColor *barColor;
+        if ([SAMCAccountManager sharedManager].isCurrentUserServicer) {
+            barColor = SAMC_COLOR_NAV_DARK;
+        } else {
+            barColor = SAMC_COLOR_NAV_LIGHT;
         }
-        else
-        {
-            [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-            [self.navigationController.navigationBar setShadowImage:nil];
-        }
+        self.navigationController.navigationBar.barTintColor = barColor;
     }
 }
 
@@ -94,6 +95,22 @@ static char UIFirstResponderViewAddress;
         [view resignFirstResponder];
     }else{
         objc_setAssociatedObject(self, &UIFirstResponderViewAddress, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+}
+
+#pragma mark - viewWillLayoutSubviews
+-(void)swizzling_viewWillLayoutSubviews
+{
+    [self swizzling_viewWillLayoutSubviews];
+    id titleView = self.navigationItem.titleView;
+    UILabel *label;
+    if ([titleView isKindOfClass:[UILabel class]]) {
+        label = (UILabel *)titleView;
+        if ([SAMCAccountManager sharedManager].isCurrentUserServicer) {
+            label.textColor = [UIColor whiteColor];
+        } else {
+            label.textColor = SAMC_COLOR_INK;
+        }
     }
 }
 
