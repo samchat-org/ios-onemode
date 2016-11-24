@@ -258,6 +258,9 @@
 		31A045061DE682320021E029 /* terms.html in Resources */ = {isa = PBXBuildFile; fileRef = 31A045021DE682310021E029 /* terms.html */; };
 		31FD59A21DE68BA2006F3ED3 /* SAMCMobileLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59A11DE68BA2006F3ED3 /* SAMCMobileLoginViewController.m */; };
 		31FD59A51DE69707006F3ED3 /* SAMCAccountLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59A41DE69707006F3ED3 /* SAMCAccountLoginViewController.m */; };
+		31FD59A81DE6AFFA006F3ED3 /* SAMCCardPortraitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59A71DE6AFFA006F3ED3 /* SAMCCardPortraitView.m */; };
+		31FD59AB1DE6B015006F3ED3 /* SAMCAvatarImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59AA1DE6B015006F3ED3 /* SAMCAvatarImageView.m */; };
+		31FD59AE1DE6B059006F3ED3 /* SAMCDefaultLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59AD1DE6B059006F3ED3 /* SAMCDefaultLoginViewController.m */; };
 		3972DECFA052F7025D9E172D /* libPods-SamChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E082DB4614A7B87AB712BF66 /* libPods-SamChat.a */; };
 		611FE9EE1BB02320005E8E45 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		61530BE71BABAD3B00FE50CC /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 61530BE61BABAD3B00FE50CC /* libsqlite3.0.tbd */; };
@@ -747,6 +750,12 @@
 		31FD59A11DE68BA2006F3ED3 /* SAMCMobileLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCMobileLoginViewController.m; sourceTree = "<group>"; };
 		31FD59A31DE69707006F3ED3 /* SAMCAccountLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCAccountLoginViewController.h; sourceTree = "<group>"; };
 		31FD59A41DE69707006F3ED3 /* SAMCAccountLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCAccountLoginViewController.m; sourceTree = "<group>"; };
+		31FD59A61DE6AFFA006F3ED3 /* SAMCCardPortraitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCCardPortraitView.h; sourceTree = "<group>"; };
+		31FD59A71DE6AFFA006F3ED3 /* SAMCCardPortraitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCCardPortraitView.m; sourceTree = "<group>"; };
+		31FD59A91DE6B015006F3ED3 /* SAMCAvatarImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCAvatarImageView.h; sourceTree = "<group>"; };
+		31FD59AA1DE6B015006F3ED3 /* SAMCAvatarImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCAvatarImageView.m; sourceTree = "<group>"; };
+		31FD59AC1DE6B059006F3ED3 /* SAMCDefaultLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCDefaultLoginViewController.h; sourceTree = "<group>"; };
+		31FD59AD1DE6B059006F3ED3 /* SAMCDefaultLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCDefaultLoginViewController.m; sourceTree = "<group>"; };
 		332C493725247BFBF7A8FA45 /* Pods-SamChat.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SamChat.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-SamChat/Pods-SamChat.adhoc.xcconfig"; sourceTree = "<group>"; };
 		6121D1C91D9B9F8D005FAD3B /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
 		6121D1CB1D9B9FCC005FAD3B /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
@@ -928,6 +937,10 @@
 				31A044451DE586820021E029 /* SAMCStepperView.m */,
 				31A0444D1DE5887E0021E029 /* SAMCPadImageView.h */,
 				31A0444E1DE5887E0021E029 /* SAMCPadImageView.m */,
+				31FD59A91DE6B015006F3ED3 /* SAMCAvatarImageView.h */,
+				31FD59AA1DE6B015006F3ED3 /* SAMCAvatarImageView.m */,
+				31FD59A61DE6AFFA006F3ED3 /* SAMCCardPortraitView.h */,
+				31FD59A71DE6AFFA006F3ED3 /* SAMCCardPortraitView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1214,6 +1227,8 @@
 				31FD59A11DE68BA2006F3ED3 /* SAMCMobileLoginViewController.m */,
 				31FD59A31DE69707006F3ED3 /* SAMCAccountLoginViewController.h */,
 				31FD59A41DE69707006F3ED3 /* SAMCAccountLoginViewController.m */,
+				31FD59AC1DE6B059006F3ED3 /* SAMCDefaultLoginViewController.h */,
+				31FD59AD1DE6B059006F3ED3 /* SAMCDefaultLoginViewController.m */,
 				31A042651DE535C80021E029 /* NTESLoginViewController.h */,
 				31A042661DE535C80021E029 /* NTESLoginViewController.m */,
 				31A042671DE535C80021E029 /* NTESLoginViewController.xib */,
@@ -2225,6 +2240,7 @@
 				31A0437C1DE535C80021E029 /* NTESChatroomTextContentConfig.m in Sources */,
 				31A044561DE590A40021E029 /* SAMCAccountManager.m in Sources */,
 				31A043C41DE535C80021E029 /* NTESWhiteboardViewController.m in Sources */,
+				31FD59A81DE6AFFA006F3ED3 /* SAMCCardPortraitView.m in Sources */,
 				31A043AB1DE535C80021E029 /* NTESSessionMsgConverter.m in Sources */,
 				31A043FA1DE535C80021E029 /* NTESFileLocationHelper.m in Sources */,
 				31A044431DE585C60021E029 /* SAMCPhoneCodeView.m in Sources */,
@@ -2246,6 +2262,7 @@
 				31A0435C1DE535C80021E029 /* UIAlertView+NTESBlock.m in Sources */,
 				31A043E51DE535C80021E029 /* NTESBirthSettingViewController.m in Sources */,
 				31A043FE1DE535C80021E029 /* NTESSessionUtil.m in Sources */,
+				31FD59AB1DE6B015006F3ED3 /* SAMCAvatarImageView.m in Sources */,
 				31A044761DE590B90021E029 /* SAMCUnreadCountManager.m in Sources */,
 				31A043711DE535C80021E029 /* NTESColorButtonCell.m in Sources */,
 				31A043941DE535C80021E029 /* NTESBlackListViewController.m in Sources */,
@@ -2302,6 +2319,7 @@
 				31A043681DE535C80021E029 /* NTESMainTabController.m in Sources */,
 				31A044731DE590B90021E029 /* SAMCResourceManager.m in Sources */,
 				31A043A31DE535C80021E029 /* NTESRegisterViewController.m in Sources */,
+				31FD59AE1DE6B059006F3ED3 /* SAMCDefaultLoginViewController.m in Sources */,
 				31A0447E1DE591010021E029 /* SAMCServerAPI.m in Sources */,
 				31A044AE1DE591380021E029 /* SAMCPublicDB_2016082201.m in Sources */,
 				31A044751DE590B90021E029 /* SAMCSyncManager.m in Sources */,

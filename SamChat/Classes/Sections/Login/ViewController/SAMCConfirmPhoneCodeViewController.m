@@ -210,7 +210,6 @@
 {
     if (_stepperView == nil) {
         _stepperView = [[SAMCStepperView alloc] initWithFrame:CGRectZero step:2 color:SAMC_COLOR_GREEN];
-        _stepperView.translatesAutoresizingMaskIntoConstraints = NO;
     }
     return _stepperView;
 }
@@ -219,7 +218,6 @@
 {
     if (_tipLabel == nil) {
         _tipLabel = [[UILabel alloc] init];
-        _tipLabel.translatesAutoresizingMaskIntoConstraints = NO;
         _tipLabel.font = [UIFont boldSystemFontOfSize:19.0f];
         _tipLabel.textAlignment = NSTextAlignmentCenter;
         _tipLabel.textColor = SAMC_COLOR_INK;
@@ -232,7 +230,6 @@
 {
     if (_phoneCodeView == nil) {
         _phoneCodeView = [[SAMCPhoneCodeView alloc] initWithFrame:CGRectZero];
-        _phoneCodeView.translatesAutoresizingMaskIntoConstraints = NO;
         _phoneCodeView.delegate = self;
     }
     return _phoneCodeView;
@@ -242,7 +239,6 @@
 {
     if (_splitLabel == nil) {
         _splitLabel = [[UILabel alloc] init];
-        _splitLabel.translatesAutoresizingMaskIntoConstraints = NO;
         _splitLabel.backgroundColor = SAMCUIColorFromRGBA(SAMC_COLOR_RGB_INK, 0.1);
     }
     return _splitLabel;
@@ -252,7 +248,6 @@
 {
     if (_phoneLabel == nil) {
         _phoneLabel = [[UILabel alloc] init];
-        _phoneLabel.translatesAutoresizingMaskIntoConstraints = NO;
         _phoneLabel.font = [UIFont boldSystemFontOfSize:21.0f];
         _phoneLabel.textColor = SAMC_COLOR_INK;
         _phoneLabel.textAlignment = NSTextAlignmentCenter;
@@ -265,7 +260,6 @@
 {
     if (_detailLabel == nil) {
         _detailLabel = [[UILabel alloc] init];
-        _detailLabel.translatesAutoresizingMaskIntoConstraints = NO;
         _detailLabel.numberOfLines = 0;
         _detailLabel.font = [UIFont systemFontOfSize:15.0f];
         _detailLabel.textColor = SAMC_COLOR_BODY_MID;
