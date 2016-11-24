@@ -12,6 +12,7 @@
 #import "SVProgressHUD.h"
 #import "SAMCAccountManager.h"
 #import "UIView+Toast.h"
+#import "NSString+SAMC.h"
 
 @interface SAMCAccountLoginViewController ()
 
@@ -123,6 +124,9 @@
 #pragma mark - textField
 - (void)textFieldEditingChanged:(UITextField *)textField
 {
+    NSString *account = self.accountTextField.text;
+    NSString *password = self.passwordTextField.text;
+    self.loginButton.enabled = [account samc_isValidSamchatId] && [password samc_isValidPassword];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
