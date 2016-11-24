@@ -109,6 +109,28 @@
 //{
 //    "header":
 //    {
+//        "action" : "login-code-request",
+//    },
+//    "body":
+//    {
+//        "countrycode" : “”
+//        "cellphone"	: “”
+//    }
+//}
++ (NSDictionary *)loginCodeRequestWithCountryCode:(NSString *)countryCode
+                                        cellPhone:(NSString *)cellPhone
+{
+    countryCode = countryCode?:@"";
+    cellPhone = cellPhone?:@"";
+    NSDictionary *header = @{SAMC_ACTION:SAMC_LOGIN_CODE_REQUEST};
+    NSDictionary *body = @{SAMC_COUNTRYCODE:countryCode,
+                           SAMC_CELLPHONE:cellPhone};
+    return @{SAMC_HEADER:header,SAMC_BODY:body};
+}
+
+//{
+//    "header":
+//    {
 //        “action”: “login”
 //    },
 //    "body" :

@@ -59,6 +59,10 @@ NS_ASSUME_NONNULL_BEGIN
                             password:(NSString *)password
                           completion:(void (^)(NSError * __nullable error))completion;
 
+- (void)loginCodeRequestWithCountryCode:(NSString *)countryCode
+                              cellPhone:(NSString *)cellPhone
+                             completion:(void (^)(NSError * __nullable error))completion;
+
 - (void)loginWithAccount:(NSString *)account
                 password:(NSString *)password
               completion:(void (^)(NSError * __nullable error))completion;

@@ -10,6 +10,7 @@
 #import "SAMCCountryCodeViewController.h"
 #import "SAMCAccountLoginViewController.h"
 #import "SAMCConfirmPhoneNumViewController.h"
+#import "SAMCSMSLoginRequestViewController.h"
 #import "NSString+SAMC.h"
 #import "SAMCTextField.h"
 #import "SAMCPadImageView.h"
@@ -149,6 +150,8 @@
 
 - (void)loginViaSMS:(id)sender
 {
+    SAMCSMSLoginRequestViewController *vc = [[SAMCSMSLoginRequestViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)changeLoginMode:(id)sender
