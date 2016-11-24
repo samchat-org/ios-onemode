@@ -80,10 +80,6 @@
 		31A0439E1DE535C80021E029 /* NTESSystemNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A0425E1DE535C80021E029 /* NTESSystemNotificationViewController.m */; };
 		31A0439F1DE535C80021E029 /* NTESSystemNotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31A0425F1DE535C80021E029 /* NTESSystemNotificationViewController.xib */; };
 		31A043A01DE535C80021E029 /* NTESLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A042631DE535C80021E029 /* NTESLoginManager.m */; };
-		31A043A11DE535C80021E029 /* NTESLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A042661DE535C80021E029 /* NTESLoginViewController.m */; };
-		31A043A21DE535C80021E029 /* NTESLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31A042671DE535C80021E029 /* NTESLoginViewController.xib */; };
-		31A043A31DE535C80021E029 /* NTESRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A042691DE535C80021E029 /* NTESRegisterViewController.m */; };
-		31A043A41DE535C80021E029 /* NTESRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31A0426A1DE535C80021E029 /* NTESRegisterViewController.xib */; };
 		31A043A51DE535C80021E029 /* NTESSessionConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A0426E1DE535C80021E029 /* NTESSessionConfig.m */; };
 		31A043A61DE535C80021E029 /* NTESChartletAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A042721DE535C80021E029 /* NTESChartletAttachment.m */; };
 		31A043A71DE535C80021E029 /* NTESCustomAttachmentDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A042741DE535C80021E029 /* NTESCustomAttachmentDecoder.m */; };
@@ -416,12 +412,6 @@
 		31A0425F1DE535C80021E029 /* NTESSystemNotificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NTESSystemNotificationViewController.xib; sourceTree = "<group>"; };
 		31A042621DE535C80021E029 /* NTESLoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESLoginManager.h; sourceTree = "<group>"; };
 		31A042631DE535C80021E029 /* NTESLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESLoginManager.m; sourceTree = "<group>"; };
-		31A042651DE535C80021E029 /* NTESLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESLoginViewController.h; sourceTree = "<group>"; };
-		31A042661DE535C80021E029 /* NTESLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESLoginViewController.m; sourceTree = "<group>"; };
-		31A042671DE535C80021E029 /* NTESLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NTESLoginViewController.xib; sourceTree = "<group>"; };
-		31A042681DE535C80021E029 /* NTESRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESRegisterViewController.h; sourceTree = "<group>"; };
-		31A042691DE535C80021E029 /* NTESRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESRegisterViewController.m; sourceTree = "<group>"; };
-		31A0426A1DE535C80021E029 /* NTESRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NTESRegisterViewController.xib; sourceTree = "<group>"; };
 		31A0426D1DE535C80021E029 /* NTESSessionConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESSessionConfig.h; sourceTree = "<group>"; };
 		31A0426E1DE535C80021E029 /* NTESSessionConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESSessionConfig.m; sourceTree = "<group>"; };
 		31A042711DE535C80021E029 /* NTESChartletAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESChartletAttachment.h; sourceTree = "<group>"; };
@@ -1229,12 +1219,6 @@
 				31FD59A41DE69707006F3ED3 /* SAMCAccountLoginViewController.m */,
 				31FD59AC1DE6B059006F3ED3 /* SAMCDefaultLoginViewController.h */,
 				31FD59AD1DE6B059006F3ED3 /* SAMCDefaultLoginViewController.m */,
-				31A042651DE535C80021E029 /* NTESLoginViewController.h */,
-				31A042661DE535C80021E029 /* NTESLoginViewController.m */,
-				31A042671DE535C80021E029 /* NTESLoginViewController.xib */,
-				31A042681DE535C80021E029 /* NTESRegisterViewController.h */,
-				31A042691DE535C80021E029 /* NTESRegisterViewController.m */,
-				31A0426A1DE535C80021E029 /* NTESRegisterViewController.xib */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -2020,7 +2004,6 @@
 				31A045031DE682310021E029 /* about.html in Resources */,
 				31A044141DE535C80021E029 /* video_chat_tip_receiver.aac in Resources */,
 				31A0439D1DE535C80021E029 /* NTESSystemNotificationCell.xib in Resources */,
-				31A043A41DE535C80021E029 /* NTESRegisterViewController.xib in Resources */,
 				31A043731DE535C80021E029 /* NTESJionTeamViewController.xib in Resources */,
 				31A044341DE585460021E029 /* CountryCodeListCh.plist in Resources */,
 				31A043B81DE535C80021E029 /* NTESAudio2TextViewController.xib in Resources */,
@@ -2052,7 +2035,6 @@
 				31A043BE1DE535C80021E029 /* NTESGalleryViewController.xib in Resources */,
 				31A044061DE535C80021E029 /* d3.icns in Resources */,
 				31A043C81DE535C80021E029 /* NTESVideoViewController.xib in Resources */,
-				31A043A21DE535C80021E029 /* NTESLoginViewController.xib in Resources */,
 				31A0439F1DE535C80021E029 /* NTESSystemNotificationViewController.xib in Resources */,
 				31A044351DE585460021E029 /* CountryCodeListEn.plist in Resources */,
 				31A043C51DE535C80021E029 /* NTESWhiteboardViewController.xib in Resources */,
@@ -2137,7 +2119,6 @@
 				31A043AF1DE535C80021E029 /* NTESSessionCustomLayoutConfig.m in Sources */,
 				31A043F21DE535C80021E029 /* NTESDemoRegisterTask.m in Sources */,
 				31A043A91DE535C80021E029 /* NTESLocationPoint.m in Sources */,
-				31A043A11DE535C80021E029 /* NTESLoginViewController.m in Sources */,
 				31A043A01DE535C80021E029 /* NTESLoginManager.m in Sources */,
 				31A044EF1DE594F20021E029 /* SAMCUser.m in Sources */,
 				31A043921DE535C80021E029 /* NTESContactUtilItem.m in Sources */,
@@ -2318,7 +2299,6 @@
 				31A043951DE535C80021E029 /* NTESContactAddFriendViewController.m in Sources */,
 				31A043681DE535C80021E029 /* NTESMainTabController.m in Sources */,
 				31A044731DE590B90021E029 /* SAMCResourceManager.m in Sources */,
-				31A043A31DE535C80021E029 /* NTESRegisterViewController.m in Sources */,
 				31FD59AE1DE6B059006F3ED3 /* SAMCDefaultLoginViewController.m in Sources */,
 				31A0447E1DE591010021E029 /* SAMCServerAPI.m in Sources */,
 				31A044AE1DE591380021E029 /* SAMCPublicDB_2016082201.m in Sources */,
