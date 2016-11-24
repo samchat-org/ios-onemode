@@ -1,33 +1,25 @@
 //
-//  SAMCMobileLoginViewController.m
+//  SAMCAccountLoginViewController.m
 //  SamChat
 //
 //  Created by HJ on 11/24/16.
 //  Copyright © 2016 SamChat. All rights reserved.
 //
 
-#import "SAMCMobileLoginViewController.h"
-#import "SAMCCountryCodeViewController.h"
 #import "SAMCAccountLoginViewController.h"
-#import "NSString+SAMC.h"
-#import "SAMCTextField.h"
 #import "SAMCPadImageView.h"
 
-@interface SAMCMobileLoginViewController ()
+@interface SAMCAccountLoginViewController ()
 
 @property (nonatomic, strong) UILabel *tipLabel;
-@property (nonatomic, strong) SAMCTextField *phoneTextField;
+@property (nonatomic, strong) UITextField *accountTextField;
 @property (nonatomic, strong) UITextField *passwordTextField;
 @property (nonatomic, strong) UIButton *loginButton;
 @property (nonatomic, strong) UIButton *forgetPWDButton;
-@property (nonatomic, strong) UIButton *viaSMSButton;
-@property (nonatomic, strong) UIButton *changeLoginModeButton;
-
-@property (nonatomic, copy) NSString *countryCode;
 
 @end
 
-@implementation SAMCMobileLoginViewController
+@implementation SAMCAccountLoginViewController
 
 - (void)viewDidLoad
 {
@@ -40,19 +32,17 @@
     self.navigationItem.title = @"Login";
     self.view.backgroundColor = SAMC_COLOR_LIGHTGREY;
     [self.view addSubview:self.tipLabel];
-    [self.view addSubview:self.phoneTextField];
+    [self.view addSubview:self.accountTextField];
     [self.view addSubview:self.passwordTextField];
     [self.view addSubview:self.loginButton];
     [self.view addSubview:self.forgetPWDButton];
-    [self.view addSubview:self.viaSMSButton];
-    [self.view addSubview:self.changeLoginModeButton];
     
     [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
         make.top.equalTo(self.view).with.offset(22);
     }];
     
-    [self.phoneTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.accountTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).with.offset(32);
         make.right.equalTo(self.view).with.offset(-32);
         make.height.equalTo(@40);
@@ -63,7 +53,7 @@
         make.left.equalTo(self.view).with.offset(32);
         make.right.equalTo(self.view).with.offset(-32);
         make.height.equalTo(@40);
-        make.top.equalTo(self.phoneTextField.mas_bottom).with.offset(20);
+        make.top.equalTo(self.accountTextField.mas_bottom).with.offset(20);
     }];
     
     [self.loginButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -74,18 +64,8 @@
     }];
     
     [self.forgetPWDButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.loginButton);
-        make.top.equalTo(self.loginButton.mas_bottom).with.offset(20);
-    }];
-    
-    [self.viaSMSButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.loginButton);
-        make.top.equalTo(self.loginButton.mas_bottom).with.offset(20);
-    }];
-    
-    [self.changeLoginModeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
-        make.bottom.equalTo(self.view).with.offset(-20);
+        make.top.equalTo(self.loginButton.mas_bottom).with.offset(20);
     }];
 }
 
@@ -96,14 +76,9 @@
 }
 
 #pragma mark - Action
-- (void)selectCountryCode:(UIButton *)sender
+- (void)touchNext:(id)sender
 {
-    SAMCCountryCodeViewController *countryCodeController = [[SAMCCountryCodeViewController alloc] init];
-    __weak typeof(self) weakSelf = self;
-    countryCodeController.selectBlock = ^(NSString *text){
-        [weakSelf.phoneTextField.leftButton setTitle:text forState:UIControlStateNormal];
-    };
-    [self.navigationController pushViewController:countryCodeController animated:YES];
+    [self.passwordTextField becomeFirstResponder];
 }
 
 - (void)touchDone:(id)sender
@@ -119,16 +94,6 @@
 
 - (void)forgotPassword:(id)sender
 {
-}
-
-- (void)loginViaSMS:(id)sender
-{
-}
-
-- (void)changeLoginMode:(id)sender
-{
-    SAMCAccountLoginViewController *vc = [[SAMCAccountLoginViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - textField
@@ -150,27 +115,30 @@
         _tipLabel.font = [UIFont boldSystemFontOfSize:19.0f];
         _tipLabel.textAlignment = NSTextAlignmentCenter;
         _tipLabel.textColor = SAMC_COLOR_INK;
-        _tipLabel.text = @"Login by Mobile";
+        _tipLabel.text = @"Login with SamChat ID";
     }
     return _tipLabel;
 }
 
-- (SAMCTextField *)phoneTextField
+- (UITextField *)accountTextField
 {
-    if (_phoneTextField == nil) {
-        _phoneTextField = [[SAMCTextField alloc] initWithFrame:CGRectZero];
-        [_phoneTextField.leftButton setTitle:self.countryCode?:@"+1" forState:UIControlStateNormal];
-        [_phoneTextField.leftButton setTitleColor:SAMC_COLOR_INK forState:UIControlStateNormal];
-        [_phoneTextField.leftButton setTitleColor:SAMC_COLOR_INK_HINT forState:UIControlStateHighlighted];
-        [_phoneTextField.leftButton addTarget:self action:@selector(selectCountryCode:) forControlEvents:UIControlEventTouchUpInside];
-        [_phoneTextField.rightTextField addTarget:self action:@selector(textFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
-        [_phoneTextField.rightTextField addTarget:self action:@selector(textFieldDidEndEditing:) forControlEvents:UIControlEventEditingDidEnd];
-        _phoneTextField.splitLabel.backgroundColor = SAMC_COLOR_INK_HINT;
-        _phoneTextField.rightTextField.textColor = SAMC_COLOR_INK;
-        _phoneTextField.rightTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Your phone number" attributes:@{NSForegroundColorAttributeName:SAMC_COLOR_INK_HINT,NSFontAttributeName:[UIFont systemFontOfSize:17.0f]}];
-        self.phoneTextField.rightTextField.keyboardType = UIKeyboardTypePhonePad;
+    if (_accountTextField == nil) {
+        _accountTextField = [[UITextField alloc] init];
+        _accountTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        _accountTextField.layer.cornerRadius = 6.0f;
+        _accountTextField.backgroundColor = [UIColor whiteColor];
+        _accountTextField.textColor = SAMC_COLOR_INK;
+        _accountTextField.font = [UIFont systemFontOfSize:17.0f];
+        _accountTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"SamChat ID" attributes:@{NSForegroundColorAttributeName:SAMC_COLOR_INK_HINT,NSFontAttributeName:[UIFont systemFontOfSize:17.0f]}];
+        _accountTextField.returnKeyType = UIReturnKeyNext;
+        [_accountTextField addTarget:self action:@selector(touchNext:) forControlEvents:UIControlEventEditingDidEndOnExit];
+        [_accountTextField addTarget:self action:@selector(textFieldDidEndEditing:) forControlEvents:UIControlEventEditingDidEnd];
+        [_accountTextField addTarget:self action:@selector(textFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
+        
+        _accountTextField.leftView = [[SAMCPadImageView alloc] initWithImage:[UIImage imageNamed:@"ico_username"]];
+        _accountTextField.leftViewMode = UITextFieldViewModeAlways;
     }
-    return _phoneTextField;
+    return _accountTextField;
 }
 
 - (UITextField *)passwordTextField
@@ -229,37 +197,6 @@
         [_forgetPWDButton addTarget:self action:@selector(forgotPassword:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _forgetPWDButton;
-}
-
-- (UIButton *)viaSMSButton
-{
-    if (_viaSMSButton == nil) {
-        _viaSMSButton = [[UIButton alloc] initWithFrame:CGRectZero];
-        _viaSMSButton.exclusiveTouch = YES;
-        _viaSMSButton.backgroundColor = [UIColor clearColor];
-        [_viaSMSButton setTitleColor:SAMC_COLOR_INGRABLUE forState:UIControlStateNormal];
-        [_viaSMSButton setTitleColor:SAMCUIColorFromRGBA(SAMC_COLOR_RGB_INGRABLUE, 0.5) forState:UIControlStateHighlighted];
-        _viaSMSButton.titleLabel.font = [UIFont systemFontOfSize:15.0f];
-        [_viaSMSButton setTitle:@"Log in via SMS" forState:UIControlStateNormal];
-        _viaSMSButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        [_viaSMSButton addTarget:self action:@selector(loginViaSMS:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _viaSMSButton;
-}
-
-- (UIButton *)changeLoginModeButton
-{
-    if (_changeLoginModeButton == nil) {
-        _changeLoginModeButton = [[UIButton alloc] initWithFrame:CGRectZero];
-        _changeLoginModeButton.exclusiveTouch = YES;
-        _changeLoginModeButton.backgroundColor = [UIColor clearColor];
-        [_changeLoginModeButton setTitleColor:SAMC_COLOR_INGRABLUE forState:UIControlStateNormal];
-        [_changeLoginModeButton setTitleColor:SAMCUIColorFromRGBA(SAMC_COLOR_RGB_INGRABLUE, 0.5) forState:UIControlStateHighlighted];
-        _changeLoginModeButton.titleLabel.font = [UIFont systemFontOfSize:15.0f];
-        [_changeLoginModeButton setTitle:@"Change Login Mode" forState:UIControlStateNormal];
-        [_changeLoginModeButton addTarget:self action:@selector(changeLoginMode:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _changeLoginModeButton;
 }
 
 @end

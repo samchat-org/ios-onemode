@@ -257,6 +257,7 @@
 		31A045051DE682320021E029 /* faq.html in Resources */ = {isa = PBXBuildFile; fileRef = 31A045011DE682310021E029 /* faq.html */; };
 		31A045061DE682320021E029 /* terms.html in Resources */ = {isa = PBXBuildFile; fileRef = 31A045021DE682310021E029 /* terms.html */; };
 		31FD59A21DE68BA2006F3ED3 /* SAMCMobileLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59A11DE68BA2006F3ED3 /* SAMCMobileLoginViewController.m */; };
+		31FD59A51DE69707006F3ED3 /* SAMCAccountLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59A41DE69707006F3ED3 /* SAMCAccountLoginViewController.m */; };
 		3972DECFA052F7025D9E172D /* libPods-SamChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E082DB4614A7B87AB712BF66 /* libPods-SamChat.a */; };
 		611FE9EE1BB02320005E8E45 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		61530BE71BABAD3B00FE50CC /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 61530BE61BABAD3B00FE50CC /* libsqlite3.0.tbd */; };
@@ -744,6 +745,8 @@
 		31A045021DE682310021E029 /* terms.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = terms.html; sourceTree = "<group>"; };
 		31FD59A01DE68BA2006F3ED3 /* SAMCMobileLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCMobileLoginViewController.h; sourceTree = "<group>"; };
 		31FD59A11DE68BA2006F3ED3 /* SAMCMobileLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCMobileLoginViewController.m; sourceTree = "<group>"; };
+		31FD59A31DE69707006F3ED3 /* SAMCAccountLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCAccountLoginViewController.h; sourceTree = "<group>"; };
+		31FD59A41DE69707006F3ED3 /* SAMCAccountLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCAccountLoginViewController.m; sourceTree = "<group>"; };
 		332C493725247BFBF7A8FA45 /* Pods-SamChat.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SamChat.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-SamChat/Pods-SamChat.adhoc.xcconfig"; sourceTree = "<group>"; };
 		6121D1C91D9B9F8D005FAD3B /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
 		6121D1CB1D9B9FCC005FAD3B /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
@@ -1209,6 +1212,8 @@
 				31A044331DE585460021E029 /* SAMCSetPasswordViewController.m */,
 				31FD59A01DE68BA2006F3ED3 /* SAMCMobileLoginViewController.h */,
 				31FD59A11DE68BA2006F3ED3 /* SAMCMobileLoginViewController.m */,
+				31FD59A31DE69707006F3ED3 /* SAMCAccountLoginViewController.h */,
+				31FD59A41DE69707006F3ED3 /* SAMCAccountLoginViewController.m */,
 				31A042651DE535C80021E029 /* NTESLoginViewController.h */,
 				31A042661DE535C80021E029 /* NTESLoginViewController.m */,
 				31A042671DE535C80021E029 /* NTESLoginViewController.xib */,
@@ -2205,6 +2210,7 @@
 				31A044771DE590B90021E029 /* SAMCUserManager.m in Sources */,
 				31A044F21DE5958F0021E029 /* SAMCImageAttachment.m in Sources */,
 				31A043D61DE535C80021E029 /* NTESClientsTableViewController.m in Sources */,
+				31FD59A51DE69707006F3ED3 /* SAMCAccountLoginViewController.m in Sources */,
 				31A043891DE535C80021E029 /* NTESLiveBroadcastView.m in Sources */,
 				31A043611DE535C80021E029 /* UIScrollView+NTESPullToRefresh.m in Sources */,
 				31A0435B1DE535C80021E029 /* UIActionSheet+NTESBlock.m in Sources */,
