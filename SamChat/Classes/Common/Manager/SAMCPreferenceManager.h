@@ -16,6 +16,12 @@
 - (NSString *)finalToken;
 @end
 
+@interface SAMCPreLoginInfo : NSObject<NSCoding>
+@property (nonatomic, copy) NSString *countryCode;
+@property (nonatomic, copy) NSString *cellPhone;
+@property (nonatomic, copy) NSString *avatarUrl;
+@end
+
 @interface SAMCPreferenceManager : NSObject
 
 @property (nonatomic, strong) NSNumber *currentUserMode;
@@ -27,6 +33,8 @@
 @property (nonatomic, strong) NSNumber *needVibrate;
 
 @property (nonatomic, strong) NSNumber *advRecallTimeMinute;
+
+@property (nonatomic, strong) SAMCPreLoginInfo *preLoginInfo;
 
 + (instancetype)sharedManager;
 - (void)reset;

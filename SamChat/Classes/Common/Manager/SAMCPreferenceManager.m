@@ -9,20 +9,15 @@
 #import "SAMCPreferenceManager.h"
 #import "SAMCDeviceUtil.h"
 
-#define NIMAccount      @"account"
-#define NIMToken        @"token"
-
-@interface SAMCLoginData ()
-
-@end
-
+#define SAMCLoginDataAccount      @"account"
+#define SAMCLoginDataToken        @"token"
 @implementation SAMCLoginData
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super init]) {
-        _account = [aDecoder decodeObjectForKey:NIMAccount];
-        _token = [aDecoder decodeObjectForKey:NIMToken];
+        _account = [aDecoder decodeObjectForKey:SAMCLoginDataAccount];
+        _token = [aDecoder decodeObjectForKey:SAMCLoginDataToken];
     }
     return self;
 }
@@ -30,16 +25,47 @@
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
     if ([_account length]) {
-        [encoder encodeObject:_account forKey:NIMAccount];
+        [encoder encodeObject:_account forKey:SAMCLoginDataAccount];
     }
     if ([_token length]) {
-        [encoder encodeObject:_token forKey:NIMToken];
+        [encoder encodeObject:_token forKey:SAMCLoginDataToken];
     }
 }
 
 - (NSString *)finalToken
 {
     return [_token stringByAppendingString:[SAMCDeviceUtil deviceId]];
+}
+
+@end
+
+
+#define SAMCPreLoginCountryCode @"countryCode"
+#define SAMCPreLoginCellPhone   @"cellPhone"
+#define SAMCPreLoginAvatarUrl   @"avatar"
+@implementation SAMCPreLoginInfo
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super init]) {
+        _countryCode = [aDecoder decodeObjectForKey:SAMCPreLoginCountryCode];
+        _cellPhone = [aDecoder decodeObjectForKey:SAMCPreLoginCellPhone];
+        _avatarUrl = [aDecoder decodeObjectForKey:SAMCPreLoginAvatarUrl];
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    if ([_countryCode length]) {
+        [encoder encodeObject:_countryCode forKey:SAMCPreLoginCountryCode];
+    }
+    if ([_cellPhone length]) {
+        [encoder encodeObject:_cellPhone forKey:SAMCPreLoginCellPhone];
+    }
+    if ([_avatarUrl length]) {
+        [encoder encodeObject:_avatarUrl forKey:SAMCPreLoginAvatarUrl];
+    }
 }
 
 @end
@@ -51,6 +77,7 @@
 #define SAMC_NEEDSOUND_KEY                  @"samc_needsound_key"
 #define SAMC_NEEDVIBRATE_KEY                @"samc_needvibrate_key"
 #define SAMC_ADVRECALL_MINUTE_KEY           @"samc_advrecall_minute_key"
+#define SAMC_PRELOGININFO_KEY               @"samc_prelogininfo_key"
 
 @interface SAMCPreferenceManager ()
 
@@ -66,6 +93,7 @@
 @synthesize needSound = _needSound;
 @synthesize needVibrate = _needVibrate;
 @synthesize advRecallTimeMinute = _advRecallTimeMinute;
+@synthesize preLoginInfo = _preLoginInfo;
 
 + (instancetype)sharedManager
 {
@@ -101,6 +129,7 @@
         [[NSUserDefaults standardUserDefaults] setValue:_needVibrate forKey:SAMC_NEEDVIBRATE_KEY];
         _advRecallTimeMinute = @(2); // default to 2 minutes
         [[NSUserDefaults standardUserDefaults] setValue:_advRecallTimeMinute forKey:SAMC_ADVRECALL_MINUTE_KEY];
+        // do not reset preLoginInfo
     });
 }
 
@@ -240,6 +269,35 @@
     dispatch_barrier_async(_syncQueue, ^{
         _advRecallTimeMinute = advRecallTimeMinute;
         [[NSUserDefaults standardUserDefaults] setValue:advRecallTimeMinute forKey:SAMC_ADVRECALL_MINUTE_KEY];
+    });
+}
+
+#pragma mark - preLoginInfo
+- (SAMCPreLoginInfo *)preLoginInfo
+{
+    __block SAMCPreLoginInfo *info;
+    dispatch_sync(_syncQueue, ^{
+        if (_preLoginInfo == nil) {
+            NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:SAMC_PRELOGININFO_KEY];
+            if (data) {
+                _preLoginInfo = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            }
+        }
+        info = _preLoginInfo;
+    });
+    return info;
+}
+
+- (void)setPreLoginInfo:(SAMCPreLoginInfo *)preLoginInfo
+{
+    dispatch_barrier_async(_syncQueue, ^{
+        _preLoginInfo = preLoginInfo;
+        if (preLoginInfo) {
+            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:preLoginInfo];
+            [[NSUserDefaults standardUserDefaults] setObject:data forKey:SAMC_PRELOGININFO_KEY];
+        } else {
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:SAMC_PRELOGININFO_KEY];
+        }
     });
 }
 
