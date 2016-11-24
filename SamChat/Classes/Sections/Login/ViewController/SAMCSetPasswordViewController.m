@@ -102,11 +102,11 @@
 - (void)touchDone:(UIButton *)sender
 {
     if (self.doneButton.enabled) {
-        [self resetPassword];
+        [self resetPassword:nil];
     }
 }
 
-- (void)resetPassword
+- (void)resetPassword:(id)sender
 {
     NSString *password = self.passwordTextField.text;
     __weak typeof(self) wself = self;
@@ -233,7 +233,7 @@
         [_doneButton setTitle:@"Confirm" forState:UIControlStateNormal];
         [_doneButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_doneButton setTitleColor:SAMC_COLOR_WHITE_HINT forState:UIControlStateHighlighted];
-        [_doneButton addTarget:self action:@selector(touchDoneButton:) forControlEvents:UIControlEventTouchUpInside];
+        [_doneButton addTarget:self action:@selector(resetPassword:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _doneButton;
 }
