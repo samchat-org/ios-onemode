@@ -8,6 +8,9 @@
 
 #import "SAMCLoginViewController.h"
 #import "SAMCGradientButton.h"
+#import "SAMCConfirmPhoneNumViewController.h"
+#import "UIActionSheet+NTESBlock.h"
+#import "NTESLogManager.h"
 
 @interface SAMCLoginViewController ()
 
@@ -19,11 +22,24 @@
 
 @implementation SAMCLoginViewController
 
-NTES_USE_CLEAR_BAR
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self setupSubviews];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:NO];
 }
 
 - (void)setupSubviews
@@ -38,13 +54,13 @@ NTES_USE_CLEAR_BAR
     [self.signupButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).with.offset(32);
         make.right.equalTo(self.view.mas_centerX).with.offset(-10);
-        make.top.equalTo(self.logoImageView.mas_bottom).with.offset(40);
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(-60);
         make.height.mas_equalTo(40);
     }];
     [self.loginButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_centerX).with.offset(10);
         make.right.equalTo(self.view.mas_right).with.offset(-32);
-        make.top.equalTo(self.logoImageView.mas_bottom).with.offset(40);
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(-60);
         make.height.mas_equalTo(40);
     }];
 }
@@ -52,10 +68,49 @@ NTES_USE_CLEAR_BAR
 #pragma mark - Action
 - (void)signup:(id)sender
 {
+    SAMCConfirmPhoneNumViewController *vc = [[SAMCConfirmPhoneNumViewController alloc] init];
+    vc.signupOperation = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)login:(id)sender
 {
+}
+
+- (void)prepareShowLog:(UILongPressGestureRecognizer *)gesuture{
+    if (gesuture.state == UIGestureRecognizerStateBegan) {
+        __weak typeof(self) wself = self;
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"查看SDK日志",@"查看Demo日志", nil];
+        [actionSheet showInView:self.view completionHandler:^(NSInteger index) {
+            switch (index) {
+                case 0:
+                    [wself showSDKLog];
+                    break;
+                case 1:
+                    [wself showDemoLog];
+                    break;
+                default:
+                    break;
+            }
+        }];
+    }
+}
+
+#pragma mark - Private
+- (void)showSDKLog{
+    UIViewController *vc = [[NTESLogManager sharedManager] sdkLogViewController];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:nav
+                       animated:YES
+                     completion:nil];
+}
+
+- (void)showDemoLog{
+    UIViewController *logViewController = [[NTESLogManager sharedManager] demoLogViewController];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:logViewController];
+    [self presentViewController:nav
+                       animated:YES
+                     completion:nil];
 }
 
 #pragma mark - lazy load
@@ -100,8 +155,10 @@ NTES_USE_CLEAR_BAR
         [_loginButton setBackgroundImage:[UIImage imageNamed:@"ico_bkg_grey_active"] forState:UIControlStateNormal];
         [_loginButton setBackgroundImage:[UIImage imageNamed:@"ico_bkg_grey_pressed"] forState:UIControlStateHighlighted];
         [_loginButton setBackgroundImage:[UIImage imageNamed:@"ico_bkg_grey_inactive"] forState:UIControlStateDisabled];
-        
         [_loginButton addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UILongPressGestureRecognizer *longPressOnLoginBtn = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(prepareShowLog:)];
+        [_loginButton addGestureRecognizer:longPressOnLoginBtn];
     }
     return _loginButton;
 }

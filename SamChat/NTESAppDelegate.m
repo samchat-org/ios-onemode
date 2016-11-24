@@ -170,6 +170,7 @@ NSString *NTESNotificationLogout = @"NTESNotificationLogout";
 {
     SAMCLoginViewController *loginController = [[SAMCLoginViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginController];
+    nav.navigationBar.translucent = NO;
     self.window.rootViewController = nav;
 }
 

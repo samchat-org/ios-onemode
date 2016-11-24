@@ -18,6 +18,10 @@
 
 + (NSString *)showTime:(NSTimeInterval)msglastTime showDetail:(BOOL)showDetail;
 
+// SAMC_BEGIN
++ (NSInteger)daysEarlierWithTime:(NSTimeInterval)msglastTime;
+// SAMC_END
+
 + (NSString *)messageTipContent:(NIMMessage *)message;
 
 + (BOOL)canEditTeamInfo:(NIMTeamMember *)member;

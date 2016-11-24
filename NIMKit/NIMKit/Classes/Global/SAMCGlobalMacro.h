@@ -44,4 +44,35 @@ alpha:alphaValue]
 #define SAMC_COLOR_WHITE_HINT                   SAMCUIColorFromRGBA(0xFFFFFF, 0.5)
 #define SAMC_COLOR_INK_HINT                     SAMCUIColorFromRGBA(0x13243F, 0.5)
 
+#define SAMC_COLOR_BODY_MID                     SAMCUIColorFromRGBA(0x13243F, 0.6)
+
+#define SAMC_COLOR_RGB_GREEN                    0x67D45F
+#define SAMC_COLOR_RGB_INK                      0x13243F
+#define SAMC_COLOR_RGB_LEMMON                   0xD1F43B
+#define SAMC_COLOR_RGB_LAKE                     0x2676B6
+#define SAMC_COLOR_RGB_INGRABLUE                0x1D4D73
+
+
+#define MESSAGE_EXT_FROM_USER_MODE_KEY          @"msg_from"
+#define MESSAGE_EXT_FROM_USER_MODE_VALUE_CUSTOM @(0)
+#define MESSAGE_EXT_FROM_USER_MODE_VALUE_SP     @(1)
+
+#define MESSAGE_EXT_UNREAD_FLAG_KEY         @"unread_flag"
+#define MESSAGE_EXT_UNREAD_FLAG_YES         @(YES)
+#define MESSAGE_EXT_UNREAD_FLAG_NO          @(NO)
+
+#define MESSAGE_EXT_QUESTION_ID_KEY         @"quest_id"
+#define MESSAGE_EXT_PUBLIC_ID_KEY           @"adv_id"
+
+#define MESSAGE_EXT_SAVE_FLAG_KEY           @"save_flag"
+#define MESSAGE_EXT_SAVE_FLAG_YES           @(YES)
+#define MESSAGE_EXT_SAVE_FLAG_NO            @(NO)
+
+#define CALL_MESSAGE_EXTERN_FROM_CUSTOM     @"customer"
+#define CALL_MESSAGE_EXTERN_FROM_SP         @"sp"
+
+#define SAMC_QR_ADDCONTACT_PREFIX           @"Samchat:"
+
+#define SAMC_PUBLIC_ACCOUNT_PREFIX          @"public_"
+
 #endif /* SAMCGlobalMacro_h */

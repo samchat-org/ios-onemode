@@ -18,6 +18,7 @@
 #import "SAMCGlobalMacro.h"
 #import "NIMKit.h"
 #import "Masonry.h"
+#import "SAMCEnumDefine.h"
 
 #import <CocoaLumberjack/CocoaLumberjack.h>
 

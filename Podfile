@@ -12,5 +12,6 @@ target 'SamChat' do
     pod 'AFNetworking', '~> 3.0'
     pod 'AWSS3'
     pod 'Masonry'
+    pod 'TTTAttributedLabel'
 end
 

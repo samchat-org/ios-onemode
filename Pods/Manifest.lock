@@ -39,6 +39,7 @@ PODS:
   - SSZipArchive (1.2)
   - SVProgressHUD (1.1.3)
   - Toast (2.4)
+  - TTTAttributedLabel (2.0.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
@@ -52,6 +53,7 @@ DEPENDENCIES:
   - SSZipArchive (~> 1.2)
   - SVProgressHUD (~> 1.1.2)
   - Toast (~> 2.4)
+  - TTTAttributedLabel
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -66,7 +68,8 @@ SPEC CHECKSUMS:
   SSZipArchive: 251093c65f98d6ea282c50bc404bfa631d9fd721
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   Toast: 0773b8fc0e97352ca6054517bec7ebdd4110029d
+  TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: 8af2c060e126347cd2c0710d5fb7af03c9ca042d
+PODFILE CHECKSUM: 20bdea44ee08f466caf8dd3e24ec1b6ad3efb287
 
 COCOAPODS: 1.1.1
