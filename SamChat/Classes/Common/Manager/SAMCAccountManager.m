@@ -101,16 +101,14 @@
 - (void)registerWithCountryCode:(NSString *)countryCode
                       cellPhone:(NSString *)cellPhone
                      verifyCode:(NSString *)verifyCode
-                       username:(NSString *)username
-                       password:(NSString *)password
-                     completion:(void (^)(NSError * __nullable error))completion
+                       fullname:(NSString *)fullname
+                     completion:(void (^)(NSError * __nullable error))completion;
 {
     NSAssert(completion != nil, @"completion block should not be nil");
     NSDictionary *paramters = [SAMCServerAPI registerWithCountryCode:countryCode
                                                            cellPhone:cellPhone
                                                           verifyCode:verifyCode
-                                                            username:username
-                                                            password:password];
+                                                            fullname:fullname];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [SAMCDataPostSerializer serializer];
     [manager POST:SAMC_URL_USER_REGISTER parameters:paramters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -128,7 +126,7 @@
                 info.countryCode = countryCode;
                 info.usertype = @(SAMCUserTypeCustom);
                 info.cellPhone = cellPhone;
-                info.username = username;
+                info.username = fullname;
                 info.lastupdate = userInfo[SAMC_LASTUPDATE];
                 user.userInfo = info;
                 [self loginNetEase:user token:token completion:completion];

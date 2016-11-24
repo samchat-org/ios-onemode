@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 Netease. All rights reserved.
 //
 
-#import "NTESAppDelegate.h"
+#import "SAMCAppDelegate.h"
 #import "SAMCLoginViewController.h"
 #import "NIMSDK.h"
 #import "UIView+Toast.h"
@@ -25,13 +25,14 @@
 #import "NTESSDKConfig.h"
 
 NSString *NTESNotificationLogout = @"NTESNotificationLogout";
-@interface NTESAppDelegate ()<NIMLoginManagerDelegate>
+NSString * const SAMCLoginNotification = @"SAMCLoginNotification";
+@interface SAMCAppDelegate ()<NIMLoginManagerDelegate>
 
 @property (nonatomic,strong) NTESSDKConfig *config;
 
 @end
 
-@implementation NTESAppDelegate
+@implementation SAMCAppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

@@ -7,7 +7,7 @@
 //
 
 #import "NTESMainTabController.h"
-#import "NTESAppDelegate.h"
+#import "SAMCAppDelegate.h"
 #import "NTESSessionListViewController.h"
 #import "NTESContactViewController.h"
 #import "NIMSDK.h"
@@ -53,7 +53,7 @@ typedef NS_ENUM(NSInteger,NTESMainTabType) {
 @implementation NTESMainTabController
 
 + (instancetype)instance{
-    NTESAppDelegate *delegete = (NTESAppDelegate *)[UIApplication sharedApplication].delegate;
+    SAMCAppDelegate *delegete = (SAMCAppDelegate *)[UIApplication sharedApplication].delegate;
     UIViewController *vc = delegete.window.rootViewController;
     if ([vc isKindOfClass:[NTESMainTabController class]]) {
         return (NTESMainTabController *)vc;

@@ -38,8 +38,7 @@ typedef NS_ENUM(NSInteger,SAMCRecallType) {
 + (NSDictionary *)registerWithCountryCode:(NSString *)countryCode
                                 cellPhone:(NSString *)cellPhone
                                verifyCode:(NSString *)verifyCode
-                                 username:(NSString *)username
-                                 password:(NSString *)password;
+                                 fullname:(NSString *)fullname;
 
 + (NSDictionary *)loginWithCountryCode:(NSString *)countryCode
                                account:(NSString *)account

@@ -179,7 +179,7 @@
 		31A044011DE535C80021E029 /* NTESPinyinConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A0433B1DE535C80021E029 /* NTESPinyinConverter.m */; };
 		31A044021DE535C80021E029 /* NTESSpellingCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A0433D1DE535C80021E029 /* NTESSpellingCenter.m */; };
 		31A044031DE535C80021E029 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31A0433E1DE535C80021E029 /* Images.xcassets */; };
-		31A044041DE535C80021E029 /* NTESAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A043411DE535C80021E029 /* NTESAppDelegate.m */; };
+		31A044041DE535C80021E029 /* SAMCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A043411DE535C80021E029 /* SAMCAppDelegate.m */; };
 		31A044051DE535C80021E029 /* BlizzardReg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 31A043451DE535C80021E029 /* BlizzardReg.ttf */; };
 		31A044061DE535C80021E029 /* d3.icns in Resources */ = {isa = PBXBuildFile; fileRef = 31A043461DE535C80021E029 /* d3.icns */; };
 		31A044071DE535C80021E029 /* SetupOSX.mpq in Resources */ = {isa = PBXBuildFile; fileRef = 31A043471DE535C80021E029 /* SetupOSX.mpq */; };
@@ -595,8 +595,8 @@
 		31A0433C1DE535C80021E029 /* NTESSpellingCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESSpellingCenter.h; sourceTree = "<group>"; };
 		31A0433D1DE535C80021E029 /* NTESSpellingCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESSpellingCenter.m; sourceTree = "<group>"; };
 		31A0433E1DE535C80021E029 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		31A043401DE535C80021E029 /* NTESAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESAppDelegate.h; sourceTree = "<group>"; };
-		31A043411DE535C80021E029 /* NTESAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESAppDelegate.m; sourceTree = "<group>"; };
+		31A043401DE535C80021E029 /* SAMCAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCAppDelegate.h; sourceTree = "<group>"; };
+		31A043411DE535C80021E029 /* SAMCAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCAppDelegate.m; sourceTree = "<group>"; };
 		31A043421DE535C80021E029 /* NTESGlobalMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESGlobalMacro.h; sourceTree = "<group>"; };
 		31A043451DE535C80021E029 /* BlizzardReg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BlizzardReg.ttf; sourceTree = "<group>"; };
 		31A043461DE535C80021E029 /* d3.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = d3.icns; sourceTree = "<group>"; };
@@ -786,9 +786,9 @@
 				31A041BB1DE535C80021E029 /* Classes */,
 				31A0433E1DE535C80021E029 /* Images.xcassets */,
 				31A044171DE5377E0021E029 /* SamChat-Prefix.pch */,
-				31A043401DE535C80021E029 /* NTESAppDelegate.h */,
+				31A043401DE535C80021E029 /* SAMCAppDelegate.h */,
 				31A044CC1DE593840021E029 /* SAMCEnumDefine.h */,
-				31A043411DE535C80021E029 /* NTESAppDelegate.m */,
+				31A043411DE535C80021E029 /* SAMCAppDelegate.m */,
 				31A043421DE535C80021E029 /* NTESGlobalMacro.h */,
 				31A0441C1DE53ECD0021E029 /* LaunchScreen.storyboard */,
 				31A043431DE535C80021E029 /* Supporting Files */,
@@ -2205,7 +2205,7 @@
 				31A043AA1DE535C80021E029 /* NTESSearchLocalHistoryObject.m in Sources */,
 				31A043901DE535C80021E029 /* NTESGroupedUsrInfo.m in Sources */,
 				31A043F51DE535C80021E029 /* NTESCADisplayLinkHolder.m in Sources */,
-				31A044041DE535C80021E029 /* NTESAppDelegate.m in Sources */,
+				31A044041DE535C80021E029 /* SAMCAppDelegate.m in Sources */,
 				31A043781DE535C80021E029 /* NTESTeamListViewController.m in Sources */,
 				31A0443C1DE5857A0021E029 /* SAMCTextField.m in Sources */,
 				31A043691DE535C80021E029 /* NTESNavigationAnimator.m in Sources */,

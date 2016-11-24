@@ -50,9 +50,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)registerWithCountryCode:(NSString *)countryCode
                       cellPhone:(NSString *)cellPhone
                      verifyCode:(NSString *)verifyCode
-                       username:(NSString *)username
-                       password:(NSString *)password
+                       fullname:(NSString *)fullname
                      completion:(void (^)(NSError * __nullable error))completion;
+
 - (void)findPWDUpdateWithCountryCode:(NSString *)countryCode
                            cellPhone:(NSString *)cellPhone
                           verifyCode:(NSString *)verifyCode

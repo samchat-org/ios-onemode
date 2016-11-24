@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NTESAppDelegate.h"
+#import "SAMCAppDelegate.h"
 
 int main(int argc, char * argv[]) {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([NTESAppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([SAMCAppDelegate class]));
     }
 }

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NTESAppDelegate : UIResponder <UIApplicationDelegate>
+@interface SAMCAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

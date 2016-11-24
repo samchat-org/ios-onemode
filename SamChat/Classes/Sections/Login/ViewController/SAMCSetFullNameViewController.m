@@ -146,22 +146,34 @@
 
 - (void)signup:(id)sender
 {
-    NSString *username = self.fullnameTextField.text;
+    NSString *fullname = self.fullnameTextField.text;
     __weak typeof(self) wself = self;
     [SVProgressHUD showWithStatus:@"signing up" maskType:SVProgressHUDMaskTypeBlack];
-    //    [[SAMCAccountManager sharedManager] registerWithCountryCode:self.countryCode cellPhone:self.phoneNumber verifyCode:self.verifyCode username:username password:password completion:^(NSError * _Nullable error) {
-    //        [SVProgressHUD dismiss];
-    //        if (error) {
-    //            if (error.code == SAMCServerErrorNetEaseLoginFailed) {
-    //                [wself setupLoginViewControllerWithToast:@"register success, login now"];
-    //            } else {
-    //                [wself.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:2.0f position:CSToastPositionCenter];
-    //            }
-    //            return;
-    //        }
-    //        extern NSString *SAMCLoginNotification;
-    //        [[NSNotificationCenter defaultCenter] postNotificationName:SAMCLoginNotification object:nil userInfo:nil];
-    //    }];
+    [[SAMCAccountManager sharedManager] registerWithCountryCode:self.countryCode cellPhone:self.phoneNumber verifyCode:self.verifyCode fullname:fullname completion:^(NSError * _Nullable error) {
+        [SVProgressHUD dismiss];
+        if (error) {
+            if (error.code == SAMCServerErrorNetEaseLoginFailed) {
+                [wself setupLoginViewControllerWithToast:@"register success, login now"];
+            } else {
+                [wself.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:2.0f position:CSToastPositionCenter];
+            }
+            return;
+        }
+        extern NSString *SAMCLoginNotification;
+        [[NSNotificationCenter defaultCenter] postNotificationName:SAMCLoginNotification object:nil userInfo:nil];
+    }];
+}
+
+- (void)setupLoginViewControllerWithToast:(NSString *)toast
+{
+    // TODO: setup login vc
+    //    [SAMCPreferenceManager sharedManager].currentUserMode = SAMCUserModeTypeCustom;
+    //    SAMCLoginViewController *vc = [[SAMCLoginViewController alloc] init];
+    //    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    //    nav.navigationBar.translucent = NO;
+    //    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    //    window.rootViewController = nav;
+    //    [window makeToast:toast duration:2.0 position:CSToastPositionCenter];
 }
 
 #pragma mark - TTTAttributedLabelDelegate
@@ -232,7 +244,7 @@
         _fullnameTextField.backgroundColor = [UIColor whiteColor];
         _fullnameTextField.textColor = SAMC_COLOR_INK;
         _fullnameTextField.font = [UIFont systemFontOfSize:17.0f];
-        _fullnameTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Username" attributes:@{NSForegroundColorAttributeName:SAMC_COLOR_INK_HINT ,NSFontAttributeName:[UIFont systemFontOfSize:17.0f]}];
+        _fullnameTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Full name" attributes:@{NSForegroundColorAttributeName:SAMC_COLOR_INK_HINT ,NSFontAttributeName:[UIFont systemFontOfSize:17.0f]}];
         _fullnameTextField.returnKeyType = UIReturnKeyNext;
         [_fullnameTextField addTarget:self action:@selector(fullnameTextFieldEditingDidEndOnExit) forControlEvents:UIControlEventEditingDidEndOnExit];
         [_fullnameTextField addTarget:self action:@selector(fullnameTextFieldDidChangedEditing:) forControlEvents:UIControlEventEditingChanged];
