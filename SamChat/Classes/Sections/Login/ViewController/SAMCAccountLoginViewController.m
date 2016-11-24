@@ -7,6 +7,7 @@
 //
 
 #import "SAMCAccountLoginViewController.h"
+#import "SAMCConfirmPhoneNumViewController.h"
 #import "SAMCPadImageView.h"
 #import "SVProgressHUD.h"
 #import "SAMCAccountManager.h"
@@ -114,6 +115,9 @@
 
 - (void)forgotPassword:(id)sender
 {
+    SAMCConfirmPhoneNumViewController *vc = [[SAMCConfirmPhoneNumViewController alloc] init];
+    vc.signupOperation = NO;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - textField
