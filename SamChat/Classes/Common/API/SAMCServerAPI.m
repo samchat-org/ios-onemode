@@ -78,28 +78,24 @@
 //        “cellphone”		:“1381196123”
 //        “verifycode”      : 332682
 //        “username”		:”Kevin Dong”
-//        “pwd”             :”123456”
 //        “deviceid”		:”14EF65” //(IMEI/MEID last 6 byte)
 //    }
 //}
 + (NSDictionary *)registerWithCountryCode:(NSString *)countryCode
                                 cellPhone:(NSString *)cellPhone
                                verifyCode:(NSString *)verifyCode
-                                 username:(NSString *)username
-                                 password:(NSString *)password
+                                 fullname:(NSString *)fullname
 {
     countryCode = countryCode ?:@"";
     cellPhone = cellPhone ?:@"";
     verifyCode = verifyCode ?:@"";
-    username = username ?:@"";
-    password = password ?:@"";
+    fullname = fullname?:@"";
     NSString *deviceId = [SAMCDeviceUtil deviceId];
     NSDictionary *header = @{SAMC_ACTION:SAMC_REGISTER};
     NSDictionary *body = @{SAMC_COUNTRYCODE:countryCode,
                            SAMC_CELLPHONE:cellPhone,
                            SAMC_VERIFYCODE:verifyCode,
-                           SAMC_USERNAME:username,
-                           SAMC_PWD:[password samc_passWordString],
+                           SAMC_USERNAME:fullname,
                            SAMC_DEVICEID:deviceId,
                            SAMC_DEVICE_TYPE:[SAMCDeviceUtil deviceInfo],
                            SAMC_APP_VERSION:[SAMCDeviceUtil appInfo]};

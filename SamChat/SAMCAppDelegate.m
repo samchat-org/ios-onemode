@@ -165,7 +165,10 @@ NSString * const SAMCLoginNotification = @"SAMCLoginNotification";
                                              selector:@selector(logout:)
                                                  name:NTESNotificationLogout
                                                object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(login:)
+                                                 name:SAMCLoginNotification
+                                               object:nil];
     [[[NIMSDK sharedSDK] loginManager] addDelegate:self];
 }
 
@@ -178,6 +181,12 @@ NSString * const SAMCLoginNotification = @"SAMCLoginNotification";
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     nav.navigationBar.translucent = NO;
     self.window.rootViewController = nav;
+}
+
+#pragma mark - 主动登录
+- (void)login:(NSNotification *)notification
+{
+    [self setupMainViewController];
 }
 
 #pragma mark - 注销
