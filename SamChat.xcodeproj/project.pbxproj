@@ -1855,8 +1855,8 @@
 		31A044CD1DE593C20021E029 /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
-				31A044D11DE594410021E029 /* SAMCDataPostSerializer.m */,
 				31A044D21DE594410021E029 /* SAMCDataPostSerializer.h */,
+				31A044D11DE594410021E029 /* SAMCDataPostSerializer.m */,
 			);
 			name = AFNetworking;
 			sourceTree = "<group>";

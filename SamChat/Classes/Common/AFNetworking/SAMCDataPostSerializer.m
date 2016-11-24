@@ -53,6 +53,7 @@
 //        [mutableRequest setHTTPBody:data];
 //    }
     
+    DDLogDebug(@"SerializerResult: %@",parameters);
     if (parameters) {
         if (![mutableRequest valueForHTTPHeaderField:@"Content-Type"]) {
             [mutableRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];

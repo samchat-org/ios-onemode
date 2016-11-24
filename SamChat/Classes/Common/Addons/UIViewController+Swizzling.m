@@ -12,6 +12,7 @@
 #import "UIResponder+NTESFirstResponder.h"
 #import "UIView+NTES.h"
 #import "UIImage+NTESColor.h"
+#import "SAMCAccountManager.h"
 
 @implementation UIViewController (Swizzling)
 
@@ -29,7 +30,13 @@
 #pragma mark - ViewDidLoad
 - (void)swizzling_viewDidLoad{
     if (self.navigationController) {
-        UIImage *buttonNormal = [[UIImage imageNamed:@"icon_back_normal.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        NSString *backButtonImageName;
+        if ([SAMCAccountManager sharedManager].isCurrentUserServicer) {
+            backButtonImageName = @"ico_nav_back_dark";
+        } else {
+            backButtonImageName = @"ico_nav_back_light";
+        }
+        UIImage *buttonNormal = [[UIImage imageNamed:backButtonImageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         [self.navigationController.navigationBar setBackIndicatorImage:buttonNormal];
         [self.navigationController.navigationBar setBackIndicatorTransitionMaskImage:buttonNormal];
         UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];

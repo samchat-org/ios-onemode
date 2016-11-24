@@ -338,6 +338,9 @@
 
 - (BOOL)isCurrentUserServicer
 {
+    if (self.currentAccount == nil) {
+        return NO;
+    }
     return [[self currentUser].userInfo.usertype isEqual:@(SAMCuserTypeSamPros)];
 }
 
