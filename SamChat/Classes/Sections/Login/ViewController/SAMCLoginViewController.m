@@ -11,6 +11,7 @@
 #import "SAMCConfirmPhoneNumViewController.h"
 #import "UIActionSheet+NTESBlock.h"
 #import "NTESLogManager.h"
+#import "SAMCMobileLoginViewController.h"
 
 @interface SAMCLoginViewController ()
 
@@ -75,6 +76,8 @@
 
 - (void)login:(id)sender
 {
+    SAMCMobileLoginViewController *vc = [[SAMCMobileLoginViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)prepareShowLog:(UILongPressGestureRecognizer *)gesuture{
