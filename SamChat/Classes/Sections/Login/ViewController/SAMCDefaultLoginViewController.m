@@ -14,6 +14,8 @@
 #import "SVProgressHUD.h"
 #import "SAMCAccountManager.h"
 #import "UIView+Toast.h"
+#import "SAMCConfirmPhoneNumViewController.h"
+#import "SAMCSMSLoginRequestViewController.h"
 
 @interface SAMCDefaultLoginViewController ()
 
@@ -147,10 +149,15 @@
 
 - (void)forgotPassword:(id)sender
 {
+    SAMCConfirmPhoneNumViewController *vc = [[SAMCConfirmPhoneNumViewController alloc] init];
+    vc.signupOperation = NO;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)loginViaSMS:(id)sender
 {
+    SAMCSMSLoginRequestViewController *vc = [[SAMCSMSLoginRequestViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)more:(id)sender

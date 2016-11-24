@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class SAMCPreLoginInfo;
 @interface SAMCLoginViewController : UIViewController
+
+@property (nonatomic, strong) SAMCPreLoginInfo *preLoginInfo;
 
 @end

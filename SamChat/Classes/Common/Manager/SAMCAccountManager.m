@@ -258,9 +258,14 @@
     SAMCLoginData *loginData = [[SAMCLoginData alloc] init];
     loginData.account = user.userId;
     loginData.token = token;
+    SAMCPreLoginInfo *preLoginInfo = [[SAMCPreLoginInfo alloc] init];
+    preLoginInfo.countryCode = user.userInfo.countryCode;
+    preLoginInfo.cellPhone = user.userInfo.cellPhone;
+    preLoginInfo.avatarUrl = user.userInfo.avatar;
     [[[NIMSDK sharedSDK] loginManager] login:loginData.account token:[loginData finalToken] completion:^(NSError *error) {
         if (error == nil) {
             [SAMCPreferenceManager sharedManager].loginData = loginData;
+            [SAMCPreferenceManager sharedManager].preLoginInfo = preLoginInfo;
             [[NTESServiceManager sharedManager] start];
             [[SAMCDataBaseManager sharedManager] open];
             if ([[SAMCDataBaseManager sharedManager] needsMigration]) {

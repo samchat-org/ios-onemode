@@ -23,6 +23,9 @@
 #import "NIMKit.h"
 #import "NTESDataManager.h"
 #import "NTESSDKConfig.h"
+#import "SAMCPreferenceManager.h"
+#import "SAMCAccountManager.h"
+#import "SAMCDefaultLoginViewController.h"
 
 NSString *NTESNotificationLogout = @"NTESNotificationLogout";
 NSString * const SAMCLoginNotification = @"SAMCLoginNotification";
@@ -69,7 +72,7 @@ NSString * const SAMCLoginNotification = @"SAMCLoginNotification";
     [self.window makeKeyAndVisible];
     [application setStatusBarStyle:UIStatusBarStyleLightContent];
 
-    [self setupMainViewController];
+    [self setupUserViewController];
     
     
     return YES;
@@ -136,25 +139,24 @@ NSString * const SAMCLoginNotification = @"SAMCLoginNotification";
     }
 }
 
-- (void)setupMainViewController
+- (void)setupUserViewController
 {
-    LoginData *data = [[NTESLoginManager sharedManager] currentLoginData];
-    NSString *account = [data account];
-    NSString *token = [data token];
-    
-    //如果有缓存用户名密码推荐使用自动登录
-    if ([account length] && [token length])
+    SAMCLoginData *loginData = [SAMCPreferenceManager sharedManager].loginData;
+    if ((loginData != nil) && [loginData.account length] && [loginData.token length])
     {
-        [[[NIMSDK sharedSDK] loginManager] autoLogin:account
-                                               token:token];
-        [[NTESServiceManager sharedManager] start];
-        NTESMainTabController *mainTab = [[NTESMainTabController alloc] initWithNibName:nil bundle:nil];
-        self.window.rootViewController = mainTab;
+        [[SAMCAccountManager sharedManager] autoLogin:loginData];
+        [self setupMainViewController];
     }
     else
     {
         [self setupLoginViewController];
     }
+}
+
+- (void)setupMainViewController
+{
+    NTESMainTabController * mainTab = [[NTESMainTabController alloc] initWithNibName:nil bundle:nil];
+    self.window.rootViewController = mainTab;
 }
 
 - (void)commonInitListenEvents
@@ -169,8 +171,11 @@ NSString * const SAMCLoginNotification = @"SAMCLoginNotification";
 
 - (void)setupLoginViewController
 {
-    SAMCLoginViewController *loginController = [[SAMCLoginViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginController];
+    SAMCPreLoginInfo *preLoginInfo = [SAMCPreferenceManager sharedManager].preLoginInfo;
+    [[SAMCPreferenceManager sharedManager] reset];
+    SAMCLoginViewController *vc = [[SAMCLoginViewController alloc] init];
+    vc.preLoginInfo = preLoginInfo;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
     nav.navigationBar.translucent = NO;
     self.window.rootViewController = nav;
 }

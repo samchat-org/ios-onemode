@@ -12,6 +12,8 @@
 #import "UIActionSheet+NTESBlock.h"
 #import "NTESLogManager.h"
 #import "SAMCMobileLoginViewController.h"
+#import "SAMCDefaultLoginViewController.h"
+#import "SAMCPreferenceManager.h"
 
 @interface SAMCLoginViewController ()
 
@@ -34,6 +36,14 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
+    
+    if ((_preLoginInfo != nil) && [_preLoginInfo.countryCode length] && [_preLoginInfo.cellPhone length]) {
+        SAMCDefaultLoginViewController *defaultLoginVC = [[SAMCDefaultLoginViewController alloc] initWithCountryCode:_preLoginInfo.countryCode
+                                                                                                           cellPhone:_preLoginInfo.cellPhone
+                                                                                                           avatarUrl:_preLoginInfo.avatarUrl];
+        [self.navigationController pushViewController:defaultLoginVC animated:NO];
+        _preLoginInfo = nil;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
