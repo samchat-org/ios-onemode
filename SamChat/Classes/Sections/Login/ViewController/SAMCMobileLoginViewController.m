@@ -9,6 +9,7 @@
 #import "SAMCMobileLoginViewController.h"
 #import "SAMCCountryCodeViewController.h"
 #import "SAMCAccountLoginViewController.h"
+#import "SAMCConfirmPhoneNumViewController.h"
 #import "NSString+SAMC.h"
 #import "SAMCTextField.h"
 #import "SAMCPadImageView.h"
@@ -119,6 +120,9 @@
 
 - (void)forgotPassword:(id)sender
 {
+    SAMCConfirmPhoneNumViewController *vc = [[SAMCConfirmPhoneNumViewController alloc] init];
+    vc.signupOperation = NO;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)loginViaSMS:(id)sender
