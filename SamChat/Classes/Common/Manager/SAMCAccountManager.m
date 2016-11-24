@@ -169,15 +169,36 @@
     }];
 }
 
+- (void)loginWithAccount:(NSString *)account
+                password:(NSString *)password
+              completion:(void (^)(NSError * __nullable error))completion
+{
+    NSDictionary *parameters = [SAMCServerAPI loginWithAccount:account password:password];
+    [self loginWithParameters:parameters completion:completion];
+}
+
 - (void)loginWithCountryCode:(NSString *)countryCode
-                     account:(NSString *)account
+                   cellPhone:(NSString *)cellPhone
                     password:(NSString *)password
                   completion:(void (^)(NSError * __nullable error))completion
 {
+    NSDictionary *parameters = [SAMCServerAPI loginWithCountryCode:countryCode cellPhone:cellPhone password:password];
+    [self loginWithParameters:parameters completion:completion];
+}
+
+- (void)loginWithCountryCode:(NSString *)countryCode
+                   cellPhone:(NSString *)cellPhone
+                  verifyCode:(NSString *)verifyCode
+                  completion:(void (^)(NSError * __nullable error))completion
+{
+    NSDictionary *parameters = [SAMCServerAPI loginWithCountryCode:countryCode cellPhone:cellPhone verifyCode:verifyCode];
+    [self loginWithParameters:parameters completion:completion];
+}
+
+- (void)loginWithParameters:(NSDictionary *)parameters
+                 completion:(void (^)(NSError * __nullable error))completion
+{
     NSAssert(completion != nil, @"completion block should not be nil");
-    
-    DDLogDebug(SAMC_URL_USER_LOGIN);
-    NSDictionary *parameters = [SAMCServerAPI loginWithCountryCode:countryCode account:account password:password];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [SAMCDataPostSerializer serializer];
     __weak typeof(self) wself = self;
@@ -193,7 +214,7 @@
                 [SAMCPreferenceManager sharedManager].needQuestionNotify = [userInfo valueForKeyPath:SAMC_MY_SETTINGS_QUESTION_NOTIFY];
                 [wself parseSysParams:response[SAMC_SYS_PARAMS]];
                 SAMCUser *user = [SAMCUser userFromDict:userInfo];
-                [self loginNetEase:user token:token completion:completion];
+                [wself loginNetEase:user token:token completion:completion];
             }
         } else {
             completion([SAMCServerErrorHelper errorWithCode:SAMCServerErrorUnknowError]);

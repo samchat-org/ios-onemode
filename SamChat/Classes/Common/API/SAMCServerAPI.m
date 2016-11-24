@@ -113,24 +113,64 @@
 //    },
 //    "body" :
 //    {
-//        “countrycode”	:86
+//        “type”          ：0   // 0. Samchat-id  1.手机号  2.短信验证码
+//        “countrycode”		:86
 //        “account”		:“1381196123”
 //        “pwd”			:”123456”
-//        “deviceid”	:”14EF65” //(IMEI/MEID last 6 byte)
+//        “verifycode”      :1212,
+//        “deviceid”		:”14EF65” //(IMEI/MEID last 6 byte)
+//        “device_type”     : “asdfasdafds”
+//        “app_version”     : “asdadf”
 //    }
 //}
-+ (NSDictionary *)loginWithCountryCode:(NSString *)countryCode
-                               account:(NSString *)account
-                              password:(NSString *)password
++ (NSDictionary *)loginWithAccount:(NSString *)account
+                          password:(NSString *)password
 {
-    countryCode = countryCode ?:@"";
-    account = account ?:@"";
+    account = account?:@"";
     password = password ?:@"";
     NSString *deviceId = [SAMCDeviceUtil deviceId];
     NSDictionary *header = @{SAMC_ACTION:SAMC_LOGIN};
-    NSDictionary *body = @{SAMC_COUNTRYCODE:countryCode,
+    NSDictionary *body = @{SAMC_TYPE:@(0),
                            SAMC_ACCOUNT:account,
                            SAMC_PWD:[password samc_passWordString],
+                           SAMC_DEVICEID:deviceId,
+                           SAMC_DEVICE_TYPE:[SAMCDeviceUtil deviceInfo],
+                           SAMC_APP_VERSION:[SAMCDeviceUtil appInfo]};
+    return @{SAMC_HEADER:header,SAMC_BODY:body};
+}
+
++ (NSDictionary *)loginWithCountryCode:(NSString *)countryCode
+                             cellPhone:(NSString *)cellPhone
+                              password:(NSString *)password
+{
+    countryCode = countryCode ?:@"";
+    cellPhone = cellPhone ?:@"";
+    password = password ?:@"";
+    NSString *deviceId = [SAMCDeviceUtil deviceId];
+    NSDictionary *header = @{SAMC_ACTION:SAMC_LOGIN};
+    NSDictionary *body = @{SAMC_TYPE:@(1),
+                           SAMC_COUNTRYCODE:countryCode,
+                           SAMC_ACCOUNT:cellPhone,
+                           SAMC_PWD:[password samc_passWordString],
+                           SAMC_DEVICEID:deviceId,
+                           SAMC_DEVICE_TYPE:[SAMCDeviceUtil deviceInfo],
+                           SAMC_APP_VERSION:[SAMCDeviceUtil appInfo]};
+    return @{SAMC_HEADER:header,SAMC_BODY:body};
+}
+
++ (NSDictionary *)loginWithCountryCode:(NSString *)countryCode
+                             cellPhone:(NSString *)cellPhone
+                            verifyCode:(NSString *)verifyCode
+{
+    countryCode = countryCode ?:@"";
+    cellPhone = cellPhone ?:@"";
+    verifyCode = verifyCode ?:@"";
+    NSString *deviceId = [SAMCDeviceUtil deviceId];
+    NSDictionary *header = @{SAMC_ACTION:SAMC_LOGIN};
+    NSDictionary *body = @{SAMC_TYPE:@(2),
+                           SAMC_COUNTRYCODE:countryCode,
+                           SAMC_ACCOUNT:cellPhone,
+                           SAMC_VERIFYCODE:verifyCode,
                            SAMC_DEVICEID:deviceId,
                            SAMC_DEVICE_TYPE:[SAMCDeviceUtil deviceInfo],
                            SAMC_APP_VERSION:[SAMCDeviceUtil appInfo]};

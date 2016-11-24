@@ -40,9 +40,14 @@ typedef NS_ENUM(NSInteger,SAMCRecallType) {
                                verifyCode:(NSString *)verifyCode
                                  fullname:(NSString *)fullname;
 
++ (NSDictionary *)loginWithAccount:(NSString *)account
+                          password:(NSString *)password;
 + (NSDictionary *)loginWithCountryCode:(NSString *)countryCode
-                               account:(NSString *)account
+                             cellPhone:(NSString *)cellPhone
                               password:(NSString *)password;
++ (NSDictionary *)loginWithCountryCode:(NSString *)countryCode
+                             cellPhone:(NSString *)cellPhone
+                            verifyCode:(NSString *)verifyCode;
 
 + (NSDictionary *)logout;
 
