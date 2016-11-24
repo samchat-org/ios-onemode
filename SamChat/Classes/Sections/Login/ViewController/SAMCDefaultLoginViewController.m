@@ -16,6 +16,7 @@
 #import "UIView+Toast.h"
 #import "SAMCConfirmPhoneNumViewController.h"
 #import "SAMCSMSLoginRequestViewController.h"
+#import "NSString+SAMC.h"
 
 @interface SAMCDefaultLoginViewController ()
 
@@ -185,6 +186,8 @@
 #pragma mark - textField
 - (void)textFieldEditingChanged:(UITextField *)textField
 {
+    NSString *password = self.passwordTextField.text;
+    self.loginButton.enabled = [password samc_isValidPassword];
 }
 
 #pragma mark - lazy load
