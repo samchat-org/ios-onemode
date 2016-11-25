@@ -40,6 +40,8 @@
     self.rightPadding = rowData.showAccessory ? 35 : 15;
     if (rowData.imageName) {
         self.imageView.image = [UIImage imageNamed:rowData.imageName];
+    } else {
+        self.imageView.image = nil;
     }
     NSString *subActionName      = rowData.extraInfo[@"action"];
     [self.rightButton removeTarget:self.nim_viewController action:NULL forControlEvents:UIControlEventTouchUpInside];

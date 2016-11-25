@@ -161,6 +161,8 @@ static NSString *DefaultTableCell = @"UITableViewCell";
     // SAMC_BEGIN
     if (rowData.imageName) {
         cell.imageView.image = [UIImage imageNamed:rowData.imageName];
+    } else {
+        cell.imageView.image = nil;
     }
     // SAMC_END
 }
