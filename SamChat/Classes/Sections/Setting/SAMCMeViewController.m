@@ -149,6 +149,24 @@
                           HeaderTitle:@"",
                           RowContent :@[
                                   @{
+                                      Title     :@"About SamChat",
+                                      ImageName :@"ico_option_info",
+                                      CellAction:@"",
+                                      ShowAccessory :@(YES)
+                                      },
+                                  @{
+                                      Title     :@"F.A.Q",
+                                      ImageName :@"ico_option_help",
+                                      CellAction:@"",
+                                      ShowAccessory :@(YES)
+                                      },
+                                  ],
+                          FooterTitle:@""
+                          },
+                      @{
+                          HeaderTitle:@"",
+                          RowContent :@[
+                                  @{
                                       Title      :@"消息提醒",
                                       DetailTitle:disableRemoteNotification ? @"未开启" : @"已开启",
                                       },
