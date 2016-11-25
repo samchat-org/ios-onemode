@@ -158,6 +158,11 @@ static NSString *DefaultTableCell = @"UITableViewCell";
 - (void)refreshData:(NIMCommonTableRow *)rowData cell:(UITableViewCell *)cell{
     cell.textLabel.text = rowData.title;
     cell.detailTextLabel.text = rowData.detailTitle;
+    // SAMC_BEGIN
+    if (rowData.imageName) {
+        cell.imageView.image = [UIImage imageNamed:rowData.imageName];
+    }
+    // SAMC_END
 }
 
 @end

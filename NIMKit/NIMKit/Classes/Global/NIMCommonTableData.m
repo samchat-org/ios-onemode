@@ -59,6 +59,9 @@
     if (self) {
         _title          = dict[Title];
         _detailTitle    = dict[DetailTitle];
+        // SAMC_BEGIN
+        _imageName      = dict[ImageName];
+        // SAMC_END
         _cellClassName  = dict[CellClass];
         _cellActionName = dict[CellAction];
         _uiRowHeight    = dict[RowHeight] ? [dict[RowHeight] floatValue] : DefaultUIRowHeight;

@@ -20,6 +20,9 @@
 //row key
 #define Title         @"title"
 #define DetailTitle   @"detailTitle"
+// SAMC_BEGIN
+#define ImageName     @"imageName"
+// SAMC_END
 #define CellClass     @"cellClass"
 #define CellAction    @"action"
 #define ExtraInfo     @"extraInfo"
@@ -58,6 +61,10 @@
 @property (nonatomic,strong) NSString *title;
 
 @property (nonatomic,copy  ) NSString *detailTitle;
+
+// SAMC_BEGIN
+@property (nonatomic,copy  ) NSString *imageName;
+// SAMC_END
 
 @property (nonatomic,copy  ) NSString *cellClassName;
 

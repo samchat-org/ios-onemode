@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		25CE4DCC9991942C57ECB956 /* libopenh264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7544378BA5B2F18BDCC0227 /* libopenh264.a */; };
+		31FD59BA1DE83FAD006F3ED3 /* SAMCRightButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59B91DE83FAD006F3ED3 /* SAMCRightButtonCell.m */; };
+		31FD59C31DE862D5006F3ED3 /* SAMCCellButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59C21DE862D5006F3ED3 /* SAMCCellButton.m */; };
 		3579414FA177B0D703E94FE7 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 383045D7B4B01D892377024E /* libcrypto.a */; };
 		4EEE48D9956F5BC090A53ADC /* libnio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8B148EDB34AAE2728E382F3 /* libnio.a */; };
 		610D71A11D0E5A9C00FCE25A /* NIMKitNotificationFirer.m in Sources */ = {isa = PBXBuildFile; fileRef = 610D71A01D0E5A9C00FCE25A /* NIMKitNotificationFirer.m */; };
@@ -160,6 +162,10 @@
 		22D64A779277128BA1C60C10 /* NIMVideoObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NIMVideoObject.h; path = ./NIMKit/Vendors/NIMSDK/ExportHeaders/MessageObject/NIMVideoObject.h; sourceTree = SOURCE_ROOT; };
 		280D46D89B754A1E0BB7688B /* NIMChatroomMember.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NIMChatroomMember.h; path = ./NIMKit/Vendors/NIMSDK/ExportHeaders/Chatroom/NIMChatroomMember.h; sourceTree = SOURCE_ROOT; };
 		31A044251DE579AA0021E029 /* SAMCGlobalMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SAMCGlobalMacro.h; sourceTree = "<group>"; };
+		31FD59B81DE83FAD006F3ED3 /* SAMCRightButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCRightButtonCell.h; sourceTree = "<group>"; };
+		31FD59B91DE83FAD006F3ED3 /* SAMCRightButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCRightButtonCell.m; sourceTree = "<group>"; };
+		31FD59C11DE862D5006F3ED3 /* SAMCCellButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCCellButton.h; sourceTree = "<group>"; };
+		31FD59C21DE862D5006F3ED3 /* SAMCCellButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCCellButton.m; sourceTree = "<group>"; };
 		383045D7B4B01D892377024E /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ./NIMKit/Vendors/NIMSDK/Libs/libcrypto.a; sourceTree = SOURCE_ROOT; };
 		3EC642ACAE40DDD24FF0085E /* NIMLoginManagerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NIMLoginManagerProtocol.h; path = ./NIMKit/Vendors/NIMSDK/ExportHeaders/Protocol/NIMLoginManagerProtocol.h; sourceTree = SOURCE_ROOT; };
 		400D4E94B4F490B58C076172 /* NIMChatroomNotificationContent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NIMChatroomNotificationContent.h; path = ./NIMKit/Vendors/NIMSDK/ExportHeaders/MessageObject/NotificationContent/NIMChatroomNotificationContent.h; sourceTree = SOURCE_ROOT; };
@@ -1087,6 +1093,10 @@
 				61F4E5661CE1DBC0000AD2A9 /* NIMKitColorButtonCell.m */,
 				61F4E5671CE1DBC0000AD2A9 /* NIMKitSwitcherCell.h */,
 				61F4E5681CE1DBC0000AD2A9 /* NIMKitSwitcherCell.m */,
+				31FD59B81DE83FAD006F3ED3 /* SAMCRightButtonCell.h */,
+				31FD59B91DE83FAD006F3ED3 /* SAMCRightButtonCell.m */,
+				31FD59C11DE862D5006F3ED3 /* SAMCCellButton.h */,
+				31FD59C21DE862D5006F3ED3 /* SAMCCellButton.m */,
 				31A044251DE579AA0021E029 /* SAMCGlobalMacro.h */,
 			);
 			path = Global;
@@ -1250,7 +1260,9 @@
 				6187F9D91B81915700EFFB3A /* NIMWebImageCompat.m in Sources */,
 				61F4E56A1CE1DBC0000AD2A9 /* NIMKitSwitcherCell.m in Sources */,
 				E4EA435F1BA7EAD8003FC1BA /* NIMLocationContentConfig.m in Sources */,
+				31FD59C31DE862D5006F3ED3 /* SAMCCellButton.m in Sources */,
 				6187F9DA1B81915700EFFB3A /* NIMWebImageDecoder.m in Sources */,
+				31FD59BA1DE83FAD006F3ED3 /* SAMCRightButtonCell.m in Sources */,
 				6187F9DB1B81915700EFFB3A /* NIMWebImageDownloader.m in Sources */,
 				6187F9DC1B81915700EFFB3A /* NIMWebImageDownloaderOperation.m in Sources */,
 				61F4E55F1CE1AF6F000AD2A9 /* NIMCommonTableData.m in Sources */,

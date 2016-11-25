@@ -257,7 +257,7 @@ typedef NS_ENUM(NSInteger,NTESMainTabType) {
                              TabbarSelectedImage: @"icon_chatroom_pressed",
                              },
                      @(NTESMainTabTypeSetting)     : @{
-                             TabbarVC           : @"NTESSettingViewController",
+                             TabbarVC           : @"SAMCMeViewController",
                              TabbarTitle        : @"设置",
                              TabbarImage        : @"icon_setting_normal",
                              TabbarSelectedImage: @"icon_setting_pressed",
