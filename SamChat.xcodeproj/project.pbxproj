@@ -139,10 +139,6 @@
 		31A043DD1DE535C80021E029 /* NTESNoDisturbSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31A042EF1DE535C80021E029 /* NTESNoDisturbSettingViewController.xib */; };
 		31A043DE1DE535C80021E029 /* NTESNoDisturbTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A042F21DE535C80021E029 /* NTESNoDisturbTimeCell.m */; };
 		31A043DF1DE535C80021E029 /* NTESTextSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A042F41DE535C80021E029 /* NTESTextSettingCell.m */; };
-		31A043E01DE535C80021E029 /* NTESAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A042F61DE535C80021E029 /* NTESAboutViewController.m */; };
-		31A043E11DE535C80021E029 /* NTESAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31A042F71DE535C80021E029 /* NTESAboutViewController.xib */; };
-		31A043E21DE535C80021E029 /* NTESSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A042F91DE535C80021E029 /* NTESSettingViewController.m */; };
-		31A043E31DE535C80021E029 /* NTESSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31A042FA1DE535C80021E029 /* NTESSettingViewController.xib */; };
 		31A043E41DE535C80021E029 /* NTESAliasSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A042FD1DE535C80021E029 /* NTESAliasSettingViewController.m */; };
 		31A043E51DE535C80021E029 /* NTESBirthSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A042FF1DE535C80021E029 /* NTESBirthSettingViewController.m */; };
 		31A043E61DE535C80021E029 /* NTESEmailSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A043011DE535C80021E029 /* NTESEmailSettingViewController.m */; };
@@ -531,12 +527,6 @@
 		31A042F21DE535C80021E029 /* NTESNoDisturbTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESNoDisturbTimeCell.m; sourceTree = "<group>"; };
 		31A042F31DE535C80021E029 /* NTESTextSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESTextSettingCell.h; sourceTree = "<group>"; };
 		31A042F41DE535C80021E029 /* NTESTextSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESTextSettingCell.m; sourceTree = "<group>"; };
-		31A042F51DE535C80021E029 /* NTESAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESAboutViewController.h; sourceTree = "<group>"; };
-		31A042F61DE535C80021E029 /* NTESAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESAboutViewController.m; sourceTree = "<group>"; };
-		31A042F71DE535C80021E029 /* NTESAboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NTESAboutViewController.xib; sourceTree = "<group>"; };
-		31A042F81DE535C80021E029 /* NTESSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESSettingViewController.h; sourceTree = "<group>"; };
-		31A042F91DE535C80021E029 /* NTESSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESSettingViewController.m; sourceTree = "<group>"; };
-		31A042FA1DE535C80021E029 /* NTESSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NTESSettingViewController.xib; sourceTree = "<group>"; };
 		31A042FC1DE535C80021E029 /* NTESAliasSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESAliasSettingViewController.h; sourceTree = "<group>"; };
 		31A042FD1DE535C80021E029 /* NTESAliasSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESAliasSettingViewController.m; sourceTree = "<group>"; };
 		31A042FE1DE535C80021E029 /* NTESBirthSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESBirthSettingViewController.h; sourceTree = "<group>"; };
@@ -1573,12 +1563,6 @@
 				31FD59CC1DEA6D34006F3ED3 /* SAMCCSAStepThreeViewController.m */,
 				31FD59C71DEA6D34006F3ED3 /* SAMCCSADoneViewController.h */,
 				31FD59C81DEA6D34006F3ED3 /* SAMCCSADoneViewController.m */,
-				31A042F51DE535C80021E029 /* NTESAboutViewController.h */,
-				31A042F61DE535C80021E029 /* NTESAboutViewController.m */,
-				31A042F71DE535C80021E029 /* NTESAboutViewController.xib */,
-				31A042F81DE535C80021E029 /* NTESSettingViewController.h */,
-				31A042F91DE535C80021E029 /* NTESSettingViewController.m */,
-				31A042FA1DE535C80021E029 /* NTESSettingViewController.xib */,
 				31A042FB1DE535C80021E029 /* UInfo */,
 				31A0430D1DE535C80021E029 /* View */,
 			);
@@ -2068,10 +2052,8 @@
 				31A043D21DE535C80021E029 /* NTESMutiClientsCell.xib in Resources */,
 				31A044111DE535C80021E029 /* video_chat_tip_HangUp.aac in Resources */,
 				31A044161DE535C80021E029 /* video_connect_chat_tip_sender.aac in Resources */,
-				31A043E31DE535C80021E029 /* NTESSettingViewController.xib in Resources */,
 				31A045041DE682320021E029 /* becomesp.html in Resources */,
 				31A0439B1DE535C80021E029 /* NTESCustomSysNotificationViewController.xib in Resources */,
-				31A043E11DE535C80021E029 /* NTESAboutViewController.xib in Resources */,
 				31A044121DE535C80021E029 /* video_chat_tip_OnCall.aac in Resources */,
 				31A044101DE535C80021E029 /* message.wav in Resources */,
 				31A043CE1DE535C80021E029 /* NTESVideoChatViewController.xib in Resources */,
@@ -2183,7 +2165,6 @@
 				31A0438F1DE535C80021E029 /* NTESGroupedDataCollection.m in Sources */,
 				31A0439C1DE535C80021E029 /* NTESSystemNotificationCell.m in Sources */,
 				31A043A61DE535C80021E029 /* NTESChartletAttachment.m in Sources */,
-				31A043E21DE535C80021E029 /* NTESSettingViewController.m in Sources */,
 				31A043771DE535C80021E029 /* NTESSessionCardViewController.m in Sources */,
 				31A043581DE535C80021E029 /* NSData+NTES.m in Sources */,
 				31A0435F1DE535C80021E029 /* UIResponder+NTESFirstResponder.m in Sources */,
@@ -2200,7 +2181,6 @@
 				31A043EB1DE535C80021E029 /* NTESUserInfoSettingViewController.m in Sources */,
 				31A0436B1DE535C80021E029 /* NTESAvatarImageView.m in Sources */,
 				31A043841DE535C80021E029 /* NTESLiveViewController.m in Sources */,
-				31A043E01DE535C80021E029 /* NTESAboutViewController.m in Sources */,
 				31A0444F1DE5887E0021E029 /* SAMCPadImageView.m in Sources */,
 				31A043DC1DE535C80021E029 /* NTESNoDisturbSettingViewController.m in Sources */,
 				31A043EE1DE535C80021E029 /* NTESSettingCheckCell.m in Sources */,
