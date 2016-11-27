@@ -78,7 +78,7 @@
 {
     self.navigationItem.title = @"SamChat ID";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                              style:UIBarButtonItemStyleDone
+                                                                              style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(onDone:)];
     self.navigationItem.rightBarButtonItem.tintColor = SAMC_COLOR_INGRABLUE;
