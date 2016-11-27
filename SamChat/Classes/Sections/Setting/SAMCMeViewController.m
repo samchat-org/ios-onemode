@@ -28,6 +28,7 @@
 #import "SAMCSPIntroViewController.h"
 #import "SAMCCSAStepOneViewController.h"
 #import "SAMCAccountManager.h"
+#import "SAMCSettingViewController.h"
 
 @interface SAMCMeViewController ()
 
@@ -122,7 +123,7 @@
                                   @{
                                       Title      :@"Settings",
                                       ImageName  :@"ico_option_logout",
-                                      CellAction :@"",
+                                      CellAction :@"onTouchSetting:",
                                       ShowAccessory : @(YES)
                                       },
                                   @{
@@ -315,6 +316,12 @@
 
 - (void)onTouchCustomNotify:(id)sender{
     NTESCustomSysNotificationViewController *vc = [[NTESCustomSysNotificationViewController alloc] initWithNibName:nil bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)onTouchSetting:(id)sender
+{
+    SAMCSettingViewController *vc = [[SAMCSettingViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
