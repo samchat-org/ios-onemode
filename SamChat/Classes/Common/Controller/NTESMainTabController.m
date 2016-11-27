@@ -115,6 +115,7 @@ typedef NS_ENUM(NSInteger,NTESMainTabType) {
         UIViewController *vc = [[clazz alloc] initWithNibName:nil bundle:nil];
         vc.hidesBottomBarWhenPushed = NO;
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        nav.navigationBar.translucent = NO;
         nav.tabBarItem = [[UITabBarItem alloc] initWithTitle:title
                                                        image:[UIImage imageNamed:imageName]
                                                selectedImage:[UIImage imageNamed:imageSelected]];

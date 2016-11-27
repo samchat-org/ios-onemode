@@ -260,6 +260,13 @@
 		31FD59B11DE6D0CE006F3ED3 /* SAMCSMSLoginRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59B01DE6D0CE006F3ED3 /* SAMCSMSLoginRequestViewController.m */; };
 		31FD59B41DE6D490006F3ED3 /* SAMCSMSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59B31DE6D490006F3ED3 /* SAMCSMSLoginViewController.m */; };
 		31FD59B71DE835B9006F3ED3 /* SAMCMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59B61DE835B9006F3ED3 /* SAMCMeViewController.m */; };
+		31FD59C61DEA6B03006F3ED3 /* SAMCSPIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59C51DEA6B03006F3ED3 /* SAMCSPIntroViewController.m */; };
+		31FD59CF1DEA6D34006F3ED3 /* SAMCCSADoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59C81DEA6D34006F3ED3 /* SAMCCSADoneViewController.m */; };
+		31FD59D01DEA6D34006F3ED3 /* SAMCCSAStepOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59CA1DEA6D34006F3ED3 /* SAMCCSAStepOneViewController.m */; };
+		31FD59D11DEA6D34006F3ED3 /* SAMCCSAStepThreeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59CC1DEA6D34006F3ED3 /* SAMCCSAStepThreeViewController.m */; };
+		31FD59D51DEA6D79006F3ED3 /* SAMCTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59D41DEA6D79006F3ED3 /* SAMCTextView.m */; };
+		31FD59D81DEA6DB2006F3ED3 /* SAMCSelectLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59D71DEA6DB2006F3ED3 /* SAMCSelectLocationViewController.m */; };
+		31FD59DB1DEA6DF1006F3ED3 /* SAMCSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59DA1DEA6DF1006F3ED3 /* SAMCSearchBar.m */; };
 		3972DECFA052F7025D9E172D /* libPods-SamChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E082DB4614A7B87AB712BF66 /* libPods-SamChat.a */; };
 		611FE9EE1BB02320005E8E45 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		61530BE71BABAD3B00FE50CC /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 61530BE61BABAD3B00FE50CC /* libsqlite3.0.tbd */; };
@@ -755,6 +762,20 @@
 		31FD59B31DE6D490006F3ED3 /* SAMCSMSLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCSMSLoginViewController.m; sourceTree = "<group>"; };
 		31FD59B51DE835B9006F3ED3 /* SAMCMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCMeViewController.h; sourceTree = "<group>"; };
 		31FD59B61DE835B9006F3ED3 /* SAMCMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCMeViewController.m; sourceTree = "<group>"; };
+		31FD59C41DEA6B03006F3ED3 /* SAMCSPIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCSPIntroViewController.h; sourceTree = "<group>"; };
+		31FD59C51DEA6B03006F3ED3 /* SAMCSPIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCSPIntroViewController.m; sourceTree = "<group>"; };
+		31FD59C71DEA6D34006F3ED3 /* SAMCCSADoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCCSADoneViewController.h; sourceTree = "<group>"; };
+		31FD59C81DEA6D34006F3ED3 /* SAMCCSADoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCCSADoneViewController.m; sourceTree = "<group>"; };
+		31FD59C91DEA6D34006F3ED3 /* SAMCCSAStepOneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCCSAStepOneViewController.h; sourceTree = "<group>"; };
+		31FD59CA1DEA6D34006F3ED3 /* SAMCCSAStepOneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCCSAStepOneViewController.m; sourceTree = "<group>"; };
+		31FD59CB1DEA6D34006F3ED3 /* SAMCCSAStepThreeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCCSAStepThreeViewController.h; sourceTree = "<group>"; };
+		31FD59CC1DEA6D34006F3ED3 /* SAMCCSAStepThreeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCCSAStepThreeViewController.m; sourceTree = "<group>"; };
+		31FD59D31DEA6D79006F3ED3 /* SAMCTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCTextView.h; sourceTree = "<group>"; };
+		31FD59D41DEA6D79006F3ED3 /* SAMCTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCTextView.m; sourceTree = "<group>"; };
+		31FD59D61DEA6DB2006F3ED3 /* SAMCSelectLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCSelectLocationViewController.h; sourceTree = "<group>"; };
+		31FD59D71DEA6DB2006F3ED3 /* SAMCSelectLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCSelectLocationViewController.m; sourceTree = "<group>"; };
+		31FD59D91DEA6DF1006F3ED3 /* SAMCSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCSearchBar.h; sourceTree = "<group>"; };
+		31FD59DA1DEA6DF1006F3ED3 /* SAMCSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCSearchBar.m; sourceTree = "<group>"; };
 		332C493725247BFBF7A8FA45 /* Pods-SamChat.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SamChat.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-SamChat/Pods-SamChat.adhoc.xcconfig"; sourceTree = "<group>"; };
 		6121D1C91D9B9F8D005FAD3B /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
 		6121D1CB1D9B9FCC005FAD3B /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
@@ -899,6 +920,8 @@
 				31A041E21DE535C80021E029 /* NTESMainTabController.m */,
 				31A044501DE588C30021E029 /* SAMCWebViewController.h */,
 				31A044511DE588C30021E029 /* SAMCWebViewController.m */,
+				31FD59D61DEA6DB2006F3ED3 /* SAMCSelectLocationViewController.h */,
+				31FD59D71DEA6DB2006F3ED3 /* SAMCSelectLocationViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -930,6 +953,8 @@
 				31A041F21DE535C80021E029 /* NTESPageView.m */,
 				31A044261DE57CC90021E029 /* SAMCGradientButton.h */,
 				31A044271DE57CC90021E029 /* SAMCGradientButton.m */,
+				31FD59D91DEA6DF1006F3ED3 /* SAMCSearchBar.h */,
+				31FD59DA1DEA6DF1006F3ED3 /* SAMCSearchBar.m */,
 				31A0443A1DE5857A0021E029 /* SAMCTextField.h */,
 				31A0443B1DE5857A0021E029 /* SAMCTextField.m */,
 				31A044441DE586820021E029 /* SAMCStepperView.h */,
@@ -940,6 +965,8 @@
 				31FD59AA1DE6B015006F3ED3 /* SAMCAvatarImageView.m */,
 				31FD59A61DE6AFFA006F3ED3 /* SAMCCardPortraitView.h */,
 				31FD59A71DE6AFFA006F3ED3 /* SAMCCardPortraitView.m */,
+				31FD59D31DEA6D79006F3ED3 /* SAMCTextView.h */,
+				31FD59D41DEA6D79006F3ED3 /* SAMCTextView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1538,6 +1565,14 @@
 				31A042EC1DE535C80021E029 /* NoDisturb */,
 				31FD59B51DE835B9006F3ED3 /* SAMCMeViewController.h */,
 				31FD59B61DE835B9006F3ED3 /* SAMCMeViewController.m */,
+				31FD59C41DEA6B03006F3ED3 /* SAMCSPIntroViewController.h */,
+				31FD59C51DEA6B03006F3ED3 /* SAMCSPIntroViewController.m */,
+				31FD59C91DEA6D34006F3ED3 /* SAMCCSAStepOneViewController.h */,
+				31FD59CA1DEA6D34006F3ED3 /* SAMCCSAStepOneViewController.m */,
+				31FD59CB1DEA6D34006F3ED3 /* SAMCCSAStepThreeViewController.h */,
+				31FD59CC1DEA6D34006F3ED3 /* SAMCCSAStepThreeViewController.m */,
+				31FD59C71DEA6D34006F3ED3 /* SAMCCSADoneViewController.h */,
+				31FD59C81DEA6D34006F3ED3 /* SAMCCSADoneViewController.m */,
 				31A042F51DE535C80021E029 /* NTESAboutViewController.h */,
 				31A042F61DE535C80021E029 /* NTESAboutViewController.m */,
 				31A042F71DE535C80021E029 /* NTESAboutViewController.xib */,
@@ -2171,6 +2206,7 @@
 				31A043EE1DE535C80021E029 /* NTESSettingCheckCell.m in Sources */,
 				31A0439E1DE535C80021E029 /* NTESSystemNotificationViewController.m in Sources */,
 				31A0444C1DE586F90021E029 /* NSString+SAMC.m in Sources */,
+				31FD59DB1DEA6DF1006F3ED3 /* SAMCSearchBar.m in Sources */,
 				31A044B01DE591380021E029 /* SAMCUserInfoDB_2016082201.m in Sources */,
 				31A043F81DE535C80021E029 /* NTESDemoConfig.m in Sources */,
 				31A043631DE535C80021E029 /* UINavigationBar+Swizzling.m in Sources */,
@@ -2183,6 +2219,7 @@
 				31FD59B41DE6D490006F3ED3 /* SAMCSMSLoginViewController.m in Sources */,
 				31A043B61DE535C80021E029 /* NTESSessionWhiteBoardContentView.m in Sources */,
 				31A044EB1DE594F20021E029 /* SAMCQuestionMessage.m in Sources */,
+				31FD59D51DEA6D79006F3ED3 /* SAMCTextView.m in Sources */,
 				31A043861DE535C80021E029 /* NTESChatroomMemberCell.m in Sources */,
 				31A0438E1DE535C80021E029 /* NTESGroupedContacts.m in Sources */,
 				31A044B91DE591380021E029 /* SAMCDataBaseManager.m in Sources */,
@@ -2262,6 +2299,7 @@
 				31A043FE1DE535C80021E029 /* NTESSessionUtil.m in Sources */,
 				31FD59AB1DE6B015006F3ED3 /* SAMCAvatarImageView.m in Sources */,
 				31A044761DE590B90021E029 /* SAMCUnreadCountManager.m in Sources */,
+				31FD59D81DEA6DB2006F3ED3 /* SAMCSelectLocationViewController.m in Sources */,
 				31A043711DE535C80021E029 /* NTESColorButtonCell.m in Sources */,
 				31A043941DE535C80021E029 /* NTESBlackListViewController.m in Sources */,
 				31A043981DE535C80021E029 /* NTESCustomNotificationDB.m in Sources */,
@@ -2276,6 +2314,7 @@
 				31A043DF1DE535C80021E029 /* NTESTextSettingCell.m in Sources */,
 				31A043F11DE535C80021E029 /* NTESDemoFetchChatroomTask.m in Sources */,
 				31A044241DE567C60021E029 /* SAMCLoginViewController.m in Sources */,
+				31FD59CF1DEA6D34006F3ED3 /* SAMCCSADoneViewController.m in Sources */,
 				31A043C21DE535C80021E029 /* NTESSessionRemoteHistoryViewController.m in Sources */,
 				31A0437D1DE535C80021E029 /* NTESChatroomManager.m in Sources */,
 				31A044F81DE599740021E029 /* NIMMessage+SAMC.m in Sources */,
@@ -2289,9 +2328,11 @@
 				31FD59B71DE835B9006F3ED3 /* SAMCMeViewController.m in Sources */,
 				31A044ED1DE594F20021E029 /* SAMCSPBasicInfo.m in Sources */,
 				31A043CC1DE535C80021E029 /* NTESNetChatViewController.m in Sources */,
+				31FD59D11DEA6D34006F3ED3 /* SAMCCSAStepThreeViewController.m in Sources */,
 				31A044EC1DE594F20021E029 /* SAMCQuestionSession.m in Sources */,
 				31A0438B1DE535C80021E029 /* NTESChatroomTextContentView.m in Sources */,
 				31A044E71DE594F20021E029 /* NIMMessageWrapper.m in Sources */,
+				31FD59C61DEA6B03006F3ED3 /* SAMCSPIntroViewController.m in Sources */,
 				31A043701DE535C80021E029 /* NTESCardPortraitCell.m in Sources */,
 				31A0437A1DE535C80021E029 /* NTESChatroomCellLayoutConfig.m in Sources */,
 				31A043E71DE535C80021E029 /* NTESGenderSettingViewController.m in Sources */,
@@ -2321,6 +2362,7 @@
 				31A0447E1DE591010021E029 /* SAMCServerAPI.m in Sources */,
 				31A044AE1DE591380021E029 /* SAMCPublicDB_2016082201.m in Sources */,
 				31A044751DE590B90021E029 /* SAMCSyncManager.m in Sources */,
+				31FD59D01DEA6D34006F3ED3 /* SAMCCSAStepOneViewController.m in Sources */,
 				31A043BD1DE535C80021E029 /* NTESGalleryViewController.m in Sources */,
 				31A0435A1DE535C80021E029 /* NSString+NTES.m in Sources */,
 				31A044371DE585460021E029 /* SAMCConfirmPhoneCodeViewController.m in Sources */,

@@ -26,6 +26,8 @@
 #import "NTESBlackListViewController.h"
 #import "NTESUserUtil.h"
 #import "NTESLogUploader.h"
+#import "SAMCSPIntroViewController.h"
+#import "SAMCCSAStepOneViewController.h"
 
 @interface SAMCMeViewController ()
 
@@ -138,7 +140,7 @@
                                       Title     :@"Apply for SamPro",
                                       ImageName :@"ico_option_sp",
                                       CellClass :@"SAMCRightButtonCell",
-                                      CellAction:@"",
+                                      CellAction:@"createSamPros:",
                                       ExtraInfo :@{@"action":@"learnMore:", @"title":@"Learn More"},
                                       ShowAccessory :@(YES)
                                       },
@@ -340,7 +342,14 @@
 
 - (void)learnMore:(id)sender
 {
-    DDLogDebug(@"learn more");
+    SAMCSPIntroViewController *vc = [[SAMCSPIntroViewController alloc] initWithTitle:@"Become a Service Provider" htmlName:@"becomesp"];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)createSamPros:(id)sender
+{
+    SAMCCSAStepOneViewController *vc = [[SAMCCSAStepOneViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Notification
