@@ -18,9 +18,7 @@
 #import "NTESNotificationCenter.h"
 #import "NTESCustomNotificationDB.h"
 #import "NTESCustomSysNotificationViewController.h"
-#import "NTESNoDisturbSettingViewController.h"
 #import "NTESLogManager.h"
-#import "NTESColorButtonCell.h"
 #import "SAMCUserInfoSettingViewController.h"
 #import "NTESBlackListViewController.h"
 #import "NTESUserUtil.h"
@@ -86,13 +84,8 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)buildData{
-    BOOL disableRemoteNotification = [UIApplication sharedApplication].currentUserNotificationSettings.types == UIUserNotificationTypeNone;
-    NIMPushNotificationSetting *setting = [[NIMSDK sharedSDK].apnsManager currentSetting];
-    BOOL enableNoDisturbing     = setting.noDisturbing;
-    NSString *noDisturbingStart = [NSString stringWithFormat:@"%02zd:%02zd",setting.noDisturbingStartH,setting.noDisturbingStartM];
-    NSString *noDisturbingEnd   = [NSString stringWithFormat:@"%02zd:%02zd",setting.noDisturbingEndH,setting.noDisturbingEndM];
-    
+- (void)buildData
+{
     NSInteger customNotifyCount = [[NTESCustomNotificationDB sharedInstance] unreadCount];
     NSString *customNotifyText  = [NSString stringWithFormat:@"自定义系统通知 (%zd)",customNotifyCount];
     
@@ -167,29 +160,7 @@
                           FooterTitle:@""
                           },
                       @{
-                          HeaderTitle:@"",
-                          RowContent :@[
-                                  @{
-                                      Title      :@"消息提醒",
-                                      DetailTitle:disableRemoteNotification ? @"未开启" : @"已开启",
-                                      },
-                                  ],
-                          FooterTitle:@"在iPhone的“设置- 通知中心”功能，找到应用程序“云信”，可以更改云信新消息提醒设置"
-                          },
-                      @{
-                          HeaderTitle:@"",
-                          RowContent :@[
-                                  @{
-                                      Title      :@"免打扰",
-                                      DetailTitle:enableNoDisturbing ? [NSString stringWithFormat:@"%@到%@",noDisturbingStart,noDisturbingEnd] : @"未开启",
-                                      CellAction :@"onActionNoDisturbingSetting:",
-                                      ShowAccessory : @(YES)
-                                      },
-                                  ],
-                          FooterTitle:@""
-                          },
-                      @{
-                          HeaderTitle:@"",
+                          HeaderTitle:@"以下功能用于测试，请忽略",
                           RowContent :@[
                                   @{
                                       Title      :@"查看日志",
@@ -207,25 +178,8 @@
                                       Title      :customNotifyText,
                                       CellAction :@"onTouchCustomNotify:",
                                       },
-                                  @{
-                                      Title      :@"关于",
-                                      CellAction :@"onTouchAbout:",
-                                      },
                                   ],
                           FooterTitle:@""
-                          },
-                      @{
-                          HeaderTitle:@"",
-                          RowContent :@[
-                                  @{
-                                      Title        : @"注销",
-                                      CellClass    : @"NTESColorButtonCell",
-                                      CellAction   : @"logoutCurrentAccount:",
-                                      ExtraInfo    : @(ColorButtonCellStyleRed),
-                                      ForbidSelect : @(YES)
-                                      },
-                                  ],
-                          FooterTitle:@"",
                           },
                       ];
     self.data = [NIMCommonTableSection sectionsWithData:data];
@@ -241,15 +195,6 @@
 - (void)onActionTouchPortrait:(id)sender
 {
     SAMCUserInfoSettingViewController *vc = [[SAMCUserInfoSettingViewController alloc] initWithNibName:nil bundle:nil];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (void)onActionNoDisturbingSetting:(id)sender {
-    NTESNoDisturbSettingViewController *vc = [[NTESNoDisturbSettingViewController alloc] initWithNibName:nil bundle:nil];
-    __weak typeof(self) wself = self;
-    vc.handler = ^(){
-        [wself refreshData];
-    };
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -422,12 +367,6 @@
     [self presentViewController:nav
                        animated:YES
                      completion:nil];
-}
-
-#pragma mark - 旋转处理 (iOS7)
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    [self.tableView reloadData];
 }
 
 @end
