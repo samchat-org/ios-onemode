@@ -149,6 +149,11 @@ FOUNDATION_EXPORT const unsigned char NIMKitVersionString[];
  */
 @property (nonatomic,strong) UIImage  *avatarImage;
 
+// SAMC_BEGIN
+@property (nonatomic,copy) NSString *samchatId;
+@property (nonatomic,copy) NSString *serviceCategory;
+// SAMC_END
+
 @end
 
 /**

@@ -124,11 +124,17 @@ static NSString *DefaultTableCell = @"UITableViewCell";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section == 0) {
-        return 25.f;
-    }
+    // SAMC_BEGIN
+//    if (section == 0) {
+//        return 25.f;
+//    }
     NIMCommonTableSection *tableSection = self.data[section];
-    return [tableSection.headerTitle sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13.f]}].height;
+    if (tableSection.headerTitle) {
+        return [tableSection.headerTitle sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13.f]}].height;
+    } else {
+        return tableSection.uiHeaderHeight;
+    }
+    // SAMC_END
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section{

@@ -1,20 +1,16 @@
 //
-//  NTESUserInfoSettingViewController.m
-//  NIM
+//  SAMCUserInfoSettingViewController.m
+//  SamChat
 //
-//  Created by chris on 15/9/17.
-//  Copyright (c) 2015年 Netease. All rights reserved.
+//  Created by HJ on 11/27/16.
+//  Copyright © 2016 SamChat. All rights reserved.
 //
 
-#import "NTESUserInfoSettingViewController.h"
+#import "SAMCUserInfoSettingViewController.h"
 #import "NIMCommonTableData.h"
 #import "NIMCommonTableDelegate.h"
-#import "NTESNickNameSettingViewController.h"
-#import "NTESGenderSettingViewController.h"
-#import "NTESBirthSettingViewController.h"
-#import "NTESMobileSettingViewController.h"
-#import "NTESEmailSettingViewController.h"
-#import "NTESSignSettingViewController.h"
+#import "SAMCFullNameSettingViewController.h"
+#import "SAMCSamChatIdSettingViewController.h"
 #import "NTESUserUtil.h"
 #import "SVProgressHUD.h"
 #import "UIView+Toast.h"
@@ -22,20 +18,34 @@
 #import "UIImage+NTES.h"
 #import "NTESFileLocationHelper.h"
 #import "NIMWebImageManager.h"
+#import "SAMCSettingAvatarView.h"
+#import "SAMCAccountManager.h"
 
-@interface NTESUserInfoSettingViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface SAMCUserInfoSettingViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
-@property (nonatomic,strong) NIMCommonTableDelegate *delegator;
+@property (nonatomic, strong) NIMCommonTableDelegate *delegator;
 
-@property (nonatomic,copy)   NSArray *data;
+@property (nonatomic, strong) UITableView *tableView;
+
+@property (nonatomic, copy)   NSArray *data;
 
 @end
 
-@implementation NTESUserInfoSettingViewController
+@implementation SAMCUserInfoSettingViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"个人信息";
+    self.navigationItem.title = @"My Profile";
+    
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    [self.view addSubview:self.tableView];
+    UIEdgeInsets separatorInset   = self.tableView.separatorInset;
+    separatorInset.right          = 0;
+    self.tableView.separatorInset = separatorInset;
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+    
     [self buildData];
     __weak typeof(self) wself = self;
     self.delegator = [[NIMCommonTableDelegate alloc] initWithTableData:^NSArray *{
@@ -44,7 +54,10 @@
     self.tableView.delegate   = self.delegator;
     self.tableView.dataSource = self.delegator;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUserInfoHasUpdatedNotification:) name:NIMKitUserInfoHasUpdatedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onUserInfoHasUpdatedNotification:)
+                                                 name:NIMKitUserInfoHasUpdatedNotification
+                                               object:nil];
 }
 
 - (void)dealloc{
@@ -52,63 +65,42 @@
 }
 
 - (void)buildData{
-    NIMUser *me = [[NIMSDK sharedSDK].userManager userInfo:[[NIMSDK sharedSDK].loginManager currentAccount]];
+    SAMCUser *me = [SAMCAccountManager sharedManager].currentUser;
+    
+    SAMCSettingAvatarView *headerView = [[SAMCSettingAvatarView alloc] initWithFrame:CGRectMake(0, 0, 0, 140)];
+    NIMKitInfo *info = [[NIMKit sharedKit] infoByUser:me.userId];
+    [headerView refreshData:info];
+    [headerView.avatarView addTarget:self action:@selector(onTouchPortrait:) forControlEvents:UIControlEventTouchUpInside];
+    self.tableView.tableHeaderView = headerView;
+    
     NSArray *data = @[
                       @{
-                          HeaderTitle:@"",
+                          HeaderHeight:@(0.01),
                           RowContent :@[
                                   @{
-                                      ExtraInfo     : me.userId ? me.userId : [NSNull null],
-                                      CellClass     : @"NTESSettingPortraitCell",
-                                      RowHeight     : @(100),
-                                      CellAction    : @"onTouchPortrait:",
-                                      ShowAccessory : @(YES)
-                                      },
-                                  ],
-                          FooterTitle:@""
-                          },
-                      @{
-                          HeaderTitle:@"",
-                          RowContent :@[
-                                  @{
-                                      Title      :@"昵称",
-                                      DetailTitle:me.userInfo.nickName.length ? me.userInfo.nickName : @"未设置",
-                                      CellAction :@"onTouchNickSetting:",
+                                      Title      :@"Name",
+                                      DetailTitle:me.userInfo.username,
+                                      CellAction :@"onTouchNameSetting:",
                                       RowHeight     : @(50),
                                       ShowAccessory : @(YES),
                                       },
                                   @{
-                                      Title      :@"性别",
-                                      DetailTitle:[NTESUserUtil genderString:me.userInfo.gender],
-                                      CellAction :@"onTouchGenderSetting:",
+                                      Title      :@"SamChat ID",
+                                      DetailTitle:me.userInfo.samchatId.length ? me.userInfo.samchatId : @"Not Set",
+                                      CellAction :@"onTouchSamChatIdSetting:",
                                       RowHeight     : @(50),
                                       ShowAccessory : @(YES)
                                       },
                                   @{
-                                      Title      :@"生日",
-                                      DetailTitle:me.userInfo.birth.length ? me.userInfo.birth : @"未设置",
-                                      CellAction :@"onTouchBirthSetting:",
+                                      Title      :@"Password",
+                                      CellAction :@"onTouchPasswordSetting:",
                                       RowHeight     : @(50),
                                       ShowAccessory : @(YES)
                                       },
                                   @{
-                                      Title      :@"手机",
-                                      DetailTitle:me.userInfo.mobile.length ? me.userInfo.mobile : @"未设置",
-                                      CellAction :@"onTouchTelSetting:",
-                                      RowHeight     : @(50),
-                                      ShowAccessory : @(YES)
-                                      },
-                                  @{
-                                      Title      :@"邮箱",
-                                      DetailTitle:me.userInfo.email.length ? me.userInfo.email : @"未设置",
-                                      CellAction :@"onTouchEmailSetting:",
-                                      RowHeight     : @(50),
-                                      ShowAccessory : @(YES)
-                                      },
-                                  @{
-                                      Title      :@"签名",
-                                      DetailTitle:me.userInfo.sign.length ? me.userInfo.sign : @"未设置",
-                                      CellAction :@"onTouchSignSetting:",
+                                      Title      :@"Location",
+                                      DetailTitle:me.userInfo.address,
+                                      CellAction :@"onTouchLocationSetting:",
                                       RowHeight     : @(50),
                                       ShowAccessory : @(YES)
                                       },
@@ -120,12 +112,14 @@
 }
 
 
-- (void)refresh{
+- (void)refresh
+{
     [self buildData];
     [self.tableView reloadData];
 }
 
-- (void)onTouchPortrait:(id)sender{
+- (void)onTouchPortrait:(id)sender
+{
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"设置头像" delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从相册", nil];
         [sheet showInView:self.view completionHandler:^(NSInteger index) {
@@ -162,36 +156,25 @@
     [self presentViewController:picker animated:YES completion:nil];
 }
 
-- (void)onTouchNickSetting:(id)sender{
-    NTESNickNameSettingViewController *vc = [[NTESNickNameSettingViewController alloc] initWithNibName:nil bundle:nil];
+- (void)onTouchNameSetting:(id)sender
+{
+    SAMCFullNameSettingViewController *vc = [[SAMCFullNameSettingViewController alloc] initWithNibName:nil bundle:nil];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)onTouchGenderSetting:(id)sender{
-    NTESGenderSettingViewController *vc = [[NTESGenderSettingViewController alloc] initWithNibName:nil bundle:nil];
+- (void)onTouchSamChatIdSetting:(id)sender
+{
+    SAMCSamChatIdSettingViewController *vc = [[SAMCSamChatIdSettingViewController alloc] initWithNibName:nil bundle:nil];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)onTouchBirthSetting:(id)sender{
-    NTESBirthSettingViewController *vc = [[NTESBirthSettingViewController alloc] initWithNibName:nil bundle:nil];
-    [self.navigationController pushViewController:vc animated:YES];
+- (void)onTouchPasswordSetting:(id)sender
+{
 }
 
-- (void)onTouchTelSetting:(id)sender{
-    NTESMobileSettingViewController *vc = [[NTESMobileSettingViewController alloc] initWithNibName:nil bundle:nil];
-    [self.navigationController pushViewController:vc animated:YES];
+- (void)onTouchLocationSetting:(id)sender
+{
 }
-
-- (void)onTouchEmailSetting:(id)sender{
-    NTESEmailSettingViewController *vc = [[NTESEmailSettingViewController alloc] initWithNibName:nil bundle:nil];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (void)onTouchSignSetting:(id)sender{
-    NTESSignSettingViewController *vc = [[NTESSignSettingViewController alloc] initWithNibName:nil bundle:nil];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
 
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{

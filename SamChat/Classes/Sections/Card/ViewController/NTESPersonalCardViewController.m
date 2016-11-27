@@ -17,8 +17,6 @@
 #import "NTESBundleSetting.h"
 #import "UIAlertView+NTESBlock.h"
 #import "NTESUserUtil.h"
-#import "NTESUserInfoSettingViewController.h"
-#import "NTESAliasSettingViewController.h"
 
 @interface NTESPersonalCardViewController ()
 
@@ -214,13 +212,13 @@
 
 #pragma mark - Action
 - (void)onActionEditAlias:(id)sender{
-    NTESAliasSettingViewController *vc = [[NTESAliasSettingViewController alloc] initWithUserId:self.userId];
-    [self.navigationController pushViewController:vc animated:YES];
+//    NTESAliasSettingViewController *vc = [[NTESAliasSettingViewController alloc] initWithUserId:self.userId];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)onActionEditMyInfo:(id)sender{
-    NTESUserInfoSettingViewController *vc = [[NTESUserInfoSettingViewController alloc] initWithNibName:nil bundle:nil];
-    [self.navigationController pushViewController:vc animated:YES];
+//    NTESUserInfoSettingViewController *vc = [[NTESUserInfoSettingViewController alloc] initWithNibName:nil bundle:nil];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)onActionBlackListValueChange:(id)sender{

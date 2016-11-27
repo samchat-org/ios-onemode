@@ -21,7 +21,7 @@
 #import "NTESNoDisturbSettingViewController.h"
 #import "NTESLogManager.h"
 #import "NTESColorButtonCell.h"
-#import "NTESUserInfoSettingViewController.h"
+#import "SAMCUserInfoSettingViewController.h"
 #import "NTESBlackListViewController.h"
 #import "NTESUserUtil.h"
 #import "NTESLogUploader.h"
@@ -98,11 +98,11 @@
     NSString *uid = [[NIMSDK sharedSDK].loginManager currentAccount];
     NSArray *data = @[
                       @{
-                          HeaderTitle:@"",
+                          HeaderHeight:@(22),
                           RowContent :@[
                                   @{
                                       ExtraInfo     : uid.length ? uid : [NSNull null],
-                                      CellClass     : @"NTESSettingPortraitCell",
+                                      CellClass     : @"SAMCSettingPortraitCell",
                                       RowHeight     : @(100),
                                       CellAction    : @"onActionTouchPortrait:",
                                       ShowAccessory : @(YES)
@@ -237,9 +237,9 @@
 
 
 #pragma mark - Action
-
-- (void)onActionTouchPortrait:(id)sender{
-    NTESUserInfoSettingViewController *vc = [[NTESUserInfoSettingViewController alloc] initWithNibName:nil bundle:nil];
+- (void)onActionTouchPortrait:(id)sender
+{
+    SAMCUserInfoSettingViewController *vc = [[SAMCUserInfoSettingViewController alloc] initWithNibName:nil bundle:nil];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
