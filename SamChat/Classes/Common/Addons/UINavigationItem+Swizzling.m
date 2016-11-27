@@ -29,6 +29,7 @@
     if (!label) {
         label = [[UILabel alloc] initWithFrame:CGRectZero];
         label.lineBreakMode = NSLineBreakByTruncatingMiddle;
+        label.font = [UIFont boldSystemFontOfSize:17.0f];
         self.titleView = label;
     }
     if ([label isKindOfClass:[UILabel class]]) {
