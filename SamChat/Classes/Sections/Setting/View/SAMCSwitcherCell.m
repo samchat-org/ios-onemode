@@ -23,7 +23,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         _switcher = [[UISwitch alloc] initWithFrame:CGRectZero];
-        _switcher.onTintColor = SAMC_COLOR_INGRABLUE;
+        _switcher.onTintColor = SAMC_COLOR_LAKE;
         [self addSubview:_switcher];
     }
     return self;
