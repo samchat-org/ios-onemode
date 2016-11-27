@@ -81,7 +81,7 @@
                                                                               style:UIBarButtonItemStyleDone
                                                                              target:self
                                                                              action:@selector(onDone:)];
-    self.navigationItem.rightBarButtonItem.tintColor = SAMC_COLOR_INK;
+    self.navigationItem.rightBarButtonItem.tintColor = SAMC_COLOR_INGRABLUE;
     self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
