@@ -68,12 +68,17 @@
     _progressView.frame   = self.bounds;
     
     CALayer *maskLayer = [CALayer layer];
-    maskLayer.cornerRadius = 13.0;
+    // SAMC_BEGIN
+    maskLayer.cornerRadius = 13.0-5.0;
+    // SAMC_END
     maskLayer.backgroundColor = [UIColor blackColor].CGColor;
     maskLayer.frame = self.imageView.bounds;
     self.imageView.layer.mask = maskLayer;
     
-    self.playBtn.nim_centerX = self.nim_width  * .5f;
+    // SAMC_BEGIN
+//    self.playBtn.nim_centerX = self.nim_width * .5f;
+    self.playBtn.nim_centerX = self.imageView.nim_centerX;
+    // SAMC_END
     self.playBtn.nim_centerY = self.nim_height * .5f;
 }
 

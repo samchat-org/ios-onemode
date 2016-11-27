@@ -63,29 +63,60 @@
 
 
 #pragma mark - Private
-- (UIImage *)chatBubbleImageForState:(UIControlState)state outgoing:(BOOL)outgoing{
+- (UIImage *)chatBubbleImageForState:(UIControlState)state outgoing:(BOOL)outgoing
+{
+    // TODO:fot test
+    return [self chatBubbleImageForState:state outgoing:outgoing spMode:NO];
+}
+// SAMC_BEGIN
+//- (UIImage *)chatBubbleImageForState:(UIControlState)state outgoing:(BOOL)outgoing
+- (UIImage *)chatBubbleImageForState:(UIControlState)state outgoing:(BOOL)outgoing spMode:(BOOL)spMode
+// SAMC_END
+{
     if (outgoing) {
         if (state == UIControlStateNormal)
         {
-            UIImage *image = [UIImage nim_imageInKit:@"icon_sender_text_node_normal.png"];
-            
-            return [image resizableImageWithCapInsets:UIEdgeInsetsMake(18,25,17,25) resizingMode:UIImageResizingModeStretch];
-            
+            // SAMC_BEGIN
+//            UIImage *image = [UIImage nim_imageInKit:@"icon_sender_text_node_normal.png"];
+//            return [image resizableImageWithCapInsets:UIEdgeInsetsMake(18,25,17,25) resizingMode:UIImageResizingModeStretch];
+            UIImage *image;
+            if (spMode) {
+                image = [UIImage nim_imageInKit:@"bkg_chat_ingra_right.png"];
+            } else {
+                image = [UIImage nim_imageInKit:@"bkg_chat_green_right.png"];
+            }
+            return [image resizableImageWithCapInsets:UIEdgeInsetsMake(21,15,10,26) resizingMode:UIImageResizingModeStretch];
+            // SAMC_END
         }else if (state == UIControlStateHighlighted)
         {
-            UIImage *image = [UIImage nim_imageInKit:@"icon_sender_text_node_pressed.png"] ;
-            return [image resizableImageWithCapInsets:UIEdgeInsetsMake(18,25,17,25) resizingMode:UIImageResizingModeStretch];
+            // SAMC_BEGIN
+//            UIImage *image = [UIImage nim_imageInKit:@"icon_sender_text_node_pressed.png"] ;
+//            return [image resizableImageWithCapInsets:UIEdgeInsetsMake(18,25,17,25) resizingMode:UIImageResizingModeStretch];
+            UIImage *image;
+            if (spMode) {
+                image = [UIImage nim_imageInKit:@"bkg_chat_ingra_right_pressed.png"];
+            } else {
+                image = [UIImage nim_imageInKit:@"bkg_chat_green_right_pressed.png"];
+            }
+            return [image resizableImageWithCapInsets:UIEdgeInsetsMake(21,15,10,26) resizingMode:UIImageResizingModeStretch];
+            // SAMC_END
         }
         
     }else {
         if (state == UIControlStateNormal) {
-            UIImage *image = [UIImage nim_imageInKit:@"icon_receiver_node_normal.png"];
-            
-            return [image resizableImageWithCapInsets:UIEdgeInsetsMake(18,25,17,25) resizingMode:UIImageResizingModeStretch];
-            
+            // SAMC_BEGIN
+//            UIImage *image = [UIImage nim_imageInKit:@"icon_receiver_node_normal.png"];
+//            return [image resizableImageWithCapInsets:UIEdgeInsetsMake(18,25,17,25) resizingMode:UIImageResizingModeStretch];
+            UIImage *image = [UIImage nim_imageInKit:@"bkg-chat-white-left.png"];
+            return [image resizableImageWithCapInsets:UIEdgeInsetsMake(21,26,10,15) resizingMode:UIImageResizingModeStretch];
+            // SAMC_END
         }else if (state == UIControlStateHighlighted) {
-            UIImage *image = [UIImage nim_imageInKit:@"icon_receiver_node_pressed.png"] ;
-            return [image resizableImageWithCapInsets:UIEdgeInsetsMake(18,25,17,25) resizingMode:UIImageResizingModeStretch];
+            // SAMC_BEGIN
+//            UIImage *image = [UIImage nim_imageInKit:@"icon_receiver_node_pressed.png"] ;
+//            return [image resizableImageWithCapInsets:UIEdgeInsetsMake(18,25,17,25) resizingMode:UIImageResizingModeStretch];
+            UIImage *image = [UIImage nim_imageInKit:@"bkg-chat-white-left-pressed.png"];
+            return [image resizableImageWithCapInsets:UIEdgeInsetsMake(21,26,10,15) resizingMode:UIImageResizingModeStretch];
+            // SAMC_END
         }
     }
     return nil;
