@@ -99,15 +99,13 @@
     }];
 }
 
-- (void)setUpNavItem{
-    UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [cancelButton addTarget:self action:@selector(onCancel) forControlEvents:UIControlEventTouchUpInside];
-    [cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
-    [cancelButton setTitleColor:SAMC_COLOR_INGRABLUE forState:UIControlStateNormal];
-    [cancelButton setTitleColor:SAMCUIColorFromRGBA(SAMC_COLOR_RGB_INGRABLUE, 0.5) forState:UIControlStateHighlighted];
-    [cancelButton sizeToFit];
-    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
-    self.navigationItem.rightBarButtonItem = cancelItem;
+- (void)setUpNavItem
+{
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
+                                                                              style:UIBarButtonItemStylePlain
+                                                                             target:self
+                                                                             action:@selector(onCancel)];
+    self.navigationItem.rightBarButtonItem.tintColor = SAMC_COLOR_INGRABLUE;
 }
 
 - (void)onCancel

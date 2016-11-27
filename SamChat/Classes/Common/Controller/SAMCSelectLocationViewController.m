@@ -80,27 +80,19 @@
 - (void)setupNavItem
 {
     self.navigationItem.title = @"Select Location";
-    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    negativeSpacer.width = -5;
     
-    UIColor *activeColor;
-    UIColor *pressedColor;
+    UIColor *tintColor;
     if (_userMode == SAMCUserModeTypeCustom) {
-        activeColor = SAMC_COLOR_INGRABLUE;
-        pressedColor = UIColorFromRGBA(SAMC_COLOR_RGB_INGRABLUE, 0.5f);
+        tintColor = SAMC_COLOR_INGRABLUE;
     } else {
-        activeColor = [UIColor whiteColor];
-        pressedColor = UIColorFromRGBA(0xFFFFFF, 0.5);
+        tintColor = [UIColor whiteColor];
     }
     
-    UIButton *doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [doneButton addTarget:self action:@selector(done:) forControlEvents:UIControlEventTouchUpInside];
-    [doneButton setTitle:@"Done" forState:UIControlStateNormal];
-    [doneButton setTitleColor:activeColor forState:UIControlStateNormal];
-    [doneButton setTitleColor:pressedColor forState:UIControlStateHighlighted];
-    [doneButton sizeToFit];
-    UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
-    self.navigationItem.rightBarButtonItem = doneItem;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                              style:UIBarButtonItemStylePlain
+                                                                             target:self
+                                                                             action:@selector(done:)];
+    self.navigationItem.rightBarButtonItem.tintColor = tintColor;
 }
 
 #pragma mark - Action
