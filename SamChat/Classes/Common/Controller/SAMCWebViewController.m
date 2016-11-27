@@ -55,22 +55,14 @@
 
 - (void)setupNavItem
 {
-    UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [rightBtn addTarget:self action:@selector(done:) forControlEvents:UIControlEventTouchUpInside];
-    [rightBtn setTitle:@"Done" forState:UIControlStateNormal];
-    rightBtn.titleLabel.font = [UIFont systemFontOfSize:17.0f];
-    rightBtn.titleLabel.textAlignment = NSTextAlignmentRight;
-    [rightBtn sizeToFit];
-    [rightBtn setTitleColor:SAMC_COLOR_INGRABLUE forState:UIControlStateNormal];
-    [rightBtn setTitleColor:UIColorFromRGBA(SAMC_COLOR_RGB_INGRABLUE, 0.5f) forState:UIControlStateHighlighted];
-    UIBarButtonItem *navRightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
-    
-    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    negativeSpacer.width = -5;
-    self.navigationItem.rightBarButtonItems = @[negativeSpacer, navRightItem];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                              style:UIBarButtonItemStyleDone
+                                                                             target:self
+                                                                             action:@selector(onDone:)];
+    self.navigationItem.rightBarButtonItem.tintColor = SAMC_COLOR_INGRABLUE;
 }
 
-- (void)done:(id)sender
+- (void)onDone:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
 }

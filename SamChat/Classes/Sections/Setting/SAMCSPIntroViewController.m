@@ -29,7 +29,7 @@
     }];
 }
 
-- (void)onDone:(id)sender
+- (void)createSamPros:(id)sender
 {
     SAMCCSAStepOneViewController *vc = [[SAMCCSAStepOneViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
@@ -44,7 +44,7 @@
         [_doneButton setBackgroundImage:[UIImage imageNamed:@"ico_bkg_lake_active"] forState:UIControlStateNormal];
         [_doneButton setBackgroundImage:[UIImage imageNamed:@"ico_bkg_lake_pressed"] forState:UIControlStateHighlighted];
         [_doneButton setTitle:@"Become a Service Profiver" forState:UIControlStateNormal];
-        [_doneButton addTarget:self action:@selector(onDone:) forControlEvents:UIControlEventTouchUpInside];
+        [_doneButton addTarget:self action:@selector(createSamPros:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _doneButton;
 }
