@@ -68,12 +68,20 @@ static char UIFirstResponderViewAddress;
         [self.navigationController.navigationBar setShadowImage:nil];
         
         UIColor *barColor;
+        UIColor *titleColor;
         if ([SAMCAccountManager sharedManager].isCurrentUserServicer) {
             barColor = SAMC_COLOR_NAV_DARK;
+            titleColor = [UIColor whiteColor];
         } else {
             barColor = SAMC_COLOR_NAV_LIGHT;
+            titleColor = SAMC_COLOR_INK;
         }
         self.navigationController.navigationBar.barTintColor = barColor;
+        
+        id titleView = self.navigationItem.titleView;
+        if ([titleView isKindOfClass:[UILabel class]]) {
+            ((UILabel *)titleView).textColor = titleColor;
+        }
     }
 }
 
@@ -102,16 +110,16 @@ static char UIFirstResponderViewAddress;
 -(void)swizzling_viewWillLayoutSubviews
 {
     [self swizzling_viewWillLayoutSubviews];
-    id titleView = self.navigationItem.titleView;
-    UILabel *label;
-    if ([titleView isKindOfClass:[UILabel class]]) {
-        label = (UILabel *)titleView;
-        if ([SAMCAccountManager sharedManager].isCurrentUserServicer) {
-            label.textColor = [UIColor whiteColor];
-        } else {
-            label.textColor = SAMC_COLOR_INK;
-        }
-    }
+//    id titleView = self.navigationItem.titleView;
+//    UILabel *label;
+//    if ([titleView isKindOfClass:[UILabel class]]) {
+//        label = (UILabel *)titleView;
+//        if ([SAMCAccountManager sharedManager].isCurrentUserServicer) {
+//            label.textColor = [UIColor whiteColor];
+//        } else {
+//            label.textColor = SAMC_COLOR_INK;
+//        }
+//    }
 }
 
 #pragma mark - Private
