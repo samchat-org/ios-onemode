@@ -28,6 +28,7 @@
 #import "NTESLogUploader.h"
 #import "SAMCSPIntroViewController.h"
 #import "SAMCCSAStepOneViewController.h"
+#import "SAMCAccountManager.h"
 
 @interface SAMCMeViewController ()
 
@@ -128,7 +129,7 @@
                                   @{
                                       Title      :@"Log out",
                                       ImageName  :@"ico_option_logout",
-                                      CellAction :@"",
+                                      CellAction :@"logoutCurrentAccount:",
                                       },
                                   ],
                           FooterTitle:@""
@@ -324,15 +325,21 @@
 }
 
 - (void)logoutCurrentAccount:(id)sender{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"退出当前帐号？" message:nil delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"logout?" message:nil delegate:nil cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
     [alert showAlertWithCompletionHandler:^(NSInteger alertIndex) {
         switch (alertIndex) {
             case 1:
-                [[[NIMSDK sharedSDK] loginManager] logout:^(NSError *error)
-                 {
-                     extern NSString *NTESNotificationLogout;
-                     [[NSNotificationCenter defaultCenter] postNotificationName:NTESNotificationLogout object:nil];
-                 }];
+            {
+                [SVProgressHUD showWithStatus:@"logout" maskType:SVProgressHUDMaskTypeBlack];
+                __weak typeof(self) wself = self;
+                [[SAMCAccountManager sharedManager] logout:^(NSError * _Nullable error) {
+                    [SVProgressHUD dismiss];
+                    if (error) {
+                        [wself.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:2.0f position:CSToastPositionCenter];
+                        return;
+                    }
+                }];
+            }
                 break;
             default:
                 break;
