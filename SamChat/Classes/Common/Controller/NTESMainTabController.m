@@ -23,13 +23,14 @@
 #define TabbarImage @"image"
 #define TabbarSelectedImage @"selectedImage"
 #define TabbarItemBadgeValue @"badgeValue"
-#define TabBarCount 4
+#define TabBarCount 5
 
 typedef NS_ENUM(NSInteger,NTESMainTabType) {
-    NTESMainTabTypeMessageList,    //聊天
-    NTESMainTabTypeContact,        //通讯录
-    NTESMainTabTypeChatroomList,   //聊天室
-    NTESMainTabTypeSetting,        //设置
+    NTESMainTabTypeMessageList,
+    NTESMainTabTypeContact,
+    NTESMainTabTypePublic,
+    NTESMainTabTypeForum,
+    NTESMainTabTypeSetting,
 };
 
 
@@ -116,9 +117,16 @@ typedef NS_ENUM(NSInteger,NTESMainTabType) {
         vc.hidesBottomBarWhenPushed = NO;
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
         nav.navigationBar.translucent = NO;
+//        nav.tabBarItem = [[UITabBarItem alloc] initWithTitle:title
+//                                                       image:[UIImage imageNamed:imageName]
+//                                               selectedImage:[UIImage imageNamed:imageSelected]];
+        UIImage *normalImage = [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        UIImage *pressedImage = [[UIImage imageNamed:imageSelected] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         nav.tabBarItem = [[UITabBarItem alloc] initWithTitle:title
-                                                       image:[UIImage imageNamed:imageName]
-                                               selectedImage:[UIImage imageNamed:imageSelected]];
+                                                       image:normalImage
+                                               selectedImage:pressedImage];
+        [nav.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:SAMC_COLOR_INGRABLUE} forState:UIControlStateNormal];
+        
         nav.tabBarItem.tag = idx;
         NSInteger badge = [item[TabbarItemBadgeValue] integerValue];
         if (badge) {
@@ -239,29 +247,35 @@ typedef NS_ENUM(NSInteger,NTESMainTabType) {
         _configs = @{
                      @(NTESMainTabTypeMessageList) : @{
                              TabbarVC           : @"NTESSessionListViewController",
-                             TabbarTitle        : @"云信",
-                             TabbarImage        : @"icon_message_normal",
-                             TabbarSelectedImage: @"icon_message_pressed",
+                             TabbarTitle        : @"Chat",
+                             TabbarImage        : @"ico_tab_chat_line",
+                             TabbarSelectedImage: @"ico_tab_chat_fill",
                              TabbarItemBadgeValue: @(self.sessionUnreadCount)
                              },
                      @(NTESMainTabTypeContact)     : @{
                              TabbarVC           : @"NTESContactViewController",
-                             TabbarTitle        : @"通讯录",
-                             TabbarImage        : @"icon_contact_normal",
-                             TabbarSelectedImage: @"icon_contact_pressed",
+                             TabbarTitle        : @"Contact",
+                             TabbarImage        : @"ico_tab_contacts_line",
+                             TabbarSelectedImage: @"ico_tab_contacts_fill",
                              TabbarItemBadgeValue: @(self.systemUnreadCount)
                              },
-                     @(NTESMainTabTypeChatroomList): @{
-                             TabbarVC           : @"NTESChatroomListViewController",
-                             TabbarTitle        : @"直播间",
-                             TabbarImage        : @"icon_chatroom_normal",
-                             TabbarSelectedImage: @"icon_chatroom_pressed",
+                     @(NTESMainTabTypePublic): @{
+                             TabbarVC           : @"SAMCPublicViewController",
+                             TabbarTitle        : @"Public",
+                             TabbarImage        : @"ico_tab_public_line",
+                             TabbarSelectedImage: @"ico_tab_public_fill",
+                             },
+                     @(NTESMainTabTypeForum): @{
+                             TabbarVC           : @"SAMCForumViewController",
+                             TabbarTitle        : @"Forum",
+                             TabbarImage        : @"ico_tab_forum_line",
+                             TabbarSelectedImage: @"ico_tab_forum_fill",
                              },
                      @(NTESMainTabTypeSetting)     : @{
                              TabbarVC           : @"SAMCMeViewController",
-                             TabbarTitle        : @"设置",
-                             TabbarImage        : @"icon_setting_normal",
-                             TabbarSelectedImage: @"icon_setting_pressed",
+                             TabbarTitle        : @"My Account",
+                             TabbarImage        : @"ico_tab_account_customer_line",
+                             TabbarSelectedImage: @"ico_tab_account_customer_fill",
                              TabbarItemBadgeValue: @(self.customSystemUnreadCount)
                              }
                      };
