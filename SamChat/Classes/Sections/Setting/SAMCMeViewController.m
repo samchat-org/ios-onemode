@@ -21,7 +21,6 @@
 #import "NTESNoDisturbSettingViewController.h"
 #import "NTESLogManager.h"
 #import "NTESColorButtonCell.h"
-#import "NTESAboutViewController.h"
 #import "NTESUserInfoSettingViewController.h"
 #import "NTESBlackListViewController.h"
 #import "NTESUserUtil.h"
@@ -154,13 +153,13 @@
                                   @{
                                       Title     :@"About SamChat",
                                       ImageName :@"ico_option_info",
-                                      CellAction:@"",
+                                      CellAction:@"onTouchAbout:",
                                       ShowAccessory :@(YES)
                                       },
                                   @{
                                       Title     :@"F.A.Q",
                                       ImageName :@"ico_option_help",
-                                      CellAction:@"",
+                                      CellAction:@"onTouchFAQ:",
                                       ShowAccessory :@(YES)
                                       },
                                   ],
@@ -319,9 +318,16 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)onTouchAbout:(id)sender{
-    NTESAboutViewController *about = [[NTESAboutViewController alloc] initWithNibName:nil bundle:nil];
-    [self.navigationController pushViewController:about animated:YES];
+- (void)onTouchAbout:(id)sender
+{
+    SAMCWebViewController *vc = [[SAMCWebViewController alloc] initWithTitle:@"About Samchat" htmlName:@"about"];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)onTouchFAQ:(id)sender
+{
+    SAMCWebViewController *vc = [[SAMCWebViewController alloc] initWithTitle:@"F.A.Q" htmlName:@"faq"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)logoutCurrentAccount:(id)sender{
