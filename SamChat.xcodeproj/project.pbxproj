@@ -23,7 +23,6 @@
 		31A043651DE535C80021E029 /* UINavigationItem+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041DB1DE535C80021E029 /* UINavigationItem+Swizzling.m */; };
 		31A043661DE535C80021E029 /* UIView+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041DD1DE535C80021E029 /* UIView+Swizzling.m */; };
 		31A043671DE535C80021E029 /* UIViewController+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041DF1DE535C80021E029 /* UIViewController+Swizzling.m */; };
-		31A043681DE535C80021E029 /* NTESMainTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041E21DE535C80021E029 /* NTESMainTabController.m */; };
 		31A043691DE535C80021E029 /* NTESNavigationAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041E51DE535C80021E029 /* NTESNavigationAnimator.m */; };
 		31A0436A1DE535C80021E029 /* NTESNavigationHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041E71DE535C80021E029 /* NTESNavigationHandler.m */; };
 		31A0436B1DE535C80021E029 /* NTESAvatarImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041EA1DE535C80021E029 /* NTESAvatarImageView.m */; };
@@ -261,6 +260,7 @@
 		31FD59ED1DEADA88006F3ED3 /* SAMCSamChatIdSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59EC1DEADA88006F3ED3 /* SAMCSamChatIdSettingViewController.m */; };
 		31FD59F21DEAE270006F3ED3 /* SAMCPublicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59F11DEAE270006F3ED3 /* SAMCPublicViewController.m */; };
 		31FD59F71DEAE2B3006F3ED3 /* SAMCForumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59F61DEAE2B3006F3ED3 /* SAMCForumViewController.m */; };
+		31FD59FA1DEAF9D6006F3ED3 /* SAMCMainTabController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59F91DEAF9D6006F3ED3 /* SAMCMainTabController.m */; };
 		3972DECFA052F7025D9E172D /* libPods-SamChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E082DB4614A7B87AB712BF66 /* libPods-SamChat.a */; };
 		611FE9EE1BB02320005E8E45 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		61530BE71BABAD3B00FE50CC /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 61530BE61BABAD3B00FE50CC /* libsqlite3.0.tbd */; };
@@ -308,8 +308,6 @@
 		31A041DD1DE535C80021E029 /* UIView+Swizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Swizzling.m"; sourceTree = "<group>"; };
 		31A041DE1DE535C80021E029 /* UIViewController+Swizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Swizzling.h"; sourceTree = "<group>"; };
 		31A041DF1DE535C80021E029 /* UIViewController+Swizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Swizzling.m"; sourceTree = "<group>"; };
-		31A041E11DE535C80021E029 /* NTESMainTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESMainTabController.h; sourceTree = "<group>"; };
-		31A041E21DE535C80021E029 /* NTESMainTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESMainTabController.m; sourceTree = "<group>"; };
 		31A041E41DE535C80021E029 /* NTESNavigationAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESNavigationAnimator.h; sourceTree = "<group>"; };
 		31A041E51DE535C80021E029 /* NTESNavigationAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESNavigationAnimator.m; sourceTree = "<group>"; };
 		31A041E61DE535C80021E029 /* NTESNavigationHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESNavigationHandler.h; sourceTree = "<group>"; };
@@ -761,6 +759,8 @@
 		31FD59F11DEAE270006F3ED3 /* SAMCPublicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SAMCPublicViewController.m; path = Public/ViewController/SAMCPublicViewController.m; sourceTree = "<group>"; };
 		31FD59F51DEAE2B3006F3ED3 /* SAMCForumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SAMCForumViewController.h; path = Forum/ViewController/SAMCForumViewController.h; sourceTree = "<group>"; };
 		31FD59F61DEAE2B3006F3ED3 /* SAMCForumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SAMCForumViewController.m; path = Forum/ViewController/SAMCForumViewController.m; sourceTree = "<group>"; };
+		31FD59F81DEAF9D6006F3ED3 /* SAMCMainTabController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCMainTabController.h; sourceTree = "<group>"; };
+		31FD59F91DEAF9D6006F3ED3 /* SAMCMainTabController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCMainTabController.m; sourceTree = "<group>"; };
 		332C493725247BFBF7A8FA45 /* Pods-SamChat.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SamChat.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-SamChat/Pods-SamChat.adhoc.xcconfig"; sourceTree = "<group>"; };
 		6121D1C91D9B9F8D005FAD3B /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
 		6121D1CB1D9B9FCC005FAD3B /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
@@ -901,8 +901,8 @@
 		31A041E01DE535C80021E029 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				31A041E11DE535C80021E029 /* NTESMainTabController.h */,
-				31A041E21DE535C80021E029 /* NTESMainTabController.m */,
+				31FD59F81DEAF9D6006F3ED3 /* SAMCMainTabController.h */,
+				31FD59F91DEAF9D6006F3ED3 /* SAMCMainTabController.m */,
 				31A044501DE588C30021E029 /* SAMCWebViewController.h */,
 				31A044511DE588C30021E029 /* SAMCWebViewController.m */,
 				31FD59D61DEA6DB2006F3ED3 /* SAMCSelectLocationViewController.h */,
@@ -2357,9 +2357,9 @@
 				31A044C41DE592490021E029 /* GCDMulticastDelegate.m in Sources */,
 				31A043651DE535C80021E029 /* UINavigationItem+Swizzling.m in Sources */,
 				31A043951DE535C80021E029 /* NTESContactAddFriendViewController.m in Sources */,
-				31A043681DE535C80021E029 /* NTESMainTabController.m in Sources */,
 				31A044731DE590B90021E029 /* SAMCResourceManager.m in Sources */,
 				31FD59AE1DE6B059006F3ED3 /* SAMCDefaultLoginViewController.m in Sources */,
+				31FD59FA1DEAF9D6006F3ED3 /* SAMCMainTabController.m in Sources */,
 				31A0447E1DE591010021E029 /* SAMCServerAPI.m in Sources */,
 				31A044AE1DE591380021E029 /* SAMCPublicDB_2016082201.m in Sources */,
 				31FD59F71DEAE2B3006F3ED3 /* SAMCForumViewController.m in Sources */,

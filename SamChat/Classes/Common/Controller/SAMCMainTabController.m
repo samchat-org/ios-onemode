@@ -1,22 +1,16 @@
 //
-//  MainTabController.m
-//  NIMDemo
+//  SAMCMainTabController.m
+//  SamChat
 //
-//  Created by chris on 15/2/2.
-//  Copyright (c) 2015年 Netease. All rights reserved.
+//  Created by HJ on 11/27/16.
+//  Copyright © 2016 SamChat. All rights reserved.
 //
 
-#import "NTESMainTabController.h"
+#import "SAMCMainTabController.h"
 #import "SAMCAppDelegate.h"
-#import "NTESSessionListViewController.h"
-#import "NTESContactViewController.h"
-#import "NIMSDK.h"
-#import "UIImage+NTESColor.h"
 #import "NTESCustomNotificationDB.h"
 #import "NTESNotificationCenter.h"
 #import "NTESNavigationHandler.h"
-#import "NTESNavigationAnimator.h"
-#import "NTESBundleSetting.h"
 
 #define TabbarVC    @"vc"
 #define TabbarTitle @"title"
@@ -25,21 +19,17 @@
 #define TabbarItemBadgeValue @"badgeValue"
 #define TabBarCount 5
 
-typedef NS_ENUM(NSInteger,NTESMainTabType) {
-    NTESMainTabTypeMessageList,
-    NTESMainTabTypeContact,
-    NTESMainTabTypePublic,
-    NTESMainTabTypeForum,
-    NTESMainTabTypeSetting,
+typedef NS_ENUM(NSInteger,SAMCMainTabType) {
+    SAMCMainTabTypeMessageList,
+    SAMCMainTabTypeContact,
+    SAMCMainTabTypePublic,
+    SAMCMainTabTypeForum,
+    SAMCMainTabTypeSetting,
 };
 
-
-
-@interface NTESMainTabController ()<NIMSystemNotificationManagerDelegate,NIMConversationManagerDelegate>
+@interface SAMCMainTabController ()<NIMSystemNotificationManagerDelegate,NIMConversationManagerDelegate>
 
 @property (nonatomic,strong) NSArray *navigationHandlers;
-
-@property (nonatomic,strong) NTESNavigationAnimator *animator;
 
 @property (nonatomic,assign) NSInteger sessionUnreadCount;
 
@@ -51,29 +41,34 @@ typedef NS_ENUM(NSInteger,NTESMainTabType) {
 
 @end
 
-@implementation NTESMainTabController
+@implementation SAMCMainTabController
 
-+ (instancetype)instance{
++ (instancetype)instance
+{
     SAMCAppDelegate *delegete = (SAMCAppDelegate *)[UIApplication sharedApplication].delegate;
     UIViewController *vc = delegete.window.rootViewController;
-    if ([vc isKindOfClass:[NTESMainTabController class]]) {
-        return (NTESMainTabController *)vc;
+    if ([vc isKindOfClass:[SAMCMainTabController class]]) {
+        return (SAMCMainTabController *)vc;
     }else{
         return nil;
     }
 }
 
-
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     [self setUpSubNav];
     [[NIMSDK sharedSDK].systemNotificationManager addDelegate:self];
     [[NIMSDK sharedSDK].conversationManager addDelegate:self];
     extern NSString *NTESCustomNotificationCountChanged;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onCustomNotifyChanged:) name:NTESCustomNotificationCountChanged object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onCustomNotifyChanged:)
+                                                 name:NTESCustomNotificationCountChanged
+                                               object:nil];
 }
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     [self setUpStatusBar];
 }
@@ -85,13 +80,15 @@ typedef NS_ENUM(NSInteger,NTESMainTabType) {
     self.view.frame = [UIScreen mainScreen].bounds;
 }
 
-- (void)dealloc{
+- (void)dealloc
+{
     [[NIMSDK sharedSDK].systemNotificationManager removeDelegate:self];
     [[NIMSDK sharedSDK].conversationManager removeDelegate:self];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (NSArray*)tabbars{
+- (NSArray*)tabbars
+{
     self.sessionUnreadCount  = [NIMSDK sharedSDK].conversationManager.allUnreadCount;
     self.systemUnreadCount   = [NIMSDK sharedSDK].systemNotificationManager.allUnreadCount;
     self.customSystemUnreadCount = [[NTESCustomNotificationDB sharedInstance] unreadCount];
@@ -102,8 +99,8 @@ typedef NS_ENUM(NSInteger,NTESMainTabType) {
     return items;
 }
 
-
-- (void)setUpSubNav{
+- (void)setUpSubNav
+{
     NSMutableArray *handleArray = [[NSMutableArray alloc] init];
     NSMutableArray *vcArray = [[NSMutableArray alloc] init];
     [self.tabbars enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -117,9 +114,6 @@ typedef NS_ENUM(NSInteger,NTESMainTabType) {
         vc.hidesBottomBarWhenPushed = NO;
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
         nav.navigationBar.translucent = NO;
-//        nav.tabBarItem = [[UITabBarItem alloc] initWithTitle:title
-//                                                       image:[UIImage imageNamed:imageName]
-//                                               selectedImage:[UIImage imageNamed:imageSelected]];
         UIImage *normalImage = [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         UIImage *pressedImage = [[UIImage imageNamed:imageSelected] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         nav.tabBarItem = [[UITabBarItem alloc] initWithTitle:title
@@ -142,40 +136,43 @@ typedef NS_ENUM(NSInteger,NTESMainTabType) {
     self.navigationHandlers = [NSArray arrayWithArray:handleArray];
 }
 
-
-- (void)setUpStatusBar{
+- (void)setUpStatusBar
+{
     UIStatusBarStyle style = UIStatusBarStyleDefault;
-    [[UIApplication sharedApplication] setStatusBarStyle:style
-                                                animated:NO];
+    [[UIApplication sharedApplication] setStatusBarStyle:style animated:NO];
 }
-
 
 #pragma mark - NIMConversationManagerDelegate
 - (void)didAddRecentSession:(NIMRecentSession *)recentSession
-           totalUnreadCount:(NSInteger)totalUnreadCount{
+           totalUnreadCount:(NSInteger)totalUnreadCount
+{
     self.sessionUnreadCount = totalUnreadCount;
     [self refreshSessionBadge];
 }
 
 
 - (void)didUpdateRecentSession:(NIMRecentSession *)recentSession
-              totalUnreadCount:(NSInteger)totalUnreadCount{
+              totalUnreadCount:(NSInteger)totalUnreadCount
+{
     self.sessionUnreadCount = totalUnreadCount;
     [self refreshSessionBadge];
 }
 
 
-- (void)didRemoveRecentSession:(NIMRecentSession *)recentSession totalUnreadCount:(NSInteger)totalUnreadCount{
+- (void)didRemoveRecentSession:(NIMRecentSession *)recentSession totalUnreadCount:(NSInteger)totalUnreadCount
+{
     self.sessionUnreadCount = totalUnreadCount;
     [self refreshSessionBadge];
 }
 
-- (void)messagesDeletedInSession:(NIMSession *)session{
+- (void)messagesDeletedInSession:(NIMSession *)session
+{
     self.sessionUnreadCount = [NIMSDK sharedSDK].conversationManager.allUnreadCount;
     [self refreshSessionBadge];
 }
 
-- (void)allMessagesDeleted{
+- (void)allMessagesDeleted
+{
     self.sessionUnreadCount = 0;
     [self refreshSessionBadge];
 }
@@ -195,27 +192,29 @@ typedef NS_ENUM(NSInteger,NTESMainTabType) {
     [self refreshSettingBadge];
 }
 
-
-
-- (void)refreshSessionBadge{
-    UINavigationController *nav = self.viewControllers[NTESMainTabTypeMessageList];
+- (void)refreshSessionBadge
+{
+    UINavigationController *nav = self.viewControllers[SAMCMainTabTypeMessageList];
     nav.tabBarItem.badgeValue = self.sessionUnreadCount ? @(self.sessionUnreadCount).stringValue : nil;
 }
 
-- (void)refreshContactBadge{
-    UINavigationController *nav = self.viewControllers[NTESMainTabTypeContact];
+- (void)refreshContactBadge
+{
+    UINavigationController *nav = self.viewControllers[SAMCMainTabTypeContact];
     NSInteger badge = self.systemUnreadCount;
     nav.tabBarItem.badgeValue = badge ? @(badge).stringValue : nil;
 }
 
-- (void)refreshSettingBadge{
-    UINavigationController *nav = self.viewControllers[NTESMainTabTypeSetting];
+- (void)refreshSettingBadge
+{
+    UINavigationController *nav = self.viewControllers[SAMCMainTabTypeSetting];
     NSInteger badge = self.customSystemUnreadCount;
     nav.tabBarItem.badgeValue = badge ? @(badge).stringValue : nil;
 }
 
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
     return UIStatusBarStyleDefault;
 }
 
@@ -225,67 +224,50 @@ typedef NS_ENUM(NSInteger,NTESMainTabType) {
     return self.selectedViewController;
 }
 
-
-#pragma mark - Rotate
-
-- (BOOL)shouldAutorotate{
-    BOOL enableRotate = [NTESBundleSetting sharedConfig].enableRotate;
-    return enableRotate ? [self.selectedViewController shouldAutorotate] : NO;
-}
-
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations{
-    BOOL enableRotate = [NTESBundleSetting sharedConfig].enableRotate;
-    return enableRotate ? [self.selectedViewController supportedInterfaceOrientations] : UIInterfaceOrientationMaskPortrait;
-}
-
-
 #pragma mark - VC
-- (NSDictionary *)vcInfoForTabType:(NTESMainTabType)type{
+- (NSDictionary *)vcInfoForTabType:(SAMCMainTabType)type
+{
     
     if (_configs == nil)
     {
         _configs = @{
-                     @(NTESMainTabTypeMessageList) : @{
+                     @(SAMCMainTabTypeMessageList) : @{
                              TabbarVC           : @"NTESSessionListViewController",
                              TabbarTitle        : @"Chat",
                              TabbarImage        : @"ico_tab_chat_line",
                              TabbarSelectedImage: @"ico_tab_chat_fill",
                              TabbarItemBadgeValue: @(self.sessionUnreadCount)
                              },
-                     @(NTESMainTabTypeContact)     : @{
+                     @(SAMCMainTabTypeContact)     : @{
                              TabbarVC           : @"NTESContactViewController",
                              TabbarTitle        : @"Contact",
                              TabbarImage        : @"ico_tab_contacts_line",
                              TabbarSelectedImage: @"ico_tab_contacts_fill",
                              TabbarItemBadgeValue: @(self.systemUnreadCount)
                              },
-                     @(NTESMainTabTypePublic): @{
+                     @(SAMCMainTabTypePublic): @{
                              TabbarVC           : @"SAMCPublicViewController",
                              TabbarTitle        : @"Public",
                              TabbarImage        : @"ico_tab_public_line",
                              TabbarSelectedImage: @"ico_tab_public_fill",
                              },
-                     @(NTESMainTabTypeForum): @{
+                     @(SAMCMainTabTypeForum): @{
                              TabbarVC           : @"SAMCForumViewController",
                              TabbarTitle        : @"Forum",
                              TabbarImage        : @"ico_tab_forum_line",
                              TabbarSelectedImage: @"ico_tab_forum_fill",
                              },
-                     @(NTESMainTabTypeSetting)     : @{
+                     @(SAMCMainTabTypeSetting)     : @{
                              TabbarVC           : @"SAMCMeViewController",
-                             TabbarTitle        : @"My Account",
+                             TabbarTitle        : @"Me",
                              TabbarImage        : @"ico_tab_account_customer_line",
                              TabbarSelectedImage: @"ico_tab_account_customer_fill",
                              TabbarItemBadgeValue: @(self.customSystemUnreadCount)
                              }
                      };
-
+        
     }
     return _configs[@(type)];
 }
-
-
-
-
 
 @end

@@ -15,7 +15,7 @@
 #import "NTESLogManager.h"
 #import "NTESDemoConfig.h"
 #import "NTESSessionUtil.h"
-#import "NTESMainTabController.h"
+#import "SAMCMainTabController.h"
 #import "NTESLoginManager.h"
 #import "NTESCustomAttachmentDecoder.h"
 #import "NTESClientUtil.h"
@@ -155,7 +155,7 @@ NSString * const SAMCLoginNotification = @"SAMCLoginNotification";
 
 - (void)setupMainViewController
 {
-    NTESMainTabController * mainTab = [[NTESMainTabController alloc] initWithNibName:nil bundle:nil];
+    SAMCMainTabController * mainTab = [[SAMCMainTabController alloc] initWithNibName:nil bundle:nil];
     self.window.rootViewController = mainTab;
 }
 

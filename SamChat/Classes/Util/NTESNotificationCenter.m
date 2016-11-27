@@ -9,7 +9,7 @@
 #import "NTESNotificationCenter.h"
 #import "NTESVideoChatViewController.h"
 #import "NTESAudioChatViewController.h"
-#import "NTESMainTabController.h"
+#import "SAMCMainTabController.h"
 #import "NTESSessionViewController.h"
 #import "NSDictionary+NTESJson.h"
 #import "NTESCustomNotificationDB.h"
@@ -86,7 +86,7 @@ NSString *NTESCustomNotificationCountChanged = @"NTESCustomNotificationCountChan
 
 - (void)playMessageAudioTip
 {
-    UINavigationController *nav = [NTESMainTabController instance].selectedViewController;
+    UINavigationController *nav = [SAMCMainTabController instance].selectedViewController;
     BOOL needPlay = YES;
     for (UIViewController *vc in nav.viewControllers) {
         if ([vc isKindOfClass:[NIMSessionViewController class]] ||  [vc isKindOfClass:[NTESLiveViewController class]])
@@ -109,7 +109,7 @@ NSString *NTESCustomNotificationCountChanged = @"NTESCustomNotificationCountChan
     setting.shouldBeCounted = NO;
     tip.setting = setting;
     
-    NTESMainTabController *tabVC = [NTESMainTabController instance];
+    SAMCMainTabController *tabVC = [SAMCMainTabController instance];
     UINavigationController *nav = tabVC.selectedViewController;
 
     for (NTESSessionViewController *vc in nav.viewControllers) {
@@ -152,7 +152,7 @@ NSString *NTESCustomNotificationCountChanged = @"NTESCustomNotificationCountChan
                     [[NSNotificationCenter defaultCenter] postNotificationName:NTESCustomNotificationCountChanged object:nil];
                 }
                 NSString *content  = [dict jsonString:NTESCustomContent];
-                [[NTESMainTabController instance].selectedViewController.view makeToast:content duration:2.0 position:CSToastPositionCenter];
+                [[SAMCMainTabController instance].selectedViewController.view makeToast:content duration:2.0 position:CSToastPositionCenter];
             }
         }
     }
@@ -161,7 +161,7 @@ NSString *NTESCustomNotificationCountChanged = @"NTESCustomNotificationCountChan
 #pragma mark - NIMNetCallManagerDelegate
 - (void)onReceive:(UInt64)callID from:(NSString *)caller type:(NIMNetCallType)type message:(NSString *)extendMessage{
     
-    NTESMainTabController *tabVC = [NTESMainTabController instance];
+    SAMCMainTabController *tabVC = [SAMCMainTabController instance];
     [tabVC.view endEditing:YES];
     UINavigationController *nav = tabVC.selectedViewController;
 
@@ -204,7 +204,7 @@ NSString *NTESCustomNotificationCountChanged = @"NTESCustomNotificationCountChan
             services:(NSUInteger)types
              message:(NSString *)info
 {
-    NTESMainTabController *tabVC = [NTESMainTabController instance];
+    SAMCMainTabController *tabVC = [SAMCMainTabController instance];
     
     [tabVC.view endEditing:YES];
 
@@ -218,7 +218,7 @@ NSString *NTESCustomNotificationCountChanged = @"NTESCustomNotificationCountChan
                                                                                                  types:types
                                                                                                   info:info];
             if (tabVC.presentedViewController) {
-                __weak NTESMainTabController *wtabVC = (NTESMainTabController *)tabVC;
+                __weak SAMCMainTabController *wtabVC = (SAMCMainTabController *)tabVC;
                 [tabVC.presentedViewController dismissViewControllerAnimated:NO completion:^{
                     [wtabVC presentViewController:vc animated:NO completion:nil];
                 }];
@@ -231,7 +231,7 @@ NSString *NTESCustomNotificationCountChanged = @"NTESCustomNotificationCountChan
 
 - (BOOL)shouldResponseBusy
 {
-    NTESMainTabController *tabVC = [NTESMainTabController instance];
+    SAMCMainTabController *tabVC = [SAMCMainTabController instance];
     UINavigationController *nav = tabVC.selectedViewController;
     return [nav.topViewController isKindOfClass:[NTESNetChatViewController class]] || [tabVC.presentedViewController isKindOfClass:[NTESWhiteboardViewController class]];
 }

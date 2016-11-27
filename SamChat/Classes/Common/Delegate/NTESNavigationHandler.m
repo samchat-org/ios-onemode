@@ -8,7 +8,7 @@
 
 #import "NTESNavigationHandler.h"
 #import "UIView+NTES.h"
-#import "NTESMainTabController.h"
+#import "SAMCMainTabController.h"
 #import "UIResponder+NTESFirstResponder.h"
 #import "NTESNavigationAnimator.h"
 
@@ -140,7 +140,7 @@
 {
     if (!_uiPopShadow) {
         _uiPopShadow = [CAGradientLayer layer];
-        _uiPopShadow.frame = CGRectMake(-6, 0, 6, [NTESMainTabController instance].view.frame.size.height);
+        _uiPopShadow.frame = CGRectMake(-6, 0, 6, [SAMCMainTabController instance].view.frame.size.height);
         _uiPopShadow.startPoint = CGPointMake(1.0, 0.5);
         _uiPopShadow.endPoint = CGPointMake(0, 0.5);
         _uiPopShadow.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithWhite:0.0 alpha:0.2f] CGColor], (id)[[UIColor clearColor] CGColor], nil];

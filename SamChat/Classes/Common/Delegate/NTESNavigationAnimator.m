@@ -8,7 +8,7 @@
 
 #import "NTESNavigationAnimator.h"
 #import "UIView+NTES.h"
-#import "NTESMainTabController.h"
+#import "SAMCMainTabController.h"
 
 @implementation NTESNavigationAnimator
 
@@ -97,7 +97,7 @@
     
     BOOL hidesBottomBar = toViewController.hidesBottomBarWhenPushed && self.navigationController.viewControllers.firstObject != toViewController;
     
-    UITabBar *tabbar = [NTESMainTabController instance].tabBar;
+    UITabBar *tabbar = [SAMCMainTabController instance].tabBar;
     UIView *containerView = [transitionContext containerView];
     
     [containerView addSubview:toViewController.view];
@@ -124,7 +124,7 @@
         tabbar.right = width;
         fakeBar.alpha = 0.0;
     } completion:^(BOOL finished) {
-        [[NTESMainTabController instance].view addSubview:tabbar];
+        [[SAMCMainTabController instance].view addSubview:tabbar];
         [toViewController.navigationController.view addSubview:tureBar];
         [fakeBar removeFromSuperview];
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
