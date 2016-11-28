@@ -232,7 +232,7 @@ typedef NS_ENUM(NSInteger,SAMCMainTabType) {
     {
         _configs = @{
                      @(SAMCMainTabTypeMessageList) : @{
-                             TabbarVC           : @"NTESSessionListViewController",
+                             TabbarVC           : @"SAMCSessionListViewController",
                              TabbarTitle        : @"Chat",
                              TabbarImage        : @"ico_tab_chat_line",
                              TabbarSelectedImage: @"ico_tab_chat_fill",
