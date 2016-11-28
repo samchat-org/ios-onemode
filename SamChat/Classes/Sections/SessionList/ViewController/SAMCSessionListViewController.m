@@ -19,6 +19,7 @@
 #import "UIView+NIM.h"
 #import "NIMAvatarImageView.h"
 #import "NIMKitUtil.h"
+#import "SAMCConversationManager.h"
 
 #define SessionListTitle @"Chat"
 
@@ -62,7 +63,7 @@
     self.tableView.dataSource       = self;
     self.tableView.tableFooterView  = [[UIView alloc] init];
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    _recentSessions = [[NIMSDK sharedSDK].conversationManager.allRecentSessions mutableCopy];
+    _recentSessions = [[[SAMCConversationManager sharedManager] allChatSessions] mutableCopy];
     if (!self.recentSessions.count) {
         _recentSessions = [NSMutableArray array];
     }
@@ -189,13 +190,13 @@
 
 - (void)messagesDeletedInSession:(NIMSession *)session
 {
-    _recentSessions = [[NIMSDK sharedSDK].conversationManager.allRecentSessions mutableCopy];
+    _recentSessions = [[[SAMCConversationManager sharedManager] allChatSessions] mutableCopy];
     [self reload];
 }
 
 - (void)allMessagesDeleted
 {
-    _recentSessions = [[NIMSDK sharedSDK].conversationManager.allRecentSessions mutableCopy];
+    _recentSessions = [[[SAMCConversationManager sharedManager] allChatSessions] mutableCopy];
     [self reload];
 }
 
