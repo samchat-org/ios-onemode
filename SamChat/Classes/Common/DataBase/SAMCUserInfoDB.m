@@ -70,9 +70,8 @@
 {
     __block SAMCUser *user = [[SAMCUser alloc] init];
     user.userId = userId;
-    NSNumber *unique_id = @([userId integerValue]);
     [self.queue inDatabase:^(FMDatabase *db) {
-        FMResultSet *s = [db executeQuery:@"SELECT * FROM userInfo WHERE unique_id = ?", unique_id];
+        FMResultSet *s = [db executeQuery:@"SELECT * FROM userInfo WHERE unique_id = ?", userId];
         if ([s next]) {
             SAMCUserInfo *userInfo = [[SAMCUserInfo alloc] init];
             userInfo.username = [s stringForColumn:@"username"];
@@ -110,7 +109,7 @@
         DDLogError(@"unique id should not be nil");
         return;
     }
-    NSNumber *unique_id = @([user.userId integerValue]);
+    NSString *unique_id = user.userId;
     SAMCUserInfo *userInfo = user.userInfo;
     [self.queue inDatabase:^(FMDatabase *db) {
         FMResultSet *s = [db executeQuery:@"SELECT * FROM userinfo WHERE unique_id = ?", unique_id];
@@ -179,7 +178,7 @@
     // TODO: separate transaction?
     [self.queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
         for (NSDictionary *user in users) {
-            NSNumber *unique_id = user[SAMC_ID];
+            NSString *unique_id = [user[SAMC_ID] stringValue];
             NSString *username = user[SAMC_USERNAME];
             NSNumber *usertype = user[SAMC_TYPE];
             NSNumber *lastupdate = user[SAMC_LASTUPDATE];
@@ -233,7 +232,7 @@
             return;
         }
         NSString *sql = [NSString stringWithFormat:@"INSERT OR IGNORE INTO %@(unique_id) VALUES(?)", tableName];
-        [db executeUpdate:sql, @([user.userId integerValue])];
+        [db executeUpdate:sql, user.userId];
         [wself.multicastDelegate didAddContact:user type:listType];
     }];
 }
@@ -256,7 +255,7 @@
             return;
         }
         NSString *sql = [NSString stringWithFormat:@"DELETE FROM '%@' WHERE unique_id=?", tableName];
-        [db executeUpdate:sql, @([user.userId integerValue])];
+        [db executeUpdate:sql, user.userId];
         [wself.multicastDelegate didRemoveContact:user type:listType];
     }];
 }
@@ -278,8 +277,8 @@
         NSString *sql = [NSString stringWithFormat:@"SELECT * FROM %@", tableName];
         FMResultSet *s = [db executeQuery:sql];
         while ([s next]) {
-            NSNumber *uniqueId = @([s longForColumn:@"unique_id"]);
-            [contactList addObject:uniqueId.stringValue];
+            NSString *uniqueId = [s stringForColumn:@"unique_id"];
+            [contactList addObject:uniqueId];
         }
         [s close];
     }];

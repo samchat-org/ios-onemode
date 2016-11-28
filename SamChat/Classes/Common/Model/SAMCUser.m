@@ -14,7 +14,7 @@
 + (instancetype)userFromDict:(NSDictionary *)userDict
 {
     SAMCUser *user = [[SAMCUser alloc] init];
-    user.userId = [NSString stringWithFormat:@"%@",userDict[SAMC_ID]];
+    user.userId = [userDict[SAMC_ID] stringValue];
     
     SAMCUserInfo *info = [[SAMCUserInfo alloc] init];
     info.username = userDict[SAMC_USERNAME];
