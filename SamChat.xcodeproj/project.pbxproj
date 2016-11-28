@@ -231,6 +231,7 @@
 		31A044FB1DE5BBB30021E029 /* UIButton+SAMC.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A044FA1DE5BBB30021E029 /* UIButton+SAMC.m */; };
 		31A044FE1DE5C0BE0021E029 /* SAMCSetFullNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A044FD1DE5C0BE0021E029 /* SAMCSetFullNameViewController.m */; };
 		31F996C81DEBC97B003555D8 /* NIMMessage+SAMC.m in Sources */ = {isa = PBXBuildFile; fileRef = 31F996C71DEBC97B003555D8 /* NIMMessage+SAMC.m */; };
+		31F996CA1DEBD3F4003555D8 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 31F996C91DEBD3F4003555D8 /* Settings.bundle */; };
 		31FD59A21DE68BA2006F3ED3 /* SAMCMobileLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59A11DE68BA2006F3ED3 /* SAMCMobileLoginViewController.m */; };
 		31FD59A51DE69707006F3ED3 /* SAMCAccountLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59A41DE69707006F3ED3 /* SAMCAccountLoginViewController.m */; };
 		31FD59A81DE6AFFA006F3ED3 /* SAMCCardPortraitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59A71DE6AFFA006F3ED3 /* SAMCCardPortraitView.m */; };
@@ -709,6 +710,7 @@
 		31A044FD1DE5C0BE0021E029 /* SAMCSetFullNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCSetFullNameViewController.m; sourceTree = "<group>"; };
 		31F996C61DEBC97B003555D8 /* NIMMessage+SAMC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NIMMessage+SAMC.h"; sourceTree = "<group>"; };
 		31F996C71DEBC97B003555D8 /* NIMMessage+SAMC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NIMMessage+SAMC.m"; sourceTree = "<group>"; };
+		31F996C91DEBD3F4003555D8 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		31FD59A01DE68BA2006F3ED3 /* SAMCMobileLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCMobileLoginViewController.h; sourceTree = "<group>"; };
 		31FD59A11DE68BA2006F3ED3 /* SAMCMobileLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCMobileLoginViewController.m; sourceTree = "<group>"; };
 		31FD59A31DE69707006F3ED3 /* SAMCAccountLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCAccountLoginViewController.h; sourceTree = "<group>"; };
@@ -1718,6 +1720,7 @@
 				31A044181DE53BAD0021E029 /* samchat_debug.xcconfig */,
 				31A044191DE53BAD0021E029 /* samchat_release.xcconfig */,
 				31A044201DE547FF0021E029 /* samchat_adhoc.xcconfig */,
+				31F996C91DEBD3F4003555D8 /* Settings.bundle */,
 				31A0434D1DE535C80021E029 /* NIMKitResouce.bundle */,
 				31A0434E1DE535C80021E029 /* SamChatPro.entitlements */,
 				31A0434C1DE535C80021E029 /* SamChatDev.entitlements */,
@@ -2096,6 +2099,7 @@
 				31A043971DE535C80021E029 /* NTESContactViewController.xib in Resources */,
 				31A044131DE535C80021E029 /* video_chat_tip_onTimer.aac in Resources */,
 				31A043BE1DE535C80021E029 /* NTESGalleryViewController.xib in Resources */,
+				31F996CA1DEBD3F4003555D8 /* Settings.bundle in Resources */,
 				31A043C81DE535C80021E029 /* NTESVideoViewController.xib in Resources */,
 				31A0439F1DE535C80021E029 /* NTESSystemNotificationViewController.xib in Resources */,
 				31A044351DE585460021E029 /* CountryCodeListEn.plist in Resources */,
