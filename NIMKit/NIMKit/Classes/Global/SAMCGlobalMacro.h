@@ -78,6 +78,6 @@ alpha:alphaValue]
 #define SAMC_PUBLIC_ACCOUNT_PREFIX          @"public_"
 
 #define SAMC_SAMCHAT_ACCOUNT_PREFIX         @"samchat_"
-#define SAMC_SAMCHAT_ACCOUNT_ASKSAM         SAMC_SAMCHAT_ACCOUNT_PREFIX@"1234"
+#define SAMC_SAMCHAT_ACCOUNT_ASKSAM         SAMC_SAMCHAT_ACCOUNT_PREFIX@"30000002146"
 
 #endif /* SAMCGlobalMacro_h */

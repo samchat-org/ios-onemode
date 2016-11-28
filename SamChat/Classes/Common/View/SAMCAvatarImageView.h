@@ -16,6 +16,9 @@
 @property (nonatomic, strong) UIColor *circleColor;
 @property (nonatomic, copy) NSString *userId;
 
+@property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, assign) BOOL isRounded;
+
 - (instancetype)initWithFrame:(CGRect)frame circleWidth:(CGFloat)width;
 
 @end

@@ -14,8 +14,6 @@ static char imageURLKey;
 
 @interface SAMCAvatarImageView ()
 
-@property (nonatomic, strong) UIImageView *imageView;
-
 @end
 
 @implementation SAMCAvatarImageView
@@ -41,6 +39,7 @@ static char imageURLKey;
 - (void)setupSubviewsWithCircleWidth:(CGFloat)width
 {
     self.circleColor = SAMC_COLOR_LIGHTGREY;
+    self.isRounded = YES;
     self.backgroundColor = [UIColor clearColor];
     _imageView = [[UIImageView alloc] init];
     _imageView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -69,10 +68,15 @@ static char imageURLKey;
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    CGFloat length = MIN(self.frame.size.width, self.frame.size.height);
-    self.layer.cornerRadius = length/2;
-    length = MIN(_imageView.frame.size.width, _imageView.frame.size.height);
-    _imageView.layer.cornerRadius = length/2;
+    if (self.isRounded) {
+        CGFloat length = MIN(self.frame.size.width, self.frame.size.height);
+        self.layer.cornerRadius = length/2;
+        length = MIN(_imageView.frame.size.width, _imageView.frame.size.height);
+        _imageView.layer.cornerRadius = length/2;
+    } else {
+        self.layer.cornerRadius = 6.0f;
+        _imageView.layer.cornerRadius = 6.0f;
+    }
 }
 
 - (UIImage *)image

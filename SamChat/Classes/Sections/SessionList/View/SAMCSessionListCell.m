@@ -49,7 +49,7 @@
         make.width.equalTo(@40);
         make.height.equalTo(@40);
         make.centerY.equalTo(self);
-        make.left.equalTo(self).with.offset(5);
+        make.left.equalTo(self).with.offset(10);
     }];
     
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -90,6 +90,14 @@
 
 - (void)setRecentSession:(NIMRecentSession *)recentSession
 {
+    if ([recentSession.session.sessionId hasPrefix:SAMC_SAMCHAT_ACCOUNT_PREFIX]) {
+        self.nameLabel.textColor = SAMC_COLOR_LAKE;
+        self.avatarView.isRounded = NO;
+    } else {
+        self.nameLabel.textColor = SAMC_COLOR_INK;
+        self.avatarView.isRounded = YES;
+    }
+    
     NSString *lastMessageContent = [recentSession.lastMessage messageContent];
     self.messageLabel.text = [lastMessageContent length] ? lastMessageContent : @" ";
     self.timeLabel.text = [self timestampDescriptionForRecentSession:recentSession];
