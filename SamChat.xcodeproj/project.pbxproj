@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		311AE8711DEC07B1005149EE /* NIMRecentSessionWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE8701DEC07B1005149EE /* NIMRecentSessionWrapper.m */; };
 		311AE8741DEC16FF005149EE /* SAMCSessionListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE8731DEC16FF005149EE /* SAMCSessionListCell.m */; };
+		311AE8771DEC4A11005149EE /* SAMCAskSamSessionConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE8761DEC4A11005149EE /* SAMCAskSamSessionConfig.m */; };
+		311AE87A1DEC4D21005149EE /* SAMCAskSamSessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE8791DEC4D21005149EE /* SAMCAskSamSessionViewController.m */; };
 		31A043581DE535C80021E029 /* NSData+NTES.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041BE1DE535C80021E029 /* NSData+NTES.m */; };
 		31A043591DE535C80021E029 /* NSDictionary+NTESJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041C01DE535C80021E029 /* NSDictionary+NTESJson.m */; };
 		31A0435A1DE535C80021E029 /* NSString+NTES.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041C21DE535C80021E029 /* NSString+NTES.m */; };
@@ -279,6 +281,10 @@
 		311AE8701DEC07B1005149EE /* NIMRecentSessionWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIMRecentSessionWrapper.m; sourceTree = "<group>"; };
 		311AE8721DEC16FF005149EE /* SAMCSessionListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCSessionListCell.h; sourceTree = "<group>"; };
 		311AE8731DEC16FF005149EE /* SAMCSessionListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCSessionListCell.m; sourceTree = "<group>"; };
+		311AE8751DEC4A11005149EE /* SAMCAskSamSessionConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCAskSamSessionConfig.h; sourceTree = "<group>"; };
+		311AE8761DEC4A11005149EE /* SAMCAskSamSessionConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCAskSamSessionConfig.m; sourceTree = "<group>"; };
+		311AE8781DEC4D21005149EE /* SAMCAskSamSessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCAskSamSessionViewController.h; sourceTree = "<group>"; };
+		311AE8791DEC4D21005149EE /* SAMCAskSamSessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCAskSamSessionViewController.m; sourceTree = "<group>"; };
 		31A041BD1DE535C80021E029 /* NSData+NTES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+NTES.h"; sourceTree = "<group>"; };
 		31A041BE1DE535C80021E029 /* NSData+NTES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+NTES.m"; sourceTree = "<group>"; };
 		31A041BF1DE535C80021E029 /* NSDictionary+NTESJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+NTESJson.h"; sourceTree = "<group>"; };
@@ -1268,6 +1274,8 @@
 			children = (
 				31A0426D1DE535C80021E029 /* NTESSessionConfig.h */,
 				31A0426E1DE535C80021E029 /* NTESSessionConfig.m */,
+				311AE8751DEC4A11005149EE /* SAMCAskSamSessionConfig.h */,
+				311AE8761DEC4A11005149EE /* SAMCAskSamSessionConfig.m */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -1378,6 +1386,8 @@
 				31A042B21DE535C80021E029 /* NTESSessionRemoteHistoryViewController.m */,
 				31A042B31DE535C80021E029 /* NTESSessionViewController.h */,
 				31A042B41DE535C80021E029 /* NTESSessionViewController.m */,
+				311AE8781DEC4D21005149EE /* SAMCAskSamSessionViewController.h */,
+				311AE8791DEC4D21005149EE /* SAMCAskSamSessionViewController.m */,
 				31A042B51DE535C80021E029 /* RealTimeSession */,
 				31A042BC1DE535C80021E029 /* Video */,
 				31A042C01DE535C80021E029 /* VideoChat */,
@@ -2211,6 +2221,7 @@
 				31FD59D51DEA6D79006F3ED3 /* SAMCTextView.m in Sources */,
 				31A043861DE535C80021E029 /* NTESChatroomMemberCell.m in Sources */,
 				31A0438E1DE535C80021E029 /* NTESGroupedContacts.m in Sources */,
+				311AE87A1DEC4D21005149EE /* SAMCAskSamSessionViewController.m in Sources */,
 				31A044B91DE591380021E029 /* SAMCDataBaseManager.m in Sources */,
 				31FD59A21DE68BA2006F3ED3 /* SAMCMobileLoginViewController.m in Sources */,
 				31A043601DE535C80021E029 /* UIScrollView+NTESDirection.m in Sources */,
@@ -2334,6 +2345,7 @@
 				31A043F31DE535C80021E029 /* NTESDemoService.m in Sources */,
 				31A044281DE57CC90021E029 /* SAMCGradientButton.m in Sources */,
 				31A044FB1DE5BBB30021E029 /* UIButton+SAMC.m in Sources */,
+				311AE8771DEC4A11005149EE /* SAMCAskSamSessionConfig.m in Sources */,
 				31A043B51DE535C80021E029 /* NTESSessionSnapchatContentView.m in Sources */,
 				31A043BF1DE535C80021E029 /* NTESLocationViewController.m in Sources */,
 				31A044AC1DE591380021E029 /* SAMCMessageDB_2016082201.m in Sources */,

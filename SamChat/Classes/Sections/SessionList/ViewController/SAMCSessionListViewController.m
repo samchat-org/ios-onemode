@@ -20,6 +20,7 @@
 #import "NIMAvatarImageView.h"
 #import "NIMKitUtil.h"
 #import "SAMCConversationManager.h"
+#import "SAMCAskSamSessionViewController.h"
 
 #define SessionListTitle @"Chat"
 
@@ -104,7 +105,12 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NIMRecentSession *recentSession = self.recentSessions[indexPath.row];
-    NTESSessionViewController *vc = [[NTESSessionViewController alloc] initWithSession:recentSession.session];
+    UIViewController *vc;
+    if ([recentSession.session.sessionId isEqualToString:SAMC_SAMCHAT_ACCOUNT_ASKSAM]) {
+        vc = [[SAMCAskSamSessionViewController alloc] initWithSession:recentSession.session];
+    } else {
+        vc = [[NTESSessionViewController alloc] initWithSession:recentSession.session];
+    }
     [self.navigationController pushViewController:vc animated:YES];
 }
 
