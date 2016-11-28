@@ -122,21 +122,12 @@ NSString * const SAMCLoginNotification = @"SAMCLoginNotification";
 #pragma mark - misc
 - (void)registerAPNs
 {
-    if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerForRemoteNotifications)])
-    {
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
-        
-        UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:types
-                                                                                 categories:nil];
-        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-
-    }
-    else
-    {
-        UIRemoteNotificationType types = UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeBadge;
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:types];
-    }
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    
+    UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:types
+                                                                             categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
 }
 
 - (void)setupUserViewController
