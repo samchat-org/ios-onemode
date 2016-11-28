@@ -173,6 +173,7 @@
 {
     [[UIApplication sharedApplication] setStatusBarHidden:isHidden];
     self.navigationController.navigationBar.hidden = isHidden;
+    self.navigationController.navigationBar.translucent = isHidden;
     NTESNavigationHandler *handler = (NTESNavigationHandler *)self.navigationController.delegate;
     handler.recognizer.enabled = !isHidden;
 }
