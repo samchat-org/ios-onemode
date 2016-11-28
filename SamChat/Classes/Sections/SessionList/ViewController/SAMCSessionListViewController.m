@@ -225,6 +225,12 @@
     [self.recentSessions sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         NIMRecentSession *item1 = obj1;
         NIMRecentSession *item2 = obj2;
+        if ([item1.session.sessionId hasPrefix:SAMC_SAMCHAT_ACCOUNT_PREFIX]) {
+            return NSOrderedAscending;
+        }
+        if ([item2.session.sessionId hasPrefix:SAMC_SAMCHAT_ACCOUNT_PREFIX]) {
+            return NSOrderedDescending;
+        }
         if (item1.lastMessage.timestamp < item2.lastMessage.timestamp) {
             return NSOrderedDescending;
         }
