@@ -15,7 +15,7 @@
 #import "NTESSessionUtil.h"
 #import "NTESPersonalCardViewController.h"
 #import "NIMMessage+SAMC.h"
-#import "NIMSessionListCell.h"
+#import "SAMCSessionListCell.h"
 #import "UIView+NIM.h"
 #import "NIMAvatarImageView.h"
 #import "NIMKitUtil.h"
@@ -147,22 +147,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString * cellId = @"cellId";
-    NIMSessionListCell * cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    static NSString *cellId = @"SAMCSessionListCellId";
+    SAMCSessionListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (!cell) {
-        cell = [[NIMSessionListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-        [cell.avatarImageView addTarget:self action:@selector(onTouchAvatar:) forControlEvents:UIControlEventTouchUpInside];
+        cell = [[SAMCSessionListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
-    NIMRecentSession *recent = self.recentSessions[indexPath.row];
-    cell.nameLabel.text = [self nameForRecentSession:recent];
-    [cell.avatarImageView setAvatarBySession:recent.session];
-    [cell.nameLabel sizeToFit];
-    cell.messageLabel.text  = [self contentForRecentSession:recent];
-    [cell.messageLabel sizeToFit];
-    cell.timeLabel.text = [self timestampDescriptionForRecentSession:recent];
-    [cell.timeLabel sizeToFit];
-    
-    [cell refresh:recent];
+    cell.recentSession = self.recentSessions[indexPath.row];
     return cell;
 }
 
@@ -207,7 +197,8 @@
     __block BOOL find = NO;
     [self.recentSessions enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NIMRecentSession *item = obj;
-        if (item.lastMessage.timestamp <= recentSession.lastMessage.timestamp) {
+        if ((![item.session.sessionId hasPrefix:SAMC_SAMCHAT_ACCOUNT_PREFIX]) &&
+            (item.lastMessage.timestamp <= recentSession.lastMessage.timestamp)) {
             *stop = YES;
             find  = YES;
             matchIdx = idx;
@@ -327,29 +318,6 @@
     self.tableView.top = self.header.height;
     self.tableView.height = self.view.height - self.tableView.top;
     self.header.bottom = self.tableView.top + self.tableView.contentInset.top;
-}
-
-- (NSString *)contentForRecentSession:(NIMRecentSession *)recent
-{
-    return [recent.lastMessage messageContent];
-}
-
-- (NSString *)timestampDescriptionForRecentSession:(NIMRecentSession *)recent
-{
-    return [NIMKitUtil showTime:recent.lastMessage.timestamp showDetail:NO];
-}
-
-- (NSString *)nameForRecentSession:(NIMRecentSession *)recent
-{
-    if ([recent.session.sessionId isEqualToString:[[NIMSDK sharedSDK].loginManager currentAccount]]) {
-        return @"我的电脑";
-    }
-    if (recent.session.sessionType == NIMSessionTypeP2P) {
-        return [NIMKitUtil showNick:recent.session.sessionId inSession:recent.session];
-    }else{
-        NIMTeam *team = [[NIMSDK sharedSDK].teamManager teamById:recent.session.sessionId];
-        return team.teamName;
-    }
 }
 
 @end
