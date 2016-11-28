@@ -55,7 +55,7 @@
     _inputConfig = config;
     
     //设置最大输入字数
-    NSInteger textInputLength = 1000;
+    NSInteger textInputLength = 4000;
     if ([_inputConfig respondsToSelector:@selector(maxInputLength)]) {
         textInputLength = [_inputConfig maxInputLength];
     }
@@ -131,12 +131,12 @@
     [_toolBar.recordButton addTarget:self action:@selector(onTouchRecordBtnUpOutside:) forControlEvents:UIControlEventTouchUpOutside];
     _toolBar.nim_size = [_toolBar sizeThatFits:CGSizeMake(self.nim_width, CGFLOAT_MAX)];
     _toolBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [_toolBar.recordButton setTitle:@"按住说话" forState:UIControlStateNormal];
+    [_toolBar.recordButton setTitle:@"Hold to Talk" forState:UIControlStateNormal];
     [self addSubview:_toolBar];
     _toolBar.inputTextView.delegate = self;
     
     [_toolBar.inputTextView setCustomUI];
-    [_toolBar.inputTextView setPlaceHolder:@"请输入消息"];
+    [_toolBar.inputTextView setPlaceHolder:@"Your message here"];
     _inputType = InputTypeText;
     _inputBottomViewHeight = 0;
     _inputTextViewOlderHeight = [NIMUIConfig topInputViewHeight];
@@ -525,9 +525,14 @@
     {
         [self.actionDelegate onTextChanged:self];
     }
-    [self inputTextViewToHeight:[self getTextViewContentH:textView]];
+//SAMC_BEGIN
+    [self inputTextViewToHeight:[self getTextViewContentH:textView]+self.spacing*2];
 }
 
+- (CGFloat)spacing{
+    return 6.f;
+}
+//SAMC_END
 
 #pragma mark - InputEmoticonProtocol
 - (void)selectedEmoticon:(NSString*)emoticonID catalog:(NSString*)emotCatalogID description:(NSString *)description{
