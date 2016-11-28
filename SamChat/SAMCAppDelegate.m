@@ -21,7 +21,7 @@
 #import "NTESClientUtil.h"
 #import "NTESNotificationCenter.h"
 #import "NIMKit.h"
-#import "NTESDataManager.h"
+#import "SAMCDataManager.h"
 #import "NTESSDKConfig.h"
 #import "SAMCPreferenceManager.h"
 #import "SAMCAccountManager.h"
@@ -65,7 +65,7 @@ NSString * const SAMCLoginNotification = @"SAMCLoginNotification";
     
     [self commonInitListenEvents];
     
-    [[NIMKit sharedKit] setProvider:[NTESDataManager sharedInstance]];
+    [[NIMKit sharedKit] setProvider:[SAMCDataManager sharedManager]];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor grayColor];

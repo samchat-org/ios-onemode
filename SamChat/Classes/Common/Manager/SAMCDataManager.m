@@ -11,6 +11,7 @@
 #import "NTESCustomAttachmentDefines.h"
 #import "SAMCUser.h"
 #import "SAMCUserManager.h"
+#import "NIMKit.h"
 
 @interface SAMCDataRequest : NSObject
 
@@ -183,25 +184,25 @@
 
 
 #pragma mark - NIMTeamManagerDelegate
-//- (void)onTeamAdded:(NIMTeam *)team
-//{
-//    [[NIMKit sharedKit] notfiyTeamInfoChanged:@[team.teamId]];
-//}
-//
-//- (void)onTeamUpdated:(NIMTeam *)team
-//{
-//    [[NIMKit sharedKit] notfiyTeamInfoChanged:@[team.teamId]];
-//}
-//
-//- (void)onTeamRemoved:(NIMTeam *)team
-//{
-//    [[NIMKit sharedKit] notfiyTeamInfoChanged:@[team.teamId]];
-//}
-//
-//- (void)onTeamMemberChanged:(NIMTeam *)team
-//{
-//    [[NIMKit sharedKit] notfiyTeamMemebersChanged:@[team.teamId]];
-//}
+- (void)onTeamAdded:(NIMTeam *)team
+{
+    [[NIMKit sharedKit] notifyTeamInfoChanged:@[team.teamId]];
+}
+
+- (void)onTeamUpdated:(NIMTeam *)team
+{
+    [[NIMKit sharedKit] notifyTeamInfoChanged:@[team.teamId]];
+}
+
+- (void)onTeamRemoved:(NIMTeam *)team
+{
+    [[NIMKit sharedKit] notifyTeamInfoChanged:@[team.teamId]];
+}
+
+- (void)onTeamMemberChanged:(NIMTeam *)team
+{
+    [[NIMKit sharedKit] notifyTeamMemebersChanged:@[team.teamId]];
+}
 
 @end
 
