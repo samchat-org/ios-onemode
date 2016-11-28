@@ -74,6 +74,12 @@
     return _sessionConfig;
 }
 
+#pragma mark - NIMInputActionDelegate
+- (void)onSendText:(NSString *)text
+{
+    DDLogDebug(@"send text:%@", text);
+}
+
 #pragma mark - Cell事件
 - (void)onTapCell:(NIMKitEvent *)event
 {
