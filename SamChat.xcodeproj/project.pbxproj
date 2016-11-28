@@ -134,7 +134,6 @@
 		31A043D91DE535C80021E029 /* NTESLogUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A042E81DE535C80021E029 /* NTESLogUploader.m */; };
 		31A043DA1DE535C80021E029 /* NTESLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A042EA1DE535C80021E029 /* NTESLogViewController.m */; };
 		31A043DB1DE535C80021E029 /* NTESLogViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31A042EB1DE535C80021E029 /* NTESLogViewController.xib */; };
-		31A043ED1DE535C80021E029 /* NTESBirthPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A0430F1DE535C80021E029 /* NTESBirthPickerView.m */; };
 		31A043EE1DE535C80021E029 /* NTESSettingCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A043111DE535C80021E029 /* NTESSettingCheckCell.m */; };
 		31A043EF1DE535C80021E029 /* NTESSettingPortraitCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A043131DE535C80021E029 /* NTESSettingPortraitCell.m */; };
 		31A043F01DE535C80021E029 /* NTESSettingSwitcherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A043151DE535C80021E029 /* NTESSettingSwitcherCell.m */; };
@@ -515,8 +514,6 @@
 		31A042E91DE535C80021E029 /* NTESLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESLogViewController.h; sourceTree = "<group>"; };
 		31A042EA1DE535C80021E029 /* NTESLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESLogViewController.m; sourceTree = "<group>"; };
 		31A042EB1DE535C80021E029 /* NTESLogViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NTESLogViewController.xib; sourceTree = "<group>"; };
-		31A0430E1DE535C80021E029 /* NTESBirthPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESBirthPickerView.h; sourceTree = "<group>"; };
-		31A0430F1DE535C80021E029 /* NTESBirthPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESBirthPickerView.m; sourceTree = "<group>"; };
 		31A043101DE535C80021E029 /* NTESSettingCheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESSettingCheckCell.h; sourceTree = "<group>"; };
 		31A043111DE535C80021E029 /* NTESSettingCheckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESSettingCheckCell.m; sourceTree = "<group>"; };
 		31A043121DE535C80021E029 /* NTESSettingPortraitCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESSettingPortraitCell.h; sourceTree = "<group>"; };
@@ -1598,8 +1595,6 @@
 		31A0430D1DE535C80021E029 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				31A0430E1DE535C80021E029 /* NTESBirthPickerView.h */,
-				31A0430F1DE535C80021E029 /* NTESBirthPickerView.m */,
 				31A043101DE535C80021E029 /* NTESSettingCheckCell.h */,
 				31A043111DE535C80021E029 /* NTESSettingCheckCell.m */,
 				31A043121DE535C80021E029 /* NTESSettingPortraitCell.h */,
@@ -2228,7 +2223,6 @@
 				31A0438D1DE535C80021E029 /* NTESContactDataMember.m in Sources */,
 				31A0437F1DE535C80021E029 /* NTESChatroomMaker.m in Sources */,
 				31A0446F1DE590B90021E029 /* SAMCDataManager.m in Sources */,
-				31A043ED1DE535C80021E029 /* NTESBirthPickerView.m in Sources */,
 				31A043AE1DE535C80021E029 /* NTESSessionCustomContentConfig.m in Sources */,
 				31A043F91DE535C80021E029 /* NTESDevice.m in Sources */,
 				31A044001DE535C80021E029 /* NTESUserUtil.m in Sources */,

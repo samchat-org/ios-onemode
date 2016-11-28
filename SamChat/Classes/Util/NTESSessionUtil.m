@@ -68,7 +68,7 @@ double OnedayTimeIntervalValue = 24*60*60;  //一天的秒数
                                                  
 +(BOOL)isTheSameDay:(NSTimeInterval)currentTime compareTime:(NSDateComponents*)older
 {
-    NSCalendarUnit currentComponents = (NSCalendarUnit)(NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSHourCalendarUnit | NSMinuteCalendarUnit);
+    NSCalendarUnit currentComponents = (NSCalendarUnit)(NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitHour | NSCalendarUnitMinute);
     NSDateComponents *current = [[NSCalendar currentCalendar] components:currentComponents fromDate:[NSDate dateWithTimeIntervalSinceNow:currentTime]];
     
     return current.year == older.year && current.month == older.month && current.day == older.day;
@@ -117,7 +117,7 @@ double OnedayTimeIntervalValue = 24*60*60;  //一天的秒数
     NSDate * nowDate = [NSDate date];
     NSDate * msgDate = [NSDate dateWithTimeIntervalSince1970:msglastTime];
     NSString *result = nil;
-    NSCalendarUnit components = (NSCalendarUnit)(NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitWeekday|NSHourCalendarUnit | NSMinuteCalendarUnit);
+    NSCalendarUnit components = (NSCalendarUnit)(NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitWeekday|NSCalendarUnitHour | NSCalendarUnitMinute);
     NSDateComponents *nowDateComponents = [[NSCalendar currentCalendar] components:components fromDate:nowDate];
     NSDateComponents *msgDateComponents = [[NSCalendar currentCalendar] components:components fromDate:msgDate];
 
