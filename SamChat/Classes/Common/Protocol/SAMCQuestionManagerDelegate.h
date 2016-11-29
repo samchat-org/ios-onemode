@@ -8,17 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@class SAMCQuestionSession;
-
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol SAMCQuestionManagerDelegate <NSObject>
 
 @optional
-- (void)didAddQuestionSession:(SAMCQuestionSession *)questionSession;
-- (void)didUpdateQuestionSession:(SAMCQuestionSession *)questionSession;
-
-- (void)questionUnreadCountDidChanged:(NSInteger)unreadCount userMode:(SAMCUserModeType)mode;
+- (void)sendQuestionMessage:(NIMMessage *)message didCompleteWithError:(NSError * __nullable)error;
 
 @end
 

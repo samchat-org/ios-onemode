@@ -206,13 +206,11 @@
 		31A044AC1DE591380021E029 /* SAMCMessageDB_2016082201.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A044831DE591380021E029 /* SAMCMessageDB_2016082201.m */; };
 		31A044AD1DE591380021E029 /* SAMCMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A044851DE591380021E029 /* SAMCMigrationManager.m */; };
 		31A044AE1DE591380021E029 /* SAMCPublicDB_2016082201.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A044871DE591380021E029 /* SAMCPublicDB_2016082201.m */; };
-		31A044AF1DE591380021E029 /* SAMCQuestionDB_2016082201.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A044891DE591380021E029 /* SAMCQuestionDB_2016082201.m */; };
 		31A044B01DE591380021E029 /* SAMCUserInfoDB_2016082201.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A0448B1DE591380021E029 /* SAMCUserInfoDB_2016082201.m */; };
 		31A044B91DE591380021E029 /* SAMCDataBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A0449F1DE591380021E029 /* SAMCDataBaseManager.m */; };
 		31A044BA1DE591380021E029 /* SAMCDBBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A044A11DE591380021E029 /* SAMCDBBase.m */; };
 		31A044BC1DE591380021E029 /* SAMCPublicDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A044A51DE591380021E029 /* SAMCPublicDB.m */; };
 		31A044BD1DE591380021E029 /* SAMCPublicMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A044A71DE591380021E029 /* SAMCPublicMessage.m */; };
-		31A044BE1DE591380021E029 /* SAMCQuestionDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A044A91DE591380021E029 /* SAMCQuestionDB.m */; };
 		31A044BF1DE591380021E029 /* SAMCUserInfoDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A044AB1DE591380021E029 /* SAMCUserInfoDB.m */; };
 		31A044C41DE592490021E029 /* GCDMulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A044C31DE592490021E029 /* GCDMulticastDelegate.m */; };
 		31A044D31DE594410021E029 /* SAMCDataPostSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A044D11DE594410021E029 /* SAMCDataPostSerializer.m */; };
@@ -654,8 +652,6 @@
 		31A044851DE591380021E029 /* SAMCMigrationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCMigrationManager.m; sourceTree = "<group>"; };
 		31A044861DE591380021E029 /* SAMCPublicDB_2016082201.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCPublicDB_2016082201.h; sourceTree = "<group>"; };
 		31A044871DE591380021E029 /* SAMCPublicDB_2016082201.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCPublicDB_2016082201.m; sourceTree = "<group>"; };
-		31A044881DE591380021E029 /* SAMCQuestionDB_2016082201.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCQuestionDB_2016082201.h; sourceTree = "<group>"; };
-		31A044891DE591380021E029 /* SAMCQuestionDB_2016082201.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCQuestionDB_2016082201.m; sourceTree = "<group>"; };
 		31A0448A1DE591380021E029 /* SAMCUserInfoDB_2016082201.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCUserInfoDB_2016082201.h; sourceTree = "<group>"; };
 		31A0448B1DE591380021E029 /* SAMCUserInfoDB_2016082201.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCUserInfoDB_2016082201.m; sourceTree = "<group>"; };
 		31A0449D1DE591380021E029 /* SAMCDataBaseMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SAMCDataBaseMacro.h; path = DataBase/SAMCDataBaseMacro.h; sourceTree = "<group>"; };
@@ -667,8 +663,6 @@
 		31A044A51DE591380021E029 /* SAMCPublicDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SAMCPublicDB.m; path = DataBase/SAMCPublicDB.m; sourceTree = "<group>"; };
 		31A044A61DE591380021E029 /* SAMCPublicMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SAMCPublicMessage.h; path = DataBase/SAMCPublicMessage.h; sourceTree = "<group>"; };
 		31A044A71DE591380021E029 /* SAMCPublicMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SAMCPublicMessage.m; path = DataBase/SAMCPublicMessage.m; sourceTree = "<group>"; };
-		31A044A81DE591380021E029 /* SAMCQuestionDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SAMCQuestionDB.h; path = DataBase/SAMCQuestionDB.h; sourceTree = "<group>"; };
-		31A044A91DE591380021E029 /* SAMCQuestionDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SAMCQuestionDB.m; path = DataBase/SAMCQuestionDB.m; sourceTree = "<group>"; };
 		31A044AA1DE591380021E029 /* SAMCUserInfoDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SAMCUserInfoDB.h; path = DataBase/SAMCUserInfoDB.h; sourceTree = "<group>"; };
 		31A044AB1DE591380021E029 /* SAMCUserInfoDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SAMCUserInfoDB.m; path = DataBase/SAMCUserInfoDB.m; sourceTree = "<group>"; };
 		31A044C21DE592490021E029 /* GCDMulticastDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDMulticastDelegate.h; sourceTree = "<group>"; };
@@ -1804,8 +1798,6 @@
 				31A044A51DE591380021E029 /* SAMCPublicDB.m */,
 				31A044A61DE591380021E029 /* SAMCPublicMessage.h */,
 				31A044A71DE591380021E029 /* SAMCPublicMessage.m */,
-				31A044A81DE591380021E029 /* SAMCQuestionDB.h */,
-				31A044A91DE591380021E029 /* SAMCQuestionDB.m */,
 				31A044AA1DE591380021E029 /* SAMCUserInfoDB.h */,
 				31A044AB1DE591380021E029 /* SAMCUserInfoDB.m */,
 			);
@@ -1821,8 +1813,6 @@
 				31A044851DE591380021E029 /* SAMCMigrationManager.m */,
 				31A044861DE591380021E029 /* SAMCPublicDB_2016082201.h */,
 				31A044871DE591380021E029 /* SAMCPublicDB_2016082201.m */,
-				31A044881DE591380021E029 /* SAMCQuestionDB_2016082201.h */,
-				31A044891DE591380021E029 /* SAMCQuestionDB_2016082201.m */,
 				31A0448A1DE591380021E029 /* SAMCUserInfoDB_2016082201.h */,
 				31A0448B1DE591380021E029 /* SAMCUserInfoDB_2016082201.m */,
 			);
@@ -2233,12 +2223,10 @@
 				31A043B91DE535C80021E029 /* NTESFilePreViewController.m in Sources */,
 				31A0446D1DE590B90021E029 /* SAMCChatManager.m in Sources */,
 				31A0437B1DE535C80021E029 /* NTESChatroomConfig.m in Sources */,
-				31A044BE1DE591380021E029 /* SAMCQuestionDB.m in Sources */,
 				31A043911DE535C80021E029 /* NTESContactUtilCell.m in Sources */,
 				31A043B11DE535C80021E029 /* NTESSearchMessageContentCell.m in Sources */,
 				31A043FC1DE535C80021E029 /* NTESSDKConfig.m in Sources */,
 				31A044BA1DE591380021E029 /* SAMCDBBase.m in Sources */,
-				31A044AF1DE591380021E029 /* SAMCQuestionDB_2016082201.m in Sources */,
 				31A0439A1DE535C80021E029 /* NTESCustomSysNotificationViewController.m in Sources */,
 				31A043F01DE535C80021E029 /* NTESSettingSwitcherCell.m in Sources */,
 				31A0438D1DE535C80021E029 /* NTESContactDataMember.m in Sources */,

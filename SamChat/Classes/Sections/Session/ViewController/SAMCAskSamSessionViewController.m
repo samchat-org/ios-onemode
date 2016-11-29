@@ -31,8 +31,9 @@
 #import "UIAlertView+NTESBlock.h"
 #import "NTESSessionUtil.h"
 #import "SAMCAskSamSessionConfig.h"
+#import "SAMCQuestionManager.h"
 
-@interface SAMCAskSamSessionViewController ()<UINavigationControllerDelegate>
+@interface SAMCAskSamSessionViewController ()<UINavigationControllerDelegate,SAMCQuestionManagerDelegate>
 
 @property (nonatomic, strong) SAMCAskSamSessionConfig *sessionConfig;
 @property (nonatomic, strong) UIView *currentSingleSnapView;
@@ -45,6 +46,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[SAMCQuestionManager sharedManager] addDelegate:self];
     DDLogInfo(@"enter session, id = %@",self.session.sessionId);
     if ([[NTESBundleSetting sharedConfig] showFps]) {
         self.fpsLabel = [[NTESFPSLabel alloc] initWithFrame:CGRectZero];
@@ -56,6 +58,7 @@
 
 - (void)dealloc
 {
+    [[SAMCQuestionManager sharedManager] removeDelegate:self];
     [_fpsLabel invalidate];
 }
 
@@ -77,70 +80,37 @@
 #pragma mark - NIMInputActionDelegate
 - (void)onSendText:(NSString *)text
 {
-    DDLogDebug(@"send text:%@", text);
-    NIMMessage *message = [NTESSessionMsgConverter msgWithText:text];
-    [self sendMessage:message];
+    [[SAMCQuestionManager sharedManager] sendQuestion:text location:@{}];
+}
+
+#pragma mark - SAMCQuestionManagerDelegate
+- (void)sendQuestionMessage:(NIMMessage *)message didCompleteWithError:(NSError *)error
+{
+    [super sendMessage:message didCompleteWithError:error];
 }
 
 #pragma mark - 消息收发接口
-//- (void)sendMessage:(NIMMessage *)message
-//{
-////    [[[NIMSDK sharedSDK] chatManager] sendMessage:message toSession:_session error:nil];
-//}
-
-//发送消息
-- (void)willSendMessage:(NIMMessage *)message
-{
-//    if ([message.session isEqual:_session]) {
-//        if ([self findModel:message]) {
-//            [self uiUpdateMessage:message];
-//        }else{
-//            if (self.session.sessionType == NIMSessionTypeChatroom) {
-//                [self uiAddChatroomMessages:@[message]];
-//            }else{
-//                [self uiAddMessages:@[message]];
-//            }
-//        }
-//    }
-}
-
-//发送结果
-- (void)sendMessage:(NIMMessage *)message didCompleteWithError:(NSError *)error
-{
-//    if ([message.session isEqual:_session]) {
-//        NIMMessageModel *model = [self makeModel:message];
-//        NSInteger index = [self.sessionDatasource indexAtModelArray:model];
-//        [self.layoutManager updateCellAtIndex:index model:model];
-//    }
-}
-
-//发送进度
--(void)sendMessage:(NIMMessage *)message progress:(CGFloat)progress
-{
-//    if ([message.session isEqual:_session]) {
-//        NIMMessageModel *model = [self makeModel:message];
-//        [_layoutManager updateCellAtIndex:[self.sessionDatasource indexAtModelArray:model] model:model];
-//    }
-}
-
 //接收消息
 - (void)onRecvMessages:(NSArray *)messages
 {
-//    NIMMessage *message = messages.firstObject;
-//    NIMSession *session = message.session;
-//    if (![session isEqual:self.session] || !messages.count){
-//        return;
-//    }
-//    
-//    if (session.sessionType == NIMSessionTypeChatroom) {
-//        [self uiAddChatroomMessages:messages];
-//    }
-//    else{
-//        [self uiAddMessages:messages];
-//        [self.conversationManager markAllMessagesReadInSession:self.session];
-//    }
-//    
-//    [self sendMessageReceipt:messages];
+    NIMMessage *message = messages.firstObject;
+    NIMSession *session = message.session;
+    if (![session isEqual:self.session] || !messages.count){
+        return;
+    }
+    for (NIMMessage *msg in messages) {
+        if (msg.isOutgoingMsg) {
+            NSNumber *deliveryState = msg.localExt[MESSAGE_LOCAL_EXT_DELIVERYSTATE_KEY];
+            if (deliveryState) {
+                if ([[SAMCQuestionManager sharedManager] isMessageSending:msg]) {
+                    NSMutableDictionary *localExt = [msg.localExt mutableCopy];
+                    [localExt setObject:@(NIMMessageDeliveryStateDelivering) forKey:MESSAGE_LOCAL_EXT_DELIVERYSTATE_KEY];
+                    msg.localExt = localExt;
+                }
+            }
+        }
+    }
+    [super onRecvMessages:messages];
 }
 
 #pragma mark - Cell事件

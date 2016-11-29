@@ -90,8 +90,8 @@
         // 如果发送的消息带有questionId，则发送成功的时候更新这个消息的status
         NSString *questionIdStr = [ext valueForKey:MESSAGE_EXT_QUESTION_ID_KEY];
         if (questionIdStr) {
-            [[SAMCQuestionManager sharedManager] updateReceivedQuestion:[questionIdStr intValue]
-                                                                 status:SAMCReceivedQuestionStatusResponsed];
+//            [[SAMCQuestionManager sharedManager] updateReceivedQuestion:[questionIdStr intValue]
+//                                                                 status:SAMCReceivedQuestionStatusResponsed];
         }
     }
     [self.multicastDelegate sendMessage:message didCompleteWithError:error];

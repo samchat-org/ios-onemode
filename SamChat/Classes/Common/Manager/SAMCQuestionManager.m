@@ -11,7 +11,15 @@
 #import "SAMCServerErrorHelper.h"
 #import "AFNetworking.h"
 #import "SAMCDataPostSerializer.h"
-#import "SAMCDataBaseManager.h"
+#import "NTESSessionMsgConverter.h"
+#import "GCDMulticastDelegate.h"
+
+@interface SAMCQuestionManager ()
+
+@property (nonatomic, strong) GCDMulticastDelegate<SAMCQuestionManagerDelegate> *questionDelegate;
+@property (nonatomic, strong) NSMutableArray *sendingMessages;
+
+@end
 
 @implementation SAMCQuestionManager
 
@@ -28,38 +36,65 @@
 - (instancetype)init
 {
     if (self = [super init]) {
+        _sendingMessages = [[NSMutableArray alloc] init];
+        _questionDelegate = (GCDMulticastDelegate <SAMCQuestionManagerDelegate> *)[[GCDMulticastDelegate alloc] init];
     }
     return self;
 }
 
 - (void)addDelegate:(id<SAMCQuestionManagerDelegate>)delegate
 {
-    [[SAMCDataBaseManager sharedManager].questionDB addQuestionDelegate:delegate];
+    [self.questionDelegate addDelegate:delegate delegateQueue:dispatch_get_main_queue()];
 }
 
 - (void)removeDelegate:(id<SAMCQuestionManagerDelegate>)delegate
 {
-    [[SAMCDataBaseManager sharedManager].questionDB removeQuestionDelegate:delegate];
+    [self.questionDelegate removeDelegate:delegate];
 }
 
-- (NSArray<SAMCQuestionSession *> *)allSendQuestion
+- (BOOL)isMessageSending:(NIMMessage *)message
 {
-    return [[SAMCDataBaseManager sharedManager].questionDB allSendQuestion];
+    return [self.sendingMessages containsObject:message];
 }
 
-- (NSArray<SAMCQuestionSession *> *)allReceivedQuestion
+- (void)sendQuestion:(NSString *)question location:(NSDictionary *)location
 {
-    return [[SAMCDataBaseManager sharedManager].questionDB allReceivedQuestion];
-}
-
-- (NSArray<NSString *> *)sendQuestionHistory
-{
-    return [[SAMCDataBaseManager sharedManager].questionDB sendQuestionHistory];
+    NIMSession *session = [NIMSession session:SAMC_SAMCHAT_ACCOUNT_ASKSAM type:NIMSessionTypeP2P];
+    NIMMessage *message = [NTESSessionMsgConverter msgWithText:question];
+    NIMMessageSetting *setting = [[NIMMessageSetting alloc] init];
+    setting.shouldBeCounted = NO;
+    message.setting = setting;
+    message.localExt = @{MESSAGE_LOCAL_EXT_DELIVERYSTATE_KEY:@(NIMMessageDeliveryStateFailed)};
+    
+    __weak typeof(self) wself = self;
+    [[NIMSDK sharedSDK].conversationManager saveMessage:message forSession:session completion:^(NSError * _Nullable error) {
+        if (!error) {
+            [wself.sendingMessages addObject:message];
+            [wself sendQuestion:question location:location completion:^(NSError * _Nullable error, NSDictionary * __nullable response) {
+                [wself.sendingMessages removeObject:message];
+                NSMutableDictionary *localExt = [message.localExt mutableCopy];
+                if (!error) {
+                    [localExt setObject:@(NIMMessageDeliveryStateDeliveried) forKey:MESSAGE_LOCAL_EXT_DELIVERYSTATE_KEY];
+                    if (response[SAMC_QUESTION_ID]) {
+                        [localExt setObject:response[SAMC_QUESTION_ID] forKey:SAMC_QUESTION_ID];
+                    }
+                    if (response[SAMC_DATETIME]) {
+                        [localExt setObject:response[SAMC_DATETIME] forKey:SAMC_DATETIME];
+                    }
+                } else {
+                    [localExt setObject:@(NIMMessageDeliveryStateFailed) forKey:MESSAGE_LOCAL_EXT_DELIVERYSTATE_KEY];
+                }
+                message.localExt = localExt;
+                [[NIMSDK sharedSDK].conversationManager updateMessage:message forSession:session completion:NULL];
+                [wself.questionDelegate sendQuestionMessage:message didCompleteWithError:error];
+            }];
+        }
+    }];
 }
 
 - (void)sendQuestion:(NSString *)question
             location:(NSDictionary *)location
-          completion:(void (^)(NSError * __nullable error))completion
+          completion:(void (^)(NSError * __nullable error, NSDictionary * __nullable response))completion
 {
     NSAssert(completion != nil, @"completion block should not be nil");
     NSDictionary *parameters = [SAMCServerAPI sendQuestion:question location:location];
@@ -70,108 +105,16 @@
             NSDictionary *response = responseObject;
             NSInteger errorCode = [((NSNumber *)response[SAMC_RET]) integerValue];
             if (errorCode) {
-                completion([SAMCServerErrorHelper errorWithCode:errorCode]);
+                completion([SAMCServerErrorHelper errorWithCode:errorCode], nil);
             } else {
-                NSDictionary *questionInfo = [[NSMutableDictionary alloc] initWithDictionary:parameters[SAMC_BODY]];
-                [questionInfo setValue:response[SAMC_QUESTION_ID] forKey:SAMC_QUESTION_ID];
-                [questionInfo setValue:response[SAMC_DATETIME] forKey:SAMC_DATETIME];
-                [self insertSendQuestion:questionInfo];
-                completion(nil);
+                completion(nil, parameters[SAMC_BODY]);
             }
         } else {
-            completion([SAMCServerErrorHelper errorWithCode:SAMCServerErrorUnknowError]);
+            completion([SAMCServerErrorHelper errorWithCode:SAMCServerErrorUnknowError], nil);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        completion([SAMCServerErrorHelper errorWithCode:SAMCServerErrorServerNotReachable]);
+        completion([SAMCServerErrorHelper errorWithCode:SAMCServerErrorServerNotReachable], nil);
     }];
-}
-
-- (void)queryPopularRequest:(NSInteger)count
-                 completion:(void (^)(NSArray<NSString *> * _Nullable populars))completion;
-{
-    NSAssert(completion != nil, @"completion block should not be nil");
-    NSDictionary *parameters = [SAMCServerAPI queryPopularRequest:count];
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.requestSerializer = [SAMCDataPostSerializer serializer];
-    [manager POST:SAMC_URL_QUESTION_QUERYPOPULARREQUEST parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-            NSDictionary *response = responseObject;
-            NSInteger errorCode = [((NSNumber *)response[SAMC_RET]) integerValue];
-            if (errorCode) {
-                completion(nil);
-            } else {
-                DDLogDebug(@"%@", response[SAMC_POPULAR_REQUEST]);
-                NSMutableArray *popularsArray = [[NSMutableArray alloc] init];
-                for (NSDictionary *questionDict in response[SAMC_POPULAR_REQUEST]) {
-                    NSString *question = questionDict[SAMC_CONTENT];
-                    if (question) {
-                        [popularsArray addObject:question];
-                    }
-                }
-                completion(popularsArray);
-            }
-        } else {
-            completion(nil);
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        completion(nil);
-    }];
-}
-
-#pragma mark - QuestionDB
-- (void)insertSendQuestion:(NSDictionary *)questionInfo
-{
-    if ((questionInfo == nil) || (![questionInfo isKindOfClass:[NSDictionary class]])) {
-        return;
-    }
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[SAMCDataBaseManager sharedManager].questionDB insertSendQuestion:questionInfo];
-    });
-}
-
-- (void)clearSendQuestionNewResponseCount:(SAMCQuestionSession *)session
-{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[SAMCDataBaseManager sharedManager].questionDB clearSendQuestionNewResponseCount:session];
-    });
-}
-
-- (void)deleteSendQuestion:(SAMCQuestionSession *)session
-{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[SAMCDataBaseManager sharedManager].questionDB deleteSendQuestion:session];
-    });
-}
-
-- (void)insertReceivedQuestion:(NSDictionary *)questionInfo
-{
-    if ((questionInfo == nil) || (![questionInfo isKindOfClass:[NSDictionary class]])) {
-        return;
-    }
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[SAMCDataBaseManager sharedManager].questionDB insertReceivedQuestion:questionInfo];
-    });
-}
-
-- (void)updateReceivedQuestion:(NSInteger)questionId status:(SAMCReceivedQuestionStatus)status
-{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[SAMCDataBaseManager sharedManager].questionDB updateReceivedQuestion:questionId status:status];
-    });
-}
-
-- (void)deleteReceivedQuestion:(SAMCQuestionSession *)session
-{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[SAMCDataBaseManager sharedManager].questionDB deleteReceivedQuestion:session];
-    });
-}
-
-- (void)removeAnswer:(NSString *)answer fromSendQuestion:(NSNumber *)questionId
-{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[SAMCDataBaseManager sharedManager].questionDB sendQuestion:questionId removeAnswer:answer];
-    });
 }
 
 @end

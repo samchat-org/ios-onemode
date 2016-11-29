@@ -65,8 +65,6 @@
 - (void)refresh
 {
     SAMCDataBaseManager *dbManager = [SAMCDataBaseManager sharedManager];
-    _customServiceUnreadCount = [dbManager.questionDB allUnreadCountOfUserMode:SAMCUserModeTypeCustom];
-    _spServiceUnreadCount = [dbManager.questionDB allUnreadCountOfUserMode:SAMCUserModeTypeSP];
     _customPublicUnreadCount = [dbManager.publicDB allUnreadCountOfUserMode:SAMCUserModeTypeCustom];
     _spPublicUnreadCount = 0;
 }
