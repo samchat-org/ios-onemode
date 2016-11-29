@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		25CE4DCC9991942C57ECB956 /* libopenh264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7544378BA5B2F18BDCC0227 /* libopenh264.a */; };
+		311AE87D1DED3102005149EE /* SAMCInputLinkParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE87C1DED3102005149EE /* SAMCInputLinkParser.m */; };
+		311AE8801DED5185005149EE /* NIMAttributedLabel+SAMC.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE87F1DED5185005149EE /* NIMAttributedLabel+SAMC.m */; };
 		31FD59BA1DE83FAD006F3ED3 /* SAMCRightButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59B91DE83FAD006F3ED3 /* SAMCRightButtonCell.m */; };
 		31FD59C31DE862D5006F3ED3 /* SAMCCellButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FD59C21DE862D5006F3ED3 /* SAMCCellButton.m */; };
 		3579414FA177B0D703E94FE7 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 383045D7B4B01D892377024E /* libcrypto.a */; };
@@ -161,6 +163,10 @@
 		184F4C368E825E3FD68FC5C0 /* NIMCustomSystemNotificationSetting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NIMCustomSystemNotificationSetting.h; path = ./NIMKit/Vendors/NIMSDK/ExportHeaders/NIMCustomSystemNotificationSetting.h; sourceTree = SOURCE_ROOT; };
 		22D64A779277128BA1C60C10 /* NIMVideoObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NIMVideoObject.h; path = ./NIMKit/Vendors/NIMSDK/ExportHeaders/MessageObject/NIMVideoObject.h; sourceTree = SOURCE_ROOT; };
 		280D46D89B754A1E0BB7688B /* NIMChatroomMember.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NIMChatroomMember.h; path = ./NIMKit/Vendors/NIMSDK/ExportHeaders/Chatroom/NIMChatroomMember.h; sourceTree = SOURCE_ROOT; };
+		311AE87B1DED3102005149EE /* SAMCInputLinkParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCInputLinkParser.h; sourceTree = "<group>"; };
+		311AE87C1DED3102005149EE /* SAMCInputLinkParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCInputLinkParser.m; sourceTree = "<group>"; };
+		311AE87E1DED5185005149EE /* NIMAttributedLabel+SAMC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NIMAttributedLabel+SAMC.h"; sourceTree = "<group>"; };
+		311AE87F1DED5185005149EE /* NIMAttributedLabel+SAMC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NIMAttributedLabel+SAMC.m"; sourceTree = "<group>"; };
 		31A044251DE579AA0021E029 /* SAMCGlobalMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SAMCGlobalMacro.h; sourceTree = "<group>"; };
 		31FD59B81DE83FAD006F3ED3 /* SAMCRightButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCRightButtonCell.h; sourceTree = "<group>"; };
 		31FD59B91DE83FAD006F3ED3 /* SAMCRightButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCRightButtonCell.m; sourceTree = "<group>"; };
@@ -845,6 +851,8 @@
 				61B1F7B31B7885040065FEFB /* NIMAttributedLabel+NIMKit.m */,
 				E479641C1CCDB95600A4534A /* NIMExtensionHelper.h */,
 				E479641D1CCDB95600A4534A /* NIMExtensionHelper.m */,
+				311AE87E1DED5185005149EE /* NIMAttributedLabel+SAMC.h */,
+				311AE87F1DED5185005149EE /* NIMAttributedLabel+SAMC.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -869,6 +877,8 @@
 			children = (
 				61B1F7B61B7885B50065FEFB /* NIMInputEmoticonParser.h */,
 				61B1F7B71B7885B50065FEFB /* NIMInputEmoticonParser.m */,
+				311AE87B1DED3102005149EE /* SAMCInputLinkParser.h */,
+				311AE87C1DED3102005149EE /* SAMCInputLinkParser.m */,
 				61DFDA671B764E9600DD5F2A /* NIMInputMoreContainerView.h */,
 				61DFDA681B764E9600DD5F2A /* NIMInputMoreContainerView.m */,
 				61DFDA691B764E9600DD5F2A /* NIMInputTextView.h */,
@@ -1248,6 +1258,7 @@
 				61D99FDA1BAFF6190059D369 /* NIMTeamCardOperationItem.m in Sources */,
 				61D99FC91BAFF48A0059D369 /* NIMTeamAnnouncementListCell.m in Sources */,
 				6187F9D41B81915700EFFB3A /* NIMAttributedLabel.m in Sources */,
+				311AE87D1DED3102005149EE /* SAMCInputLinkParser.m in Sources */,
 				6187F9D51B81915700EFFB3A /* NIMAttributedLabelAttachment.m in Sources */,
 				61D99FF31BAFFA760059D369 /* NIMProgressHUD.m in Sources */,
 				61D99FCB1BAFF48A0059D369 /* NIMTeamSwitchTableViewCell.m in Sources */,
@@ -1277,6 +1288,7 @@
 				6187F9DF1B81915700EFFB3A /* NSData+NIMImageContentType.m in Sources */,
 				61D99FDC1BAFF6190059D369 /* NIMTeamInfoData.m in Sources */,
 				6187F9E01B81915700EFFB3A /* UIImage+NIMGIF.m in Sources */,
+				311AE8801DED5185005149EE /* NIMAttributedLabel+SAMC.m in Sources */,
 				E4EA434D1BA7EA72003FC1BA /* NIMTextContentConfig.m in Sources */,
 				6187F9E11B81915700EFFB3A /* UIImage+NIMMultiFormat.m in Sources */,
 				6187F9E21B81915700EFFB3A /* UIView+NIMWebCacheOperation.m in Sources */,

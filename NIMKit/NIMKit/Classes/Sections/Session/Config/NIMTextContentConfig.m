@@ -8,6 +8,7 @@
 
 #import "NIMTextContentConfig.h"
 #import "NIMAttributedLabel+NIMKit.h"
+#import "NIMAttributedLabel+SAMC.h"
 @interface NIMTextContentConfig()
 
 @property (nonatomic,strong) NIMAttributedLabel *label;
@@ -20,7 +21,10 @@
 - (CGSize)contentSize:(CGFloat)cellWidth
 {
     NSString *text = self.message.text;
-    [self.label nim_setText:text];
+    // SAMC_BEGIN
+//    [self.label nim_setText:text];
+    [self.label samc_setText:text];
+    // SAMC_END
     
     CGFloat msgBubbleMaxWidth    = (cellWidth - 130);
     CGFloat bubbleLeftToContent  = 14;

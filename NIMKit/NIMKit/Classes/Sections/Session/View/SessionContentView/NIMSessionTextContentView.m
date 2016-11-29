@@ -8,6 +8,7 @@
 
 #import "NIMSessionTextContentView.h"
 #import "NIMAttributedLabel+NIMKit.h"
+#import "NIMAttributedLabel+SAMC.h"
 #import "NIMMessageModel.h"
 #import "NIMGlobalMacro.h"
 
@@ -36,7 +37,10 @@ NSString *const NIMTextMessageLabelLinkData = @"NIMTextMessageLabelLinkData";
 - (void)refresh:(NIMMessageModel *)data{
     [super refresh:data];
     NSString *text = self.model.message.text;
-    [_textLabel nim_setText:text];
+    // SAMC_BEGIN
+//    [_textLabel nim_setText:text];
+    [_textLabel samc_setText:text];
+    // SAMC_END
     if (!self.model.message.isOutgoingMsg) {
         self.textLabel.textColor = [UIColor blackColor];
     }else{

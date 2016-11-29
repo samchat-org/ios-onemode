@@ -61,7 +61,14 @@ typedef NS_ENUM(NSInteger, NIMAudioRecordPhase) {
 - (void)setInputConfig:(id<NIMSessionConfig>)config;
 
 - (void)setInputTextPlaceHolder:(NSString*)placeHolder;
+// SAMC_BEGIN
+- (void)setInputText:(NSString *)text;
+// SAMC_END
 - (void)updateAudioRecordTime:(NSTimeInterval)time;
 - (void)updateVoicePower:(float)power;
+
+// SAMC_BEGIN
+- (void)becomeFirstResponder;
+// SAMC_END
 
 @end

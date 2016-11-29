@@ -82,4 +82,7 @@ alpha:alphaValue]
 #define SAMC_SAMCHAT_ACCOUNT_PREFIX         @"samchat_"
 #define SAMC_SAMCHAT_ACCOUNT_ASKSAM         SAMC_SAMCHAT_ACCOUNT_PREFIX@"30000002146"
 
+#define SAMC_MSG_LINK_PREFIX                @"samchat://"
+#define SAMC_MSG_LINK_ACTION_INPUT          @"ActionInput"
+
 #endif /* SAMCGlobalMacro_h */

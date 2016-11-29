@@ -107,14 +107,14 @@
             // SAMC_BEGIN
 //            UIImage *image = [UIImage nim_imageInKit:@"icon_receiver_node_normal.png"];
 //            return [image resizableImageWithCapInsets:UIEdgeInsetsMake(18,25,17,25) resizingMode:UIImageResizingModeStretch];
-            UIImage *image = [UIImage nim_imageInKit:@"bkg-chat-white-left.png"];
+            UIImage *image = [UIImage nim_imageInKit:@"bkg_chat_white_left.png"];
             return [image resizableImageWithCapInsets:UIEdgeInsetsMake(21,26,10,15) resizingMode:UIImageResizingModeStretch];
             // SAMC_END
         }else if (state == UIControlStateHighlighted) {
             // SAMC_BEGIN
 //            UIImage *image = [UIImage nim_imageInKit:@"icon_receiver_node_pressed.png"] ;
 //            return [image resizableImageWithCapInsets:UIEdgeInsetsMake(18,25,17,25) resizingMode:UIImageResizingModeStretch];
-            UIImage *image = [UIImage nim_imageInKit:@"bkg-chat-white-left-pressed.png"];
+            UIImage *image = [UIImage nim_imageInKit:@"bkg_chat_white_left_pressed.png"];
             return [image resizableImageWithCapInsets:UIEdgeInsetsMake(21,26,10,15) resizingMode:UIImageResizingModeStretch];
             // SAMC_END
         }

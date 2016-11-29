@@ -78,6 +78,69 @@
 - (void)onSendText:(NSString *)text
 {
     DDLogDebug(@"send text:%@", text);
+    NIMMessage *message = [NTESSessionMsgConverter msgWithText:text];
+    [self sendMessage:message];
+}
+
+#pragma mark - 消息收发接口
+//- (void)sendMessage:(NIMMessage *)message
+//{
+////    [[[NIMSDK sharedSDK] chatManager] sendMessage:message toSession:_session error:nil];
+//}
+
+//发送消息
+- (void)willSendMessage:(NIMMessage *)message
+{
+//    if ([message.session isEqual:_session]) {
+//        if ([self findModel:message]) {
+//            [self uiUpdateMessage:message];
+//        }else{
+//            if (self.session.sessionType == NIMSessionTypeChatroom) {
+//                [self uiAddChatroomMessages:@[message]];
+//            }else{
+//                [self uiAddMessages:@[message]];
+//            }
+//        }
+//    }
+}
+
+//发送结果
+- (void)sendMessage:(NIMMessage *)message didCompleteWithError:(NSError *)error
+{
+//    if ([message.session isEqual:_session]) {
+//        NIMMessageModel *model = [self makeModel:message];
+//        NSInteger index = [self.sessionDatasource indexAtModelArray:model];
+//        [self.layoutManager updateCellAtIndex:index model:model];
+//    }
+}
+
+//发送进度
+-(void)sendMessage:(NIMMessage *)message progress:(CGFloat)progress
+{
+//    if ([message.session isEqual:_session]) {
+//        NIMMessageModel *model = [self makeModel:message];
+//        [_layoutManager updateCellAtIndex:[self.sessionDatasource indexAtModelArray:model] model:model];
+//    }
+}
+
+//接收消息
+- (void)onRecvMessages:(NSArray *)messages
+{
+//    NIMMessage *message = messages.firstObject;
+//    NIMSession *session = message.session;
+//    if (![session isEqual:self.session] || !messages.count){
+//        return;
+//    }
+//    
+//    if (session.sessionType == NIMSessionTypeChatroom) {
+//        [self uiAddChatroomMessages:messages];
+//    }
+//    else{
+//        [self uiAddMessages:messages];
+//        [self.conversationManager markAllMessagesReadInSession:self.session];
+//    }
+//    
+//    [self sendMessageReceipt:messages];
 }
 
 #pragma mark - Cell事件
@@ -104,6 +167,7 @@
         [self.view makeToast:[NSString stringWithFormat:@"tap link : %@",link]
                     duration:2
                     position:CSToastPositionCenter];
+        [self tapLinkData:link];
         handled = YES;
     }
     
@@ -111,6 +175,7 @@
         NSAssert(0, @"invalid event");
     }
 }
+
 
 - (void)onLongPressCell:(NIMMessage *)message inView:(UIView *)view
 {
@@ -179,6 +244,31 @@
 - (void)showCustom:(NIMMessage *)message
 {
     //普通的自定义消息点击事件可以在这里做哦~
+}
+
+- (void)tapLinkData:(id)linkData
+{
+    if (![linkData isKindOfClass:[NSString class]]) {
+        return;
+    }
+    NSString *link = linkData;
+    if ([link hasPrefix:SAMC_MSG_LINK_PREFIX]) {
+        NSString *content = [link substringFromIndex:[SAMC_MSG_LINK_PREFIX length]];
+        NSData *data = [content dataUsingEncoding:NSUTF8StringEncoding];
+        if (data) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            if ([dict isKindOfClass:[NSDictionary class]]) {
+                NSDictionary *actionInfo = dict[SAMC_MSG_LINK_ACTION_INPUT];
+                if (actionInfo) {
+                    NSString *text = actionInfo[@"text"];
+                    if (text) {
+                        [self.sessionInputView setInputText:text];
+                        [self.sessionInputView becomeFirstResponder];
+                    }
+                }
+            }
+        }
+    }
 }
 
 #pragma mark - 菜单

@@ -197,6 +197,13 @@
     [_toolBar.inputTextView setPlaceHolder:placeHolder];
 }
 
+// SAMC_BEGIN
+- (void)setInputText:(NSString *)text
+{
+    _toolBar.inputTextView.text = text;
+}
+// SAMC_END
+
 - (void)updateAudioRecordTime:(NSTimeInterval)time {
     self.audioRecordIndicator.recordTime = time;
 }
@@ -204,6 +211,13 @@
 - (void)updateVoicePower:(float)power {
     
 }
+
+// SAMC_BEGIN
+- (void)becomeFirstResponder
+{
+    [_toolBar.inputTextView becomeFirstResponder];
+}
+// SAMC_END
 
 #pragma mark - private methods
 - (void)addListenEvents
