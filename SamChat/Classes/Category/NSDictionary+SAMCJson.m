@@ -32,4 +32,26 @@
     return nil;
 }
 
+- (NSString *)samc_JsonStringForKeyPath:(NSString *)keyPath
+{
+    id object = [self valueForKeyPath:keyPath];
+    if ([object isKindOfClass:[NSString class]]) {
+        return object;
+    } else if([object isKindOfClass:[NSNumber class]]) {
+        return [object stringValue];
+    }
+    return nil;
+}
+
+- (NSNumber *)samc_JsonNumberForKeyPath:(NSString *)keyPath
+{
+    id object = [self valueForKeyPath:keyPath];
+    if ([object isKindOfClass:[NSNumber class]]) {
+        return object;
+    } else if([object isKindOfClass:[NSString class]]) {
+        return @([object integerValue]);
+    }
+    return nil;
+}
+
 @end
