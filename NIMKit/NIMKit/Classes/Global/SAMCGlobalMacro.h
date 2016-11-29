@@ -70,6 +70,8 @@ alpha:alphaValue]
 #define MESSAGE_EXT_SAVE_FLAG_YES           @(YES)
 #define MESSAGE_EXT_SAVE_FLAG_NO            @(NO)
 
+#define MESSAGE_LOCAL_EXT_DELIVERYSTATE_KEY @"delivery_state"
+
 #define CALL_MESSAGE_EXTERN_FROM_CUSTOM     @"customer"
 #define CALL_MESSAGE_EXTERN_FROM_SP         @"sp"
 

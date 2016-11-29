@@ -18,6 +18,7 @@
 #import "NIMAttributedLabel.h"
 #import "UIImage+NIM.h"
 #import "NIMSessionUnknowContentView.h"
+#import "SAMCGlobalMacro.h"
 
 @interface NIMMessageCell()<NIMPlayAudioUIDelegate,NIMMessageContentViewDelegate>{
     UILongPressGestureRecognizer *_longPressGesture;
@@ -375,7 +376,8 @@
 - (BOOL)retryButtonHidden
 {
     if (!self.model.message.isReceivedMsg) {
-        return self.model.message.deliveryState != NIMMessageDeliveryStateFailed;
+//      return self.model.message.deliveryState != NIMMessageDeliveryStateFailed;
+        return [self deliveryStateOfMessage:self.model.message] != NIMMessageDeliveryStateFailed;
     } else
     {
         return self.model.message.attachmentDownloadState != NIMMessageAttachmentDownloadStateFailed;
@@ -394,7 +396,8 @@
 {
     if (!self.model.message.isReceivedMsg)
     {
-        return self.model.message.deliveryState != NIMMessageDeliveryStateDelivering;
+//      return self.model.message.deliveryState != NIMMessageDeliveryStateDelivering;
+        return [self deliveryStateOfMessage:self.model.message] != NIMMessageDeliveryStateDelivering;
     }
     else
     {
@@ -402,6 +405,17 @@
     }
 }
 
+// SAMC_BEGIN
+- (NIMMessageDeliveryState)deliveryStateOfMessage:(NIMMessage *)message
+{
+    NSNumber *deliveryStateExt = message.localExt[MESSAGE_LOCAL_EXT_DELIVERYSTATE_KEY];
+    if (deliveryStateExt) {
+        NSLog(@"deliveryStateOfMessage:%@", deliveryStateExt);
+        return [deliveryStateExt integerValue];
+    }
+    return message.deliveryState;
+}
+// SAMC_END
 
 - (BOOL)unreadHidden {
     if (self.model.message.messageType == NIMMessageTypeAudio) { //音频
