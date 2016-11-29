@@ -165,8 +165,18 @@
 #pragma mark - NIMConversationManagerDelegate
 - (void)didAddRecentSession:(NIMRecentSession *)recentSession
            totalUnreadCount:(NSInteger)totalUnreadCount{
-    [self.recentSessions addObject:recentSession];
-    [self sort];
+    if ([recentSession.session.sessionId isEqualToString:SAMC_SAMCHAT_ACCOUNT_ASKSAM]) {
+        for (NIMRecentSession *recent in self.recentSessions) {
+            if ([recent.session.sessionId isEqualToString:SAMC_SAMCHAT_ACCOUNT_ASKSAM]) {
+                [self.recentSessions removeObject:recent];
+                break;
+            }
+        }
+        [self.recentSessions insertObject:recentSession atIndex:0];
+    } else {
+        [self.recentSessions addObject:recentSession];
+        [self sort];
+    }
     [self reload];
 }
 
