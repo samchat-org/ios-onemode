@@ -410,7 +410,6 @@
 {
     NSNumber *deliveryStateExt = message.localExt[MESSAGE_LOCAL_EXT_DELIVERYSTATE_KEY];
     if (deliveryStateExt) {
-        NSLog(@"deliveryStateOfMessage:%@", deliveryStateExt);
         return [deliveryStateExt integerValue];
     }
     return message.deliveryState;
