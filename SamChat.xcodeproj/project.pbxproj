@@ -11,6 +11,8 @@
 		311AE8741DEC16FF005149EE /* SAMCSessionListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE8731DEC16FF005149EE /* SAMCSessionListCell.m */; };
 		311AE8771DEC4A11005149EE /* SAMCAskSamSessionConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE8761DEC4A11005149EE /* SAMCAskSamSessionConfig.m */; };
 		311AE87A1DEC4D21005149EE /* SAMCAskSamSessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE8791DEC4D21005149EE /* SAMCAskSamSessionViewController.m */; };
+		311AE8831DED94D4005149EE /* SAMCQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE8821DED94D4005149EE /* SAMCQuestion.m */; };
+		311AE8861DEDA18B005149EE /* NSDictionary+SAMCJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE8851DEDA18B005149EE /* NSDictionary+SAMCJson.m */; };
 		31A043581DE535C80021E029 /* NSData+NTES.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041BE1DE535C80021E029 /* NSData+NTES.m */; };
 		31A043591DE535C80021E029 /* NSDictionary+NTESJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041C01DE535C80021E029 /* NSDictionary+NTESJson.m */; };
 		31A0435A1DE535C80021E029 /* NSString+NTES.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041C21DE535C80021E029 /* NSString+NTES.m */; };
@@ -283,6 +285,10 @@
 		311AE8761DEC4A11005149EE /* SAMCAskSamSessionConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCAskSamSessionConfig.m; sourceTree = "<group>"; };
 		311AE8781DEC4D21005149EE /* SAMCAskSamSessionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCAskSamSessionViewController.h; sourceTree = "<group>"; };
 		311AE8791DEC4D21005149EE /* SAMCAskSamSessionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCAskSamSessionViewController.m; sourceTree = "<group>"; };
+		311AE8811DED94D4005149EE /* SAMCQuestion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCQuestion.h; sourceTree = "<group>"; };
+		311AE8821DED94D4005149EE /* SAMCQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCQuestion.m; sourceTree = "<group>"; };
+		311AE8841DEDA18B005149EE /* NSDictionary+SAMCJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+SAMCJson.h"; sourceTree = "<group>"; };
+		311AE8851DEDA18B005149EE /* NSDictionary+SAMCJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+SAMCJson.m"; sourceTree = "<group>"; };
 		31A041BD1DE535C80021E029 /* NSData+NTES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+NTES.h"; sourceTree = "<group>"; };
 		31A041BE1DE535C80021E029 /* NSData+NTES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+NTES.m"; sourceTree = "<group>"; };
 		31A041BF1DE535C80021E029 /* NSDictionary+NTESJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+NTESJson.h"; sourceTree = "<group>"; };
@@ -861,6 +867,8 @@
 				31F996C71DEBC97B003555D8 /* NIMMessage+SAMC.m */,
 				31A044F91DE5BBB30021E029 /* UIButton+SAMC.h */,
 				31A044FA1DE5BBB30021E029 /* UIButton+SAMC.m */,
+				311AE8841DEDA18B005149EE /* NSDictionary+SAMCJson.h */,
+				311AE8851DEDA18B005149EE /* NSDictionary+SAMCJson.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1873,6 +1881,8 @@
 				31A044E41DE594F20021E029 /* SAMCStateDateInfo.m */,
 				31A044E51DE594F20021E029 /* SAMCUser.h */,
 				31A044E61DE594F20021E029 /* SAMCUser.m */,
+				311AE8811DED94D4005149EE /* SAMCQuestion.h */,
+				311AE8821DED94D4005149EE /* SAMCQuestion.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2212,6 +2222,7 @@
 				31A043861DE535C80021E029 /* NTESChatroomMemberCell.m in Sources */,
 				31A0438E1DE535C80021E029 /* NTESGroupedContacts.m in Sources */,
 				311AE87A1DEC4D21005149EE /* SAMCAskSamSessionViewController.m in Sources */,
+				311AE8831DED94D4005149EE /* SAMCQuestion.m in Sources */,
 				31A044B91DE591380021E029 /* SAMCDataBaseManager.m in Sources */,
 				31FD59A21DE68BA2006F3ED3 /* SAMCMobileLoginViewController.m in Sources */,
 				31A043601DE535C80021E029 /* UIScrollView+NTESDirection.m in Sources */,
@@ -2285,6 +2296,7 @@
 				31A0436E1DE535C80021E029 /* NTESMarginButton.m in Sources */,
 				31A0435C1DE535C80021E029 /* UIAlertView+NTESBlock.m in Sources */,
 				31A043FE1DE535C80021E029 /* NTESSessionUtil.m in Sources */,
+				311AE8861DEDA18B005149EE /* NSDictionary+SAMCJson.m in Sources */,
 				31FD59AB1DE6B015006F3ED3 /* SAMCAvatarImageView.m in Sources */,
 				31A044761DE590B90021E029 /* SAMCUnreadCountManager.m in Sources */,
 				31FD59D81DEA6DB2006F3ED3 /* SAMCSelectLocationViewController.m in Sources */,

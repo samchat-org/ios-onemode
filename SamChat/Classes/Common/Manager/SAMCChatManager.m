@@ -18,6 +18,8 @@
 #import "SAMCPublicManager.h"
 #import "SAMCImageAttachment.h"
 #import "SAMCServerAPIMacro.h"
+#import "SAMCQuestion.h"
+#import "NTESSessionMsgConverter.h"
 
 @interface SAMCChatManager ()<NIMChatManagerDelegate,NIMSystemNotificationManagerDelegate>
 
@@ -265,17 +267,23 @@
 #pragma mark - NIMSystemNotificationManagerDelegate
 - (void)onReceiveCustomSystemNotification:(NIMCustomSystemNotification *)notification
 {
-//    NSString *content = notification.content;
-//    NSData *data = [content dataUsingEncoding:NSUTF8StringEncoding];
-//    if (data) {
-//        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-//        if ([dict isKindOfClass:[NSDictionary class]]) {
-//            if ([dict jsonInteger:NTESNotifyID] == NTESCustomRequestPush) {
-//                NSDictionary *requestDict = [dict jsonDict:NTESCustomContent];
-//                [[SAMCQuestionManager sharedManager] insertReceivedQuestion:requestDict[SAMC_BODY]];
-//            }
-//        }
-//    }
+    NSString *content = notification.content;
+    NSData *data = [content dataUsingEncoding:NSUTF8StringEncoding];
+    if (data) {
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        if ([dict isKindOfClass:[NSDictionary class]]) {
+            if ([dict jsonInteger:NTESNotifyID] == NTESCustomRequestPush) {
+                NSDictionary *requestDict = [dict jsonDict:NTESCustomContent];
+                SAMCQuestion *question = [SAMCQuestion questionFromDict:requestDict[SAMC_BODY]];
+                NIMSession *session = [NIMSession session:question.fromUser type:NIMSessionTypeP2P];
+                NIMMessage *message = [NTESSessionMsgConverter msgWithText:question.question];
+                NIMMessageSetting *setting = [[NIMMessageSetting alloc] init];
+                setting.shouldBeCounted = YES;
+                message.setting = setting;
+                [[NIMSDK sharedSDK].conversationManager saveMessage:message forSession:session completion:NULL];
+            }
+        }
+    }
 }
 
 - (void)receivedNewPublicMessages:(NSArray *)publicMessages
