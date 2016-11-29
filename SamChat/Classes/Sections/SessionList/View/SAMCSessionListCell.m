@@ -122,11 +122,12 @@
     }
     
     NSString *name = @"";
-    if ([recentSession.session.sessionId isEqualToString:[SAMCAccountManager sharedManager].currentAccount]) {
-        name = @"Me";
-    }
     if (recentSession.session.sessionType == NIMSessionTypeP2P) {
-        name = info.showName;
+        if ([recentSession.session.sessionId isEqualToString:[SAMCAccountManager sharedManager].currentAccount]) {
+            name = @"Me";
+        } else {
+            name = info.showName;
+        }
     }else{
         NIMTeam *team = [[NIMSDK sharedSDK].teamManager teamById:recentSession.session.sessionId];
         name = team.teamName;
