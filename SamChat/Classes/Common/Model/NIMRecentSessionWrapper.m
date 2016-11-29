@@ -7,6 +7,7 @@
 //
 
 #import "NIMRecentSessionWrapper.h"
+#import "NTESSessionMsgConverter.h"
 
 @implementation NIMRecentSessionWrapper
 
@@ -48,7 +49,7 @@
 {
     NIMRecentSessionWrapper *recent = [[NIMRecentSessionWrapper alloc] init];
     recent.session = [NIMSession session:SAMC_SAMCHAT_ACCOUNT_ASKSAM type:NIMSessionTypeP2P];
-    recent.lastMessage = nil;
+    recent.lastMessage = [NTESSessionMsgConverter msgWithText:@"What service do you need today?"];
     recent.unreadCount = 0;
     return recent;
 }
