@@ -25,18 +25,21 @@
 {
     NSArray *recentSessions = [NIMSDK sharedSDK].conversationManager.allRecentSessions;
     NSMutableArray *chatSessions = [[NSMutableArray alloc] init];
-    BOOL hasAskSam = NO;
+    NIMRecentSession *askSamSession;
     for (NIMRecentSession *recentSession in recentSessions) {
         if ([recentSession.session.sessionId hasPrefix:SAMC_PUBLIC_ACCOUNT_PREFIX]) {
             continue;
         }
         if ([recentSession.session.sessionId isEqualToString:SAMC_SAMCHAT_ACCOUNT_ASKSAM]) {
-            hasAskSam = YES;
+            askSamSession = recentSession;
         }
         [chatSessions addObject:recentSession];
     }
-    if (!hasAskSam) {
+    if (askSamSession == nil) {
         NIMRecentSessionWrapper *askSamSession = [NIMRecentSessionWrapper defaultAskSamSession];
+        [chatSessions insertObject:askSamSession atIndex:0];
+    } else {
+        [chatSessions removeObject:askSamSession];
         [chatSessions insertObject:askSamSession atIndex:0];
     }
     return chatSessions;
