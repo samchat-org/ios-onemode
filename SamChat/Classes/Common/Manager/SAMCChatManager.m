@@ -112,8 +112,13 @@
             if (questionMessage) {
                 NIMMessage *insertMessage = [NTESSessionMsgConverter msgWithText:questionMessage.text];
                 insertMessage.timestamp = message.timestamp-0.01;
+                NIMMessageSetting *setting = [[NIMMessageSetting alloc] init];
+                setting.shouldBeCounted = NO;
+                insertMessage.setting = setting;
                 [[NIMSDK sharedSDK].conversationManager saveMessage:insertMessage forSession:message.session completion:^(NSError * _Nullable error) {
-                    DDLogError(@"insert message error:%@", error);
+                    if (error) {
+                        DDLogError(@"insert message error:%@", error);
+                    }
                 }];
             }
         }
