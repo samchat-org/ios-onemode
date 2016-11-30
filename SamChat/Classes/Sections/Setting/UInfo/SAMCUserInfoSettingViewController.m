@@ -23,6 +23,7 @@
 #import "SAMCResourceManager.h"
 #import "SAMCServerAPIMacro.h"
 #import "SAMCSettingManager.h"
+#import "SAMCSelectLocationViewController.h"
 
 @interface SAMCUserInfoSettingViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -182,6 +183,26 @@
 
 - (void)onTouchLocationSetting:(id)sender
 {
+    SAMCSelectLocationViewController *vc = [[SAMCSelectLocationViewController alloc] initWithHideCurrentLocation:YES userMode:SAMCUserModeTypeCustom];
+    __weak typeof(self) wself = self;
+    vc.selectBlock = ^(NSDictionary *location, BOOL isCurrentLocation){
+        if (location == nil) {
+            DDLogError(@"onTouchLocationSetting location error");
+            return;
+        }
+        
+        NSDictionary *profileDict = @{SAMC_LOCATION:location};
+        [SVProgressHUD showWithStatus:@"updating" maskType:SVProgressHUDMaskTypeBlack];
+        [[SAMCSettingManager sharedManager] updateProfile:profileDict completion:^(NSError * _Nullable error) {
+            [SVProgressHUD dismiss];
+            if (error) {
+                [wself.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:2 position:CSToastPositionCenter];
+            } else {
+                [wself.view makeToast:@"success" duration:2 position:CSToastPositionCenter];
+            }
+        }];
+    };
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - UIImagePickerControllerDelegate
