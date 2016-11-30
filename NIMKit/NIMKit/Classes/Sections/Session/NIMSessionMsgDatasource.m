@@ -27,12 +27,14 @@
 }
 
 - (instancetype)initWithSession:(NIMSession*)session
+                         spMode:(BOOL)spMode
                    dataProvider:(id<NIMKitMessageProvider>)dataProvider
                showTimeInterval:(NSTimeInterval)timeInterval
                           limit:(NSInteger)limit
 {
     if (self = [self init]) {
         _currentSession    = session;
+        _isSPMode          = spMode;
         _dataProvider      = dataProvider;
         _messageLimit      = limit;
         _showTimeInterval  = timeInterval;
@@ -330,7 +332,10 @@
 
 #pragma mark - private methods
 - (void)insertMessage:(NIMMessage *)message{
-    NIMMessageModel *model = [[NIMMessageModel alloc] initWithMessage:message];
+    // SAMC_BEGIN
+//    NIMMessageModel *model = [[NIMMessageModel alloc] initWithMessage:message];
+    NIMMessageModel *model = [[NIMMessageModel alloc] initWithMessage:message spMode:_isSPMode];
+    // SAMC_END
     if ([self modelIsExist:model]) {
         return;
     }
@@ -386,7 +391,10 @@
 {
     NSMutableArray *array = [[NSMutableArray alloc] init];
     for (NIMMessage *message in messages) {
-        NIMMessageModel *model = [[NIMMessageModel alloc] initWithMessage:message];
+        // SAMC_BEGIN
+//        NIMMessageModel *model = [[NIMMessageModel alloc] initWithMessage:message];
+        NIMMessageModel *model = [[NIMMessageModel alloc] initWithMessage:message spMode:_isSPMode];
+        // SAMC_END
         [array addObject:model];
     }
     return array;

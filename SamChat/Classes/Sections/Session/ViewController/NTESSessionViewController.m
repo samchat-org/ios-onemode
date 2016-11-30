@@ -48,6 +48,7 @@
 #import "UIAlertView+NTESBlock.h"
 #import "NTESDataManager.h"
 #import "NTESSessionUtil.h"
+#import "SAMCAccountManager.h"
 
 typedef enum : NSUInteger {
     NTESImagePickerModeImage,
@@ -877,6 +878,11 @@ NIMContactSelectDelegate>
 
 - (BOOL)shouldAutorotate{
     return !self.currentSingleSnapView;
+}
+
+- (BOOL)isSPMode
+{
+    return [SAMCAccountManager sharedManager].isCurrentUserServicer;
 }
 
 @end

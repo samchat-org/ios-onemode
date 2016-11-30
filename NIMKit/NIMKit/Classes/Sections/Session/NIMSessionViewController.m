@@ -133,7 +133,7 @@ NIMUserManagerDelegate>
     if ([self.sessionConfig respondsToSelector:@selector(showTimeInterval)]) {
         showTimestampInterval = [self.sessionConfig showTimestampInterval];
     }
-    _sessionDatasource = [[NIMSessionMsgDatasource alloc] initWithSession:_session dataProvider:dataProvider showTimeInterval:showTimestampInterval limit:limit];
+    _sessionDatasource = [[NIMSessionMsgDatasource alloc] initWithSession:_session spMode:self.isSPMode dataProvider:dataProvider  showTimeInterval:showTimestampInterval limit:limit];
     _sessionDatasource.sessionConfig = [self sessionConfig];
     [self.conversationManager markAllMessagesReadInSession:_session];
     
@@ -626,7 +626,7 @@ NIMUserManagerDelegate>
     NSMutableArray *models = [[NSMutableArray alloc] init];
     for (NIMMessage *message in messages)
     {
-        NIMMessageModel *model = [[NIMMessageModel alloc] initWithMessage:message];
+        NIMMessageModel *model = [[NIMMessageModel alloc] initWithMessage:message spMode:self.isSPMode];
         [self layoutConfig:model];
         [models addObject:model];
     }
@@ -800,7 +800,7 @@ NIMUserManagerDelegate>
 - (NIMMessageModel *)makeModel:(NIMMessage *)message{
     NIMMessageModel *model = [self findModel:message];
     if (!model) {
-        model = [[NIMMessageModel alloc] initWithMessage:message];
+        model = [[NIMMessageModel alloc] initWithMessage:message spMode:self.isSPMode];
     }
     [self layoutConfig:model];
     return model;
@@ -885,7 +885,7 @@ NIMUserManagerDelegate>
     NSMutableArray *models = [[NSMutableArray alloc] init];
     for (NIMMessage *message in insert)
     {
-        NIMMessageModel *model = [[NIMMessageModel alloc] initWithMessage:message];
+        NIMMessageModel *model = [[NIMMessageModel alloc] initWithMessage:message spMode:self.isSPMode];
         [self layoutConfig:model];
         [models addObject:model];
     }

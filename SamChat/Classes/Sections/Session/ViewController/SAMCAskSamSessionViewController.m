@@ -32,6 +32,7 @@
 #import "NTESSessionUtil.h"
 #import "SAMCAskSamSessionConfig.h"
 #import "SAMCQuestionManager.h"
+#import "SAMCAccountManager.h"
 
 @interface SAMCAskSamSessionViewController ()<UINavigationControllerDelegate,SAMCQuestionManagerDelegate>
 
@@ -382,6 +383,11 @@
                     @(NIMMessageTypeCustom):    @"showCustom:"};
     });
     return actions;
+}
+
+- (BOOL)isSPMode
+{
+    return [SAMCAccountManager sharedManager].isCurrentUserServicer;
 }
 
 @end

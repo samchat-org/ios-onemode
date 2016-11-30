@@ -137,4 +137,7 @@
  */
 - (void)uiCheckReceipt;
 
+// should override
+- (BOOL)isSPMode;
+
 @end

@@ -30,8 +30,12 @@
     _model = data;
     CGSize size = [self bubbleViewSize:data];
     self.bounds = CGRectMake(0, 0, size.width, size.height);
-    [_bubbleImageView setImage:[self chatBubbleImageForState:UIControlStateNormal outgoing:data.message.isOutgoingMsg]];
-    [_bubbleImageView setHighlightedImage:[self chatBubbleImageForState:UIControlStateHighlighted outgoing:data.message.isOutgoingMsg]];
+    [_bubbleImageView setImage:[self chatBubbleImageForState:UIControlStateNormal
+                                                    outgoing:data.message.isOutgoingMsg
+                                                      spMode:_model.isSPMode]];
+    [_bubbleImageView setHighlightedImage:[self chatBubbleImageForState:UIControlStateHighlighted
+                                                               outgoing:data.message.isOutgoingMsg
+                                                                 spMode:_model.isSPMode]];
     _bubbleImageView.frame = self.bounds;
     [self setNeedsLayout];
 }
@@ -63,11 +67,6 @@
 
 
 #pragma mark - Private
-- (UIImage *)chatBubbleImageForState:(UIControlState)state outgoing:(BOOL)outgoing
-{
-    // TODO:fot test
-    return [self chatBubbleImageForState:state outgoing:outgoing spMode:NO];
-}
 // SAMC_BEGIN
 //- (UIImage *)chatBubbleImageForState:(UIControlState)state outgoing:(BOOL)outgoing
 - (UIImage *)chatBubbleImageForState:(UIControlState)state outgoing:(BOOL)outgoing spMode:(BOOL)spMode

@@ -54,11 +54,12 @@
 }
 
 
-- (UIImage *)chatBubbleImageForState:(UIControlState)state outgoing:(BOOL)outgoing{
+- (UIImage *)chatBubbleImageForState:(UIControlState)state outgoing:(BOOL)outgoing spMode:(BOOL)spMode
+{
     if (self.model.message.session.sessionType == NIMSessionTypeChatroom) {
         return nil;
     }
-    return [super chatBubbleImageForState:state outgoing:outgoing];
+    return [super chatBubbleImageForState:state outgoing:outgoing spMode:spMode];
 }
 
 

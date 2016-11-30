@@ -54,6 +54,10 @@
 
 @property (nonatomic) BOOL shouldShowReadLabel;
 
+// SAMC_BEGIN
+@property (nonatomic, readonly) BOOL isSPMode;
+// SAMC_END
+
 /**
  *  计算内容大小
  *
@@ -68,7 +72,10 @@
  *
  *  @return NIMMessageModel实例
  */
-- (instancetype)initWithMessage:(NIMMessage*)message;
+// SAMC_BEGIN
+//- (instancetype)initWithMessage:(NIMMessage*)message;
+- (instancetype)initWithMessage:(NIMMessage *)message spMode:(BOOL)spMode;
+// SAMC_END
 
 /**
  *  清楚缓存的排版数据
