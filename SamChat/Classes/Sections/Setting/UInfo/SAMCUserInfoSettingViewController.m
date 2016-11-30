@@ -20,6 +20,9 @@
 #import "NIMWebImageManager.h"
 #import "SAMCSettingAvatarView.h"
 #import "SAMCAccountManager.h"
+#import "SAMCResourceManager.h"
+#import "SAMCServerAPIMacro.h"
+#import "SAMCSettingManager.h"
 
 @interface SAMCUserInfoSettingViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -33,7 +36,8 @@
 
 @implementation SAMCUserInfoSettingViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.navigationItem.title = @"My Profile";
     
@@ -60,11 +64,13 @@
                                                object:nil];
 }
 
-- (void)dealloc{
+- (void)dealloc
+{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)buildData{
+- (void)buildData
+{
     SAMCUser *me = [SAMCAccountManager sharedManager].currentUser;
     
     SAMCSettingAvatarView *headerView = [[SAMCSettingAvatarView alloc] initWithFrame:CGRectMake(0, 0, 0, 140)];
@@ -121,7 +127,7 @@
 - (void)onTouchPortrait:(id)sender
 {
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"设置头像" delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从相册", nil];
+        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo",@"Choose from Photos", nil];
         [sheet showInView:self.view completionHandler:^(NSInteger index) {
             switch (index) {
                 case 0:
@@ -135,7 +141,7 @@
             }
         }];
     }else{
-        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"设置头像" delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"从相册", nil];
+        UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Choose from Photos", nil];
         [sheet showInView:self.view completionHandler:^(NSInteger index) {
             switch (index) {
                 case 0:
@@ -148,7 +154,8 @@
     }
 }
 
-- (void)showImagePicker:(UIImagePickerControllerSourceType)type{
+- (void)showImagePicker:(UIImagePickerControllerSourceType)type
+{
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate      = self;
     picker.sourceType    = type;
@@ -177,69 +184,63 @@
 }
 
 #pragma mark - UIImagePickerControllerDelegate
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
     UIImage *image = info[UIImagePickerControllerEditedImage];
     [picker dismissViewControllerAnimated:YES completion:^{
         [self uploadImage:image];
     }];
 }
 
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 
 #pragma mark - onUserInfoHasUpdatedNotification
-- (void)onUserInfoHasUpdatedNotification:(NSNotification *)notification{
+- (void)onUserInfoHasUpdatedNotification:(NSNotification *)notification
+{
     NSDictionary *userInfo = notification.userInfo;
     NSArray *userInfos = userInfo[NIMKitInfoKey];
-    if ([userInfos containsObject:[NIMSDK sharedSDK].loginManager.currentAccount]) {
+    if ([userInfos containsObject:[SAMCAccountManager sharedManager].currentAccount]) {
         [self refresh];
     }
 }
 
-
-
 #pragma mark - Private
-- (void)uploadImage:(UIImage *)image{
+- (void)uploadImage:(UIImage *)image
+{
     UIImage *imageForAvatarUpload = [image imageForAvatarUpload];
-    NSString *fileName = [NTESFileLocationHelper genFilenameWithExt:@"jpg"];
+    NSString *currentAccount = [SAMCAccountManager sharedManager].currentAccount;
+    NSInteger timeInterval = [@([[NSDate date] timeIntervalSince1970] * 1000) integerValue];
+    NSString *fileName = [NSString stringWithFormat:@"org_%@_%ld.jpg",currentAccount,timeInterval];
+    
     NSString *filePath = [[NTESFileLocationHelper getAppDocumentPath] stringByAppendingPathComponent:fileName];
     NSData *data = UIImageJPEGRepresentation(imageForAvatarUpload, 1.0);
     BOOL success = data && [data writeToFile:filePath atomically:YES];
     __weak typeof(self) wself = self;
     if (success) {
-        [SVProgressHUD show];
-        [[NIMSDK sharedSDK].resourceManager upload:filePath progress:nil completion:^(NSString *urlString, NSError *error) {
+        [SVProgressHUD showWithStatus:@"Uploading..." maskType:SVProgressHUDMaskTypeBlack];
+        NSString *key = [NSString stringWithFormat:@"%@%@", SAMC_AWSS3_AVATAR_ORG_PATH, fileName];
+        [[SAMCResourceManager sharedManager] upload:filePath key:key contentType:@"image/jpeg" progress:nil completion:^(NSString *urlString, NSError *error) {
             [SVProgressHUD dismiss];
             if (!error && wself) {
-                [[NIMSDK sharedSDK].userManager updateMyUserInfo:@{@(NIMUserInfoUpdateTagAvatar):urlString} completion:^(NSError *error) {
+                [[SAMCSettingManager sharedManager] updateAvatar:urlString completion:^(SAMCUser * _Nullable user, NSError * _Nullable error) {
                     if (!error) {
-                        [[NIMWebImageManager sharedManager] saveImageToCache:imageForAvatarUpload forURL:[NSURL URLWithString:urlString]];
+                        [[SDWebImageManager sharedManager] saveImageToCache:imageForAvatarUpload forURL:[NSURL URLWithString:user.userInfo.avatar]];
                         [wself refresh];
-                    }else{
-                        [wself.view makeToast:@"设置头像失败，请重试"
-                                     duration:2
-                                     position:CSToastPositionCenter];
+                    } else {
+                        [wself.view makeToast:@"set avatar failed" duration:2 position:CSToastPositionCenter];
                     }
                 }];
-            }else{
-                [wself.view makeToast:@"图片上传失败，请重试"
-                             duration:2
-                             position:CSToastPositionCenter];
+            } else {
+                [wself.view makeToast:@"upload failed" duration:2 position:CSToastPositionCenter];
             }
         }];
     }else{
-        [self.view makeToast:@"图片保存失败，请重试"
-                    duration:2
-                    position:CSToastPositionCenter];
+        [self.view makeToast:@"image saved failed" duration:2 position:CSToastPositionCenter];
     }
-}
-
-#pragma mark - 旋转处理 (iOS7)
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    [self.tableView reloadData];
 }
 
 @end

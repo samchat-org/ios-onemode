@@ -6,18 +6,12 @@
 	<string>en_US</string>
 	<key>CFBundleDisplayName</key>
 	<string>${XCCONFIG_BUNDLE_NAME}</string>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
-	<key>CFBundleLocalizations</key>
-	<array>
-		<string>zh_CN</string>
-	</array>
 	<key>CFBundleName</key>
 	<string>${XCCONFIG_BUNDLE_NAME}</string>
 	<key>CFBundlePackageType</key>
@@ -28,6 +22,8 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>3</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
