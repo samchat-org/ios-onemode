@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SAMCQuestionManager : NSObject
 
 + (instancetype)sharedManager;
+- (void)close;
 - (void)addDelegate:(id<SAMCQuestionManagerDelegate>)delegate;
 - (void)removeDelegate:(id<SAMCQuestionManagerDelegate>)delegate;
 

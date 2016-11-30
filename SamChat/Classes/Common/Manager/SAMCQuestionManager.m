@@ -42,6 +42,12 @@
     return self;
 }
 
+- (void)close
+{
+    [_questionDelegate removeAllDelegates];
+    [_sendingMessages removeAllObjects];
+}
+
 - (void)addDelegate:(id<SAMCQuestionManagerDelegate>)delegate
 {
     [self.questionDelegate addDelegate:delegate delegateQueue:dispatch_get_main_queue()];
