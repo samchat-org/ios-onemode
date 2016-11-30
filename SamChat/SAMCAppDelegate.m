@@ -26,6 +26,9 @@
 #import "SAMCPreferenceManager.h"
 #import "SAMCAccountManager.h"
 #import "SAMCDefaultLoginViewController.h"
+#import "SAMCSyncManager.h"
+#import "SAMCDataBaseManager.h"
+#import "SAMCUnreadCountManager.h"
 
 NSString *NTESNotificationLogout = @"NTESNotificationLogout";
 NSString * const SAMCLoginNotification = @"SAMCLoginNotification";
@@ -188,8 +191,15 @@ NSString * const SAMCLoginNotification = @"SAMCLoginNotification";
 
 - (void)doLogout
 {
+    if (![self.window.rootViewController isKindOfClass:[SAMCMainTabController class]]) {
+        // already logout, may happen when auto login failed & token error
+        return;
+    }
     [[NTESLoginManager sharedManager] setCurrentLoginData:nil];
+    [[SAMCUnreadCountManager sharedManager] close];
+    [[SAMCSyncManager sharedManager] close];
     [[NTESServiceManager sharedManager] destory];
+    [[SAMCDataBaseManager sharedManager] close];
     [self setupLoginViewController];
 }
 
