@@ -189,7 +189,12 @@
             break;
         }
     }
-    NSInteger insert = [self findInsertPlace:recentSession];
+    NSInteger insert;
+    if ([recentSession.session.sessionId hasPrefix:SAMC_SAMCHAT_ACCOUNT_PREFIX]) {
+        insert = 0;
+    } else {
+        insert = [self findInsertPlace:recentSession];
+    }
     [self.recentSessions insertObject:recentSession atIndex:insert];
     [self reload];
 }
