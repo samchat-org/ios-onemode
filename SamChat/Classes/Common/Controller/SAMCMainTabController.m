@@ -11,6 +11,7 @@
 #import "NTESCustomNotificationDB.h"
 #import "NTESNotificationCenter.h"
 #import "NTESNavigationHandler.h"
+#import "SAMCAccountManager.h"
 
 #define TabbarVC    @"vc"
 #define TabbarTitle @"title"
@@ -138,7 +139,12 @@ typedef NS_ENUM(NSInteger,SAMCMainTabType) {
 
 - (void)setUpStatusBar
 {
-    UIStatusBarStyle style = UIStatusBarStyleDefault;
+    UIStatusBarStyle style;
+    if ([SAMCAccountManager sharedManager].isCurrentUserServicer) {
+        style = UIStatusBarStyleLightContent;
+    } else {
+        style = UIStatusBarStyleDefault;
+    }
     [[UIApplication sharedApplication] setStatusBarStyle:style animated:NO];
 }
 

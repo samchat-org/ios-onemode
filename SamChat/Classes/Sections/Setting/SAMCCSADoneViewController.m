@@ -78,11 +78,6 @@
 - (void)touchGetStarted:(id)sender
 {
     [self dismissViewControllerAnimated:NO completion:NULL];
-//    [SVProgressHUD showWithStatus:@"Switching" maskType:SVProgressHUDMaskTypeBlack];
-//    extern NSString *SAMCUserModeSwitchNotification;
-//    [[NSNotificationCenter defaultCenter] postNotificationName:SAMCUserModeSwitchNotification
-//                                                        object:nil
-//                                                      userInfo:nil];
 }
 
 #pragma mark - lazy load
