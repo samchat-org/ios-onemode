@@ -15,6 +15,7 @@
 		311AE8861DEDA18B005149EE /* NSDictionary+SAMCJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE8851DEDA18B005149EE /* NSDictionary+SAMCJson.m */; };
 		311AE8891DEE7E2C005149EE /* SAMCLogUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE8881DEE7E2C005149EE /* SAMCLogUploader.m */; };
 		311AE88C1DEE9E81005149EE /* NTESTextSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE88B1DEE9E81005149EE /* NTESTextSettingCell.m */; };
+		311AE88F1DEEFF9C005149EE /* SAMCChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE88E1DEEFF9C005149EE /* SAMCChangePasswordViewController.m */; };
 		31A043581DE535C80021E029 /* NSData+NTES.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041BE1DE535C80021E029 /* NSData+NTES.m */; };
 		31A043591DE535C80021E029 /* NSDictionary+NTESJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041C01DE535C80021E029 /* NSDictionary+NTESJson.m */; };
 		31A0435A1DE535C80021E029 /* NSString+NTES.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041C21DE535C80021E029 /* NSString+NTES.m */; };
@@ -295,6 +296,8 @@
 		311AE8881DEE7E2C005149EE /* SAMCLogUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCLogUploader.m; sourceTree = "<group>"; };
 		311AE88A1DEE9E81005149EE /* NTESTextSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESTextSettingCell.h; sourceTree = "<group>"; };
 		311AE88B1DEE9E81005149EE /* NTESTextSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESTextSettingCell.m; sourceTree = "<group>"; };
+		311AE88D1DEEFF9C005149EE /* SAMCChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCChangePasswordViewController.h; sourceTree = "<group>"; };
+		311AE88E1DEEFF9C005149EE /* SAMCChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCChangePasswordViewController.m; sourceTree = "<group>"; };
 		31A041BD1DE535C80021E029 /* NSData+NTES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+NTES.h"; sourceTree = "<group>"; };
 		31A041BE1DE535C80021E029 /* NSData+NTES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+NTES.m"; sourceTree = "<group>"; };
 		31A041BF1DE535C80021E029 /* NSDictionary+NTESJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+NTESJson.h"; sourceTree = "<group>"; };
@@ -1614,6 +1617,8 @@
 				31FD59E91DEAD581006F3ED3 /* SAMCFullNameSettingViewController.m */,
 				31FD59EB1DEADA88006F3ED3 /* SAMCSamChatIdSettingViewController.h */,
 				31FD59EC1DEADA88006F3ED3 /* SAMCSamChatIdSettingViewController.m */,
+				311AE88D1DEEFF9C005149EE /* SAMCChangePasswordViewController.h */,
+				311AE88E1DEEFF9C005149EE /* SAMCChangePasswordViewController.m */,
 				31FD59FE1DEAFF1C006F3ED3 /* SAMCSettingViewController.h */,
 				31FD59FF1DEAFF1C006F3ED3 /* SAMCSettingViewController.m */,
 			);
@@ -2228,6 +2233,7 @@
 				31FD59B41DE6D490006F3ED3 /* SAMCSMSLoginViewController.m in Sources */,
 				31A043B61DE535C80021E029 /* NTESSessionWhiteBoardContentView.m in Sources */,
 				31A044EB1DE594F20021E029 /* SAMCQuestionMessage.m in Sources */,
+				311AE88F1DEEFF9C005149EE /* SAMCChangePasswordViewController.m in Sources */,
 				31FD59D51DEA6D79006F3ED3 /* SAMCTextView.m in Sources */,
 				31A043861DE535C80021E029 /* NTESChatroomMemberCell.m in Sources */,
 				31A0438E1DE535C80021E029 /* NTESGroupedContacts.m in Sources */,

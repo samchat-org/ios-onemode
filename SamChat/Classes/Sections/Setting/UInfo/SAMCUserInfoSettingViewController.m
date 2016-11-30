@@ -24,6 +24,7 @@
 #import "SAMCServerAPIMacro.h"
 #import "SAMCSettingManager.h"
 #import "SAMCSelectLocationViewController.h"
+#import "SAMCChangePasswordViewController.h"
 
 @interface SAMCUserInfoSettingViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -179,6 +180,8 @@
 
 - (void)onTouchPasswordSetting:(id)sender
 {
+    SAMCChangePasswordViewController *vc = [[SAMCChangePasswordViewController alloc] initWithNibName:nil bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)onTouchLocationSetting:(id)sender
