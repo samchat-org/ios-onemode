@@ -111,6 +111,7 @@
             } else {
                 SAMCUser *user = [SAMCAccountManager sharedManager].currentUser;
                 user.userInfo.lastupdate = [response valueForKeyPath:SAMC_USER_LASTUPDATE];
+                user.userInfo.username = profileDict[SAMC_USERNAME] ?:user.userInfo.username;
                 user.userInfo.email = profileDict[SAMC_EMAIL] ?:user.userInfo.email;
                 user.userInfo.address = [profileDict valueForKeyPath:SAMC_LOCATION_ADDRESS] ?:user.userInfo.address;
                 if (profileDict[SAMC_SAM_PROS_INFO]) {

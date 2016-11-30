@@ -66,7 +66,10 @@
         }
     }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onTextFieldChanged:) name:UITextFieldTextDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onTextFieldChanged:)
+                                                 name:UITextFieldTextDidChangeNotification
+                                               object:nil];
 }
 
 - (void)dealloc
@@ -81,7 +84,11 @@
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(onDone:)];
-    self.navigationItem.rightBarButtonItem.tintColor = SAMC_COLOR_INGRABLUE;
+    if ([SAMCAccountManager sharedManager].isCurrentUserServicer) {
+        self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
+    } else {
+        self.navigationItem.rightBarButtonItem.tintColor = SAMC_COLOR_INGRABLUE;
+    }
     self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
