@@ -18,6 +18,7 @@
 
 @property (nonatomic, strong) SAMCAvatarImageView *avatarView;
 @property (nonatomic, strong) UILabel *nameLabel;
+@property (nonatomic, strong) UILabel *categoryLabel;
 @property (nonatomic, strong) UILabel *messageLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
 
@@ -40,6 +41,7 @@
 {
     [self addSubview:self.avatarView];
     [self addSubview:self.nameLabel];
+    [self addSubview:self.categoryLabel];
     [self addSubview:self.timeLabel];
     [self addSubview:self.messageLabel];
     [self addSubview:self.badgeView];
@@ -57,8 +59,13 @@
         make.top.equalTo(self).with.offset(15);
     }];
 
-    [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.categoryLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.nameLabel.mas_right).with.offset(5);
+        make.bottom.equalTo(self.nameLabel);
+    }];
+    
+    [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.categoryLabel.mas_right).with.offset(5);
         make.right.equalTo(self).with.offset(-10);
         make.bottom.equalTo(self.nameLabel);
     }];
@@ -75,6 +82,8 @@
     }];
     
     [_nameLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [_categoryLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [_categoryLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     [_timeLabel setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     [_messageLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     [_muteImageView setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
@@ -113,6 +122,7 @@
     NSURL *url = info.avatarUrlString ? [NSURL URLWithString:info.avatarUrlString] : nil;
     [self.avatarView samc_setImageWithURL:url placeholderImage:info.avatarImage options:SDWebImageRetryFailed];
     
+    self.categoryLabel.text = info.serviceCategory;
     if (recentSession.unreadCount) {
         self.badgeView.hidden = NO;
         self.badgeView.badgeValue = [@(recentSession.unreadCount) stringValue];
@@ -168,6 +178,16 @@
         _nameLabel.textColor = SAMC_COLOR_INK;
     }
     return _nameLabel;
+}
+
+- (UILabel *)categoryLabel
+{
+    if (_categoryLabel == nil) {
+        _categoryLabel = [[UILabel alloc] init];
+        _categoryLabel.font = [UIFont systemFontOfSize:13.0f];
+        _categoryLabel.textColor = SAMC_COLOR_INK;
+    }
+    return _categoryLabel;
 }
 
 - (UILabel *)timeLabel
