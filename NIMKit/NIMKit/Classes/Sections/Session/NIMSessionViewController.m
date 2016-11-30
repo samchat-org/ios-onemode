@@ -181,7 +181,6 @@ NIMUserManagerDelegate>
 
 
 - (void)viewDidLayoutSubviews{
-    [self changeLeftBarBadge:self.conversationManager.allUnreadCount];
     BOOL isFirstLayout = CGRectEqualToRect(_layoutManager.viewRect, CGRectZero);
     if (isFirstLayout) {
         [self.tableView nim_scrollToBottom:NO];
@@ -363,36 +362,6 @@ NIMUserManagerDelegate>
 - (void)messagesDeletedInSession:(NIMSession *)session{
     [self.sessionDatasource resetMessages:nil];
     [self.tableView reloadData];
-}
-
-- (void)didAddRecentSession:(NIMRecentSession *)recentSession
-           totalUnreadCount:(NSInteger)totalUnreadCount{
-    [self changeUnreadCount:recentSession totalUnreadCount:totalUnreadCount];
-}
-
-- (void)didUpdateRecentSession:(NIMRecentSession *)recentSession
-              totalUnreadCount:(NSInteger)totalUnreadCount{
-    [self changeUnreadCount:recentSession totalUnreadCount:totalUnreadCount];
-}
-
-- (void)didRemoveRecentSession:(NIMRecentSession *)recentSession
-              totalUnreadCount:(NSInteger)totalUnreadCount{
-    [self changeUnreadCount:recentSession totalUnreadCount:totalUnreadCount];
-}
-
-
-- (void)changeUnreadCount:(NIMRecentSession *)recentSession
-         totalUnreadCount:(NSInteger)totalUnreadCount{
-    if ([recentSession.session isEqual:self.session]) {
-        return;
-    }
-    [self changeLeftBarBadge:totalUnreadCount];
-}
-
-- (void)changeLeftBarBadge:(NSInteger)unreadCount{
-    NIMCustomLeftBarView *leftBarView = (NIMCustomLeftBarView *)self.navigationItem.leftBarButtonItem.customView;
-    leftBarView.badgeView.badgeValue = @(unreadCount).stringValue;
-    leftBarView.badgeView.hidden = !unreadCount;
 }
 
 #pragma mark - NIMTeamManagerDelegate
