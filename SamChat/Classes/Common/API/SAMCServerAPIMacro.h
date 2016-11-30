@@ -50,6 +50,7 @@
 #define SAMC_AWSS3_BUCKETNAME           @"storage-test.samchat.com"
 #define SAMC_AWSS3_ADV_ORG_PATH         @"advertisement/origin/"
 #define SAMC_AWSS3_AVATAR_ORG_PATH      @"avatar/origin/"
+#define SAMC_AWSS3_LOG_PATH             @"log/"
 
 #define SAMC_HEADER                     @"header"
 #define SAMC_BODY                       @"body"

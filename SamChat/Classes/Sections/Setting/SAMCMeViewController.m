@@ -22,7 +22,7 @@
 #import "SAMCUserInfoSettingViewController.h"
 #import "NTESBlackListViewController.h"
 #import "NTESUserUtil.h"
-#import "NTESLogUploader.h"
+#import "SAMCLogUploader.h"
 #import "SAMCSPIntroViewController.h"
 #import "SAMCCSAStepOneViewController.h"
 #import "SAMCAccountManager.h"
@@ -33,7 +33,7 @@
 @property (nonatomic,strong) UITableView *tableView;
 
 @property (nonatomic,strong) NSArray *data;
-@property (nonatomic,strong) NTESLogUploader *logUploader;
+@property (nonatomic,strong) SAMCLogUploader *logUploader;
 @property (nonatomic,strong) NIMCommonTableDelegate *delegator;
 
 @end
@@ -222,22 +222,17 @@
 
 - (void)onTouchUploadLog:(id)sender{
     if (_logUploader == nil) {
-        _logUploader = [[NTESLogUploader alloc] init];
+        _logUploader = [[SAMCLogUploader alloc] init];
     }
     
-    [SVProgressHUD show];
-    
+    [SVProgressHUD showWithStatus:@"正在上传" maskType:SVProgressHUDMaskTypeBlack];
     __weak typeof(self) weakSelf = self;
     [_logUploader upload:^(NSString *urlString,NSError *error) {
         [SVProgressHUD dismiss];
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        if (error == nil && urlString)
-        {
-            [UIPasteboard generalPasteboard].string = urlString;
-            [strongSelf.view makeToast:@"上传日志成功,URL已复制到剪切板中" duration:3.0 position:CSToastPositionCenter];
-        }
-        else
-        {
+        if (error == nil && urlString) {
+            [strongSelf.view makeToast:@"上传日志成功" duration:3.0 position:CSToastPositionCenter];
+        } else {
             [strongSelf.view makeToast:@"上传日志失败" duration:3.0 position:CSToastPositionCenter];
         }
     }];

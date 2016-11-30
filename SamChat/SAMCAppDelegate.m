@@ -30,6 +30,7 @@
 #import "SAMCDataBaseManager.h"
 #import "SAMCUnreadCountManager.h"
 #import "SAMCQuestionManager.h"
+#import <AWSS3/AWSS3.h>
 
 NSString *NTESNotificationLogout = @"NTESNotificationLogout";
 NSString * const SAMCLoginNotification = @"SAMCLoginNotification";
@@ -63,6 +64,12 @@ NSString * const SAMCLoginNotification = @"SAMCLoginNotification";
 
     [NIMCustomObject registerCustomDecoder:[NTESCustomAttachmentDecoder new]];
     
+    // setup AWSS3
+    AWSCognitoCredentialsProvider *credentialsProvider = [[AWSCognitoCredentialsProvider alloc]
+                                                          initWithRegionType:AWSRegionUSWest2
+                                                          identityPoolId:@"us-west-2:2d22de2e-5125-4d48-9dec-28367ebeda89"];
+    AWSServiceConfiguration *configuration = [[AWSServiceConfiguration alloc] initWithRegion:AWSRegionUSWest2 credentialsProvider:credentialsProvider];
+    AWSServiceManager.defaultServiceManager.defaultServiceConfiguration = configuration;
 
     [self setupServices];
     [self registerAPNs];

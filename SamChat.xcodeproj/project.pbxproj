@@ -13,6 +13,7 @@
 		311AE87A1DEC4D21005149EE /* SAMCAskSamSessionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE8791DEC4D21005149EE /* SAMCAskSamSessionViewController.m */; };
 		311AE8831DED94D4005149EE /* SAMCQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE8821DED94D4005149EE /* SAMCQuestion.m */; };
 		311AE8861DEDA18B005149EE /* NSDictionary+SAMCJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE8851DEDA18B005149EE /* NSDictionary+SAMCJson.m */; };
+		311AE8891DEE7E2C005149EE /* SAMCLogUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE8881DEE7E2C005149EE /* SAMCLogUploader.m */; };
 		31A043581DE535C80021E029 /* NSData+NTES.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041BE1DE535C80021E029 /* NSData+NTES.m */; };
 		31A043591DE535C80021E029 /* NSDictionary+NTESJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041C01DE535C80021E029 /* NSDictionary+NTESJson.m */; };
 		31A0435A1DE535C80021E029 /* NSString+NTES.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041C21DE535C80021E029 /* NSString+NTES.m */; };
@@ -289,6 +290,8 @@
 		311AE8821DED94D4005149EE /* SAMCQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCQuestion.m; sourceTree = "<group>"; };
 		311AE8841DEDA18B005149EE /* NSDictionary+SAMCJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+SAMCJson.h"; sourceTree = "<group>"; };
 		311AE8851DEDA18B005149EE /* NSDictionary+SAMCJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+SAMCJson.m"; sourceTree = "<group>"; };
+		311AE8871DEE7E2C005149EE /* SAMCLogUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCLogUploader.h; sourceTree = "<group>"; };
+		311AE8881DEE7E2C005149EE /* SAMCLogUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCLogUploader.m; sourceTree = "<group>"; };
 		31A041BD1DE535C80021E029 /* NSData+NTES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+NTES.h"; sourceTree = "<group>"; };
 		31A041BE1DE535C80021E029 /* NSData+NTES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+NTES.m"; sourceTree = "<group>"; };
 		31A041BF1DE535C80021E029 /* NSDictionary+NTESJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+NTESJson.h"; sourceTree = "<group>"; };
@@ -1590,6 +1593,8 @@
 				31A042E61DE535C80021E029 /* NTESLogManager.m */,
 				31A042E71DE535C80021E029 /* NTESLogUploader.h */,
 				31A042E81DE535C80021E029 /* NTESLogUploader.m */,
+				311AE8871DEE7E2C005149EE /* SAMCLogUploader.h */,
+				311AE8881DEE7E2C005149EE /* SAMCLogUploader.m */,
 				31A042E91DE535C80021E029 /* NTESLogViewController.h */,
 				31A042EA1DE535C80021E029 /* NTESLogViewController.m */,
 				31A042EB1DE535C80021E029 /* NTESLogViewController.xib */,
@@ -2281,6 +2286,7 @@
 				31A043741DE535C80021E029 /* NTESPersonalCardViewController.m in Sources */,
 				31A043D31DE535C80021E029 /* NTESListHeader.m in Sources */,
 				31A044721DE590B90021E029 /* SAMCQuestionManager.m in Sources */,
+				311AE8891DEE7E2C005149EE /* SAMCLogUploader.m in Sources */,
 				31A043B71DE535C80021E029 /* NTESAudio2TextViewController.m in Sources */,
 				31A043F41DE535C80021E029 /* NTESBundleSetting.m in Sources */,
 				31A043961DE535C80021E029 /* NTESContactViewController.m in Sources */,

@@ -10,4 +10,6 @@
 
 @interface SAMCLogUploader : NSObject
 
+- (void)upload:(void (^)(NSString *urlString,NSError *error))completion;
+
 @end
