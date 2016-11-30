@@ -95,7 +95,8 @@
                                       DetailTitle:me.userInfo.samchatId.length ? me.userInfo.samchatId : @"Not Set",
                                       CellAction :@"onTouchSamChatIdSetting:",
                                       RowHeight     : @(50),
-                                      ShowAccessory : @(YES)
+                                      ShowAccessory : @(me.userInfo.samchatId.length==0),
+                                      ForbidSelect  : @(me.userInfo.samchatId.length!=0)
                                       },
                                   @{
                                       Title      :@"Password",

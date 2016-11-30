@@ -81,7 +81,11 @@
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(onDone:)];
-    self.navigationItem.rightBarButtonItem.tintColor = SAMC_COLOR_INGRABLUE;
+    if ([SAMCAccountManager sharedManager].isCurrentUserServicer) {
+        self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
+    } else {
+        self.navigationItem.rightBarButtonItem.tintColor = SAMC_COLOR_INGRABLUE;
+    }
     self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
@@ -90,8 +94,7 @@
     [self.view endEditing:YES];
     [SVProgressHUD show];
     __weak typeof(self) wself = self;
-    NSDictionary *profileDict = @{SAMC_SAMCHAT_ID:self.samchatId};
-    [[SAMCSettingManager sharedManager] updateProfile:profileDict completion:^(NSError * _Nullable error) {
+    [[SAMCSettingManager sharedManager] createSamchatId:self.samchatId completion:^(NSError * _Nullable error) {
         [SVProgressHUD dismiss];
         if (error) {
             [wself.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:2 position:CSToastPositionCenter];
