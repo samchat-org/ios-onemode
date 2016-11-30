@@ -271,6 +271,7 @@
                 SAMCQuestion *question = [SAMCQuestion questionFromDict:requestDict[SAMC_BODY]];
                 NIMSession *session = [NIMSession session:question.fromUser type:NIMSessionTypeP2P];
                 NIMMessage *message = [NTESSessionMsgConverter msgWithText:question.question];
+                message.from = question.fromUser;
                 if (question.messageId) {
                     message.localExt = @{MESSAGE_EXT_QUESTION_ID_KEY:question.messageId};
                 }
