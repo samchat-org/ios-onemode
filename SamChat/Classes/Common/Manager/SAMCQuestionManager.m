@@ -70,7 +70,7 @@
     [[NIMSDK sharedSDK].conversationManager saveMessage:message forSession:session completion:^(NSError * _Nullable error) {
         if (!error) {
             [wself.sendingMessages addObject:message];
-            [wself sendQuestion:question location:location completion:^(NSError * _Nullable error, NSDictionary * __nullable response) {
+            [wself sendQuestion:question location:location messageId:message.messageId completion:^(NSError * _Nullable error, NSDictionary * __nullable response) {
                 [wself.sendingMessages removeObject:message];
                 NSMutableDictionary *localExt = [message.localExt mutableCopy];
                 if (!error) {
@@ -94,10 +94,11 @@
 
 - (void)sendQuestion:(NSString *)question
             location:(NSDictionary *)location
+           messageId:(NSString *)messageId
           completion:(void (^)(NSError * __nullable error, NSDictionary * __nullable response))completion
 {
     NSAssert(completion != nil, @"completion block should not be nil");
-    NSDictionary *parameters = [SAMCServerAPI sendQuestion:question location:location];
+    NSDictionary *parameters = [SAMCServerAPI sendQuestion:question location:location messageId:messageId];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [SAMCDataPostSerializer serializer];
     [manager POST:SAMC_URL_QUESTION_QUESTION parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

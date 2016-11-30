@@ -70,7 +70,8 @@ typedef NS_ENUM(NSInteger,SAMCRecallType) {
                              to:(NSString *)changePWD;
 
 + (NSDictionary *)sendQuestion:(NSString *)question
-                      location:(NSDictionary *)location;
+                      location:(NSDictionary *)location
+                     messageId:(NSString *)messageId;
 + (NSDictionary *)queryPopularRequest:(NSInteger)count;
 
 + (NSDictionary *)follow:(BOOL)isFollow

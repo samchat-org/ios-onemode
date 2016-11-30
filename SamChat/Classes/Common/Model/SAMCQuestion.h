@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) NSNumber *datetime;
 @property (nonatomic, strong) NSNumber *questionId;
+@property (nonatomic, copy) NSString *messageId;
 @property (nonatomic, copy) NSString *question;
 @property (nonatomic, copy) NSString *address;
 @property (nonatomic, copy) NSString *fromUser;

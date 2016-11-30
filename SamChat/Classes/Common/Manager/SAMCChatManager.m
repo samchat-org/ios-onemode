@@ -101,6 +101,24 @@
 
 - (void)onRecvMessages:(NSArray<NIMMessage *> *)messages
 {
+    for (NIMMessage *message in messages) {
+        if (message.remoteExt == nil) {
+            continue;
+        }
+        NSString *questionId = message.remoteExt[MESSAGE_EXT_QUESTION_ID_KEY];
+        if (questionId) {
+            NIMSession *askSamSession = [NIMSession session:SAMC_SAMCHAT_ACCOUNT_ASKSAM type:NIMSessionTypeP2P];
+            NIMMessage *questionMessage = [[[NIMSDK sharedSDK].conversationManager messagesInSession:askSamSession messageIds:@[questionId]] firstObject];
+            if (questionMessage) {
+                NIMMessage *insertMessage = [NTESSessionMsgConverter msgWithText:questionMessage.text];
+                insertMessage.timestamp = message.timestamp-0.01;
+                [[NIMSDK sharedSDK].conversationManager saveMessage:insertMessage forSession:message.session completion:^(NSError * _Nullable error) {
+                    DDLogError(@"insert message error:%@", error);
+                }];
+            }
+        }
+    }
+    
 //    // the messages belongs to the same session
 //    if (([messages count] == 0) || (messages.firstObject.session.sessionType != NIMSessionTypeP2P)) {
 //        [self.multicastDelegate onRecvMessages:messages];
@@ -203,35 +221,6 @@
     [self.multicastDelegate fetchMessageAttachment:message didCompleteWithError:error];
 }
 
-#pragma mark - handleMessageWithQuestionId
-- (SAMCMessage *)questionMessageOfQuestionId:(NSNumber *)questionId answer:(NSString *)answer time:(NSTimeInterval)time
-{
-//    SAMCMessage *quesitonMessage = nil;
-//    // 查询是否是一个新的回复，如果是则更新到问题表中，同时需要插入问题到聊天消息中
-//    NSString *question = [[SAMCDataBaseManager sharedManager].questionDB sendQuestion:questionId insertAnswer:answer time:time];
-//    if (question) {
-//        NIMMessage *message = [[NIMMessage alloc] init];
-//        message.text = question;
-//        message.from = [SAMCAccountManager sharedManager].currentAccount;
-//        // set unread_flag & save_flag extention
-//        NSMutableDictionary *ext = [[NSMutableDictionary alloc] initWithDictionary:message.remoteExt];
-//        // 这个问题消息为了保证插入顺序，在下面直接插入数据库，在onRecvMessages:中丢弃
-//        [ext addEntriesFromDictionary:@{MESSAGE_EXT_FROM_USER_MODE_KEY:MESSAGE_EXT_FROM_USER_MODE_VALUE_CUSTOM,
-//                                        MESSAGE_EXT_UNREAD_FLAG_KEY:MESSAGE_EXT_UNREAD_FLAG_NO,
-//                                        MESSAGE_EXT_SAVE_FLAG_KEY:MESSAGE_EXT_SAVE_FLAG_NO}];
-//        message.remoteExt = ext;
-//        NIMSession *session = [NIMSession session:answer type:NIMSessionTypeP2P];
-//        [[NIMSDK sharedSDK].conversationManager saveMessage:message forSession:session completion:nil];
-//        SAMCSession *samcsession = [SAMCSession session:message.session.sessionId
-//                                                   type:message.session.sessionType
-//                                                   mode:SAMCUserModeTypeCustom];
-//        quesitonMessage = [SAMCMessage message:message.messageId session:samcsession];
-//        quesitonMessage.nimMessage = message;
-//    }
-//    return quesitonMessage;
-    return nil;
-}
-
 #pragma mark - 
 - (SAMCMessage *)publicMessageOfAdvId:(NSNumber *)advId to:(NSString *)userId time:(NSTimeInterval)time
 {
@@ -277,6 +266,9 @@
                 SAMCQuestion *question = [SAMCQuestion questionFromDict:requestDict[SAMC_BODY]];
                 NIMSession *session = [NIMSession session:question.fromUser type:NIMSessionTypeP2P];
                 NIMMessage *message = [NTESSessionMsgConverter msgWithText:question.question];
+                if (question.messageId) {
+                    message.localExt = @{MESSAGE_EXT_QUESTION_ID_KEY:question.messageId};
+                }
                 NIMMessageSetting *setting = [[NIMMessageSetting alloc] init];
                 setting.shouldBeCounted = YES;
                 message.setting = setting;

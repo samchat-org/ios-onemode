@@ -23,7 +23,7 @@
 #import "NIMMessageCellMaker.h"
 #import "NIMUIConfig.h"
 #import "NIMKit.h"
-
+#import "SAMCGlobalMacro.h"
 
 static const void * const NTESDispatchMessageDataPrepareSpecificKey = &NTESDispatchMessageDataPrepareSpecificKey;
 dispatch_queue_t NTESMessageDataPrepareQueue()
@@ -262,6 +262,19 @@ NIMUserManagerDelegate>
 #pragma mark - 消息收发接口
 - (void)sendMessage:(NIMMessage *)message
 {
+    // SAMC_BEGIN
+    // add question id if needed
+    if (_session.sessionType == NIMSessionTypeP2P) {
+        NSMutableDictionary *remoteExt = [[NSMutableDictionary alloc] initWithDictionary:message.remoteExt];
+        NIMMessageModel *model = self.sessionDatasource.modelArray.lastObject;
+        NIMMessage *lastMessage = model.message;
+        NSString *questionId = lastMessage.localExt[MESSAGE_EXT_QUESTION_ID_KEY];
+        if (questionId) {
+            [remoteExt addEntriesFromDictionary:@{MESSAGE_EXT_QUESTION_ID_KEY:questionId}];
+        }
+        message.remoteExt = remoteExt;
+    }
+    // SAMC_END
     [[[NIMSDK sharedSDK] chatManager] sendMessage:message toSession:_session error:nil];
 }
 

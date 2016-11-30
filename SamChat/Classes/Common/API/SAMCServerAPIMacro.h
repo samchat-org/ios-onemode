@@ -77,6 +77,7 @@
 #define SAMC_FINDPWD_UPDATE             @"findpwd-update"
 #define SAMC_PWD_UPDATE                 @"pwd-update"
 #define SAMC_QUESTION                   @"question"
+#define SAMC_UUID                       @"uuid"
 #define SAMC_FOLLOW                     @"follow"
 #define SAMC_BLOCK                      @"block"
 #define SAMC_QUERY                      @"query"

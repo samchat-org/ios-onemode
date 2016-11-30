@@ -363,6 +363,7 @@
 //    {
 //        "opt":[0/1]  0:发送问题   1:TBD,
 //        "question" :"aaa"
+//        "uuid" : "1234"
 //        "location" :{
 //            "location_info":{ //option
 //                “longitude”:
@@ -375,12 +376,15 @@
 //}
 + (NSDictionary *)sendQuestion:(NSString *)question
                       location:(NSDictionary *)location
+                     messageId:(NSString *)messageId
 {
     question = question ?:@"";
     location = location ?:@{};
+    messageId = messageId ?:@"";
     NSDictionary *header = @{SAMC_ACTION:SAMC_QUESTION,SAMC_TOKEN:[SAMCServerAPI token]};
     NSDictionary *body = @{SAMC_OPT:@(0),
                            SAMC_QUESTION:question,
+                           SAMC_UUID:messageId,
                            SAMC_LOCATION:location};
     return @{SAMC_HEADER:header,SAMC_BODY:body};
 }
