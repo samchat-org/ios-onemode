@@ -79,7 +79,7 @@
                           RowContent :@[
                                   @{
                                       Title      :@"Name",
-                                      DetailTitle:me.userInfo.username,
+                                      DetailTitle:me.userInfo.username.length ? me.userInfo.username : @"",
                                       CellAction :@"onTouchNameSetting:",
                                       RowHeight     : @(50),
                                       ShowAccessory : @(YES),
@@ -99,7 +99,7 @@
                                       },
                                   @{
                                       Title      :@"Location",
-                                      DetailTitle:me.userInfo.address,
+                                      DetailTitle:me.userInfo.address.length ? me.userInfo.address : @"",
                                       CellAction :@"onTouchLocationSetting:",
                                       RowHeight     : @(50),
                                       ShowAccessory : @(YES)

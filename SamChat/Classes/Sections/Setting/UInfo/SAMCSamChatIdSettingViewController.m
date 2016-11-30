@@ -43,7 +43,7 @@
     [self setUpNav];
     __weak typeof(self) wself = self;
     SAMCUser *me = [SAMCAccountManager sharedManager].currentUser;
-    self.samchatId = me.userInfo.samchatId;
+    self.samchatId = me.userInfo.samchatId ? me.userInfo.samchatId : @"";
     [self buildData];
     self.delegator = [[NIMCommonTableDelegate alloc] initWithTableData:^NSArray *{
         return wself.data;

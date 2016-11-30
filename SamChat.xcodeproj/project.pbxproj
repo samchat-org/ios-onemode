@@ -14,6 +14,7 @@
 		311AE8831DED94D4005149EE /* SAMCQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE8821DED94D4005149EE /* SAMCQuestion.m */; };
 		311AE8861DEDA18B005149EE /* NSDictionary+SAMCJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE8851DEDA18B005149EE /* NSDictionary+SAMCJson.m */; };
 		311AE8891DEE7E2C005149EE /* SAMCLogUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE8881DEE7E2C005149EE /* SAMCLogUploader.m */; };
+		311AE88C1DEE9E81005149EE /* NTESTextSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE88B1DEE9E81005149EE /* NTESTextSettingCell.m */; };
 		31A043581DE535C80021E029 /* NSData+NTES.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041BE1DE535C80021E029 /* NSData+NTES.m */; };
 		31A043591DE535C80021E029 /* NSDictionary+NTESJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041C01DE535C80021E029 /* NSDictionary+NTESJson.m */; };
 		31A0435A1DE535C80021E029 /* NSString+NTES.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041C21DE535C80021E029 /* NSString+NTES.m */; };
@@ -292,6 +293,8 @@
 		311AE8851DEDA18B005149EE /* NSDictionary+SAMCJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+SAMCJson.m"; sourceTree = "<group>"; };
 		311AE8871DEE7E2C005149EE /* SAMCLogUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCLogUploader.h; sourceTree = "<group>"; };
 		311AE8881DEE7E2C005149EE /* SAMCLogUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCLogUploader.m; sourceTree = "<group>"; };
+		311AE88A1DEE9E81005149EE /* NTESTextSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NTESTextSettingCell.h; sourceTree = "<group>"; };
+		311AE88B1DEE9E81005149EE /* NTESTextSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESTextSettingCell.m; sourceTree = "<group>"; };
 		31A041BD1DE535C80021E029 /* NSData+NTES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+NTES.h"; sourceTree = "<group>"; };
 		31A041BE1DE535C80021E029 /* NSData+NTES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+NTES.m"; sourceTree = "<group>"; };
 		31A041BF1DE535C80021E029 /* NSDictionary+NTESJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+NTESJson.h"; sourceTree = "<group>"; };
@@ -1620,6 +1623,8 @@
 		31A0430D1DE535C80021E029 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				311AE88A1DEE9E81005149EE /* NTESTextSettingCell.h */,
+				311AE88B1DEE9E81005149EE /* NTESTextSettingCell.m */,
 				31A043101DE535C80021E029 /* NTESSettingCheckCell.h */,
 				31A043111DE535C80021E029 /* NTESSettingCheckCell.m */,
 				31A043121DE535C80021E029 /* NTESSettingPortraitCell.h */,
@@ -2304,6 +2309,7 @@
 				31A043FE1DE535C80021E029 /* NTESSessionUtil.m in Sources */,
 				311AE8861DEDA18B005149EE /* NSDictionary+SAMCJson.m in Sources */,
 				31FD59AB1DE6B015006F3ED3 /* SAMCAvatarImageView.m in Sources */,
+				311AE88C1DEE9E81005149EE /* NTESTextSettingCell.m in Sources */,
 				31A044761DE590B90021E029 /* SAMCUnreadCountManager.m in Sources */,
 				31FD59D81DEA6DB2006F3ED3 /* SAMCSelectLocationViewController.m in Sources */,
 				31A043711DE535C80021E029 /* NTESColorButtonCell.m in Sources */,
