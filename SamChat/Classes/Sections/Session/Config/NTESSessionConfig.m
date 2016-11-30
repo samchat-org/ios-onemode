@@ -114,7 +114,7 @@
 
 
 - (BOOL)shouldHandleReceipt{
-    return YES;
+    return NO;
 }
 
 - (BOOL)shouldHandleReceiptForMessage:(NIMMessage *)message
