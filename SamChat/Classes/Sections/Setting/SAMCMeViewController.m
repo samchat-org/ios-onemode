@@ -185,11 +185,11 @@
     self.data = [NIMCommonTableSection sectionsWithData:data];
 }
 
-- (void)refreshData{
+- (void)refreshData
+{
     [self buildData];
     [self.tableView reloadData];
 }
-
 
 #pragma mark - Action
 - (void)onActionTouchPortrait:(id)sender
@@ -315,18 +315,15 @@
 #pragma mark - Notification
 - (void)onCustomNotifyChanged:(NSNotification *)notification
 {
-    [self buildData];
-    [self.tableView reloadData];
+    [self refreshData];
 }
-
 
 - (void)onUserInfoHasUpdatedNotification:(NSNotification *)notification
 {
     NSDictionary *userInfo = notification.userInfo;
     NSArray *userInfos = userInfo[NIMKitInfoKey];
     if ([userInfos containsObject:[NIMSDK sharedSDK].loginManager.currentAccount]) {
-        [self buildData];
-        [self.tableView reloadData];
+        [self refreshData];
     }
 }
 

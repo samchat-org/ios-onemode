@@ -84,6 +84,7 @@
             info.avatarUrlString = userInfo.avatar;
             info.avatarImage = self.defaultUserAvatar;
             info.serviceCategory = userInfo.spInfo.serviceCategory;
+            info.samchatId = userInfo.samchatId;
             
             if (userInfo == nil)
             {
