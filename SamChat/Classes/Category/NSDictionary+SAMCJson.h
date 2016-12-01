@@ -19,4 +19,5 @@
 - (NSArray *)samc_JsonArray: (NSString *)key;
 
 - (BOOL)samc_JsonBool:(NSString *)key;
+- (NSInteger)samc_JsonInteger:(NSString *)key;
 @end

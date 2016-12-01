@@ -71,4 +71,14 @@
     return NO;
 }
 
+- (NSInteger)samc_JsonInteger:(NSString *)key
+{
+    id object = [self objectForKey:key];
+    if ([object isKindOfClass:[NSString class]] ||
+        [object isKindOfClass:[NSNumber class]]) {
+        return [object integerValue];
+    }
+    return 0;
+}
+
 @end

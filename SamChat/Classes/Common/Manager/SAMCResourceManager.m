@@ -13,6 +13,7 @@
 #import "SAMCDataPostSerializer.h"
 #import "SAMCServerAPI.h"
 #import "SAMCServerErrorHelper.h"
+#import "NSDictionary+SAMCJson.h"
 
 @implementation SAMCResourceManager
 
@@ -97,7 +98,7 @@
     [manager POST:SAMC_URL_PROFILE_GET_PLACESINFO parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSDictionary *response = responseObject;
-            NSInteger errorCode = [((NSNumber *)response[SAMC_RET]) integerValue];
+            NSInteger errorCode = [response samc_JsonInteger:SAMC_RET];
             if (errorCode) {
                 completion(nil, [SAMCServerErrorHelper errorWithCode:errorCode]);
             } else {

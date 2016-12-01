@@ -13,6 +13,7 @@
 #import "SAMCDataPostSerializer.h"
 #import "NTESSessionMsgConverter.h"
 #import "GCDMulticastDelegate.h"
+#import "NSDictionary+SAMCJson.h"
 
 @interface SAMCQuestionManager ()
 
@@ -110,7 +111,7 @@
     [manager POST:SAMC_URL_QUESTION_QUESTION parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSDictionary *response = responseObject;
-            NSInteger errorCode = [((NSNumber *)response[SAMC_RET]) integerValue];
+            NSInteger errorCode = [response samc_JsonInteger:SAMC_RET];
             if (errorCode) {
                 completion([SAMCServerErrorHelper errorWithCode:errorCode], nil);
             } else {

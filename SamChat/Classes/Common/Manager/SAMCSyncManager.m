@@ -224,7 +224,7 @@ typedef void (^SyncAction)();
         DDLogDebug(@"queryStateDate Response:%@", responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSDictionary *response = responseObject;
-            NSInteger errorCode = [((NSNumber *)response[SAMC_RET]) integerValue];
+            NSInteger errorCode = [response samc_JsonInteger:SAMC_RET];
             if (errorCode) {
                 completion(nil, [SAMCServerErrorHelper errorWithCode:errorCode]);
             } else {
@@ -253,7 +253,7 @@ typedef void (^SyncAction)();
             NSString *syncVersion;
             if ([responseObject isKindOfClass:[NSDictionary class]]) {
                 NSDictionary *response = responseObject;
-                NSInteger errorCode = [((NSNumber *)response[SAMC_RET]) integerValue];
+                NSInteger errorCode = [response samc_JsonInteger:SAMC_RET];
                 if (errorCode == 0) {
                     syncVersion = [response samc_JsonStringForKeyPath:SAMC_STATE_DATE_LAST];
                     NSArray *users = response[SAMC_USERS];
@@ -289,7 +289,7 @@ typedef void (^SyncAction)();
             NSString *syncVersion;
             if ([responseObject isKindOfClass:[NSDictionary class]]) {
                 NSDictionary *response = responseObject;
-                NSInteger errorCode = [((NSNumber *)response[SAMC_RET]) integerValue];
+                NSInteger errorCode = [response samc_JsonInteger:SAMC_RET];
                 if (errorCode == 0) {
                     syncVersion = [response samc_JsonStringForKeyPath:SAMC_STATE_DATE_LAST];
                     NSArray *users = response[SAMC_USERS];

@@ -16,6 +16,7 @@
 #import "SAMCDataBaseManager.h"
 #import "SAMCUserManager.h"
 #import "SAMCPreferenceManager.h"
+#import "NSDictionary+SAMCJson.h"
 
 @implementation SAMCSettingManager
 
@@ -46,7 +47,7 @@
     [manager POST:SAMC_URL_USER_CREATE_SAM_PROS parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSDictionary *response = responseObject;
-            NSInteger errorCode = [((NSNumber *)response[SAMC_RET]) integerValue];
+            NSInteger errorCode = [response samc_JsonInteger:SAMC_RET];
             if (errorCode) {
                 completion([SAMCServerErrorHelper errorWithCode:errorCode]);
             } else {
@@ -76,7 +77,7 @@
     [manager POST:SAMC_URL_PROFILE_AVATAR_UPDATE parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSDictionary *response = responseObject;
-            NSInteger errorCode = [((NSNumber *)response[SAMC_RET]) integerValue];
+            NSInteger errorCode = [response samc_JsonInteger:SAMC_RET];
             if (errorCode) {
                 completion(nil, [SAMCServerErrorHelper errorWithCode:errorCode]);
             } else {
@@ -105,7 +106,7 @@
     [manager POST:SAMC_URL_PROFILE_PROFILE_UPDATE parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSDictionary *response = responseObject;
-            NSInteger errorCode = [((NSNumber *)response[SAMC_RET]) integerValue];
+            NSInteger errorCode = [response samc_JsonInteger:SAMC_RET];
             if (errorCode) {
                 completion([SAMCServerErrorHelper errorWithCode:errorCode]);
             } else {
@@ -147,7 +148,7 @@
     [manager POST:SAMC_URL_PROFILE_EDITCELLPHONE_CODER_EQUEST parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSDictionary *response = responseObject;
-            NSInteger errorCode = [((NSNumber *)response[SAMC_RET]) integerValue];
+            NSInteger errorCode = [response samc_JsonInteger:SAMC_RET];
             if (errorCode) {
                 completion([SAMCServerErrorHelper errorWithCode:errorCode]);
             } else {
@@ -173,7 +174,7 @@
     [manager POST:SAMC_URL_PROFILE_EDITCELLPHONE_UPDATE parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSDictionary *response = responseObject;
-            NSInteger errorCode = [((NSNumber *)response[SAMC_RET]) integerValue];
+            NSInteger errorCode = [response samc_JsonInteger:SAMC_RET];
             if (errorCode) {
                 completion([SAMCServerErrorHelper errorWithCode:errorCode]);
             } else {
@@ -203,7 +204,7 @@
     [manager POST:SAMC_URL_USER_PWD_UPDATE parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSDictionary *response = responseObject;
-            NSInteger errorCode = [((NSNumber *)response[SAMC_RET]) integerValue];
+            NSInteger errorCode = [response samc_JsonInteger:SAMC_RET];
             if (errorCode) {
                 completion([SAMCServerErrorHelper errorWithCode:errorCode]);
             } else {
@@ -227,7 +228,7 @@
     [manager POST:SAMC_URL_PROFILE_UPDATE_QUESTION_NOTIFY parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSDictionary *response = responseObject;
-            NSInteger errorCode = [((NSNumber *)response[SAMC_RET]) integerValue];
+            NSInteger errorCode = [response samc_JsonInteger:SAMC_RET];
             if (errorCode) {
                 completion([SAMCServerErrorHelper errorWithCode:errorCode]);
             } else {
@@ -255,7 +256,7 @@
     [manager POST:SAMC_URL_PROFILE_CREATE_SAMCHATID parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSDictionary *response = responseObject;
-            NSInteger errorCode = [((NSNumber *)response[SAMC_RET]) integerValue];
+            NSInteger errorCode = [response samc_JsonInteger:SAMC_RET];
             if (errorCode) {
                 completion([SAMCServerErrorHelper errorWithCode:errorCode]);
             } else {
