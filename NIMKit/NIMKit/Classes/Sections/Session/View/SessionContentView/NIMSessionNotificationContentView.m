@@ -34,7 +34,10 @@
     [_label sizeToFit];
 }
 
-- (UIImage *)chatBubbleImageForState:(UIControlState)state outgoing:(BOOL)outgoing{
+// SAMC_BEGIN
+//- (UIImage *)chatBubbleImageForState:(UIControlState)state outgoing:(BOOL)outgoing{
+- (UIImage *)chatBubbleImageForState:(UIControlState)state outgoing:(BOOL)outgoing spMode:(BOOL)spMode{
+// SAMC_END 
     return [[UIImage nim_imageInKit:@"icon_session_time_bg"] resizableImageWithCapInsets:UIEdgeInsetsMake(8,20,8,20) resizingMode:UIImageResizingModeStretch];
 }
 
