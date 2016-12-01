@@ -11,11 +11,9 @@
 #import "SAMCSelectLocationViewController.h"
 #import "SAMCServerAPIMacro.h"
 #import "SAMCPadImageView.h"
-#import "SAMCStepperView.h"
 
 @interface SAMCCSAStepOneViewController ()
 
-@property (nonatomic, strong) SAMCStepperView *stepperView;
 @property (nonatomic, strong) UILabel *tipLabel;
 @property (nonatomic, strong) UITextField *serviceCategoryTextField;
 @property (nonatomic, strong) UITextField *serviceLocationTextField;
@@ -60,22 +58,14 @@
     self.view.backgroundColor = SAMC_COLOR_LIGHTGREY;
     [self setUpNavItem];
 
-    [self.view addSubview:self.stepperView];
     [self.view addSubview:self.tipLabel];
     [self.view addSubview:self.serviceCategoryTextField];
     [self.view addSubview:self.serviceLocationTextField];
     [self.view addSubview:self.nextButton];
     
-    [self.stepperView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
-        make.width.equalTo(@72);
-        make.height.equalTo(@12);
-        make.top.equalTo(self.view).with.offset(20);
-    }];
-    
     [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
-        make.top.equalTo(self.stepperView.mas_bottom).with.offset(22);
+        make.top.equalTo(self.view).with.offset(22);
     }];
     
     [self.serviceCategoryTextField mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -198,14 +188,6 @@
         _samProsInformation = [[NSMutableDictionary alloc] init];
     }
     return _samProsInformation;
-}
-
-- (SAMCStepperView *)stepperView
-{
-    if (_stepperView == nil) {
-        _stepperView = [[SAMCStepperView alloc] initWithFrame:CGRectZero step:1 color:SAMC_COLOR_LAKE];
-    }
-    return _stepperView;
 }
 
 - (UILabel *)tipLabel

@@ -12,12 +12,10 @@
 #import "SVProgressHUD.h"
 #import "SAMCSettingManager.h"
 #import "UIView+Toast.h"
-#import "SAMCStepperView.h"
 #import "SAMCCSADoneViewController.h"
 
 @interface SAMCCSAStepThreeViewController ()<UITextViewDelegate>
 
-@property (nonatomic, strong) SAMCStepperView *stepperView;
 @property (nonatomic, strong) UILabel *tipLabel;
 @property (nonatomic, strong) SAMCTextView *descriptionTextView;
 @property (nonatomic, strong) UIButton *doneButton;
@@ -67,21 +65,13 @@
     self.view.backgroundColor = SAMC_COLOR_LIGHTGREY;
     [self setUpNavItem];
     
-    [self.view addSubview:self.stepperView];
     [self.view addSubview:self.tipLabel];
     [self.view addSubview:self.descriptionTextView];
     [self.view addSubview:self.doneButton];
     
-    [self.stepperView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
-        make.width.equalTo(@72);
-        make.height.equalTo(@12);
-        make.top.equalTo(self.view).with.offset(20);
-    }];
-    
     [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
-        make.top.equalTo(self.stepperView.mas_bottom).with.offset(22);
+        make.top.equalTo(self.view).with.offset(22);
     }];
     
     [self.descriptionTextView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -170,14 +160,6 @@
 }
 
 #pragma mark - lazy load
-- (SAMCStepperView *)stepperView
-{
-    if (_stepperView == nil) {
-        _stepperView = [[SAMCStepperView alloc] initWithFrame:CGRectZero step:3 color:SAMC_COLOR_LAKE];
-    }
-    return _stepperView;
-}
-
 - (UILabel *)tipLabel
 {
     if (_tipLabel == nil) {
