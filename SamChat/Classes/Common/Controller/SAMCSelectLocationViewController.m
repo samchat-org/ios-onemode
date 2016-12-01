@@ -11,6 +11,7 @@
 #import "SAMCPlaceInfo.h"
 #import "SAMCServerAPIMacro.h"
 #import "SAMCSearchBar.h"
+#import "SAMCAccountManager.h"
 
 @interface SAMCSelectLocationViewController ()<UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>
 
@@ -81,18 +82,11 @@
 {
     self.navigationItem.title = @"Select Location";
     
-    UIColor *tintColor;
-    if (_userMode == SAMCUserModeTypeCustom) {
-        tintColor = SAMC_COLOR_INGRABLUE;
-    } else {
-        tintColor = [UIColor whiteColor];
-    }
-    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done"
                                                                               style:UIBarButtonItemStylePlain
                                                                              target:self
                                                                              action:@selector(done:)];
-    self.navigationItem.rightBarButtonItem.tintColor = tintColor;
+    self.navigationItem.rightBarButtonItem.tintColor = SAMC_BarItemTintColor;
 }
 
 #pragma mark - Action
