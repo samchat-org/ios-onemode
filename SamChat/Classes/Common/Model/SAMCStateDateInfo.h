@@ -10,8 +10,7 @@
 
 @interface SAMCStateDateInfo : NSObject
 
-@property (nonatomic, copy) NSString *servicerListVersion;
-@property (nonatomic, copy) NSString *customerListVersion;
+@property (nonatomic, copy) NSString *contactListVersion;
 @property (nonatomic, copy) NSString *followListVersion;
 
 + (instancetype)stateDateInfoFromDict:(NSDictionary *)dict;

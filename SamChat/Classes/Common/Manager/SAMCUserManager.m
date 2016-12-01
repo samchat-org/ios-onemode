@@ -15,6 +15,7 @@
 #import "SAMCAccountManager.h"
 #import "GCDMulticastDelegate.h"
 #import "SAMCSyncManager.h"
+#import "NSDictionary+SAMCJson.h"
 
 @interface SAMCUserManager ()
 
@@ -179,11 +180,11 @@
 
 - (void)addOrRemove:(BOOL)isAdd
             contact:(SAMCUser *)user
-               type:(SAMCContactListType)type
+                tag:(NSString *)tag
          completion:(void (^)(NSError * __nullable error))completion
 {
     NSAssert(completion != nil, @"completion block should not be nil");
-    NSDictionary *parameters = [SAMCServerAPI addOrRemove:isAdd contact:user.userId type:type];
+    NSDictionary *parameters = [SAMCServerAPI addOrRemove:isAdd contact:user.userId tag:tag];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [SAMCDataPostSerializer serializer];
     [manager POST:SAMC_URL_CONTACT_CONTACT parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -194,15 +195,14 @@
                 completion([SAMCServerErrorHelper errorWithCode:errorCode]);
             } else {
                 if (isAdd) {
-                    [[SAMCDataBaseManager sharedManager].userInfoDB insertToContactList:user type:type];
+                    [[SAMCDataBaseManager sharedManager].userInfoDB insertToContactList:user tag:tag];
                 } else {
-                    [[SAMCDataBaseManager sharedManager].userInfoDB deleteFromContactList:user type:type];
+                    [[SAMCDataBaseManager sharedManager].userInfoDB deleteFromContactList:user tag:tag];
                 }
                 NSDictionary *stateDate = response[SAMC_STATE_DATE];
                 if ([stateDate isKindOfClass:[NSDictionary class]]) {
-                    [[SAMCSyncManager sharedManager] updateLocalContactListVersionFrom:[stateDate[SAMC_PREVIOUS] stringValue]
-                                                                                    to:[stateDate[SAMC_LAST] stringValue]
-                                                                                  type:type];
+                    [[SAMCSyncManager sharedManager] updateLocalContactListVersionFrom:[stateDate samc_JsonString:SAMC_PREVIOUS]
+                                                                                    to:[stateDate samc_JsonString:SAMC_LAST]];
                 }
                 completion(nil);
             }
@@ -243,19 +243,9 @@
 }
 
 #pragma mark -
-- (NSArray<NSString *> *)myContactListOfType:(SAMCContactListType)listType
+- (NSArray<NSString *> *)myContactListOfTag:(NSString *)tag
 {
-    return [[SAMCDataBaseManager sharedManager].userInfoDB myContactListOfType:listType];
-}
-
-- (BOOL)isMyProvider:(NSString *)userId
-{
-    return [[[SAMCDataBaseManager sharedManager].userInfoDB myContactListOfType:SAMCContactListTypeServicer] containsObject:userId];
-}
-
-- (BOOL)isMyCustomer:(NSString *)userId
-{
-    return [[[SAMCDataBaseManager sharedManager].userInfoDB myContactListOfType:SAMCContactListTypeCustomer] containsObject:userId];
+    return [[SAMCDataBaseManager sharedManager].userInfoDB myContactListOfTag:tag];
 }
 
 - (SAMCUser *)userInfo:(NSString *)userId

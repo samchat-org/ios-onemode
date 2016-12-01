@@ -16,5 +16,7 @@
 - (NSString *)samc_JsonStringForKeyPath:(NSString *)keyPath;
 - (NSNumber *)samc_JsonNumberForKeyPath:(NSString *)keyPath;
 
+- (NSArray *)samc_JsonArray: (NSString *)key;
+
 - (BOOL)samc_JsonBool:(NSString *)key;
 @end

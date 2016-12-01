@@ -16,8 +16,7 @@
 - (void)close;
 
 - (void)updateLocalContactListVersionFrom:(NSString *)fromVersion
-                                       to:(NSString *)toVersion
-                                     type:(SAMCContactListType)listType;
+                                       to:(NSString *)toVersion;
 - (void)updateLocalFollowListVersionFrom:(NSString *)fromVersion
                                       to:(NSString *)toVersion;
 

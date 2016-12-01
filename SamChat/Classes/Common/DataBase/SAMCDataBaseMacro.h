@@ -19,7 +19,7 @@ sp_service_description TEXT, sp_countrycode TEXT, sp_phone TEXT, sp_address TEXT
 #define SAMC_CREATE_USERINFO_TABLE_USERNAME_INDEX_SQL_2016082201 @"CREATE index IF NOT EXISTS username_index ON userinfo(username)"
 
 #define SAMC_CREATE_CONTACT_LIST_TABLE_SQL_2016082201 @"CREATE TABLE IF NOT EXISTS contact_list(\
-serial INTEGER PRIMARY KEY AUTOINCREMENT, unique_id TEXT UNIQUE, tag text)"
+serial INTEGER PRIMARY KEY AUTOINCREMENT, unique_id TEXT, tag text)"
 
 #define SAMC_CREATE_CONTACT_LIST_VERSION_TABLE_SQL_2016082201 @"CREATE TABLE IF NOT EXISTS contact_list_version(\
 type INTEGER, version TEXT, UNIQUE(type))"

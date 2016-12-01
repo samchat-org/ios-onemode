@@ -161,8 +161,7 @@
 #define SAMC_PLACE_ID                   @"place_id"
 #define SAMC_PLACES_INFO                @"places_info"
 #define SAMC_STATE_DATE_INFO            @"state_date_info"
-#define SAMC_SERVICER_LIST              @"servicer_list"
-#define SAMC_CUSTOMER_LIST              @"customer_list"
+#define SAMC_CONTACT_LIST               @"contact_list"
 #define SAMC_FOLLOW_LIST                @"follow_list"
 #define SAMC_MESSAGE_ID                 @"message_id"
 #define SAMC_POPULAR_REQUEST            @"popular_request"
@@ -170,6 +169,7 @@
 #define SAMC_STATE_DATE                 @"state_date"
 #define SAMC_PREVIOUS                   @"previous"
 #define SAMC_LAST                       @"last"
+#define SAMC_TAG                        @"tag"
 
 #define SAMC_AVATAR_ORIGIN              @"avatar.origin"
 #define SAMC_AVATAR_THUMB               @"avatar.thumb"

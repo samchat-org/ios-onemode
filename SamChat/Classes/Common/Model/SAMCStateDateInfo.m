@@ -15,8 +15,7 @@
 + (instancetype)stateDateInfoFromDict:(NSDictionary *)dict
 {
     SAMCStateDateInfo *info = [[SAMCStateDateInfo alloc] init];
-    info.servicerListVersion = [dict samc_JsonString:SAMC_SERVICER_LIST];
-    info.customerListVersion = [dict samc_JsonString:SAMC_CUSTOMER_LIST];
+    info.contactListVersion = [dict samc_JsonString:SAMC_CONTACT_LIST];
     info.followListVersion = [dict samc_JsonString:SAMC_FOLLOW_LIST];
     return info;
 }

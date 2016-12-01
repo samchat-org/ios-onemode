@@ -92,11 +92,11 @@ typedef NS_ENUM(NSInteger,SAMCRecallType) {
                             location:(NSDictionary *)location;
 
 + (NSDictionary *)queryFollowList;
-+ (NSDictionary *)queryContactList:(SAMCContactListType)type;
++ (NSDictionary *)queryContactList;
 
 + (NSDictionary *)addOrRemove:(BOOL)isAdd
                       contact:(NSString *)userId
-                         type:(SAMCContactListType)type;
+                          tag:(NSString *)tag;
 
 + (NSDictionary *)sendInviteMsg:(NSArray *)phones;
 

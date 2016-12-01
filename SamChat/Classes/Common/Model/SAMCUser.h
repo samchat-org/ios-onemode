@@ -52,3 +52,17 @@
 + (instancetype)spInfoFromDict:(NSDictionary *)spInfoDict;
 
 @end
+
+@interface SAMCUserContactInfo : NSObject
+
+@property (nonatomic, copy) NSString *userId;
+@property (nonatomic, copy) NSString *username;
+@property (nonatomic, strong) NSNumber *usertype;
+@property (nonatomic, strong) NSNumber *lastupdate;
+@property (nonatomic, copy) NSString *avatar;
+@property (nonatomic, copy) NSString *serviceCategory;
+@property (nonatomic, copy) NSArray<NSString *> *tags;
+
++ (instancetype)userContactInfoFromDict:(NSDictionary *)contactInfoDict;
+
+@end

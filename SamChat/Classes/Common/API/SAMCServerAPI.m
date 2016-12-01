@@ -442,10 +442,10 @@
 + (NSDictionary *)follow:(BOOL)isFollow
          officialAccount:(NSString *)userId;
 {
-    NSNumber *uniqueId = @([userId integerValue]);
+    userId = userId?:@"";
     NSDictionary *header = @{SAMC_ACTION:SAMC_FOLLOW,SAMC_TOKEN:[SAMCServerAPI token]};
     NSDictionary *body = @{SAMC_OPT:isFollow ? @(1) : @(0),
-                           SAMC_ID:uniqueId};
+                           SAMC_ID:userId};
     return @{SAMC_HEADER:header,SAMC_BODY:body};
 }
 
@@ -466,10 +466,10 @@
 + (NSDictionary *)block:(BOOL)blockFlag
                    user:(NSString *)userId
 {
-    NSNumber *uniqueId = @([userId integerValue]);
+    userId = userId?:@"";
     NSDictionary *header = @{SAMC_ACTION:SAMC_BLOCK,SAMC_TOKEN:[SAMCServerAPI token]};
     NSDictionary *body = @{SAMC_OPT:blockFlag? @(1):@(0),
-                           SAMC_ID:uniqueId};
+                           SAMC_ID:userId};
     return @{SAMC_HEADER:header,SAMC_BODY:body};
 }
 
@@ -641,13 +641,12 @@
 //    },
 //    "body" :
 //    {
-//        “type[0,1]”: 0 customer  1 servicer
 //    } 
 //}
-+ (NSDictionary *)queryContactList:(SAMCContactListType)type
++ (NSDictionary *)queryContactList
 {
     NSDictionary *header = @{SAMC_ACTION:SAMC_CONTACT_LIST_QUERY,SAMC_TOKEN:[SAMCServerAPI token]};
-    NSDictionary *body = @{SAMC_TYPE:@(type)};
+    NSDictionary *body = @{};
     return @{SAMC_HEADER:header,SAMC_BODY:body};
 }
 
@@ -667,13 +666,14 @@
 //}
 + (NSDictionary *)addOrRemove:(BOOL)isAdd
                       contact:(NSString *)userId
-                         type:(SAMCContactListType)type
+                          tag:(NSString *)tag
 {
-    NSNumber *uniqueId = @([userId integerValue]);
+    userId = userId?:@"";
+    tag = tag?:@"";
     NSDictionary *header = @{SAMC_ACTION:SAMC_CONTACT,SAMC_TOKEN:[SAMCServerAPI token]};
     NSDictionary *body = @{SAMC_OPT:isAdd ? @(0):@(1),
-                           SAMC_TYPE:@(type),
-                           SAMC_ID:uniqueId};
+                           SAMC_TAG:tag,
+                           SAMC_ID:userId};
     return @{SAMC_HEADER:header,SAMC_BODY:body};
 }
 

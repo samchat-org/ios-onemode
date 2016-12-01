@@ -71,3 +71,20 @@
 }
 
 @end
+
+@implementation SAMCUserContactInfo
+
++ (instancetype)userContactInfoFromDict:(NSDictionary *)contactInfoDict
+{
+    SAMCUserContactInfo *info = [[SAMCUserContactInfo alloc] init];
+    info.userId = [contactInfoDict samc_JsonString:SAMC_ID];
+    info.username = [contactInfoDict samc_JsonString:SAMC_USERNAME];
+    info.lastupdate = [contactInfoDict samc_JsonNumber:SAMC_LASTUPDATE];
+    info.usertype = [contactInfoDict samc_JsonNumber:SAMC_TYPE];
+    info.avatar = [contactInfoDict samc_JsonStringForKeyPath:SAMC_AVATAR_THUMB];
+    info.serviceCategory = [contactInfoDict samc_JsonStringForKeyPath:SAMC_SAM_PROS_INFO_SERVICE_CATEGORY];
+    info.tags = [contactInfoDict samc_JsonArray:SAMC_TAG];
+    return info;
+}
+
+@end

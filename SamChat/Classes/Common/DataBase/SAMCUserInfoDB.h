@@ -20,16 +20,16 @@
 
 - (void)updateUser:(SAMCUser *)user;
 
-- (BOOL)updateContactList:(NSArray *)users type:(SAMCContactListType)listType;
+- (BOOL)updateContactList:(NSArray<SAMCUserContactInfo *> *)users;
 
-- (void)insertToContactList:(SAMCUser *)user type:(SAMCContactListType)listType;
+- (void)insertToContactList:(SAMCUser *)user tag:(NSString *)tag;
 
-- (void)deleteFromContactList:(SAMCUser *)user type:(SAMCContactListType)listType;
+- (void)deleteFromContactList:(SAMCUser *)user tag:(NSString *)tag;
 
-- (NSArray<NSString *> *)myContactListOfType:(SAMCContactListType)listType;
+- (NSArray<NSString *> *)myContactListOfTag:(NSString *)tag;
 
-- (NSString *)localContactListVersionOfType:(SAMCContactListType)listType;
+- (NSString *)localContactListVersion;
 
-- (void)updateLocalContactListVersion:(NSString *)version type:(SAMCContactListType)listType;
+- (void)updateLocalContactListVersion:(NSString *)version;
 
 @end

@@ -14,6 +14,7 @@
 #import "SAMCServerAPI.h"
 #import "SAMCServerErrorHelper.h"
 #import "SAMCDataBaseManager.h"
+#import "NSDictionary+SAMCJson.h"
 
 typedef void (^SyncAction)();
 
@@ -148,7 +149,7 @@ typedef void (^SyncAction)();
                 [wself performSelector:@selector(doSync) withObject:nil afterDelay:wself.retryDelay];
             } else {
                 wself.stateDateInfo = stateDateInfo;
-                wself.syncBlock = [wself queryServicerListBlock];
+                wself.syncBlock = [wself queryContactListBlock];
                 wself.isSyncing = NO;
                 [wself doSync];
             }
@@ -156,54 +157,26 @@ typedef void (^SyncAction)();
     };
 }
 
-- (SyncAction)queryServicerListBlock
+- (SyncAction)queryContactListBlock
 {
     __weak typeof(self) wself = self;
     return ^(){
-        NSString *localServicerListVersion = wself.localServicerListVersion;
-        if ([wself.stateDateInfo.servicerListVersion isEqualToString:localServicerListVersion]) {
-            DDLogDebug(@"queryServicerListBlock no need to sync servicer list");
-            wself.syncBlock = [wself queryCustomerListBlock];
+        NSString *localContactListVersion = wself.localContactListVersion;
+        if ([wself.stateDateInfo.contactListVersion isEqualToString:localContactListVersion]) {
+            DDLogDebug(@"queryContactListBlock no need to sync servicer list");
+            wself.syncBlock = [wself queryFollowListBlock];
             wself.isSyncing = NO;
             [wself doSync];
             return;
         }
         [wself queryContactList:SAMCContactListTypeServicer completion:^(NSError *error) {
             if (error) {
-                DDLogDebug(@"queryServicerListBlock sync servicer list error: %@", error);
+                DDLogDebug(@"queryContactListBlock list error: %@", error);
                 wself.isSyncing = NO;
                 [wself performSelector:@selector(doSync) withObject:nil afterDelay:wself.retryDelay];
             } else {
-                DDLogDebug(@"queryServicerListBlock sync servicer list finished");
-                [wself updateLocalContactListVersion:wself.stateDateInfo.servicerListVersion type:SAMCContactListTypeServicer];
-                wself.syncBlock = [wself queryCustomerListBlock];
-                wself.isSyncing = NO;
-                [wself doSync];
-            }
-        }];
-    };
-}
-
-- (SyncAction)queryCustomerListBlock
-{
-    __weak typeof(self) wself = self;
-    return ^(){
-        NSString *localCustomerListVersion = wself.localCustomerListVersion;
-        if ([wself.stateDateInfo.customerListVersion isEqualToString:localCustomerListVersion]) {
-            DDLogDebug(@"queryCustomerListBlock no need to sync customer list");
-            wself.syncBlock = [wself queryFollowListBlock];
-            wself.isSyncing = NO;
-            [wself doSync];
-            return;
-        }
-        [wself queryContactList:SAMCContactListTypeCustomer completion:^(NSError *error) {
-            if (error) {
-                DDLogDebug(@"queryCustomerListBlock sync customer list error: %@", error);
-                wself.isSyncing = NO;
-                [wself performSelector:@selector(doSync) withObject:nil afterDelay:wself.retryDelay];
-            } else {
-                DDLogDebug(@"queryCustomerListBlock sync customer list finished");
-                [wself updateLocalContactListVersion:wself.stateDateInfo.customerListVersion type:SAMCContactListTypeCustomer];
+                DDLogDebug(@"queryContactListBlock list finished");
+                [wself updateLocalContactListVersion:wself.stateDateInfo.contactListVersion];
                 wself.syncBlock = [wself queryFollowListBlock];
                 wself.isSyncing = NO;
                 [wself doSync];
@@ -270,7 +243,7 @@ typedef void (^SyncAction)();
 - (void)queryContactList:(SAMCContactListType)type completion:(void(^)(NSError *error))completion
 {
     NSAssert(completion != nil, @"completion block should not be nil");
-    NSDictionary *parameters = [SAMCServerAPI queryContactList:type];
+    NSDictionary *parameters = [SAMCServerAPI queryContactList];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [SAMCDataPostSerializer serializer];
     __weak typeof(self) wself = self;
@@ -282,9 +255,9 @@ typedef void (^SyncAction)();
                 NSDictionary *response = responseObject;
                 NSInteger errorCode = [((NSNumber *)response[SAMC_RET]) integerValue];
                 if (errorCode == 0) {
-                    syncVersion = [[response valueForKeyPath:SAMC_STATE_DATE_LAST] stringValue];
+                    syncVersion = [response samc_JsonStringForKeyPath:SAMC_STATE_DATE_LAST];
                     NSArray *users = response[SAMC_USERS];
-                    result = [[SAMCDataBaseManager sharedManager].userInfoDB updateContactList:users type:type];
+                    result = [[SAMCDataBaseManager sharedManager].userInfoDB updateContactList:users];
                 }
             }
             NSError *aError = nil;
@@ -293,11 +266,7 @@ typedef void (^SyncAction)();
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (result) {
-                    if (type == SAMCContactListTypeServicer) {
-                        wself.stateDateInfo.servicerListVersion = syncVersion;
-                    } else {
-                        wself.stateDateInfo.customerListVersion = syncVersion;
-                    }
+                    wself.stateDateInfo.contactListVersion = syncVersion;
                 }
                 completion(aError);
             });
@@ -322,7 +291,7 @@ typedef void (^SyncAction)();
                 NSDictionary *response = responseObject;
                 NSInteger errorCode = [((NSNumber *)response[SAMC_RET]) integerValue];
                 if (errorCode == 0) {
-                    syncVersion = [[response valueForKeyPath:SAMC_STATE_DATE_LAST] stringValue];
+                    syncVersion = [response samc_JsonStringForKeyPath:SAMC_STATE_DATE_LAST];
                     NSArray *users = response[SAMC_USERS];
                     if ((users != nil) && ([users isKindOfClass:[NSArray class]])) {
                         result = [[SAMCDataBaseManager sharedManager].publicDB updateFollowList:users];
@@ -348,18 +317,10 @@ typedef void (^SyncAction)();
 #pragma mark -
 - (void)updateLocalContactListVersionFrom:(NSString *)fromVersion
                                        to:(NSString *)toVersion
-                                     type:(SAMCContactListType)listType
 {
-    if (listType == SAMCContactListTypeServicer) {
-        if ([fromVersion isEqualToString:self.localServicerListVersion]) {
-            [self updateLocalContactListVersion:toVersion type:listType];
-            DDLogDebug(@"update servicer list version from %@ to %@", fromVersion, toVersion);
-        }
-    } else {
-        if ([fromVersion isEqualToString:self.localCustomerListVersion]) {
-            [self updateLocalContactListVersion:toVersion type:listType];
-            DDLogDebug(@"update customer list version from %@ to %@", fromVersion, toVersion);
-        }
+    if ([fromVersion isEqualToString:self.localContactListVersion]) {
+        [self updateLocalContactListVersion:toVersion];
+        DDLogDebug(@"update contact list version from %@ to %@", fromVersion, toVersion);
     }
 }
 
@@ -372,11 +333,10 @@ typedef void (^SyncAction)();
     }
 }
 
-- (void)updateLocalContactListVersion:(NSString *)version type:(SAMCContactListType)listType
+- (void)updateLocalContactListVersion:(NSString *)version
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-       [[SAMCDataBaseManager sharedManager].userInfoDB updateLocalContactListVersion:version
-                                                                                type:listType];
+       [[SAMCDataBaseManager sharedManager].userInfoDB updateLocalContactListVersion:version];
     });
 }
 
@@ -388,14 +348,9 @@ typedef void (^SyncAction)();
 }
 
 #pragma mark - private
-- (NSString *)localServicerListVersion
+- (NSString *)localContactListVersion
 {
-    return [[SAMCDataBaseManager sharedManager].userInfoDB localContactListVersionOfType:SAMCContactListTypeServicer];
-}
-
-- (NSString *)localCustomerListVersion
-{
-    return [[SAMCDataBaseManager sharedManager].userInfoDB localContactListVersionOfType:SAMCContactListTypeCustomer];
+    return [[SAMCDataBaseManager sharedManager].userInfoDB localContactListVersion];
 }
 
 - (NSString *)localFollowListVersion

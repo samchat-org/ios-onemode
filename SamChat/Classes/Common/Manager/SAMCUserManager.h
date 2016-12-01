@@ -36,15 +36,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)addOrRemove:(BOOL)isAdd
             contact:(SAMCUser *)user
-               type:(SAMCContactListType)type
+                tag:(NSString *)tag
          completion:(void (^)(NSError * __nullable error))completion;
 
 - (void)sendInviteMsg:(NSArray<SAMCPhone *> *)phones
            completion:(void (^)(NSError * __nullable error))completion;
 
-- (NSArray<NSString *> *)myContactListOfType:(SAMCContactListType)listType;
-- (BOOL)isMyProvider:(NSString *)userId;
-- (BOOL)isMyCustomer:(NSString *)userId;
+- (NSArray<NSString *> *)myContactListOfTag:(NSString *)tag;
 
 - (SAMCUser *)userInfo:(NSString *)userId;
 

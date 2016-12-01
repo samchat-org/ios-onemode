@@ -54,6 +54,13 @@
     return nil;
 }
 
+- (NSArray *)samc_JsonArray: (NSString *)key
+{
+    id object = [self objectForKey:key];
+    return [object isKindOfClass:[NSArray class]] ? object : nil;
+    
+}
+
 - (BOOL)samc_JsonBool:(NSString *)key
 {
     id object = [self objectForKey:key];
