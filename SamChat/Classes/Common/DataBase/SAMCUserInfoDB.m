@@ -325,13 +325,8 @@
     __block BOOL result = YES;
     [self.queue inDatabase:^(FMDatabase *db) {
         NSArray *sqls;
-        if (listType == SAMCContactListTypeCustomer) {
-            sqls = @[@"DROP TABLE IF EXISTS contact_list_customer",
-                     SAMC_CREATE_CONTACT_LIST_CUSTOMER_TABLE_SQL_2016082201];
-        } else if (listType == SAMCContactListTypeServicer) {
-            sqls = @[@"DROP TABLE IF EXISTS contact_list_servicer",
-                     SAMC_CREATE_CONTACT_LIST_SERVICER_TABLE_SQL_2016082201];
-        }
+        sqls = @[@"DROP TABLE IF EXISTS contact_list",
+                 SAMC_CREATE_CONTACT_LIST_TABLE_SQL_2016082201];
         for (NSString *sql in sqls) {
             if (![db executeUpdate:sql]) {
                 DDLogError(@"error: execute sql %@ failed error %@",sql,[db lastError]);
