@@ -54,6 +54,7 @@ alpha:alphaValue]
 #define SAMC_COLOR_RGB_LAKE                     0x2676B6
 #define SAMC_COLOR_RGB_INGRABLUE                0x1D4D73
 
+#define SAMC_BarItemTintColor ([SAMCAccountManager sharedManager].isCurrentUserServicer ? [UIColor whiteColor]:SAMC_COLOR_INGRABLUE)
 
 #define MESSAGE_EXT_FROM_USER_MODE_KEY          @"msg_from"
 #define MESSAGE_EXT_FROM_USER_MODE_VALUE_CUSTOM @(0)
