@@ -23,6 +23,7 @@
 #import "SAMCUnreadCountManager.h"
 #import "SAMCSyncManager.h"
 #import "SAMCPreferenceManager.h"
+#import "NSDictionary+SAMCJson.h"
 
 @interface SAMCAccountManager () <NIMLoginManagerDelegate, SAMCUserManagerDelegate>
 
@@ -279,6 +280,30 @@
         }else{
             completion([SAMCServerErrorHelper errorWithCode:SAMCServerErrorNetEaseLoginFailed]);
         }
+    }];
+}
+
+- (void)checkPWD:(void (^)(BOOL isPWDSet, NSError * __nullable error))completion
+{
+    NSAssert(completion != nil, @"completion block should not be nil");
+    NSDictionary *parameters = [SAMCServerAPI checkPWD];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer = [SAMCDataPostSerializer serializer];
+    [manager POST:SAMC_URL_USER_CHECK_PWD parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *response = responseObject;
+            NSInteger errorCode = [((NSNumber *)response[SAMC_RET]) integerValue];
+            if (errorCode) {
+                completion(YES, [SAMCServerErrorHelper errorWithCode:errorCode]);
+            } else {
+                BOOL isPWDSet = [response samc_JsonBool:SAMC_PWD_FLAG];
+                completion(isPWDSet, nil);
+            }
+        } else {
+            completion(YES, [SAMCServerErrorHelper errorWithCode:SAMCServerErrorUnknowError]);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        completion(YES, [SAMCServerErrorHelper errorWithCode:SAMCServerErrorServerNotReachable]);
     }];
 }
 

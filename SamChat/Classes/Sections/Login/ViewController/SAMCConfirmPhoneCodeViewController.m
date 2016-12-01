@@ -9,7 +9,7 @@
 #import "SAMCConfirmPhoneCodeViewController.h"
 #import "SAMCTextField.h"
 #import "SAMCPhoneCodeView.h"
-#import "SAMCSetPasswordViewController.h"
+#import "SAMCReSetPasswordViewController.h"
 #import "SAMCAccountManager.h"
 #import "UIView+Toast.h"
 #import "SVProgressHUD.h"
@@ -202,7 +202,7 @@
                                                                       phone:phoneNumber
                                                                        code:verifyCode];
         } else {
-            vc = [[SAMCSetPasswordViewController alloc] initWithCountryCode:countryCode
+            vc = [[SAMCReSetPasswordViewController alloc] initWithCountryCode:countryCode
                                                                       phone:phoneNumber
                                                                        code:verifyCode];
         }

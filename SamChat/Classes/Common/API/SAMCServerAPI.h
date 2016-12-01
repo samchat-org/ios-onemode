@@ -54,6 +54,8 @@ typedef NS_ENUM(NSInteger,SAMCRecallType) {
 
 + (NSDictionary *)logout;
 
++ (NSDictionary *)checkPWD;
+
 + (NSDictionary *)createSamPros:(NSDictionary *)info;
 
 + (NSDictionary *)findPWDCodeRequestWithCountryCode:(NSString *)countryCode

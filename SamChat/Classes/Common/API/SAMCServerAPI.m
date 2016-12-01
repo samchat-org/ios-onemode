@@ -212,6 +212,24 @@
     return @{SAMC_HEADER:header,SAMC_BODY:body};
 }
 
+
+//{
+//  "header":
+//  {
+//    "action" : "check-pwd",
+//    "token": ""
+//  },
+//  "body" :
+//  {
+//  }
+//}
++ (NSDictionary *)checkPWD
+{
+    NSDictionary *header = @{SAMC_ACTION:SAMC_CHECK_PWD,SAMC_TOKEN:[SAMCServerAPI token]};
+    NSDictionary *body = @{};
+    return @{SAMC_HEADER:header,SAMC_BODY:body};
+}
+
 //{
 //    "header":
 //    {

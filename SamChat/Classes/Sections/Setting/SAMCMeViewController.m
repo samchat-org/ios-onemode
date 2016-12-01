@@ -27,6 +27,7 @@
 #import "SAMCCSAStepOneViewController.h"
 #import "SAMCAccountManager.h"
 #import "SAMCSettingViewController.h"
+#import "SAMCSetPasswordViewController.h"
 
 @interface SAMCMeViewController ()
 
@@ -277,27 +278,52 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)logoutCurrentAccount:(id)sender{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"logout?" message:nil delegate:nil cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
-    [alert showAlertWithCompletionHandler:^(NSInteger alertIndex) {
-        switch (alertIndex) {
-            case 1:
-            {
-                [SVProgressHUD showWithStatus:@"logout" maskType:SVProgressHUDMaskTypeBlack];
-                __weak typeof(self) wself = self;
+- (void)logoutCurrentAccount:(id)sender
+{
+    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:nil message:@"Logout will not delete any data. You can still log in with this account." preferredStyle:UIAlertControllerStyleActionSheet];
+    __weak typeof(self) wself = self;
+    [alertController addAction: [UIAlertAction actionWithTitle: @"Log Out" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        [SVProgressHUD showWithStatus:@"Logging out" maskType:SVProgressHUDMaskTypeBlack];
+        [[SAMCAccountManager sharedManager] checkPWD:^(BOOL isPWDSet, NSError * _Nullable error) {
+            if (!isPWDSet) {
+                [SVProgressHUD dismiss];
+                SAMCSetPasswordViewController *vc = [[SAMCSetPasswordViewController alloc] init];
+                [wself.navigationController pushViewController:vc animated:YES];
+            } else {
                 [[SAMCAccountManager sharedManager] logout:^(NSError * _Nullable error) {
                     [SVProgressHUD dismiss];
                     if (error) {
-                        [wself.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:2.0f position:CSToastPositionCenter];
+                        DDLogError(@"logout error:%@", error);
                         return;
                     }
                 }];
             }
-                break;
-            default:
-                break;
-        }
-    }];
+        }];
+    }]];
+    [alertController addAction: [UIAlertAction actionWithTitle: @"Cancel" style: UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController: alertController animated: YES completion: nil];
+    
+    
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"logout?" message:@"Logout will not delete any data. You can still log in with this account." delegate:nil cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
+//    [alert showAlertWithCompletionHandler:^(NSInteger alertIndex) {
+//        switch (alertIndex) {
+//            case 1:
+//            {
+//                [SVProgressHUD showWithStatus:@"logout" maskType:SVProgressHUDMaskTypeBlack];
+//                __weak typeof(self) wself = self;
+//                [[SAMCAccountManager sharedManager] logout:^(NSError * _Nullable error) {
+//                    [SVProgressHUD dismiss];
+//                    if (error) {
+//                        [wself.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:2.0f position:CSToastPositionCenter];
+//                        return;
+//                    }
+//                }];
+//            }
+//                break;
+//            default:
+//                break;
+//        }
+//    }];
 }
 
 - (void)learnMore:(id)sender

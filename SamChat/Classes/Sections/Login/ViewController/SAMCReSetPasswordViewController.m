@@ -6,7 +6,7 @@
 //  Copyright © 2016 SamChat. All rights reserved.
 //
 
-#import "SAMCSetPasswordViewController.h"
+#import "SAMCReSetPasswordViewController.h"
 #import "SAMCTextField.h"
 #import "SAMCAccountManager.h"
 #import "SAMCDeviceUtil.h"
@@ -21,7 +21,7 @@
 #import "SAMCWebViewController.h"
 #import "NSString+SAMC.h"
 
-@interface SAMCSetPasswordViewController ()
+@interface SAMCReSetPasswordViewController ()
 
 @property (nonatomic, copy) NSString *countryCode;
 @property (nonatomic, copy) NSString *phoneNumber;
@@ -34,7 +34,7 @@
 
 @end
 
-@implementation SAMCSetPasswordViewController
+@implementation SAMCReSetPasswordViewController
 
 - (instancetype)initWithCountryCode:(NSString *)countryCode phone:(NSString *)phone code:(NSString *)code
 {

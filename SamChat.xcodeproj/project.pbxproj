@@ -16,6 +16,7 @@
 		311AE8891DEE7E2C005149EE /* SAMCLogUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE8881DEE7E2C005149EE /* SAMCLogUploader.m */; };
 		311AE88C1DEE9E81005149EE /* NTESTextSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE88B1DEE9E81005149EE /* NTESTextSettingCell.m */; };
 		311AE88F1DEEFF9C005149EE /* SAMCChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE88E1DEEFF9C005149EE /* SAMCChangePasswordViewController.m */; };
+		311AE8921DEFF5BE005149EE /* SAMCSetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE8911DEFF5BE005149EE /* SAMCSetPasswordViewController.m */; };
 		31A043581DE535C80021E029 /* NSData+NTES.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041BE1DE535C80021E029 /* NSData+NTES.m */; };
 		31A043591DE535C80021E029 /* NSDictionary+NTESJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041C01DE535C80021E029 /* NSDictionary+NTESJson.m */; };
 		31A0435A1DE535C80021E029 /* NSString+NTES.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041C21DE535C80021E029 /* NSString+NTES.m */; };
@@ -186,7 +187,7 @@
 		31A044361DE585460021E029 /* SAMCCountryCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A0442D1DE585460021E029 /* SAMCCountryCodeViewController.m */; };
 		31A044371DE585460021E029 /* SAMCConfirmPhoneCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A0442F1DE585460021E029 /* SAMCConfirmPhoneCodeViewController.m */; };
 		31A044381DE585460021E029 /* SAMCConfirmPhoneNumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A044311DE585460021E029 /* SAMCConfirmPhoneNumViewController.m */; };
-		31A044391DE585460021E029 /* SAMCSetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A044331DE585460021E029 /* SAMCSetPasswordViewController.m */; };
+		31A044391DE585460021E029 /* SAMCReSetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A044331DE585460021E029 /* SAMCReSetPasswordViewController.m */; };
 		31A0443C1DE5857A0021E029 /* SAMCTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A0443B1DE5857A0021E029 /* SAMCTextField.m */; };
 		31A044421DE585C60021E029 /* SAMCOneCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A0443F1DE585C60021E029 /* SAMCOneCodeView.m */; };
 		31A044431DE585C60021E029 /* SAMCPhoneCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A044411DE585C60021E029 /* SAMCPhoneCodeView.m */; };
@@ -298,6 +299,8 @@
 		311AE88B1DEE9E81005149EE /* NTESTextSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NTESTextSettingCell.m; sourceTree = "<group>"; };
 		311AE88D1DEEFF9C005149EE /* SAMCChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCChangePasswordViewController.h; sourceTree = "<group>"; };
 		311AE88E1DEEFF9C005149EE /* SAMCChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCChangePasswordViewController.m; sourceTree = "<group>"; };
+		311AE8901DEFF5BE005149EE /* SAMCSetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCSetPasswordViewController.h; sourceTree = "<group>"; };
+		311AE8911DEFF5BE005149EE /* SAMCSetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCSetPasswordViewController.m; sourceTree = "<group>"; };
 		31A041BD1DE535C80021E029 /* NSData+NTES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+NTES.h"; sourceTree = "<group>"; };
 		31A041BE1DE535C80021E029 /* NSData+NTES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+NTES.m"; sourceTree = "<group>"; };
 		31A041BF1DE535C80021E029 /* NSDictionary+NTESJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+NTESJson.h"; sourceTree = "<group>"; };
@@ -616,8 +619,8 @@
 		31A0442F1DE585460021E029 /* SAMCConfirmPhoneCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCConfirmPhoneCodeViewController.m; sourceTree = "<group>"; };
 		31A044301DE585460021E029 /* SAMCConfirmPhoneNumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCConfirmPhoneNumViewController.h; sourceTree = "<group>"; };
 		31A044311DE585460021E029 /* SAMCConfirmPhoneNumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCConfirmPhoneNumViewController.m; sourceTree = "<group>"; };
-		31A044321DE585460021E029 /* SAMCSetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCSetPasswordViewController.h; sourceTree = "<group>"; };
-		31A044331DE585460021E029 /* SAMCSetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCSetPasswordViewController.m; sourceTree = "<group>"; };
+		31A044321DE585460021E029 /* SAMCReSetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCReSetPasswordViewController.h; sourceTree = "<group>"; };
+		31A044331DE585460021E029 /* SAMCReSetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCReSetPasswordViewController.m; sourceTree = "<group>"; };
 		31A0443A1DE5857A0021E029 /* SAMCTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCTextField.h; sourceTree = "<group>"; };
 		31A0443B1DE5857A0021E029 /* SAMCTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCTextField.m; sourceTree = "<group>"; };
 		31A0443E1DE585C60021E029 /* SAMCOneCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SAMCOneCodeView.h; path = View/SAMCOneCodeView.h; sourceTree = "<group>"; };
@@ -1253,8 +1256,8 @@
 				31A0442F1DE585460021E029 /* SAMCConfirmPhoneCodeViewController.m */,
 				31A044FC1DE5C0BE0021E029 /* SAMCSetFullNameViewController.h */,
 				31A044FD1DE5C0BE0021E029 /* SAMCSetFullNameViewController.m */,
-				31A044321DE585460021E029 /* SAMCSetPasswordViewController.h */,
-				31A044331DE585460021E029 /* SAMCSetPasswordViewController.m */,
+				31A044321DE585460021E029 /* SAMCReSetPasswordViewController.h */,
+				31A044331DE585460021E029 /* SAMCReSetPasswordViewController.m */,
 				31FD59A01DE68BA2006F3ED3 /* SAMCMobileLoginViewController.h */,
 				31FD59A11DE68BA2006F3ED3 /* SAMCMobileLoginViewController.m */,
 				31FD59A31DE69707006F3ED3 /* SAMCAccountLoginViewController.h */,
@@ -1619,6 +1622,8 @@
 				31FD59EC1DEADA88006F3ED3 /* SAMCSamChatIdSettingViewController.m */,
 				311AE88D1DEEFF9C005149EE /* SAMCChangePasswordViewController.h */,
 				311AE88E1DEEFF9C005149EE /* SAMCChangePasswordViewController.m */,
+				311AE8901DEFF5BE005149EE /* SAMCSetPasswordViewController.h */,
+				311AE8911DEFF5BE005149EE /* SAMCSetPasswordViewController.m */,
 				31FD59FE1DEAFF1C006F3ED3 /* SAMCSettingViewController.h */,
 				31FD59FF1DEAFF1C006F3ED3 /* SAMCSettingViewController.m */,
 			);
@@ -2175,6 +2180,7 @@
 				31A044AD1DE591380021E029 /* SAMCMigrationManager.m in Sources */,
 				31A043CD1DE535C80021E029 /* NTESVideoChatViewController.m in Sources */,
 				31A043871DE535C80021E029 /* NTESChatroomSegmentedControl.m in Sources */,
+				311AE8921DEFF5BE005149EE /* SAMCSetPasswordViewController.m in Sources */,
 				31A043A51DE535C80021E029 /* NTESSessionConfig.m in Sources */,
 				31A0438C1DE535C80021E029 /* NTESCustomSysNotificationSender.m in Sources */,
 				31A043821DE535C80021E029 /* NTESChatroomViewController.m in Sources */,
@@ -2369,7 +2375,7 @@
 				31A044AC1DE591380021E029 /* SAMCMessageDB_2016082201.m in Sources */,
 				31A043D81DE535C80021E029 /* NTESLogManager.m in Sources */,
 				31A044521DE588C30021E029 /* SAMCWebViewController.m in Sources */,
-				31A044391DE585460021E029 /* SAMCSetPasswordViewController.m in Sources */,
+				31A044391DE585460021E029 /* SAMCReSetPasswordViewController.m in Sources */,
 				31A044F51DE597FC0021E029 /* SAMCImageUtil.m in Sources */,
 				31A044EE1DE594F20021E029 /* SAMCStateDateInfo.m in Sources */,
 				31A044C41DE592490021E029 /* GCDMulticastDelegate.m in Sources */,

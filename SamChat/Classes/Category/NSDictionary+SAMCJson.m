@@ -54,4 +54,14 @@
     return nil;
 }
 
+- (BOOL)samc_JsonBool:(NSString *)key
+{
+    id object = [self objectForKey:key];
+    if ([object isKindOfClass:[NSString class]] ||
+        [object isKindOfClass:[NSNumber class]]) {
+        return [object boolValue];
+    }
+    return NO;
+}
+
 @end

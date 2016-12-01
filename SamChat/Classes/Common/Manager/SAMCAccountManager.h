@@ -75,6 +75,8 @@ NS_ASSUME_NONNULL_BEGIN
                   verifyCode:(NSString *)verifyCode
                   completion:(void (^)(NSError * __nullable error))completion;
 
+- (void)checkPWD:(void (^)(BOOL isPWDSet, NSError * __nullable error))completion;
+
 - (void)logout:(void (^)(NSError * __nullable error))completion;
 
 - (void)autoLogin:(SAMCLoginData *)loginData;

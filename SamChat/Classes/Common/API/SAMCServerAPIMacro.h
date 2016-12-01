@@ -17,6 +17,7 @@
 #define SAMC_URL_USER_LOGIN_CODE_REQUEST    SAMC_API_PREFIX@"api_1.0_user_loginCodeRequest.do"
 #define SAMC_URL_USER_LOGIN                 SAMC_API_PREFIX@"api_1.0_user_login.do"
 #define SAMC_URL_USER_LOGOUT                SAMC_API_PREFIX@"api_1.0_user_logout.do"
+#define SAMC_URL_USER_CHECK_PWD             SAMC_API_PREFIX@"api_1.0_user_checkPwd.do"
 #define SAMC_URL_USER_CREATE_SAM_PROS       SAMC_API_PREFIX@"api_1.0_user_createSamPros.do"
 #define SAMC_URL_USER_FIND_PWD_CODE_REQUEST SAMC_API_PREFIX@"api_1.0_user_findpwdCodeRequest.do"
 #define SAMC_URL_USER_FIND_PWD_CODE_VERIFY  SAMC_API_PREFIX@"api_1.0_user_findpwdCodeVerify.do"
@@ -71,6 +72,7 @@
 #define SAMC_LOGIN_CODE_REQUEST         @"login-code-request"
 #define SAMC_LOGIN                      @"login"
 #define SAMC_LOGOUT                     @"logout"
+#define SAMC_CHECK_PWD                  @"check-pwd"
 #define SAMC_APPKEY_GET                 @"appkey-get"
 #define SAMC_CREATE_SAM_PROS            @"create-sam-pros"
 #define SAMC_FINDPWD_CODE_REQUEST       @"findpwd-code-request"
@@ -125,6 +127,7 @@
 #define SAMC_NEW_PWD                    @"new_pwd"
 #define SAMC_QUESTION_NOTIFY            @"question_notify"
 #define SAMC_APP_ADVERTISEMENT_RECALL_MINUTE    @"app_advertisement_recall_minute"
+#define SAMC_PWD_FLAG                   @"pwd_flag"
 
 #define SAMC_COMPANY_NAME               @"company_name"
 #define SAMC_SERVICE_CATEGORY           @"service_category"
