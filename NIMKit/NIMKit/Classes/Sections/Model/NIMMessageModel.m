@@ -33,6 +33,7 @@
     if (self = [self init])
     {
         _message = message;
+        _messageTime = message.timestamp;
         _isSPMode = spMode;
     }
     return self;
