@@ -28,6 +28,7 @@
 #import "SAMCAccountManager.h"
 #import "SAMCSettingViewController.h"
 #import "SAMCSetPasswordViewController.h"
+#import "SAMCSPInfoSettingViewController.h"
 
 @interface SAMCMeViewController ()
 
@@ -300,6 +301,8 @@
 
 - (void)onTouchSamProSetting:(id)sender
 {
+    SAMCSPInfoSettingViewController *vc = [[SAMCSPInfoSettingViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)onTouchAbout:(id)sender
@@ -338,28 +341,6 @@
     }]];
     [alertController addAction: [UIAlertAction actionWithTitle: @"Cancel" style: UIAlertActionStyleCancel handler:nil]];
     [self presentViewController: alertController animated: YES completion: nil];
-    
-    
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"logout?" message:@"Logout will not delete any data. You can still log in with this account." delegate:nil cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
-//    [alert showAlertWithCompletionHandler:^(NSInteger alertIndex) {
-//        switch (alertIndex) {
-//            case 1:
-//            {
-//                [SVProgressHUD showWithStatus:@"logout" maskType:SVProgressHUDMaskTypeBlack];
-//                __weak typeof(self) wself = self;
-//                [[SAMCAccountManager sharedManager] logout:^(NSError * _Nullable error) {
-//                    [SVProgressHUD dismiss];
-//                    if (error) {
-//                        [wself.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:2.0f position:CSToastPositionCenter];
-//                        return;
-//                    }
-//                }];
-//            }
-//                break;
-//            default:
-//                break;
-//        }
-//    }];
 }
 
 - (void)learnMore:(id)sender
