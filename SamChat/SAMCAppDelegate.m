@@ -34,6 +34,7 @@
 
 NSString *NTESNotificationLogout = @"NTESNotificationLogout";
 NSString * const SAMCLoginNotification = @"SAMCLoginNotification";
+NSString * const SAMCUserTypeChangedNotification = @"SAMCUserTypeChangedNotification";
 @interface SAMCAppDelegate ()<NIMLoginManagerDelegate>
 
 @property (nonatomic,strong) NTESSDKConfig *config;

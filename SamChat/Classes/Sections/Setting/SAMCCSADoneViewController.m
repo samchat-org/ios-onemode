@@ -78,6 +78,10 @@
 - (void)touchGetStarted:(id)sender
 {
     [self dismissViewControllerAnimated:NO completion:NULL];
+    extern NSString *SAMCUserTypeChangedNotification;
+    [[NSNotificationCenter defaultCenter] postNotificationName:SAMCUserTypeChangedNotification
+                                                        object:nil
+                                                      userInfo:nil];
 }
 
 #pragma mark - lazy load

@@ -71,8 +71,21 @@
     self.tableView.dataSource = self.delegator;
     
     extern NSString *NTESCustomNotificationCountChanged;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onCustomNotifyChanged:) name:NTESCustomNotificationCountChanged object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUserInfoHasUpdatedNotification:) name:NIMKitUserInfoHasUpdatedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onCustomNotifyChanged:)
+                                                 name:NTESCustomNotificationCountChanged
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onUserInfoHasUpdatedNotification:)
+                                                 name:NIMKitUserInfoHasUpdatedNotification
+                                               object:nil];
+    if (![SAMCAccountManager sharedManager].isCurrentUserServicer) {
+        extern NSString *SAMCUserTypeChangedNotification;
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onUserTypeChangedNotification:)
+                                                     name:SAMCUserTypeChangedNotification
+                                                   object:nil];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -91,6 +104,38 @@
     NSString *customNotifyText  = [NSString stringWithFormat:@"自定义系统通知 (%zd)",customNotifyCount];
     
     NSString *uid = [[NIMSDK sharedSDK].loginManager currentAccount];
+    
+    NSDictionary *samProCellInfo;
+    if ([SAMCAccountManager sharedManager].isCurrentUserServicer) {
+        samProCellInfo = @{
+                           HeaderTitle:@"",
+                           RowContent :@[
+                                   @{
+                                       Title     :@"SamPro Setting",
+                                       ImageName :@"ico_option_sp",
+                                       CellAction:@"onTouchSamProSetting:",
+                                       ShowAccessory :@(YES)
+                                       },
+                                   ],
+                           FooterTitle:@""
+                           };
+    } else {
+        samProCellInfo = @{
+                           HeaderTitle:@"",
+                           RowContent :@[
+                                   @{
+                                       Title     :@"Apply for SamPro",
+                                       ImageName :@"ico_option_sp",
+                                       CellClass :@"SAMCRightButtonCell",
+                                       CellAction:@"createSamPros:",
+                                       ExtraInfo :@{@"action":@"learnMore:", @"title":@"Learn More"},
+                                       ShowAccessory :@(YES)
+                                       },
+                                   ],
+                           FooterTitle:@""
+                           };
+    }
+    
     NSArray *data = @[
                       @{
                           HeaderHeight:@(22),
@@ -128,20 +173,7 @@
                                   ],
                           FooterTitle:@""
                           },
-                      @{
-                          HeaderTitle:@"",
-                          RowContent :@[
-                                  @{
-                                      Title     :@"Apply for SamPro",
-                                      ImageName :@"ico_option_sp",
-                                      CellClass :@"SAMCRightButtonCell",
-                                      CellAction:@"createSamPros:",
-                                      ExtraInfo :@{@"action":@"learnMore:", @"title":@"Learn More"},
-                                      ShowAccessory :@(YES)
-                                      },
-                                  ],
-                          FooterTitle:@""
-                          },
+                      samProCellInfo,
                       @{
                           HeaderTitle:@"",
                           RowContent :@[
@@ -266,6 +298,10 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)onTouchSamProSetting:(id)sender
+{
+}
+
 - (void)onTouchAbout:(id)sender
 {
     SAMCWebViewController *vc = [[SAMCWebViewController alloc] initWithTitle:@"About Samchat" htmlName:@"about"];
@@ -351,6 +387,11 @@
     if ([userInfos containsObject:[NIMSDK sharedSDK].loginManager.currentAccount]) {
         [self refreshData];
     }
+}
+
+- (void)onUserTypeChangedNotification:(NSNotification *)notification
+{
+    [self refreshData];
 }
 
 #pragma mark - Private
