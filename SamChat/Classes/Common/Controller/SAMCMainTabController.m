@@ -245,7 +245,7 @@ typedef NS_ENUM(NSInteger,SAMCMainTabType) {
                              TabbarItemBadgeValue: @(self.sessionUnreadCount)
                              },
                      @(SAMCMainTabTypeContact)     : @{
-                             TabbarVC           : @"NTESContactViewController",
+                             TabbarVC           : @"SAMCContactViewController",
                              TabbarTitle        : @"Contact",
                              TabbarImage        : @"ico_tab_contacts_line",
                              TabbarSelectedImage: @"ico_tab_contacts_fill",

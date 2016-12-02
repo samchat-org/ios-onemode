@@ -41,6 +41,8 @@ alpha:alphaValue]
 #define SAMC_COLOR_HORIZON_GRADIENT_DARK        SAMCUIColorFromRGB(0x2EBDEF)
 #define SAMC_COLOR_HORIZON_GRADIENT_LIGHT       SAMCUIColorFromRGB(0xD1F43B)
 
+#define SAMC_COLOR_INGRABLUE_HINT               SAMCUIColorFromRGB(0x8EA6B9)
+
 #define SAMC_COLOR_WHITE_HINT                   SAMCUIColorFromRGBA(0xFFFFFF, 0.5)
 #define SAMC_COLOR_INK_HINT                     SAMCUIColorFromRGBA(0x13243F, 0.5)
 
@@ -55,6 +57,7 @@ alpha:alphaValue]
 #define SAMC_COLOR_RGB_INGRABLUE                0x1D4D73
 
 #define SAMC_BarItemTintColor ([SAMCAccountManager sharedManager].isCurrentUserServicer ? [UIColor whiteColor]:SAMC_COLOR_INGRABLUE)
+#define SAMC_BarTitleColor ([SAMCAccountManager sharedManager].isCurrentUserServicer ? [UIColor whiteColor]:SAMC_COLOR_INK)
 
 #define MESSAGE_EXT_FROM_USER_MODE_KEY          @"msg_from"
 #define MESSAGE_EXT_FROM_USER_MODE_VALUE_CUSTOM @(0)

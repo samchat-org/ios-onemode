@@ -18,6 +18,8 @@
 		311AE88F1DEEFF9C005149EE /* SAMCChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE88E1DEEFF9C005149EE /* SAMCChangePasswordViewController.m */; };
 		311AE8921DEFF5BE005149EE /* SAMCSetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE8911DEFF5BE005149EE /* SAMCSetPasswordViewController.m */; };
 		311AE8981DF016B4005149EE /* SAMCSPInfoSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE8971DF016B4005149EE /* SAMCSPInfoSettingViewController.m */; };
+		311AE89B1DF10653005149EE /* SAMCContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE89A1DF10653005149EE /* SAMCContactViewController.m */; };
+		311AE8A11DF12230005149EE /* SAMCNavigationDropDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE8A01DF12230005149EE /* SAMCNavigationDropDownMenu.m */; };
 		31A043581DE535C80021E029 /* NSData+NTES.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041BE1DE535C80021E029 /* NSData+NTES.m */; };
 		31A043591DE535C80021E029 /* NSDictionary+NTESJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041C01DE535C80021E029 /* NSDictionary+NTESJson.m */; };
 		31A0435A1DE535C80021E029 /* NSString+NTES.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041C21DE535C80021E029 /* NSString+NTES.m */; };
@@ -304,6 +306,10 @@
 		311AE8911DEFF5BE005149EE /* SAMCSetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCSetPasswordViewController.m; sourceTree = "<group>"; };
 		311AE8961DF016B4005149EE /* SAMCSPInfoSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCSPInfoSettingViewController.h; sourceTree = "<group>"; };
 		311AE8971DF016B4005149EE /* SAMCSPInfoSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCSPInfoSettingViewController.m; sourceTree = "<group>"; };
+		311AE8991DF10653005149EE /* SAMCContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCContactViewController.h; sourceTree = "<group>"; };
+		311AE89A1DF10653005149EE /* SAMCContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCContactViewController.m; sourceTree = "<group>"; };
+		311AE89F1DF12230005149EE /* SAMCNavigationDropDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCNavigationDropDownMenu.h; sourceTree = "<group>"; };
+		311AE8A01DF12230005149EE /* SAMCNavigationDropDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCNavigationDropDownMenu.m; sourceTree = "<group>"; };
 		31A041BD1DE535C80021E029 /* NSData+NTES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+NTES.h"; sourceTree = "<group>"; };
 		31A041BE1DE535C80021E029 /* NSData+NTES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+NTES.m"; sourceTree = "<group>"; };
 		31A041BF1DE535C80021E029 /* NSDictionary+NTESJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+NTESJson.h"; sourceTree = "<group>"; };
@@ -1158,6 +1164,8 @@
 		31A0423F1DE535C80021E029 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				311AE89F1DF12230005149EE /* SAMCNavigationDropDownMenu.h */,
+				311AE8A01DF12230005149EE /* SAMCNavigationDropDownMenu.m */,
 				31A042401DE535C80021E029 /* NTESContactDefines.h */,
 				31A042411DE535C80021E029 /* NTESContactUtilCell.h */,
 				31A042421DE535C80021E029 /* NTESContactUtilCell.m */,
@@ -1188,6 +1196,8 @@
 				31A0424D1DE535C80021E029 /* NTESContactViewController.h */,
 				31A0424E1DE535C80021E029 /* NTESContactViewController.m */,
 				31A0424F1DE535C80021E029 /* NTESContactViewController.xib */,
+				311AE8991DF10653005149EE /* SAMCContactViewController.h */,
+				311AE89A1DF10653005149EE /* SAMCContactViewController.m */,
 			);
 			path = Contact;
 			sourceTree = "<group>";
@@ -2300,6 +2310,7 @@
 				31A044011DE535C80021E029 /* NTESPinyinConverter.m in Sources */,
 				31A0437C1DE535C80021E029 /* NTESChatroomTextContentConfig.m in Sources */,
 				31A044561DE590A40021E029 /* SAMCAccountManager.m in Sources */,
+				311AE8A11DF12230005149EE /* SAMCNavigationDropDownMenu.m in Sources */,
 				31A043C41DE535C80021E029 /* NTESWhiteboardViewController.m in Sources */,
 				31FD59A81DE6AFFA006F3ED3 /* SAMCCardPortraitView.m in Sources */,
 				31A043AB1DE535C80021E029 /* NTESSessionMsgConverter.m in Sources */,
@@ -2372,6 +2383,7 @@
 				31A043931DE535C80021E029 /* NTESUserListCell.m in Sources */,
 				31A043D01DE535C80021E029 /* NTESVideoChatNetStatusView.m in Sources */,
 				31A043BB1DE535C80021E029 /* NTESFileTransSelectViewController.m in Sources */,
+				311AE89B1DF10653005149EE /* SAMCContactViewController.m in Sources */,
 				31A043F31DE535C80021E029 /* NTESDemoService.m in Sources */,
 				31A044281DE57CC90021E029 /* SAMCGradientButton.m in Sources */,
 				31A044FB1DE5BBB30021E029 /* UIButton+SAMC.m in Sources */,

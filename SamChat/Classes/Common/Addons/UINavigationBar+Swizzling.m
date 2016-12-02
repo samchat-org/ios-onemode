@@ -29,6 +29,9 @@
     
     //解决标题过长时，设置navigationItem.title导致标题偏移的问题
     UILabel *label = (UILabel *)navigationItem.titleView;
+    if (![label isKindOfClass:[UILabel class]]) {
+        return;
+    }
     UIFont *font   = self.titleTextAttributes[NSFontAttributeName];
     if (font) {
         label.font = font;
