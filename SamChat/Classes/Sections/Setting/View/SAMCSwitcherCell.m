@@ -34,6 +34,11 @@
 {
     self.textLabel.text       = rowData.title;
     self.detailTextLabel.text = rowData.detailTitle;
+    if (rowData.imageName) {
+        self.imageView.image = [UIImage imageNamed:rowData.imageName];
+    } else {
+        self.imageView.image = nil;
+    }
     NSString *actionName      = rowData.cellActionName;
     [self.switcher setOn:[rowData.extraInfo boolValue] animated:NO];
     [self.switcher removeTarget:self.viewController action:NULL forControlEvents:UIControlEventValueChanged];

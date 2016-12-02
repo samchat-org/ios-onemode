@@ -22,7 +22,8 @@
     NSArray *sqls = @[SAMC_CREATE_USERINFO_TABLE_SQL_2016082201,
                       SAMC_CREATE_USERINFO_TABLE_UNIQUE_ID_INDEX_SQL_2016082201,
                       SAMC_CREATE_USERINFO_TABLE_USERNAME_INDEX_SQL_2016082201,
-                      SAMC_CREATE_CONTACT_LIST_TABLE_SQL_2016082201];
+                      SAMC_CREATE_CONTACT_LIST_TABLE_SQL_2016082201,
+                      SAMC_CREATE_CONTACT_LIST_VERSION_TABLE_SQL_2016082201];
     for (NSString *sql in sqls) {
         if (![db executeUpdate:sql]) {
             DDLogError(@"error: execute sql %@ failed error %@",sql,[db lastError]);

@@ -60,9 +60,15 @@
     
     NSArray *contactItems;
     if ([SAMCAccountManager sharedManager].isCurrentUserServicer) {
-        contactItems = @[@"All", @"Customers", @"Friends", @"Service Providers", @"Associate SPs"];
+        contactItems = @[SAMC_CONTACT_TAG_ALL,
+                         SAMC_CONTACT_TAG_CUSTOMERS,
+                         SAMC_CONTACT_TAG_FRIENDS,
+                         SAMC_CONTACT_TAG_SERVICE_PROVIDERS,
+                         SAMC_CONTACT_TAG_ASSOCIATE_SPS];
     } else {
-        contactItems = @[@"All", @"Customers", @"Friends"];
+        contactItems = @[SAMC_CONTACT_TAG_ALL,
+                         SAMC_CONTACT_TAG_CUSTOMERS,
+                         SAMC_CONTACT_TAG_FRIENDS];
     }
     NSInteger selectedIndex = 0;
     self.currentContactTag = contactItems[selectedIndex];

@@ -8,6 +8,7 @@
 
 #import "SAMCPublicViewController.h"
 #import "SAMCAccountManager.h"
+#import "SAMCPublicSearchViewController.h"
 
 @implementation SAMCPublicViewController
 
@@ -41,6 +42,8 @@
 
 - (void)searchPublic:(id)sender
 {
+    SAMCPublicSearchViewController *vc = [[SAMCPublicSearchViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

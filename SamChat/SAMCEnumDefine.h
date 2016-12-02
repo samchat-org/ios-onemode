@@ -35,4 +35,11 @@ typedef NS_ENUM(NSInteger,SAMCUserType) {
     SAMCuserTypeSamPros
 };
 
+
+#define SAMC_CONTACT_TAG_ALL                @"All"
+#define SAMC_CONTACT_TAG_CUSTOMERS          @"Customers"
+#define SAMC_CONTACT_TAG_FRIENDS            @"Friends"
+#define SAMC_CONTACT_TAG_SERVICE_PROVIDERS  @"Service Providers"
+#define SAMC_CONTACT_TAG_ASSOCIATE_SPS      @"Associate SPs"
+
 #endif /* SAMCEnumDefine_h */
