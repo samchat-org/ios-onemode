@@ -11,7 +11,7 @@
 #import "NTESSessionViewController.h"
 #import "NTESContactUtilItem.h"
 #import "NTESContactDefines.h"
-#import "NTESGroupedContacts.h"
+#import "SAMCGroupedContacts.h"
 #import "UIView+Toast.h"
 #import "NTESCustomNotificationDB.h"
 #import "NTESNotificationCenter.h"
@@ -28,21 +28,15 @@
 #import "SAMCNavigationDropDownMenu.h"
 #import "SAMCAccountManager.h"
 
-@interface SAMCContactViewController ()
-<
-UITableViewDataSource,
-UITableViewDelegate,
-NIMSystemNotificationManagerDelegate,
-NTESContactUtilCellDelegate,
-NIMContactDataCellDelegate,
-NIMLoginManagerDelegate> {
-    UIRefreshControl *_refreshControl;
-    NTESGroupedContacts *_contacts;
-}
+@interface SAMCContactViewController () <UITableViewDataSource, UITableViewDelegate, NIMSystemNotificationManagerDelegate, NTESContactUtilCellDelegate, NIMContactDataCellDelegate, NIMLoginManagerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
-@property (nonatomic, strong) NSArray * datas;
+@property (nonatomic, strong) NSArray *datas;
+@property (nonatomic, strong) SAMCGroupedContacts *contacts;
+
+@property (nonatomic, strong) NSString *currentContactTag;
 
 @end
 
@@ -70,13 +64,18 @@ NIMLoginManagerDelegate> {
     } else {
         contactItems = @[@"All", @"Customers", @"Friends"];
     }
+    NSInteger selectedIndex = 0;
+    self.currentContactTag = contactItems[selectedIndex];
     SAMCNavigationDropDownMenu *menuView = [[SAMCNavigationDropDownMenu alloc] initWithFrame:CGRectMake(0, 0, 200, 44)
                                                                                        items:contactItems
-                                                                               selectedIndex:0
+                                                                               selectedIndex:selectedIndex
                                                                                   titleColor:SAMC_BarTitleColor
                                                                                containerView:self.view];
+    __weak typeof(self) wself = self;
     menuView.didSelectItemAtIndexHandler = ^(NSInteger index){
         NSLog(@"Did select item at index: %ld, %@", index, contactItems[index]);
+        wself.currentContactTag = contactItems[index];
+        [wself refresh];
     };
     self.navigationItem.titleView = menuView;
     
@@ -121,8 +120,15 @@ NIMLoginManagerDelegate> {
     }
 }
 
-- (void)prepareData{
-    _contacts = [[NTESGroupedContacts alloc] init];
+- (void)refresh
+{
+    [self prepareData];
+    [self.tableView reloadData];
+}
+
+- (void)prepareData
+{
+    _contacts = [[SAMCGroupedContacts alloc] initWithTag:self.currentContactTag];
     
     NSString *contactCellUtilIcon   = @"icon";
     NSString *contactCellUtilVC     = @"vc";
@@ -163,7 +169,6 @@ NIMLoginManagerDelegate> {
            },
        ] mutableCopy];
     
-//    self.navigationItem.title = @"通讯录";
     [self setUpNavItem];
     
     //构造显示的数据模型
@@ -376,24 +381,22 @@ NIMLoginManagerDelegate> {
 #pragma mark - NIMSDK Delegate
 - (void)onSystemNotificationCountChanged:(NSInteger)unreadCount
 {
-    [self prepareData];
-    [self.tableView reloadData];
+    [self refresh];
 }
 
 - (void)onLogin:(NIMLoginStep)step
 {
     if (step == NIMLoginStepSyncOK) {
         if (self.isViewLoaded) {//没有加载view的话viewDidLoad里会走一遍prepareData
-            [self prepareData];
-            [self.tableView reloadData];
+            [self refresh];
         }
     }
 }
 
 #pragma mark - Notification
-- (void)onUserInfoHasUpdatedNotification:(NSNotification *)notfication{
-    [self prepareData];
-    [self.tableView reloadData];
+- (void)onUserInfoHasUpdatedNotification:(NSNotification *)notfication
+{
+    [self refresh];
 }
 
 #pragma mark - Private

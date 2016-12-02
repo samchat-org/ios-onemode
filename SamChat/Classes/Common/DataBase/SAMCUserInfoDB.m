@@ -246,7 +246,7 @@
 {
     __block NSMutableArray *contactList = [[NSMutableArray alloc] init];
     [self.queue inDatabase:^(FMDatabase *db) {
-        FMResultSet *s = [db executeQuery:@"SELECT unique_id FROM %@ where tag=?", tag];
+        FMResultSet *s = [db executeQuery:@"SELECT unique_id FROM contact_list where tag=?", tag];
         while ([s next]) {
             NSString *uniqueId = [s stringForColumnIndex:0];
             [contactList addObject:uniqueId];

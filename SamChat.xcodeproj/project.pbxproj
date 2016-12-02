@@ -20,6 +20,7 @@
 		311AE8981DF016B4005149EE /* SAMCSPInfoSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE8971DF016B4005149EE /* SAMCSPInfoSettingViewController.m */; };
 		311AE89B1DF10653005149EE /* SAMCContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE89A1DF10653005149EE /* SAMCContactViewController.m */; };
 		311AE8A11DF12230005149EE /* SAMCNavigationDropDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE8A01DF12230005149EE /* SAMCNavigationDropDownMenu.m */; };
+		311AE8A41DF16CA1005149EE /* SAMCGroupedContacts.m in Sources */ = {isa = PBXBuildFile; fileRef = 311AE8A31DF16CA1005149EE /* SAMCGroupedContacts.m */; };
 		31A043581DE535C80021E029 /* NSData+NTES.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041BE1DE535C80021E029 /* NSData+NTES.m */; };
 		31A043591DE535C80021E029 /* NSDictionary+NTESJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041C01DE535C80021E029 /* NSDictionary+NTESJson.m */; };
 		31A0435A1DE535C80021E029 /* NSString+NTES.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A041C21DE535C80021E029 /* NSString+NTES.m */; };
@@ -310,6 +311,8 @@
 		311AE89A1DF10653005149EE /* SAMCContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCContactViewController.m; sourceTree = "<group>"; };
 		311AE89F1DF12230005149EE /* SAMCNavigationDropDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCNavigationDropDownMenu.h; sourceTree = "<group>"; };
 		311AE8A01DF12230005149EE /* SAMCNavigationDropDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCNavigationDropDownMenu.m; sourceTree = "<group>"; };
+		311AE8A21DF16CA1005149EE /* SAMCGroupedContacts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMCGroupedContacts.h; sourceTree = "<group>"; };
+		311AE8A31DF16CA1005149EE /* SAMCGroupedContacts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMCGroupedContacts.m; sourceTree = "<group>"; };
 		31A041BD1DE535C80021E029 /* NSData+NTES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+NTES.h"; sourceTree = "<group>"; };
 		31A041BE1DE535C80021E029 /* NSData+NTES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+NTES.m"; sourceTree = "<group>"; };
 		31A041BF1DE535C80021E029 /* NSDictionary+NTESJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+NTESJson.h"; sourceTree = "<group>"; };
@@ -1157,6 +1160,8 @@
 				31A0423C1DE535C80021E029 /* NTESGroupedDataCollection.m */,
 				31A0423D1DE535C80021E029 /* NTESGroupedUsrInfo.h */,
 				31A0423E1DE535C80021E029 /* NTESGroupedUsrInfo.m */,
+				311AE8A21DF16CA1005149EE /* SAMCGroupedContacts.h */,
+				311AE8A31DF16CA1005149EE /* SAMCGroupedContacts.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2194,6 +2199,7 @@
 				31A044361DE585460021E029 /* SAMCCountryCodeViewController.m in Sources */,
 				31A044AD1DE591380021E029 /* SAMCMigrationManager.m in Sources */,
 				31A043CD1DE535C80021E029 /* NTESVideoChatViewController.m in Sources */,
+				311AE8A41DF16CA1005149EE /* SAMCGroupedContacts.m in Sources */,
 				31A043871DE535C80021E029 /* NTESChatroomSegmentedControl.m in Sources */,
 				311AE8921DEFF5BE005149EE /* SAMCSetPasswordViewController.m in Sources */,
 				31A043A51DE535C80021E029 /* NTESSessionConfig.m in Sources */,
