@@ -29,7 +29,7 @@
 #import "SAMCAccountManager.h"
 #import "SAMCUserManager.h"
 
-@interface SAMCContactViewController () <UITableViewDataSource, UITableViewDelegate, NIMSystemNotificationManagerDelegate, NTESContactUtilCellDelegate, NIMContactDataCellDelegate, NIMLoginManagerDelegate>
+@interface SAMCContactViewController () <UITableViewDataSource, UITableViewDelegate, NIMSystemNotificationManagerDelegate, NTESContactUtilCellDelegate, NIMContactDataCellDelegate, NIMLoginManagerDelegate, SAMCUserManagerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
@@ -55,6 +55,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[[NIMSDK sharedSDK] systemNotificationManager] removeDelegate:self];
     [[[NIMSDK sharedSDK] loginManager] removeDelegate:self];
+    [[SAMCUserManager sharedManager] removeDelegate:self];
 }
 
 - (void)viewDidLoad {
@@ -106,6 +107,7 @@
     [self prepareData];
     [[[NIMSDK sharedSDK] systemNotificationManager] addDelegate:self];
     [[[NIMSDK sharedSDK] loginManager] addDelegate:self];
+    [[SAMCUserManager sharedManager] addDelegate:self];
     
     UITapGestureRecognizer *tapRec = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
     [tapRec setCancelsTouchesInView:NO];
@@ -391,6 +393,32 @@
     }
 }
 
+#pragma mark - SAMCUserManagerDelegate
+- (void)onUserInfoChanged:(SAMCUser *)user
+{
+}
+
+- (void)didAddContact:(NSString *)userId tag:(NSString *)tag
+{
+    if (self.isViewLoaded && [self.currentContactTag isEqualToString:tag]) {
+        [self refresh];
+    }
+}
+
+- (void)didRemoveContact:(NSString *)userId tag:(NSString *)tag
+{
+    if (self.isViewLoaded && [self.currentContactTag isEqualToString:tag]) {
+        [self refresh];
+    }
+}
+
+- (void)didUpdateContactList
+{
+    if (self.isViewLoaded) {
+        [self refresh];
+    }
+}
+
 #pragma mark - Notification
 - (void)onUserInfoHasUpdatedNotification:(NSNotification *)notfication
 {
@@ -479,7 +507,6 @@
                 [wself.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:2 position:CSToastPositionCenter];
             } else {
                 [wself.contacts removeGroupMember:contactItem];
-                [wself refresh];
                 [wself.view makeToast:@"delete success" duration:2 position:CSToastPositionCenter];
             }
         }];
