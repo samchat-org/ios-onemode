@@ -38,6 +38,7 @@
 @property (nonatomic, strong) SAMCGroupedContacts *contacts;
 
 @property (nonatomic, strong) NSString *currentContactTag;
+@property (nonatomic, strong) NSArray *contactTags;
 
 @end
 
@@ -60,32 +61,30 @@
     [super viewDidLoad];
     
     NSString *arrowImageName;
-    NSArray *contactItems;
     if ([SAMCAccountManager sharedManager].isCurrentUserServicer) {
         arrowImageName = @"ico_arrow_down_dark";
-        contactItems = @[SAMC_CONTACT_TAG_ALL,
+        _contactTags = @[SAMC_CONTACT_TAG_ALL,
                          SAMC_CONTACT_TAG_CUSTOMERS,
                          SAMC_CONTACT_TAG_FRIENDS,
                          SAMC_CONTACT_TAG_SERVICE_PROVIDERS,
                          SAMC_CONTACT_TAG_ASSOCIATE_SPS];
     } else {
         arrowImageName = @"ico_arrow_down_light";
-        contactItems = @[SAMC_CONTACT_TAG_ALL,
+        _contactTags = @[SAMC_CONTACT_TAG_ALL,
                          SAMC_CONTACT_TAG_CUSTOMERS,
                          SAMC_CONTACT_TAG_FRIENDS];
     }
     NSInteger selectedIndex = 0;
-    self.currentContactTag = contactItems[selectedIndex];
+    self.currentContactTag = _contactTags[selectedIndex];
     SAMCNavigationDropDownMenu *menuView = [[SAMCNavigationDropDownMenu alloc] initWithFrame:CGRectMake(0, 0, 200, 44)
-                                                                                       items:contactItems
+                                                                                       items:_contactTags
                                                                                selectedIndex:selectedIndex
                                                                                   titleColor:SAMC_BarTitleColor
                                                                               arrowImageName:arrowImageName
                                                                                containerView:self.view];
     __weak typeof(self) wself = self;
     menuView.didSelectItemAtIndexHandler = ^(NSInteger index){
-        NSLog(@"Did select item at index: %ld, %@", index, contactItems[index]);
-        wself.currentContactTag = contactItems[index];
+        wself.currentContactTag = wself.contactTags[index];
         [wself refresh];
     };
     self.navigationItem.titleView = menuView;
@@ -445,7 +444,23 @@
     UITableViewRowAction *action = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Copy" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         id<NTESContactItem,NTESGroupMemberProtocol> contactItem = (id<NTESContactItem,NTESGroupMemberProtocol>)[wself.contacts memberOfIndex:indexPath];
         NSString *userId = [contactItem userId];
-        DDLogDebug(@"copyAction: %@", userId);
+        [wself.tableView setEditing:NO animated:YES];
+        
+        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        __weak typeof(self) wself = self;
+        for (NSString *tag in wself.contactTags) {
+            if ([tag isEqualToString:SAMC_CONTACT_TAG_ALL] || [tag isEqualToString:wself.currentContactTag]) {
+                continue;
+            }
+            NSString *actionTitle = [NSString stringWithFormat:@"Copy to %@", tag];
+            [alertController addAction:[UIAlertAction actionWithTitle:actionTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [wself copyContact:userId toTag:tag];
+            }]];
+        }
+        
+        [alertController addAction: [UIAlertAction actionWithTitle: @"Cancel" style: UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController: alertController animated: YES completion: nil];
+        
     }];
     action.backgroundColor = SAMC_COLOR_GREY;
     return action;
@@ -471,6 +486,21 @@
     }];
     action.backgroundColor = SAMC_COLOR_RED;
     return action;
+}
+
+#pragma mark - Private
+- (void)copyContact:(NSString *)userId toTag:(NSString *)tag
+{
+    [SVProgressHUD showWithStatus:@"Copying" maskType:SVProgressHUDMaskTypeBlack];
+    __weak typeof(self) wself = self;
+    [[SAMCUserManager sharedManager] addOrRemove:YES contact:userId tag:tag completion:^(NSError * _Nullable error) {
+        [SVProgressHUD dismiss];
+        if (error) {
+            [wself.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:2 position:CSToastPositionCenter];
+        } else {
+            [wself.view makeToast:@"copy success" duration:2 position:CSToastPositionCenter];
+        }
+    }];
 }
 
 @end
