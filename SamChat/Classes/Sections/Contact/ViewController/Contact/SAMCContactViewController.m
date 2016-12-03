@@ -27,6 +27,7 @@
 #import "NTESUserUtil.h"
 #import "SAMCNavigationDropDownMenu.h"
 #import "SAMCAccountManager.h"
+#import "SAMCUserManager.h"
 
 @interface SAMCContactViewController () <UITableViewDataSource, UITableViewDelegate, NIMSystemNotificationManagerDelegate, NTESContactUtilCellDelegate, NIMContactDataCellDelegate, NIMLoginManagerDelegate>
 
@@ -346,31 +347,19 @@
     return index + 1;
 }
 
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    id<NTESContactItem> contactItem = (id<NTESContactItem>)[_contacts memberOfIndex:indexPath];
+    if ([contactItem userId].length) {
+        return @[[self deleteAction], [self copyAction], [self chatAction]];
+    } else {
+        return nil;
+    }
+}
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     id<NTESContactItem> contactItem = (id<NTESContactItem>)[_contacts memberOfIndex:indexPath];
     return [contactItem userId].length;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"删除好友" message:@"删除好友后，将同时解除双方的好友关系" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-        [alert showAlertWithCompletionHandler:^(NSInteger index) {
-            if (index == 1) {
-                [SVProgressHUD show];
-                id<NTESContactItem,NTESGroupMemberProtocol> contactItem = (id<NTESContactItem,NTESGroupMemberProtocol>)[_contacts memberOfIndex:indexPath];
-                NSString *userId = [contactItem userId];
-                __weak typeof(self) wself = self;
-                [[NIMSDK sharedSDK].userManager deleteFriend:userId completion:^(NSError *error) {
-                    [SVProgressHUD dismiss];
-                    if (!error) {
-                        [_contacts removeGroupMember:contactItem];
-                    }else{
-                        [wself.view makeToast:@"删除失败"duration:2.0f position:CSToastPositionCenter];
-                    }
-                }];
-            }
-        }];
-    }
 }
 
 #pragma mark - NIMContactDataCellDelegate
@@ -432,6 +421,53 @@
     //回调处理
     vc.finshBlock = block;
     [vc show];
+}
+
+#pragma mark - UITableViewRowAction
+- (UITableViewRowAction *)chatAction
+{
+    __weak typeof(self) wself = self;
+    UITableViewRowAction *action = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Chat" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        id<NTESContactItem,NTESGroupMemberProtocol> contactItem = (id<NTESContactItem,NTESGroupMemberProtocol>)[wself.contacts memberOfIndex:indexPath];
+        NSString *userId = [contactItem userId];
+        DDLogDebug(@"chatAction: %@", userId);
+    }];
+    action.backgroundColor = SAMC_COLOR_LIMEGREY;
+    return action;
+}
+
+- (UITableViewRowAction *)copyAction
+{
+    __weak typeof(self) wself = self;
+    UITableViewRowAction *action = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Copy" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        id<NTESContactItem,NTESGroupMemberProtocol> contactItem = (id<NTESContactItem,NTESGroupMemberProtocol>)[wself.contacts memberOfIndex:indexPath];
+        NSString *userId = [contactItem userId];
+        DDLogDebug(@"copyAction: %@", userId);
+    }];
+    action.backgroundColor = SAMC_COLOR_GREY;
+    return action;
+}
+
+- (UITableViewRowAction *)deleteAction
+{
+    __weak typeof(self) wself = self;
+    UITableViewRowAction *action = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Delete" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        id<NTESContactItem,NTESGroupMemberProtocol> contactItem = (id<NTESContactItem,NTESGroupMemberProtocol>)[wself.contacts memberOfIndex:indexPath];
+        NSString *userId = [contactItem userId];
+        [SVProgressHUD showWithStatus:@"Deleting" maskType:SVProgressHUDMaskTypeBlack];
+        [[SAMCUserManager sharedManager] addOrRemove:NO contact:userId tag:wself.currentContactTag completion:^(NSError * _Nullable error) {
+        [SVProgressHUD dismiss];
+            if (error) {
+                [wself.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:2 position:CSToastPositionCenter];
+            } else {
+                [wself.contacts removeGroupMember:contactItem];
+                [wself refresh];
+                [wself.view makeToast:@"delete success" duration:2 position:CSToastPositionCenter];
+            }
+        }];
+    }];
+    action.backgroundColor = SAMC_COLOR_RED;
+    return action;
 }
 
 @end

@@ -22,9 +22,9 @@
 
 - (BOOL)updateContactList:(NSArray<SAMCUserContactInfo *> *)users;
 
-- (void)insertToContactList:(SAMCUser *)user tag:(NSString *)tag;
+- (void)insertToContactList:(NSString *)userId tag:(NSString *)tag;
 
-- (void)deleteFromContactList:(SAMCUser *)user tag:(NSString *)tag;
+- (void)deleteFromContactList:(NSString *)userId tag:(NSString *)tag;
 
 - (NSArray<NSString *> *)myContactListOfTag:(NSString *)tag;
 

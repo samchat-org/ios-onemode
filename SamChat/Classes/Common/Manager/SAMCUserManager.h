@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
             completion:(void (^)(NSArray<SAMCUser *> * __nullable users, NSError * __nullable error))completion;
 
 - (void)addOrRemove:(BOOL)isAdd
-            contact:(SAMCUser *)user
+            contact:(NSString *)userId
                 tag:(NSString *)tag
          completion:(void (^)(NSError * __nullable error))completion;
 

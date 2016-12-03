@@ -15,8 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @optional
 - (void)onUserInfoChanged:(SAMCUser *)user;
-- (void)didAddContact:(SAMCUser *)user tag:(NSString *)tag;
-- (void)didRemoveContact:(SAMCUser *)user tag:(NSString *)tag;
+- (void)didAddContact:(NSString *)userId tag:(NSString *)tag;
+- (void)didRemoveContact:(NSString *)userId tag:(NSString *)tag;
 - (void)didUpdateContactList;
 
 @end

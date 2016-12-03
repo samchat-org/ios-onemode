@@ -208,37 +208,34 @@
     return result;
 }
 
-- (void)insertToContactListInDB:(SAMCUser *)user tag:(NSString *)tag
+- (void)insertToContactListInDB:(NSString *)userId tag:(NSString *)tag
 {
-    if ((user == nil) || (tag == nil)) {
-        DDLogError(@"insertToContactList:%@, tag:%@ error", user, tag);
+    if ((userId == nil) || (tag == nil)) {
+        DDLogError(@"insertToContactList:%@, tag:%@ error", userId, tag);
         return;
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self updateUser:user notify:NO];
-    });
     __weak typeof(self) wself = self;
     [self.queue inDatabase:^(FMDatabase *db) {
-        FMResultSet *s = [db executeQuery:@"SELECT COUNT(*) FROM contact_list WHERE unique_id=? AND tag=?", user.userId, tag];
+        FMResultSet *s = [db executeQuery:@"SELECT COUNT(*) FROM contact_list WHERE unique_id=? AND tag=?", userId, tag];
         if ([s next] && ([s intForColumnIndex:0]>0)) {
         } else {
-            [db executeUpdate:@"INSERT INTO contact_list(unique_id, tag) VALUES(?,?)",user.userId,tag];
-            [wself.multicastDelegate didAddContact:user tag:tag];
+            [db executeUpdate:@"INSERT INTO contact_list(unique_id, tag) VALUES(?,?)",userId,tag];
+            [wself.multicastDelegate didAddContact:userId tag:tag];
         }
         [s close];
     }];
 }
 
-- (void)deleteFromContactListInDB:(SAMCUser *)user tag:(NSString *)tag
+- (void)deleteFromContactListInDB:(NSString *)userId tag:(NSString *)tag
 {
-    if ((user == nil) || (tag == nil)) {
-        DDLogError(@"deleteFromContactList:%@, tag:%@ error", user, tag);
+    if ((userId == nil) || (tag == nil)) {
+        DDLogError(@"deleteFromContactList:%@, tag:%@ error", userId, tag);
         return;
     }
     __weak typeof(self) wself = self;
     [self.queue inDatabase:^(FMDatabase *db) {
-        [db executeUpdate:@"DELETE FROM contact_list WHERE unique_id=? AND tag=?", user.userId, tag];
-        [wself.multicastDelegate didRemoveContact:user tag:tag];
+        [db executeUpdate:@"DELETE FROM contact_list WHERE unique_id=? AND tag=?", userId, tag];
+        [wself.multicastDelegate didRemoveContact:userId tag:tag];
     }];
 }
 
@@ -377,7 +374,7 @@
     return result;
 }
 
-- (void)insertToContactList:(SAMCUser *)user tag:(NSString *)tag
+- (void)insertToContactList:(NSString *)userId tag:(NSString *)tag
 {
 //    dispatch_async(dispatch_get_main_queue(), ^{
 //        if (listType == SAMCContactListTypeServicer) {
@@ -386,10 +383,10 @@
 //            [self.customerList addObject:user.userId];;
 //        }
 //    });
-    [self insertToContactListInDB:user tag:tag];
+    [self insertToContactListInDB:userId tag:tag];
 }
 
-- (void)deleteFromContactList:(SAMCUser *)user tag:(NSString *)tag
+- (void)deleteFromContactList:(NSString *)userId tag:(NSString *)tag
 {
 //    dispatch_async(dispatch_get_main_queue(), ^{
 //        if (listType == SAMCContactListTypeServicer) {
@@ -398,7 +395,7 @@
 //            [self.customerList removeObject:user.userId];;
 //        }
 //    });
-    [self deleteFromContactListInDB:user tag:tag];
+    [self deleteFromContactListInDB:userId tag:tag];
 }
 
 - (NSString *)localContactListVersion

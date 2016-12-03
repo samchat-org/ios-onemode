@@ -179,12 +179,12 @@
 }
 
 - (void)addOrRemove:(BOOL)isAdd
-            contact:(SAMCUser *)user
+            contact:(NSString *)userId
                 tag:(NSString *)tag
          completion:(void (^)(NSError * __nullable error))completion
 {
     NSAssert(completion != nil, @"completion block should not be nil");
-    NSDictionary *parameters = [SAMCServerAPI addOrRemove:isAdd contact:user.userId tag:tag];
+    NSDictionary *parameters = [SAMCServerAPI addOrRemove:isAdd contact:userId tag:tag];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [SAMCDataPostSerializer serializer];
     [manager POST:SAMC_URL_CONTACT_CONTACT parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -195,9 +195,9 @@
                 completion([SAMCServerErrorHelper errorWithCode:errorCode]);
             } else {
                 if (isAdd) {
-                    [[SAMCDataBaseManager sharedManager].userInfoDB insertToContactList:user tag:tag];
+                    [[SAMCDataBaseManager sharedManager].userInfoDB insertToContactList:userId tag:tag];
                 } else {
-                    [[SAMCDataBaseManager sharedManager].userInfoDB deleteFromContactList:user tag:tag];
+                    [[SAMCDataBaseManager sharedManager].userInfoDB deleteFromContactList:userId tag:tag];
                 }
                 NSDictionary *stateDate = response[SAMC_STATE_DATE];
                 if ([stateDate isKindOfClass:[NSDictionary class]]) {

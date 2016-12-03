@@ -191,9 +191,8 @@
 - (void)contactAddOrRemove:(BOOL)isAdd tag:(NSString *)tag
 {
     [SVProgressHUD showWithStatus:@"Adding" maskType:SVProgressHUDMaskTypeBlack];
-    SAMCUser *user = [[SAMCUserManager sharedManager] userInfo:_userId];
     __weak typeof(self) wself = self;
-    [[SAMCUserManager sharedManager] addOrRemove:YES contact:user tag:tag completion:^(NSError * _Nullable error) {
+    [[SAMCUserManager sharedManager] addOrRemove:YES contact:_userId tag:tag completion:^(NSError * _Nullable error) {
         [SVProgressHUD dismiss];
         if (error) {
             [wself.view makeToast:error.userInfo[NSLocalizedDescriptionKey] duration:2 position:CSToastPositionCenter];
