@@ -28,6 +28,7 @@
 {
     self = [super initWithName:@"userinfo.db"];
     if (self) {
+        _userInfoCache = [[NSMutableDictionary alloc] init];
         [self createMigrationInfo];
     }
     return self;
@@ -213,7 +214,9 @@
         DDLogError(@"insertToContactList:%@, tag:%@ error", user, tag);
         return;
     }
-    [self updateUser:user];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self updateUser:user notify:NO];
+    });
     __weak typeof(self) wself = self;
     [self.queue inDatabase:^(FMDatabase *db) {
         FMResultSet *s = [db executeQuery:@"SELECT COUNT(*) FROM contact_list WHERE unique_id=? AND tag=?", user.userId, tag];
@@ -309,17 +312,29 @@
     return user;
 }
 
-- (void)updateUser:(SAMCUser *)user
+//- (void)updateUser:(SAMCUser *)user
+//{
+//    [self updateUserInDB:user];
+//    // user may not have all info
+//    // so update cache from db
+//    user = [self userInfoInDB:user.userId];
+//    if (user) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self.userInfoCache setObject:user forKey:user.userId];
+//        });
+//    }
+//}
+
+- (void)updateUser:(SAMCUser *)user notify:(BOOL)needNotify
 {
-    [self updateUserInDB:user];
-    // user may not have all info
-    // so update cache from db
-    user = [self userInfoInDB:user.userId];
-    if (user) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.userInfoCache setObject:user forKey:user.userId];
-        });
+    NSAssert([NSThread currentThread].isMainThread, @"updateUser must be in main thread");
+    [self.userInfoCache setObject:user forKey:user.userId];
+    if (needNotify) {
+        [self.multicastDelegate onUserInfoChanged:[self userInfo:user.userId]];
     }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self userInfoInDB:user.userId];
+    });
 }
 
 - (NSArray<NSString *> *)myContactListOfTag:(NSString *)tag
@@ -402,15 +417,6 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self updateLocalContactListVersionInDB:version];
     });
-}
-
-#pragma mark - lazy load
-- (NSMutableDictionary *)userInfoCache
-{
-    if (_userInfoCache == nil) {
-        _userInfoCache = [[NSMutableDictionary alloc] init];
-    }
-    return _userInfoCache;
 }
 
 @end

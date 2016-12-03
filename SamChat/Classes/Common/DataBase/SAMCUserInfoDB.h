@@ -18,7 +18,7 @@
 
 - (SAMCUser *)userInfo:(NSString *)userId;
 
-- (void)updateUser:(SAMCUser *)user;
+- (void)updateUser:(SAMCUser *)user notify:(BOOL)needNotify;
 
 - (BOOL)updateContactList:(NSArray<SAMCUserContactInfo *> *)users;
 

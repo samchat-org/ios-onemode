@@ -165,7 +165,7 @@
                     SAMCUser *user = [SAMCUser userFromDict:userDict];
                     // directly store to db, not trigger onUserInfoChanged:
                     // SAMCDataManager will notfiyUserInfoChanged once a batch
-                    [[SAMCDataBaseManager sharedManager].userInfoDB updateUser:user];
+                    [[SAMCDataBaseManager sharedManager].userInfoDB updateUser:user notify:NO];
                     [users addObject:user];
                 }
                 completion(users, nil);
@@ -260,10 +260,7 @@
 - (void)updateUser:(SAMCUser *)user
 {
     if (user) {
-        [self.multicastDelegate onUserInfoChanged:[self userInfo:user.userId]];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [[SAMCDataBaseManager sharedManager].userInfoDB updateUser:user];
-        });
+        [[SAMCDataBaseManager sharedManager].userInfoDB updateUser:user notify:YES];
     }
 }
 
