@@ -54,7 +54,7 @@
                 DDLogDebug(@"createSamPros response:%@", response);
                 SAMCUser *user = [SAMCAccountManager sharedManager].currentUser;
                 user.userInfo.usertype = @(SAMCuserTypeSamPros);
-                user.userInfo.lastupdate = [response valueForKeyPath:SAMC_USER_LASTUPDATE];
+                user.userInfo.lastupdate = [response samc_JsonNumberForKeyPath:SAMC_USER_LASTUPDATE];
                 user.userInfo.spInfo = [SAMCSamProsInfo spInfoFromDict:info];
                 [[SAMCUserManager sharedManager] updateUser:user];
                 completion(nil);
@@ -82,9 +82,9 @@
                 completion(nil, [SAMCServerErrorHelper errorWithCode:errorCode]);
             } else {
                 SAMCUser *user = [SAMCAccountManager sharedManager].currentUser;
-                user.userInfo.avatar = [response valueForKeyPath:SAMC_USER_THUMB];
+                user.userInfo.avatar = [response samc_JsonStringForKeyPath:SAMC_USER_THUMB];
                 user.userInfo.avatarOriginal = url;
-                user.userInfo.lastupdate = [response valueForKeyPath:SAMC_USER_LASTUPDATE];
+                user.userInfo.lastupdate = [response samc_JsonNumberForKeyPath:SAMC_USER_LASTUPDATE];
                 [[SAMCUserManager sharedManager] updateUser:user];
                 completion(user, nil);
             }
@@ -111,19 +111,19 @@
                 completion([SAMCServerErrorHelper errorWithCode:errorCode]);
             } else {
                 SAMCUser *user = [SAMCAccountManager sharedManager].currentUser;
-                user.userInfo.lastupdate = [response valueForKeyPath:SAMC_USER_LASTUPDATE];
-                user.userInfo.username = profileDict[SAMC_USERNAME] ?:user.userInfo.username;
-                user.userInfo.email = profileDict[SAMC_EMAIL] ?:user.userInfo.email;
-                user.userInfo.address = [profileDict valueForKeyPath:SAMC_LOCATION_ADDRESS] ?:user.userInfo.address;
+                user.userInfo.lastupdate = [response samc_JsonNumberForKeyPath:SAMC_USER_LASTUPDATE];
+                user.userInfo.username = [profileDict samc_JsonString:SAMC_USERNAME] ?:user.userInfo.username;
+                user.userInfo.email =[profileDict samc_JsonString:SAMC_EMAIL] ?:user.userInfo.email;
+                user.userInfo.address = [profileDict samc_JsonStringForKeyPath:SAMC_LOCATION_ADDRESS] ?:user.userInfo.address;
                 if (profileDict[SAMC_SAM_PROS_INFO]) {
                     NSDictionary *prosProfileDict = profileDict[SAMC_SAM_PROS_INFO];
-                    user.userInfo.spInfo.companyName = prosProfileDict[SAMC_COMPANY_NAME] ?:user.userInfo.spInfo.companyName;
-                    user.userInfo.spInfo.serviceCategory = prosProfileDict[SAMC_SERVICE_CATEGORY] ?:user.userInfo.spInfo.serviceCategory;
-                    user.userInfo.spInfo.serviceDescription = prosProfileDict[SAMC_SERVICE_DESCRIPTION] ?:user.userInfo.spInfo.serviceDescription;
-                    user.userInfo.spInfo.countryCode = prosProfileDict[SAMC_COUNTRYCODE] ?:user.userInfo.spInfo.countryCode;
-                    user.userInfo.spInfo.phone = prosProfileDict[SAMC_PHONE] ?:user.userInfo.spInfo.phone;
-                    user.userInfo.spInfo.email = prosProfileDict[SAMC_EMAIL] ?:user.userInfo.spInfo.email;
-                    user.userInfo.spInfo.address = [prosProfileDict valueForKeyPath:SAMC_LOCATION_ADDRESS] ? :user.userInfo.spInfo.address;
+                    user.userInfo.spInfo.companyName = [prosProfileDict samc_JsonString:SAMC_COMPANY_NAME] ?:user.userInfo.spInfo.companyName;
+                    user.userInfo.spInfo.serviceCategory = [prosProfileDict samc_JsonString:SAMC_SERVICE_CATEGORY] ?:user.userInfo.spInfo.serviceCategory;
+                    user.userInfo.spInfo.serviceDescription = [prosProfileDict samc_JsonString:SAMC_SERVICE_DESCRIPTION] ?:user.userInfo.spInfo.serviceDescription;
+                    user.userInfo.spInfo.countryCode = [prosProfileDict samc_JsonString:SAMC_COUNTRYCODE] ?:user.userInfo.spInfo.countryCode;
+                    user.userInfo.spInfo.phone = [prosProfileDict samc_JsonString:SAMC_PHONE] ?:user.userInfo.spInfo.phone;
+                    user.userInfo.spInfo.email = [prosProfileDict samc_JsonString:SAMC_EMAIL] ?:user.userInfo.spInfo.email;
+                    user.userInfo.spInfo.address = [prosProfileDict samc_JsonStringForKeyPath:SAMC_LOCATION_ADDRESS] ? :user.userInfo.spInfo.address;
                 }
                 [[SAMCUserManager sharedManager] updateUser:user];
                 completion(nil);
@@ -181,7 +181,7 @@
                 SAMCUser *user = [SAMCAccountManager sharedManager].currentUser;
                 user.userInfo.countryCode = countryCode;
                 user.userInfo.cellPhone = cellPhone;
-                user.userInfo.lastupdate = [response valueForKeyPath:SAMC_USER_LASTUPDATE];
+                user.userInfo.lastupdate = [response samc_JsonNumberForKeyPath:SAMC_USER_LASTUPDATE];
                 [[SAMCUserManager sharedManager] updateUser:user];
                 completion(nil);
             }
@@ -233,7 +233,7 @@
                 completion([SAMCServerErrorHelper errorWithCode:errorCode]);
             } else {
                 SAMCUser *user = [SAMCAccountManager sharedManager].currentUser;
-                user.userInfo.lastupdate = [response valueForKeyPath:SAMC_USER_LASTUPDATE];
+                user.userInfo.lastupdate = [response samc_JsonNumberForKeyPath:SAMC_USER_LASTUPDATE];
                 [[SAMCUserManager sharedManager] updateUser:user];
                 [SAMCPreferenceManager sharedManager].needQuestionNotify = @(needNotify);
                 completion(nil);
@@ -262,7 +262,7 @@
             } else {
                 SAMCUser *user = [SAMCAccountManager sharedManager].currentUser;
                 user.userInfo.samchatId = samchatId;
-                user.userInfo.lastupdate = [response valueForKeyPath:SAMC_USER_LASTUPDATE];
+                user.userInfo.lastupdate = [response samc_JsonNumberForKeyPath:SAMC_USER_LASTUPDATE];
                 [[SAMCUserManager sharedManager] updateUser:user];
                 completion(nil);
             }
