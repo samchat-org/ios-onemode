@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NTESContactDefines.h"
+#import "NTESGroupedContacts.h"
 
-@interface NTESContactDataMember : NSObject
+@interface NTESContactDataMember : NSObject<NTESContactItem,NTESGroupMemberProtocol>
 
 @property (nonatomic,strong) NIMKitInfo *info;
 

@@ -102,7 +102,7 @@ typedef NS_ENUM(NSInteger,SAMCMainTabType) {
 
 - (void)setUpSubNav
 {
-    NSMutableArray *handleArray = [[NSMutableArray alloc] init];
+//    NSMutableArray *handleArray = [[NSMutableArray alloc] init];
     NSMutableArray *vcArray = [[NSMutableArray alloc] init];
     [self.tabbars enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSDictionary * item =[self vcInfoForTabType:[obj integerValue]];
@@ -127,14 +127,14 @@ typedef NS_ENUM(NSInteger,SAMCMainTabType) {
         if (badge) {
             nav.tabBarItem.badgeValue = [NSString stringWithFormat:@"%zd",badge];
         }
-        NTESNavigationHandler *handler = [[NTESNavigationHandler alloc] initWithNavigationController:nav];
-        nav.delegate = handler;
+//        NTESNavigationHandler *handler = [[NTESNavigationHandler alloc] initWithNavigationController:nav];
+//        nav.delegate = handler;
         
         [vcArray addObject:nav];
-        [handleArray addObject:handler];
+//        [handleArray addObject:handler];
     }];
     self.viewControllers = [NSArray arrayWithArray:vcArray];
-    self.navigationHandlers = [NSArray arrayWithArray:handleArray];
+//    self.navigationHandlers = [NSArray arrayWithArray:handleArray];
 }
 
 - (void)setUpStatusBar

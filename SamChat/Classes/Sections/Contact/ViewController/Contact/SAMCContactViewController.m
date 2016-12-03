@@ -28,11 +28,15 @@
 #import "SAMCNavigationDropDownMenu.h"
 #import "SAMCAccountManager.h"
 #import "SAMCUserManager.h"
+#import "SAMCContactSearchResultViewController.h"
 
-@interface SAMCContactViewController () <UITableViewDataSource, UITableViewDelegate, NIMSystemNotificationManagerDelegate, NTESContactUtilCellDelegate, NIMContactDataCellDelegate, NIMLoginManagerDelegate, SAMCUserManagerDelegate>
+@interface SAMCContactViewController () <UITableViewDataSource, UITableViewDelegate, NIMSystemNotificationManagerDelegate, NTESContactUtilCellDelegate, NIMContactDataCellDelegate, NIMLoginManagerDelegate, SAMCUserManagerDelegate, UISearchResultsUpdating>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+
+@property (nonatomic, strong) UISearchController *searchController;
+@property (nonatomic, strong) NSArray *searchResultData;
 
 @property (nonatomic, strong) NSArray *datas;
 @property (nonatomic, strong) SAMCGroupedContacts *contacts;
@@ -104,6 +108,10 @@
     self.tableView.separatorInset = separatorInset;
     self.tableView.sectionIndexBackgroundColor = [UIColor clearColor];
     self.tableView.tableFooterView = [[UIView alloc] init];
+    self.tableView.tableHeaderView = self.searchController.searchBar;
+    
+    self.definesPresentationContext = YES;
+    
     [self prepareData];
     [[[NIMSDK sharedSDK] systemNotificationManager] addDelegate:self];
     [[[NIMSDK sharedSDK] loginManager] addDelegate:self];
@@ -198,7 +206,7 @@
     }
     contactUtil.members = members;
     
-    [_contacts addGroupAboveWithTitle:@"" members:contactUtil.members];
+//    [_contacts addGroupAboveWithTitle:@"" members:contactUtil.members];
 }
 
 
@@ -367,6 +375,30 @@
     return [contactItem userId].length;
 }
 
+#pragma mark - UISearchResultsUpdating
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
+{
+    UINavigationController *navController = (UINavigationController *)self.searchController.searchResultsController;
+    SAMCContactSearchResultViewController *resultVC = (SAMCContactSearchResultViewController *)navController.topViewController;
+    
+    NSMutableArray *members = [[NSMutableArray alloc] init];
+    for (int i=0; i<[_contacts groupCount]; i++) {
+        [members addObjectsFromArray:[_contacts membersOfGroup:i]];
+    }
+    NSString *searchText = searchController.searchBar.text;
+    __block NSMutableArray *tempResultArray = [[NSMutableArray alloc] init];
+    [members enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        id<NIMGroupMemberProtocol> member = obj;
+        NSRange range = [member.showName rangeOfString:searchText options:NSCaseInsensitiveSearch];
+        if (range.location != NSNotFound) {
+            [tempResultArray addObject:member];
+        }
+    }];
+    
+    resultVC.searchResultData = tempResultArray;
+    [resultVC.tableView reloadData];
+}
+
 #pragma mark - NIMContactDataCellDelegate
 - (void)onPressAvatar:(NSString *)memberId{
     [self enterPersonalCard:memberId];
@@ -532,6 +564,24 @@
             [wself.view makeToast:@"copy success" duration:2 position:CSToastPositionCenter];
         }
     }];
+}
+
+#pragma mark - lazy load
+- (UISearchController *)searchController
+{
+    if (_searchController == nil) {
+        SAMCContactSearchResultViewController *vc= [[SAMCContactSearchResultViewController alloc] init];
+        UINavigationController *resultVC = [[UINavigationController alloc] initWithRootViewController:vc];
+        
+        _searchController = [[UISearchController alloc] initWithSearchResultsController:resultVC];
+        _searchController.searchResultsUpdater = self;
+        _searchController.dimsBackgroundDuringPresentation = YES;
+        _searchController.hidesNavigationBarDuringPresentation = YES;
+        _searchController.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        // searchBar will out of screen as navigationBar.translucent is NO
+        self.navigationController.extendedLayoutIncludesOpaqueBars = !self.navigationController.navigationBar.translucent;
+    }
+    return _searchController;
 }
 
 @end
