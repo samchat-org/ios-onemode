@@ -122,7 +122,7 @@
                 NSString *token = response[SAMC_TOKEN];
                 NSDictionary *userInfo = response[SAMC_USER];
                 SAMCUser *user = [[SAMCUser alloc] init];
-                user.userId = [userInfo[SAMC_ID] stringValue];
+                user.userId = [userInfo samc_JsonString:SAMC_ID];
                 SAMCUserInfo *info = [[SAMCUserInfo alloc] init];
                 info.countryCode = countryCode;
                 info.usertype = @(SAMCUserTypeCustom);
