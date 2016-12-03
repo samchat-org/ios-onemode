@@ -352,7 +352,11 @@
 {
     id<NTESContactItem> contactItem = (id<NTESContactItem>)[_contacts memberOfIndex:indexPath];
     if ([contactItem userId].length) {
-        return @[[self deleteAction], [self copyAction], [self chatAction]];
+        if ([self.currentContactTag isEqualToString:SAMC_CONTACT_TAG_ALL]) {
+            return @[[self chatAction]];
+        } else {
+            return @[[self deleteAction], [self copyAction], [self chatAction]];
+        }
     } else {
         return nil;
     }
