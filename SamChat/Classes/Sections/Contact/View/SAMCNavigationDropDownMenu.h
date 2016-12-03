@@ -16,6 +16,7 @@
                         items:(NSArray *)items
                 selectedIndex:(NSInteger)index
                    titleColor:(UIColor *)titleColor
+               arrowImageName:(NSString *)imageName
                 containerView:(UIView *)containerView;
 
 - (void)hideMenu;

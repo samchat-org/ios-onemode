@@ -58,14 +58,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSString *arrowImageName;
     NSArray *contactItems;
     if ([SAMCAccountManager sharedManager].isCurrentUserServicer) {
+        arrowImageName = @"ico_arrow_down_dark";
         contactItems = @[SAMC_CONTACT_TAG_ALL,
                          SAMC_CONTACT_TAG_CUSTOMERS,
                          SAMC_CONTACT_TAG_FRIENDS,
                          SAMC_CONTACT_TAG_SERVICE_PROVIDERS,
                          SAMC_CONTACT_TAG_ASSOCIATE_SPS];
     } else {
+        arrowImageName = @"ico_arrow_down_light";
         contactItems = @[SAMC_CONTACT_TAG_ALL,
                          SAMC_CONTACT_TAG_CUSTOMERS,
                          SAMC_CONTACT_TAG_FRIENDS];
@@ -76,6 +79,7 @@
                                                                                        items:contactItems
                                                                                selectedIndex:selectedIndex
                                                                                   titleColor:SAMC_BarTitleColor
+                                                                              arrowImageName:arrowImageName
                                                                                containerView:self.view];
     __weak typeof(self) wself = self;
     menuView.didSelectItemAtIndexHandler = ^(NSInteger index){

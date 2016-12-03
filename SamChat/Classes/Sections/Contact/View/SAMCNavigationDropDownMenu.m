@@ -34,6 +34,7 @@
                         items:(NSArray *)items
                 selectedIndex:(NSInteger)index
                    titleColor:(UIColor *)titleColor
+               arrowImageName:(NSString *)imageName
                 containerView:(UIView *)containerView;
 {
     self = [super initWithFrame:frame];
@@ -50,10 +51,11 @@
         self.menuButton = [[UIButton alloc] initWithFrame:CGRectZero];
         [self.menuButton setTitle:title forState:UIControlStateNormal];
         self.menuButton.titleLabel.font = [UIFont boldSystemFontOfSize:17.0f];
+        [self.menuButton setTitleColor:titleColor forState:UIControlStateNormal];
         [self.menuButton addTarget:self action:@selector(menuButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.menuButton];
         
-        self.menuArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ico_arrow_down"]];
+        self.menuArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
         [self.menuButton addSubview:self.menuArrow];
         
         CGRect tableViewFrame = CGRectMake(0, 0, containerView.frame.size.width, (CGFloat)(self.items.count) * self.cellHeight);
