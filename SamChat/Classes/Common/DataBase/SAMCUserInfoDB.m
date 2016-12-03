@@ -18,10 +18,7 @@
 
 // cache
 @property (nonatomic, strong) NSMutableDictionary *userInfoCache;
-@property (nonatomic, strong) NSMutableArray *servicerList;
-@property (nonatomic, strong) NSMutableArray *customerList;
 @property (nonatomic, copy) NSString *localContactListVersion;
-@property (nonatomic, copy) NSString *localCustomerListVersion;
 
 @end
 
@@ -400,10 +397,11 @@
 
 - (void)updateLocalContactListVersion:(NSString *)version
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        _localContactListVersion = version;
+    NSAssert([NSThread currentThread].isMainThread, @"updateLocalContactListVersion must be in main thread");
+    _localContactListVersion = version;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self updateLocalContactListVersionInDB:version];
     });
-    [self updateLocalContactListVersionInDB:version];
 }
 
 #pragma mark - lazy load

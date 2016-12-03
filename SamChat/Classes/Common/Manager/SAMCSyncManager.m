@@ -176,7 +176,7 @@ typedef void (^SyncAction)();
                 [wself performSelector:@selector(doSync) withObject:nil afterDelay:wself.retryDelay];
             } else {
                 DDLogDebug(@"queryContactListBlock list finished");
-                [wself updateLocalContactListVersion:wself.stateDateInfo.contactListVersion];
+                [[SAMCDataBaseManager sharedManager].userInfoDB updateLocalContactListVersion:wself.stateDateInfo.contactListVersion];
                 wself.syncBlock = [wself queryFollowListBlock];
                 wself.isSyncing = NO;
                 [wself doSync];
@@ -204,7 +204,7 @@ typedef void (^SyncAction)();
                 [wself performSelector:@selector(doSync) withObject:nil afterDelay:wself.retryDelay];
             } else {
                 DDLogDebug(@"queryFollowListBlock sync finished");
-                [wself updateLocalFollowListVersion:wself.stateDateInfo.followListVersion];
+                [[SAMCDataBaseManager sharedManager].publicDB updateFollowListVersion:wself.stateDateInfo.followListVersion];
                 wself.syncBlock = NULL;
                 wself.isSyncing = NO;
                 [wself doSync];
@@ -256,7 +256,11 @@ typedef void (^SyncAction)();
                 NSInteger errorCode = [response samc_JsonInteger:SAMC_RET];
                 if (errorCode == 0) {
                     syncVersion = [response samc_JsonStringForKeyPath:SAMC_STATE_DATE_LAST];
-                    NSArray *users = response[SAMC_USERS];
+                    NSArray *userDictArray = response[SAMC_USERS];
+                    NSMutableArray *users = [[NSMutableArray alloc] init];
+                    for (NSDictionary *userDict in userDictArray) {
+                        [users addObject:[SAMCUserContactInfo userContactInfoFromDict:userDict]];
+                    }
                     result = [[SAMCDataBaseManager sharedManager].userInfoDB updateContactList:users];
                 }
             }
@@ -319,7 +323,7 @@ typedef void (^SyncAction)();
                                        to:(NSString *)toVersion
 {
     if ([fromVersion isEqualToString:self.localContactListVersion]) {
-        [self updateLocalContactListVersion:toVersion];
+        [[SAMCDataBaseManager sharedManager].userInfoDB updateLocalContactListVersion:toVersion];
         DDLogDebug(@"update contact list version from %@ to %@", fromVersion, toVersion);
     }
 }
@@ -328,23 +332,9 @@ typedef void (^SyncAction)();
                                       to:(NSString *)toVersion
 {
     if ([fromVersion isEqualToString:self.localFollowListVersion]) {
-        [self updateLocalFollowListVersion:toVersion];
+        [[SAMCDataBaseManager sharedManager].publicDB updateFollowListVersion:toVersion];
         DDLogDebug(@"update follow list version from %@ to %@", fromVersion, toVersion);
     }
-}
-
-- (void)updateLocalContactListVersion:(NSString *)version
-{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-       [[SAMCDataBaseManager sharedManager].userInfoDB updateLocalContactListVersion:version];
-    });
-}
-
-- (void)updateLocalFollowListVersion:(NSString *)version
-{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[SAMCDataBaseManager sharedManager].publicDB updateFollowListVersion:version];
-    });
 }
 
 #pragma mark - private
