@@ -430,7 +430,10 @@
     UITableViewRowAction *action = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Chat" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         id<NTESContactItem,NTESGroupMemberProtocol> contactItem = (id<NTESContactItem,NTESGroupMemberProtocol>)[wself.contacts memberOfIndex:indexPath];
         NSString *userId = [contactItem userId];
-        DDLogDebug(@"chatAction: %@", userId);
+        [wself.tableView setEditing:NO animated:NO];
+        NIMSession *session = [NIMSession session:userId type:NIMSessionTypeP2P];
+        NTESSessionViewController *vc = [[NTESSessionViewController alloc] initWithSession:session];
+        [wself.navigationController pushViewController:vc animated:YES];
     }];
     action.backgroundColor = SAMC_COLOR_LIMEGREY;
     return action;
